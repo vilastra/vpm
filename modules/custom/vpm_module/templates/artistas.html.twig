@@ -1,0 +1,18 @@
+<div class='whiteArea'>
+	<div class="col-9 max-container px-0 m-auto ">
+		<div class="row">
+			<div class='col-12'>
+				<h1>Artistas</h2>
+			</div>
+			{% for obj in artistas %}
+				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+					<a href='artista?{{ obj.urlArtista }}'>
+						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
+						<div class='nombreArtista'>{{ obj.nombreArtista }}</div>
+						<div class='linkItem'>Ve más ></div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+<div class='whiteArea'>
+	<div class="col-9 max-container px-0 m-auto ">
+		<div class="row">
+			<div class='col-12'>
+				<h1>Catálogos razonados</h2>
+			</div>
+			{% for obj in catalogos %}
+				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+					<a href='catalogo?idCat={{ obj.idCatalogo }}'>
+						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
+						<div class='nombreObra'>{{ obj.nombreCatalogo }}</div>
+						<div class='descItem'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</div>
+						<div class='descItem'>
+							<b>Obras</b>:
+							{{obj.cantObras}}</div>
+					</a>
+				</div>
+			{% endfor %}
+			<div class="col-12" style='margin-top:2.5rem'>
+				<a href='catalogos-razonados' class='btn button btnBuscar more-link'>Ve todos los catálogos</a>
+			</div>
+		</div>
+	</div>
+</div>

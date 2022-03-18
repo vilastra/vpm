@@ -1,0 +1,18 @@
+name: vpm
+type: theme
+description: Tema para vista pública monvoisin
+version: 1.0
+base theme: stable
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+libraries:
+  - vpm/global-styling
+  - vpm/global-scripts
+
+regions:
+  header: 'header'
+  primary_menu: 'Primary menu'
+  content: 'contenido'
+  footer: 'footer'
+  

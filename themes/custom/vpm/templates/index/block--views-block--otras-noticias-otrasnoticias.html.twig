@@ -1,0 +1,21 @@
+<div class="greyArea" style="padding-top:0px">
+	<div class="col-9 max-container px-0 m-auto noticDestacada">
+		<div class="row">
+			<div class="col-12">
+				<h5 class="linea"><span>Otras noticias</span>
+			</div>
+		</div>
+		<div class="row">
+			<div{{attributes}}>
+				{{ title_prefix }}
+				{% if label %}
+					{# <h2{{title_attributes}}>{{ label }}</h2> #}
+				{% endif %}
+				{{ title_suffix }}
+				{% block content %}
+					{{ content }}
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+</div>

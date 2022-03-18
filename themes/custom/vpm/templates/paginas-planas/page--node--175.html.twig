@@ -1,0 +1,127 @@
+<div class="layout-container">
+
+	<header role="banner">
+		{{ page.header }}
+
+	</header>
+
+	{{ page.primary_menu }}
+	{{ page.secondary_menu }}
+
+	{{ page.breadcrumb }}
+
+	{{ page.highlighted }}
+
+	{{ page.help }}
+
+	<main role="main" class="col-9 max-container px-0 m-auto">
+		<a id="main-content" tabindex="-1"></a>
+		{# link is in html.html.twig #}
+
+		<h1>Jóvenes Programadores</h1>
+
+
+		<hr>
+		<div class="accordion">¿Qué es jóvenes programadores?<i class="fas fa-chevron-down"></i>
+			<i class="fas fa-chevron-up"></i>
+		</div>
+		<div class="panel">
+			<p>“Jóvenes Programadores” es una iniciativa del Programa BiblioRedes, del Ministerio de las Culturas, 
+																				           las Artes y el Patrimonio, el cual tuvo su lanzamiento en enero del 2015.</p>
+			<p>Se trata de un programa que busca incentivar el aprendizaje de la programación de forma virtual, para que que todos y todas en
+																				           Chile (desde los 8 años en adelante) se introduzcan en el lenguaje de los códigos y la programación, pasando de ser usuarios y usuarias a 
+																				           potenciales creadores y creadoras.</p>
+			<p>En Chile hay pocas instancias en dónde se imparten clases de programación de manera gratuita, por lo que esta iniciativa brinda la 
+																				          oportunidad de tener un aprendizaje privilegiado en el área de la tecnología.</p>
+			<p>En 2015, Jóvenes Programadores obtuvo el primer lugar del Premio de Innovación en Educación Científica en la categoría TIC’s. 
+																				           Este galardón es entregado por la Fundación Ciencia Joven y la UNESCO, lo que certifica y reafirma la calidad de esta iniciativa.</p>
+		</div>
+		<hr>
+
+		<div class="accordion">¿Cómo funciona?<i class="fas fa-chevron-down"></i>
+			<i class="fas fa-chevron-up"></i>
+		</div>
+		<div class="panel">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+		<hr>
+
+		<div class="accordion">¿Qué aprenderás?<i class="fas fa-chevron-down"></i>
+			<i class="fas fa-chevron-up"></i>
+		</div>
+		<div class="panel">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+		<hr>
+
+		<div class="accordion">Resultados<i class="fas fa-chevron-down"></i>
+			<i class="fas fa-chevron-up"></i>
+		</div>
+		<div class="panel">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<a href="{{ url('<front>') }}capacitaciones-en-linea" style="text-decoration:none">
+					<div class="btnThumbnal">Regístrate en la plataforma de Jóvenes programadores</div>
+				</a>
+			</div>
+			<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+				<a href="{{ url('<front>') }}capacitaciones-en-linea" style="text-decoration:none">
+					<div class="btnThumbnal">Ve a la plataforma de Jóvenes programadores</div>
+				</a>
+			</div>
+		</div>
+
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+acc[i].addEventListener("click", function () {
+this.classList.toggle("active");
+var iconDown = this.querySelector(".fa-chevron-down");
+var iconUp = this.querySelector(".fa-chevron-up");
+var panel = this.nextElementSibling;
+if (panel.style.display === "block") {
+panel.style.display = "none";
+iconUp.style.display = "none";
+iconDown.style.display = "block";
+} else {
+panel.style.display = "block";
+iconDown.style.display = "none";
+iconUp.style.display = "block";
+}
+});
+}
+		</script>
+
+
+		<div class="layout-content">
+			{{ page.content }}
+		</div>
+		{# /.layout-content #}
+
+		{% if page.sidebar_first %}
+			<aside class="layout-sidebar-first" role="complementary">
+				{{ page.sidebar_first }}
+			</aside>
+		{% endif %}
+
+		{% if page.sidebar_second %}
+			<aside class="layout-sidebar-second" role="complementary">
+				{{ page.sidebar_second }}
+			</aside>
+		{% endif %}
+
+	</main>
+
+	{% if page.footer %}
+		<footer role="contentinfo">
+			{{ page.footer }}
+		</footer>
+	{% endif %}
+
+</div>
+{# /.layout-container #}

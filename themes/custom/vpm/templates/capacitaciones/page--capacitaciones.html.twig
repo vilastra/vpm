@@ -1,0 +1,46 @@
+<div class="layout-container">
+
+	<header role="banner"> {{ page.header }}
+	</header> {{ page.primary_menu }} {{ page.secondary_menu }} {{ page.breadcrumb }} {{ page.highlighted }} {{ page.help }}
+
+	<main role="main" class="col-9 max-container px-0 m-auto">
+		<h1>Capacitaciones</h1>
+		<a id="main-content" tabindex="-1"></a>
+		{# link is in html.html.twig #}
+
+		<div class="row">
+			<div class="col-12">
+				<p>Desde su origen, el Programa BiblioRedes ha querido ser una alternativa de capacitación para los usuarios de las bibliotecas públicas y la ciudadanía en general con el fin de fomentar el desarrollo de competencias en el uso de las tecnologías de la información y comunicación y para ellos ha desarrollado dos líneas de trabajo, capacitaciones presenciales y capacitaciones a distancia vía E-Learning. Totalmente gratuitas.</p>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 cardThumbnail">
+				<div class="imgThumbnail"><img src="{{ url('<front>') }}/sites/default/files/2021-11/jovProg.png"></div>
+				<div class="titleThumbnail">Capacitaciones presenciales</div>
+				<a href="{{ url('<front>') }}capacitaciones-presenciales" style="text-decoration:none">
+					<div class="btnThumbnal">Ve todas las capacitaciones</div>
+				</a>
+			</div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 cardThumbnail">
+				<div class="imgThumbnail"><img src="{{ url('<front>') }}/sites/default/files/2021-11/jovProg.png"></div>
+				<div class="titleThumbnail">Capacitaciones en línea</div>
+				<a href="{{ url('<front>') }}capacitaciones-en-linea" style="text-decoration:none">
+					<div class="btnThumbnal">Ve todas las capacitaciones</div>
+				</a>
+			</div>
+      <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 cardThumbnail">
+				<div class="imgThumbnail"><img src="{{ url('<front>') }}/sites/default/files/2021-11/jovProg.png"></div>
+				<div class="titleThumbnail">Jóvenes programadores</div>
+				<a href="{{ url('<front>') }}jovenes-programadores" style="text-decoration:none">
+					<div class="btnThumbnal">Ve más información</div>
+				</a>
+			</div>
+			
+
+		</main>
+
+		{% if page.footer %}
+			<footer role="contentinfo"> {{ page.footer }}
+			</footer>
+		{% endif %}
+
+	</div>
+	{# /.layout-container #}

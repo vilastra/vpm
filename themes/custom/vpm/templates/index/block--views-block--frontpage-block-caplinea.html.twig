@@ -1,0 +1,19 @@
+<div class="greyArea">
+	<div class="col-9 max-container px-0 m-auto">
+		<div class="row">
+			<div class="col-12">
+				<h1>Capacitaciones en línea</h1>
+			</div>
+		</div>
+		<div{{attributes}}>
+			{{ title_prefix }}
+			{% if label %}
+				{# <h2{{title_attributes}}>{{ label }}</h2> #}
+			{% endif %}
+			{{ title_suffix }}
+			{% block content %}
+				{{ content }}
+			{% endblock %}
+		</div>
+	</div>
+</div>

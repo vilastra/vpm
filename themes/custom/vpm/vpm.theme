@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the Stable theme.
+ */
+
+use Drupal\Component\Utility\Html;
+
+function vpm_form_search_block_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#attributes']['class'][] = 'webform-client-form';
+  $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'search_submit';
+}
+
+function vpm_form_contact_message_feedback_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#attributes']['class'][] = 'webform-client-form';
+  $form['actions']['submit']['#attributes']['data-twig-suggestion'] = 'contact_submit';
+}
+/**
+ * @param $suggestions
+ * @param array $variables
+ */
+function vpm_theme_suggestions_input_alter(&$suggestions, array $variables) {
+  $element = $variables['element'];
+
+  if (isset($element['#attributes']['data-twig-suggestion'])) {
+    $suggestions[] = 'input__' . $element['#type'] . '__' . $element['#attributes']['data-twig-suggestion'];
+  }
+}
+

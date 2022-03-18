@@ -1,0 +1,52 @@
+<div class="col-9 max-container px-0 m-auto" style="margin-bottom: 2%!important;margin-top: 1%!important;">
+	<h4>{{ node.label }}</h4>
+	{% if content.field_aprenderascaplinea|render %}
+		<div class="col-12 tituloCapacitacion">
+			Lo que aprenderás:</div>
+		<div class="col-12">
+			<p>{{ content.field_aprenderascaplinea }}</p>
+		</div>
+	{% endif %}
+	{% if content.field_contenidos_basicoscaplinea|render %}
+		<div class="col-12 tituloCapacitacion">Contenidos de nivel básico:</div>
+		<div class="col-12">
+			<p>{{ content.field_contenidos_basicoscaplinea }}</p>
+		</div>
+	{% endif %}
+	{% if content.field_contenidos_intercaplinea|render %}
+		<div class="col-12 tituloCapacitacion">
+			Contenidos de nivel intermedio:</div>
+		<div class="col-12">
+			<p>{{ content.field_contenidos_intercaplinea }}</p>
+		</div>
+	{% endif %}
+	{% if content.field_contenidos_avancaplinea|render %}
+		<div class="col-12 tituloCapacitacion">
+			Contenidos de nivel avanzado:</div>
+		<div class="col-12">
+			<p>{{ content.field_contenidos_avancaplinea }}</p>
+		</div>
+	{% endif %}
+	{% if content.field_duracioncaplinea|render %}
+		<div class="col-12 tituloCapacitacion">Duración:</div>
+		<div class="col-12">
+			<p>{{ content.field_duracioncaplinea }}</p>
+		</div>
+	{% endif %}
+	{% if content.field_valor_caplinea|render %}
+		<div class="col-12 tituloCapacitacion">
+			Valor:</div>
+		<div class="col-12">
+			<p>{{ content.field_valor_caplinea }}</p>
+		</div>
+	{% endif %}
+	{% if content.field_recursos_adcaplinea|render %}
+		<div class="col-12 tituloCapacitacion">
+			Recursos adicionales:</div>
+		<div class="col-12">
+			<p>{{ content.field_recursos_adcaplinea }}</p>
+		</div>
+	{% endif %}
+
+
+</div>

@@ -1,0 +1,8 @@
+name: Modulo VPM
+description: "Modulo para vista pública Monvoisin"
+package: Museo Nacional de Bellas Artes 
+
+type: module
+core_version_requirement: ^8.8.0 || ^9.0
+
+# Información detallada requerida por Drupal sobre el modulo custom

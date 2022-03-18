@@ -1,0 +1,40 @@
+<div class='whiteArea'>
+	<div class="col-9 max-container px-0 m-auto ">
+		<div class="row">
+			<h1>Obras</h2>
+			{% for obj in obras %}
+				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+					<a href="">
+						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
+					</a>
+					{% if obj.idTematica!=null %}
+						<a href='tematica?idTematica={{ obj.idTematica }}'>
+							<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
+						</a>
+					{% endif %}
+					<a href="{{ obj.idObra }}">
+						<div class='nombreObra'>{{ obj.tituloObra }}</div>
+					</a>
+					<a href='artista?autorId={{ obj.autorId }}'>
+						<div class='descItem'>Autores:
+							{{ obj.nombreArtista }}</div>
+					</a>
+					<!--<div class='idObra'>{{ obj.idObra }}</div>-->
+
+				</div>
+
+			{% endfor %}
+		</div>
+		<div class="pager mt-5">
+			<div class="pager__items">
+				{% for pag in arrayBoton %}
+					
+						{{pag | raw}}
+					
+
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+</div>

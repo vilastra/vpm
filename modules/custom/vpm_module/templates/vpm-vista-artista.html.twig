@@ -1,0 +1,57 @@
+<div class='whiteArea'>
+
+	<div class="col-9 max-container px-0 m-auto ">
+
+		<div class="row mb-5">
+
+			{% for obj in artista %}
+				<h6>{{ obj.nombreArtista }}</h6>
+				<div class='cardItem col-lg-6 col-md-4 col-sm-12 col-xs-12'>
+					<div class='imgItemGrande'><img src='{{ obj.rutaFoto }}'></div>
+				</div>
+			{% endfor %}
+			<div class="col-3 ">
+				<p></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<h2>Obras destacadas del artista</h2>
+			{% for obj in obrasDestacadas[1] %}
+				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+					<a href='obra?id={{ obj.idObra }}'>
+						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
+					</a>
+					<a href='tematica?idTematica={{ obj.idTematica }}'>
+						<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
+					</a>
+					<a href='obra?id={{ obj.idObra }}'>
+						<div class='nombreObra'>{{ obj.tituloObra}}</div>
+					</a>
+
+					<div class='descItem'>
+						Autores:
+						<a href='artista?id={{ obj.idArtista }}'>{{ obj.nombreArtista }}</a>
+					</div>
+
+					<a href='obra?id={{ obj.idObra }}'>
+						<div class='descItem'>
+							<b>
+								Ve más
+							</b>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+			{% if obrasDestacadas[0] > 6 %}
+					{% for obj in artista %}
+						<div class="col-12" style="margin-top:2.5rem">
+							<a href="obras" class="btn button btnBuscar more-link keychainify-checked">Ve todas las obras de este artista</a>
+						</div>
+					</a>
+				{% endfor %}
+			{% endif %}
+
+		</div>
+	</div>
+</div>

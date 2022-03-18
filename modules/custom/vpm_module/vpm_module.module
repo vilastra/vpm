@@ -1,0 +1,56 @@
+<?php
+
+function vpm_module_theme($existing, $type, $theme, $path)
+{
+    return [
+        'vpm-index-artistas' => [
+            'variables' => [
+                'artistas' => []
+            ]
+        ],
+        'vpm-index-catalogos' => [
+            'variables' => [
+                'catalogos' => []
+            ]
+        ],
+        'vpm-index-tematicas' => [
+            'variables' => [
+                'tematicas' => []
+            ]
+        ],
+        'vpm-vista-artista' => [
+            'variables' => [
+                'artista' => [], 'obrasDestacadas' => []
+            ]
+        ],
+        'artistas' => [
+            'variables' => [
+                'artistas' => []
+            ]
+        ],
+        'vpm-vista-catalogos-razonados' => [
+            'variables' => [
+                'catalogos' => []
+            ]
+        ],
+        'vpm-vista-catalogo' => [
+            'variables' => [
+                'catalogo' => []
+            ]
+        ],
+        'vpm-catalogo-menu' => [
+            'variables' => [
+                'links' => []
+            ]
+        ],
+        'vpm-vista-obras' => [
+            'variables' => [
+                'obras' => [],
+                'arrayBoton' => []
+            ]
+        ]
+    ];
+}
+
+// Aquí se definen las variables que se enviarán a la vista del modulo custom
+// Estas son las mismas que se envian en el controlador (se puede ver al final del archivo)

@@ -1,0 +1,20 @@
+global-styling:
+  css:
+    theme:
+      css/bs/bootstrap.min.css: {}
+      css/style.css: {}
+      css/owl.carousel.css: {}
+      css/owl.theme.default.css: {}
+      
+
+
+global-scripts:
+  js:
+    js/script.js: {}
+    js/owl.carousel.js: {}
+    js/bs/bootstrap.bundle.min.js: {}
+    js/bs/bootstrap.js: {}
+
+  dependencies:
+    - core/jquery
+    - core/drupal

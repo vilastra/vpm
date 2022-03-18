@@ -1,0 +1,24 @@
+<div class='whiteArea'>
+	<div class="col-9 max-container px-0 m-auto ">
+		<div class="row">
+			<div class='col-12'>
+				<h1>Catálogos razonados</h2>
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit</p>
+			</div>
+
+			{% for obj in catalogos %}
+				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+					<a href='catalogo'>
+						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
+						<div class='nombreObra'>{{ obj.nombreCatalogo }}</div>
+						<div class='descItem'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</div>
+						<div class='descItem'>
+							<b>Obras</b>:
+							{{obj.cantObras}}</div>
+					</a>
+				</div>
+			{% endfor %}
+			<div class="col-12" style='margin-top:2.5rem'></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,150 @@
+
+<div class="layout-container">
+
+    <header role="banner">
+      {{ page.header }}
+<style>
+    
+</style>
+    </header>
+  
+    {{ page.primary_menu }}
+    {{ page.secondary_menu }}
+  
+    {{ page.breadcrumb }}
+  
+    {{ page.highlighted }}
+  
+    {{ page.help }}
+
+    <main role="main" class="col-9 max-container px-0 m-auto">     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+  
+    <h1>Preguntas Frecuentes</h1>   
+
+
+    <hr>    
+    <div class="accordion">¿Cuánto dura un curso en línea? <i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Desarrollar competencias básicas del idioma inglés, correspondientes al nivel A1 y A2 del Marco 
+      común europeo de referencia para lenguas.</p>
+    </div>
+    <hr>
+    
+    <div class="accordion">¿Qué es el curso de herramientas Excel (2010)?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de herramientas Word (2010)?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de inglés intermedio?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de inglés avanzado?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de atención de usuarios con enfoque inclusivo?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de comunicación efectiva?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de diplomado de liderazgo social?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de fortalecimiento de ambientes de trabajo?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de alimentación saludable y huerto urbano?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <div class="accordion">¿Qué es el curso de gestión de la creatividad y la innovación?<i class="fas fa-chevron-down"></i><i class="fas fa-chevron-up"></i></div>
+    <div class="panel">
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <hr>
+
+    <script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var iconDown = this.querySelector(".fa-chevron-down");
+        var iconUp = this.querySelector(".fa-chevron-up");
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+        panel.style.display = "none";
+        iconUp.style.display = "none";
+        iconDown.style.display = "block";
+        } else {
+        panel.style.display = "block";
+        iconDown.style.display = "none";
+        iconUp.style.display = "block";
+        }
+    });
+    }
+    </script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="layout-content">
+        {{ page.content }}
+      </div>{# /.layout-content #}
+  
+      {% if page.sidebar_first %}
+        <aside class="layout-sidebar-first" role="complementary">
+          {{ page.sidebar_first }}
+        </aside>
+      {% endif %}
+  
+      {% if page.sidebar_second %}
+        <aside class="layout-sidebar-second" role="complementary">
+          {{ page.sidebar_second }}
+        </aside>
+      {% endif %}
+  
+    </main>
+  
+    {% if page.footer %}
+      <footer role="contentinfo">
+        {{ page.footer }}
+      </footer>
+    {% endif %}
+  
+  </div>{# /.layout-container #}
+  

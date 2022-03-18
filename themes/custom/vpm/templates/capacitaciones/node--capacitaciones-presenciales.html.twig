@@ -1,0 +1,76 @@
+<div class="col-9 max-container px-0 m-auto" style="margin-bottom: 2%!important;margin-top: 1%!important;">
+	<h4>{{ node.label }}</h4>
+	<div class="blockCap">
+		<div class="col-12 tituloCapacitacion">
+			Lo que aprenderás:</div>
+		<div class="col-12">
+			<p>{{ content.field_aprenderascappres }}</p>
+		</div>
+	</div>
+	{% if content.field_contenidos_basicoscappres|render %}
+		<div class="blockCap">
+			<div class="col-12 tituloCapacitacion">Contenidos de nivel básico:</div>
+			<div class="col-12">
+				{{ content.field_contenidos_basicoscappres }}
+			</div>
+		</div>
+	{% endif %}
+
+	{% if content.field_contenidos_intercappres|render %}
+		<div class="blockCap">
+			<div class="col-12 tituloCapacitacion">
+				Contenidos de nivel intermedio:</div>
+			<div class="col-12">
+				<p>{{ content.field_contenidos_intercappres }}</p>
+			</div>
+		</div>
+	{% endif %}
+	{% if content.field_contenidos_avancappres|render %}
+		<div class="blockCap">
+			<div class="col-12 tituloCapacitacion">
+				Contenidos de nivel avanzado:</div>
+			<div class="col-12">
+				<p>{{ content.field_contenidos_avancappres }}</p>
+			</div>
+		</div>
+	{% endif %}
+	{% if content.field_duracioncappres|render %}
+		<div class="blockCap">
+			<div class="col-12 tituloCapacitacion">Duración:</div>
+			<div class="col-12">
+				<p>{{ content.field_duracioncappres }}</p>
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="col-12 tituloCapacitacion">
+		Valor:</div>
+	<div class="col-12">
+		<p>
+			{% if content.field_valor_cappres.0 != 0 %}
+				{{ content.field_valor_cappres }}
+			{% else %}
+				Esta capaciación es gratuita
+			{% endif %}
+		</p>
+	</div>
+
+	{% if content.field_codigocursocappres|render %}
+		<div class="blockCap">
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+				<a href="https://capacitaciones.biblioredes.gob.cl/Home/Index/?codigoCurso={{ content.field_codigocursocappres.0 }}" style="text-decoration:none">
+					<div class="btnThumbnal">Lugares de inscripción
+						<i class="fas fa-external-link-alt"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+	{% endif %}
+	{% if content.field_recursos_adcappres|render %}
+		<div class="col-12 tituloCapacitacion">
+			Recursos adicionales:</div>
+		<div class="col-12">
+			<p>{{ content.field_recursos_adcappres }}</p>
+		</div>
+	{% endif %}
+</div>

@@ -1,0 +1,79 @@
+<div class="col-9 max-container px-0 m-auto" style="margin-bottom: 2%!important;margin-top: 1%!important;">
+	<h2>{{ node.label }}</h2>
+	<input type="hidden" id="tituloContenido" value={{ node.label }}>
+	<div class="col-12 imgNoticia">
+		{{ content.field_imagen_principal_galeria	 }}</div>
+	<div class="lineGris"></div>
+	<div class="containerBodyNoticia">
+		<div class="bodyNoticia">{{ content.field_descripcion_galeria  }}</div>
+	</div>
+	
+	<div class="shareBox">
+		Comparte
+		<a href="#" class="share-facebook">
+			<i class="fab fa-facebook-f"></i>
+		</a>
+		<a href="#" class="share-twitter">
+			<i class="fab fa-twitter"></i>
+		</a>
+	</div>
+
+	<div class="main-contentSlider" id="main-contentGaleria">
+		<div class="owl-carousel owl-theme" id="carouselGaleria">
+			{% set contador = 0 %}
+			{% set break = false %}
+			{% for image in content.field_imagen if not break %}
+
+				{% set file = file_url(content.field_imagen[contador]['#item'].entity.uri.value) %}
+				{% if file !='/drupal/' %}
+					<div class="item sliderGaleria" id={{ contador }}>
+
+						<img src='{{ file_url(content.field_imagen[contador]['#item'].entity.uri.value) }}'>
+						<div>{{ content.field_imagen[contador]['#item'].alt }}</div>
+
+						{% set contador = contador + 1 %}
+					</div>
+				{% else %}
+					{% set break = true %}
+				{% endif %}
+
+			{% endfor %}
+
+		</div>
+		<div class="owl-theme">
+			<div class="owl-controls">
+				<div class="owl-nav custom-nav" id='custom-nav'></div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="main-contentSlider " id="main-contentGaleriaMini2">
+		<div class="owl-carousel owl-theme " id="carouselGaleriaMini2">
+
+			{% set contador = 0 %}
+			{% set break = false %}
+			{% for image in content.field_imagen if not break %}
+
+				{% set file = file_url(content.field_imagen[contador]['#item'].entity.uri.value) %}
+				{% if file !='/drupal/' %}
+					<div class="item sliderGaleria imagenSlider2" id={{ contador }}>
+						<img src='{{ file_url(content.field_imagen[contador]['#item'].entity.uri.value) }}'>
+						{% set contador = contador + 1 %}
+					</div>
+				{% else %}
+					{% set break = true %}
+				{% endif %}
+
+			{% endfor %}
+
+		</div>
+		<div class="owl-theme">
+			<div class="owl-controls">
+				<div class="owl-nav custom-nav " id='custom-navMini2'></div>
+			</div>
+		</div>
+	</div>
+
+
+</div>
