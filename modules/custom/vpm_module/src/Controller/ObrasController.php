@@ -312,7 +312,7 @@ class ObrasController extends ControllerBase
         /*$coleccion = $this->Cb_Coleccion();*/
         $tematica = $this->Cb_Tematica();
         $artista = $this->Cb_Artista();
-        $annio = $this->Cd_Annio();
+        $annio = $this->Cd_Annio(); 
         $tecnica = $this->Cb_Tecnica();
 
         return[
