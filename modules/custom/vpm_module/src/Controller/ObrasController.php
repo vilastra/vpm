@@ -15,6 +15,11 @@ class ObrasController extends ControllerBase
     }*/
 
 
+
+    function Listar_Query(){
+
+    }
+
     function Listar_Obras()
     {
         $limit = 6;
@@ -44,9 +49,7 @@ class ObrasController extends ControllerBase
         LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid WHERE  node.type = 'obra' AND node.status=1";
         $sql = $sql . " LIMIT $offset, $limit";  
 
-        $resultado = $mysqli->query($sql);
-         
-  
+        $resultado = $mysqli->query($sql);       
 
         $obras = [];
         $x = 0;
@@ -171,14 +174,156 @@ class ObrasController extends ControllerBase
 
     }
 
+    /*public function Cb_Coleccion(){
+
+    }*/
+
+    public function Cb_Tematica(){
+
+      $res = false;
+      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+      try {
+        $query = "SELECT DISTINCT
+        terminoTaxTematica.name as Tematica,
+        terminoTaxTematica.tid as idTematica
+        FROM node
+        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+        LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+        LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+        LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+        LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+        LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid
+        WHERE  node.type = 'obra' and terminoTaxTematica.name is not null";   
+    
+    
+        $resultado = $mysqli->query($query);
+        $tematica=[];
+        $x=0;
+        while ($fila = mysqli_fetch_array($resultado)) {
+
+          $infoTematica = [];
+          $infoTematica['idTematica'] = $fila["idTematica"];
+          $infoTematica['tematica'] = $fila["Tematica"];
+
+          $tematica[$x] = $infoTematica;
+          $x++;
+        }
+        mysqli_close($mysqli);
+        return $tematica;
+    }
+
+    public function Cb_Artista(){
+      $res = false;
+      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+      try {
+        $query = "SELECT DISTINCT terminoTaxAutoria.name as autor, 
+        terminoTaxAutoria.tid as autorId
+        FROM node
+        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+        LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+        LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+        LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+        LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+        LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid   
+        WHERE  node.type = 'obra' and terminoTaxAutoria.name is not null";   
+    
+        $resultado = $mysqli->query($query);
+        $artista=[];
+        $x=0;
+        while ($fila = mysqli_fetch_array($resultado)) {
+
+          $infoArtista = [];
+          $infoArtista['autorId'] = $fila["autorId"];
+          $infoArtista['autor'] = $fila["autor"];
+
+          $artista[$x] = $infoArtista;
+          $x++;
+        }
+        mysqli_close($mysqli);
+        return $artista;
+      }
+
+    public function Cb_Annio(){
+      $res = false;
+      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+      try {
+        $query = "select node.nid,
+        fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec, 
+        fecEjecucion.field_fecha_ejecucion_timestamp as fecEjec
+        from node
+        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+        LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+        WHERE fecEjecucion.field_fecha_ejecucion_timestamp IS NOT NULL
+        GROUP BY fecEjecucion.field_fecha_ejecucion_timestamp";  
+    
+        $resultado = $mysqli->query($query);
+        $annio=[];
+        $x=0;
+        while ($fila = mysqli_fetch_array($resultado)) {
+
+          $infoAnnio = [];
+          $infoAnnio['idfecEjec'] = $fila["idfecEjec"];
+          $infoAnnio['fecEjec'] = data_format($fila["fecEjec"], 'U = Y');
+
+          $annio[$x] = $infoAnnio;
+          $x++;
+        }
+        mysqli_close($mysqli);
+        return $annio;
+
+    }    
+
+    public function Cb_Tecnica(){
+      $res = false;
+      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+      try {
+        $query = "SELECT 
+        terminoTaxTematica.name as Tecnica,
+        terminoTaxTematica.tid as idTecnica
+        FROM node
+        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+        LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
+        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tecnicaObra.field_tecnica_tid
+        WHERE terminoTaxTematica.name IS NOT NULL
+        GROUP BY Tecnica";   
+    
+        $resultado = $mysqli->query($query);
+        $tecnica=[];
+        $x=0;
+        while ($fila = mysqli_fetch_array($resultado)) {
+
+          $infoTecnica = [];
+          $infoTecnica['idTecnica'] = $fila["idTecnica"];
+          $infoTecnica['tecnica'] = $fila["Tecnica"];
+
+          $tecnica[$x] = $infoTecnica;
+          $x++;
+        }
+        mysqli_close($mysqli);
+        return $tecnica;
+
+    }
 
     public function obras(){
         $obras = $this->Listar_Obras();
         $arrayBoton = $this->Lista_Paginador();
+        /*$coleccion = $this->Cb_Coleccion();*/
+        $tematica = $this->Cb_Tematica();
+        $artista = $this->Cb_Artista();
+        $annio = $this->Cd_Annio();
+        $tecnica = $this->Cb_Tecnica();
+
         return[
             '#theme' => 'vpm-vista-obras',
             '#obras' => $obras,
             '#arrayBoton' => $arrayBoton,
+            '#tematica' => $tematica,
+            '#annio' => $annio,
+            '#artista' => $artista,
+            '#tecnica' => $tecnica, 
+
         ];
     }
 }
