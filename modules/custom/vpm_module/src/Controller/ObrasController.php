@@ -76,7 +76,7 @@ class ObrasController extends ControllerBase
         return $obras;
     }
  
-    function Lista_Paginador()
+    public function Lista_Paginador()
     {
         $limit = 6;
         $limitPage = 7;
@@ -209,7 +209,7 @@ class ObrasController extends ControllerBase
       return $tematica;
     }
 
-    function Cb_Artista()
+    public function Cb_Artista()
     {
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query = "SELECT DISTINCT terminoTaxAutoria.name as autor, 
@@ -240,7 +240,7 @@ class ObrasController extends ControllerBase
       return $artista;
     }
 
-    function Cb_Annio()
+    public function Cb_Annio()
     {
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query = "select node.nid,
@@ -270,7 +270,7 @@ class ObrasController extends ControllerBase
       return $annio;
     }    
 
-    function Cb_Tecnica()
+    public function Cb_Tecnica()
     {
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query = "SELECT 

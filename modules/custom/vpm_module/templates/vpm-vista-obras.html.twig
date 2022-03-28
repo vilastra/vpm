@@ -1,36 +1,132 @@
 <div class='whiteArea'>
 	<div class="col-9 max-container px-0 m-auto ">
 		<div class="row">
-			<h1>Obras</h2>
-			{% for obj in obras %}
-				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
-					<a href="">
-						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
-					</a>
-					{% if obj.idTematica!=null %}
-						<a href='tematica?idTematica={{ obj.idTematica }}'>
-							<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
-						</a>
-					{% endif %}
-					<a href="{{ obj.idObra }}">
-						<div class='nombreObra'>{{ obj.tituloObra }}</div>
-					</a>
-					<a href='artista?autorId={{ obj.autorId }}'>
-						<div class='descItem'>Autores:
-							{{ obj.nombreArtista }}</div>
-					</a>
-					<!--<div class='idObra'>{{ obj.idObra }}</div>-->
+			<div class="col-lg-12">
+				<h1>Obras</h1>
+			</div>
 
+
+			<form action="" method="get">
+				<div class="row">
+					<div class="col-lg-9">
+						<input class='inputText' type='text' name='busquedaIndex' placeholder='Ingresa palabra o término…'>
+					</div>
+					<div class="col-lg-3">
+						<input type='submit' class='btn button btnBuscar more-link'>
+					</div>
+					<div class="col-lg-12 mb-3 mt-5 ">
+						<h7>Refina tu búsqueda utilizando los siguientes filtros:</h7>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+						<div class="InfoTitulo1 pb-1">Colección</div>
+						<div>
+							<select class="inputSelect" name="catalogo" id="catalogo">
+								<option value="1">Monvoisin</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+						<div class="InfoTitulo1 pb-1">Temática</div>
+						<div>
+							<select class="inputSelect" name="tematica" id="tematica">
+								<option value="0">Selecciona</option>
+								{% for obj in tematica %}
+									<option value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+						<div class="InfoTitulo1 pb-1">Artista</div>
+						<div>
+							<select class="inputSelect" name="artista" id="artista">
+								<option value="0">Selecciona</option>
+								{% for obj in artista %}
+									<option value="{{ obj.autorId }}">{{ obj.autor }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+						<div class="InfoTitulo1 pb-1">Año</div>
+						<div>
+							<select class="inputSelect" name="ano" id="ano">
+								<option value="0">Selecciona</option>
+								{% for obj in annio %}
+									<option value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+						<div class="InfoTitulo1 pb-1">Técnica</div>
+						<div>
+							<select class="inputSelect" name="tecnica" id="tecnica">
+								<option value="0">Selecciona</option>
+								{% for obj in tecnica %}
+									<option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+						<div class="InfoTitulo1 pb-4-5"></div>
+						<input type='submit' class='btn button btnBuscarFiltro more-link'>
+					</div>
 				</div>
+			</form>
 
-			{% endfor %}
+			<div class="col-lg-12">
+				<h5 class="linea">
+					<span>Resultados</span>
+				</h5>
+			</div>
+			<div class="col-lg-12 InfoTitulo1">
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+			</div>
+
+			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mt-3 mb-3">
+				<div>
+					<select class="inputSelect" name="tecnica" id="tecnica">
+						<option value="0">Ordenar por:</option>
+						{% for obj in tecnica %}
+							<option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+
+			<div class="row">
+				{% for obj in obras %}
+					<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+						<a href="">
+							<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
+						</a>
+						{% if obj.idTematica!=null %}
+							<a href='tematica?idTematica={{ obj.idTematica }}'>
+								<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
+							</a>
+						{% endif %}
+						<a href="{{ obj.idObra }}">
+							<div class='nombreObra'>{{ obj.tituloObra }}</div>
+						</a>
+						<a href='artista?autorId={{ obj.autorId }}'>
+							<div class='descItem'>Autores:
+								{{ obj.nombreArtista }}</div>
+						</a>
+						<!--<div class='idObra'>{{ obj.idObra }}</div>-->
+
+					</div>
+
+				{% endfor %}
+			</div>
 		</div>
 		<div class="pager mt-5">
 			<div class="pager__items">
 				{% for pag in arrayBoton %}
-					
-						{{pag | raw}}
-					
+
+					{{pag | raw}}
+
 
 				{% endfor %}
 			</div>
