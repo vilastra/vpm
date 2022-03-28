@@ -7,20 +7,100 @@ use mysqli;
 
 class ObrasController extends ControllerBase
 {   
-    /*if (!empty($_GET['SelColeccion'])) {
-        array_push($condiciones, 'COLECCION.Asig_Corologica = ?');
-        array_push($where, $_GET['SelColeccion']);
-        array_push($whereTipo, 's');
-        $buscar = 1;
+
+    if (!empty($_GET['tematica'])) {
+      array_push($condiciones, 'terminoTaxTematica.tid = ?');
+      array_push($where, $_GET['tematica']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
     }
 
+    if (!empty($_GET['artista'])) {
+      array_push($condiciones, 'terminoTaxAutoria.tid = ?');
+      array_push($where, $_GET['artista']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
+    }
+
+    if (!empty($_GET['ano'])) {
+      array_push($condiciones, 'fecEjecucion.field_fecha_ejecucion_timestamp = ?');
+      array_push($where, $_GET['ano']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
+    }
+
+  
+    if (!empty($_GET['tecnica'])) {
+      array_push($condiciones, 'terminoTaxTecnica.tid = ?');
+      array_push($where, $_GET['tecnica']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
+    } 
+  
 
 
-    function Listar_Query(){
+    function Listar_Query($buscar, $condiciones, $where, $whereTipo){
 
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+
+      $sql = "SELECT nid,title as titulo,terminoTaxAutoria.name as autor, terminoTaxAutoria.tid as autorId, 
+      file_managed.filename, terminoTaxTematica.name as Tematica,
+      terminoTaxTematica.tid as idTematica,
+      fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec,
+      DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec,
+      terminoTaxTecnica.name as Tecnica,
+      terminoTaxTecnica.tid as idTecnica
+      FROM node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+      LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+      LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+      LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+      LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
+      LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
+      WHERE  1=1 ";
+
+      //WHERE  node.type = 'obra' AND node.status=1 
+      $sql .= ' AND ' . implode(' AND ', $condiciones);
+
       
-    }*/
+      /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
+      $a_params = array();
+
+      $param_type = '';
+      $n = count($whereTipo);
+      for ($i = 0; $i < $n; $i++) {
+        $param_type .= $whereTipo[$i];
+      }
+
+      /* with call_user_func_array, array params must be passed by reference */
+      $a_params[] = &$param_type;
+
+      for ($i = 0; $i < $n; $i++) {
+        /* with call_user_func_array, array params must be passed by reference */
+        $a_params[] = &$where[$i];
+      }
+
+      /* Prepare statement */
+      $stmt = $mysqli->prepare($sql);
+      if ($stmt === false) {
+        trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error, E_USER_ERROR);
+      }
+
+      /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
+      if ($buscar != 0) {
+        call_user_func_array(array($stmt, 'bind_param'), $a_params);
+      }
+
+      /* Execute statement */
+      $stmt->execute();
+      $resultado = $stmt->get_result();
+
+      return $resultado;
+    }
 
     function Listar_Obras()
     {
@@ -38,17 +118,8 @@ class ObrasController extends ControllerBase
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
         $offset = ($pag - 1) * $limit;        
 
-        $sql = "SELECT nid,title as titulo,terminoTaxAutoria.name as autor, terminoTaxAutoria.tid as autorId, 
-        file_managed.filename, terminoTaxTematica.name as Tematica,
-        terminoTaxTematica.tid as idTematica
-        FROM node
-        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-        LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
-        LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
-        LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
-        LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid WHERE  node.type = 'obra' AND node.status=1";
+      
+        $sql = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo);
         $sql = $sql . " LIMIT $offset, $limit";  
 
         $resultado = $mysqli->query($sql);       
@@ -76,7 +147,7 @@ class ObrasController extends ControllerBase
         return $obras;
     }
  
-    public function Lista_Paginador()
+    function Lista_Paginador()
     {
         $limit = 6;
         $limitPage = 7;
@@ -88,7 +159,6 @@ class ObrasController extends ControllerBase
 
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
         $offset = ($pag - 1) * $limit;  
-
       
         $sqlTotal = "SELECT COUNT(*) total
         FROM node
@@ -209,7 +279,7 @@ class ObrasController extends ControllerBase
       return $tematica;
     }
 
-    public function Cb_Artista()
+    function Cb_Artista()
     {
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query = "SELECT DISTINCT terminoTaxAutoria.name as autor, 
@@ -240,7 +310,7 @@ class ObrasController extends ControllerBase
       return $artista;
     }
 
-    public function Cb_Annio()
+    function Cb_Annio()
     {
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query = "select node.nid,
@@ -259,8 +329,7 @@ class ObrasController extends ControllerBase
 
         $infoAnnio = [];
         $infoAnnio['idfecEjec'] = $fila["idfecEjec"];
-       /* $infoAnnio['fecEjec'] = date_format($fila["fecEjec"], 'U = Y');*/
-       $infoAnnio['fecEjec'] = $fila["fecEjec"];
+        $infoAnnio['fecEjec'] = $fila["fecEjec"];
       
 
         $annio[$x] = $infoAnnio;
@@ -270,7 +339,7 @@ class ObrasController extends ControllerBase
       return $annio;
     }    
 
-    public function Cb_Tecnica()
+    function Cb_Tecnica()
     {
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query = "SELECT 
