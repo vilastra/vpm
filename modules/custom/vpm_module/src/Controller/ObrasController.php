@@ -43,11 +43,11 @@ class ObrasController extends ControllerBase
       WHERE node.type = 'obra' AND node.status=1 ";
 
     //WHERE  node.type = 'obra' AND node.status=1 
-    if ($buscar == 1) {
-      $sql .= ' AND ' . implode(' AND ', $condiciones);
+    if ($buscar['select'] == 1) {
+      $sql .= ' AND ' . implode(' AND ', $condiciones['busqueda1']);
     }
-    if ($buscar == 2) {
-      $sql .= ' AND ' . implode(' OR ', $condiciones);
+    if ($buscar['texto'] == 1) {
+      $sql .= ' AND ' . implode(' OR ', $condiciones['busqueda2']);
     }
 
     if (!$paginador) {
@@ -110,6 +110,11 @@ class ObrasController extends ControllerBase
       $infoObra['tituloObra'] = $fila["titulo"];
       $infoObra['nombreArtista'] = $fila["autor"];
       $infoObra['autorId'] = $fila["autorId"];
+      if (isset($_GET["idCat"])) {
+        $infoObra['urlArtista'] = "idCat=1&Sec=Art&id=" . $fila["autorId"];
+      } else {
+        $infoObra['urlArtista'] = "id=" . $fila["autorId"];
+      }
       /* IMAGEN */
       $infoObra['rutaFoto'] = $fila["filename"];
       $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
@@ -358,45 +363,64 @@ class ObrasController extends ControllerBase
 
   function obras()
   {
-    $buscar = 0;
-    $condiciones = [];
+    $buscar['select'] = 0;
+    $buscar['texto'] = 0;
+    $condiciones['busqueda1'] = [];
+    $condiciones['busqueda2'] = [];
     $where = [];
     $whereTipo = [];
 
-    if (!empty($_GET['busquedaIndex'])) {
-      array_push($condiciones, 'node.title LIKE ?');
-      array_push($where, "%{$_GET['busquedaIndex']}%");
-      array_push($whereTipo, 's');
-      $buscar = 1;
+    // if (!empty($_GET['busquedaIndex'])) {
+    //   array_push($condiciones, 'node.title LIKE ?');
+    //   array_push($where, "%{$_GET['busquedaIndex']}%");
+    //   array_push($whereTipo, 's');
+    //   $buscar = 1;
+    // }
+
+    $palabrasOmitir = ['pieza', 'piezas', 'en', 'primer', 'lugar', 'segundo', 'tercero', 'ante', 'todo', 'fundamentalmente', 'lo', 'más', 'importante', 'después', 'por', 'fin', 'es', 'decir', 'agrega', 'considerar', 'retirar', 'acotar', 'primero', 'para', 'empezar', 'finalmente', 'mientras', 'ultimo', 'sobre', 'podemos', 'incluir', 'agregar', 'sustentar', 'adicionar', 'comprender', 'de', 'modo', 'accesorio', 'y', 'todos', 'modos', 'cualquier', 'forma', 'manera', 'cabe', 'destacar', 'idéntico', 'nuevo', 'al', 'mismo', 'tiempo', 'así', 'se', 'puede', 'señalar', 'inclusive', 'además', 'la', 'misma', 'también', 'algo', 'semejante', 'ocurre', 'con…', 'otra', 'vez', 'pero', 'aunque', 'otro', 'sentido', 'no', 'obstante', 'parte', 'como', 'contrapartida', 'sin', 'embargo', 'a', 'pesar', 'diferencia', 'camino', 'un', 'lado', 'el', 'orden', 'ideas', 'extremo', 'ahora', 'bien', 'contrario', 'que', 'antagónicamente', 'contraposición', 'revés', 'ejemplo', 'tal', 'caso', 'si', 'apelamos', 'usamos', 'una', 'imagen', 'símil', 'similarmente', 'identificante', 'permítanme', 'explicarle', 'decir', 'principio', 'otras', 'palabras', 'hecho', 'conforme', 'circunstancia', 'sea', 'inicio', 'esto', 'manera', 'eso', 'quiere', 'expresar', 'aludir', 'significa', 'razón', 'objeto', 'puesto', 'causa', 'de', 'solicitando', 'debido', 'porque', 'dado', 'ya', 'consecuencia', 'consiguiente', 'esta', 'ello', 'allí', 'ende', 'motivo', 'concordancia', 'resultado', 'cual', 'hay', 'inferir', 'siempre', 'condición', 'cuando', 'con', 'menos', 'acuerdo', 'propósito', 'cono', 'similar', 'igual', 'manera', 'situación', 'comparamos', 'idéntica', 'situación', 'circunstancia', 'paralelamente', 'definitiva', 'resumiendo', 'planteado', 'terminar', 'concretizando', 'resumen', 'englobando', 'conclusión', 'palabra', 'síntesis', 'finalizando', 'habitualmente', 'duda', 'alguna', 'supuesto', 'probablemente', 'notablemente', 'evidentemente', 'efectivamente', 'sencillamente', 'resulta', 'lógico', 'razonable', 'naturalmente', 'debe', 'suponerse', 'generalmente', 'cierto', 'posiblemente', 'efecto', 'mejor', 'desde', 'luego', 'específicamente'];
+
+    /* TEXTO NUMERO PIEZA */
+
+    if (!empty($_GET["busquedaIndex"])) {
+      $buscar['texto'] = 1;
+      $arrayBusqueda = explode(" ", $_GET["busquedaIndex"]);
+      foreach ($arrayBusqueda as &$valor) {
+        if (!in_array($valor, $palabrasOmitir)) {
+          array_push($condiciones['busqueda2'], 'node.title LIKE ?');
+          array_push($where, "%{$_GET['busquedaIndex']}%");
+          array_push($whereTipo, 's');
+        }
+      }
     }
 
+
     if (!empty($_GET['tematica'])) {
-      array_push($condiciones, 'terminoTaxTematica.tid = ?');
+      array_push($condiciones['busqueda1'], 'terminoTaxTematica.tid = ?');
       array_push($where, $_GET['tematica']);
       array_push($whereTipo, 's');
-      $buscar = 1;
+      $buscar['select'] = 1;
     }
 
     if (!empty($_GET['artista'])) {
-      array_push($condiciones, 'terminoTaxAutoria.tid = ?');
+      array_push($condiciones['busqueda1'], 'terminoTaxAutoria.tid = ?');
       array_push($where, $_GET['artista']);
       array_push($whereTipo, 's');
-      $buscar = 1;
+      $buscar['select'] = 1;
     }
 
     if (!empty($_GET['ano'])) {
-      array_push($condiciones, 'fecEjecucion.field_fecha_ejecucion_timestamp = ?');
+      array_push($condiciones['busqueda1'], 'fecEjecucion.field_fecha_ejecucion_timestamp = ?');
       array_push($where, $_GET['ano']);
       array_push($whereTipo, 's');
-      $buscar = 1;
+      $buscar['select'] = 1;
     }
 
 
     if (!empty($_GET['tecnica'])) {
-      array_push($condiciones, 'terminoTaxTecnica.tid = ?');
+      array_push($condiciones['busqueda1'], 'terminoTaxTecnica.tid = ?');
       array_push($where, $_GET['tecnica']);
       array_push($whereTipo, 's');
-      $buscar = 1;
+      $buscar['select'] = 1;
     }
     $pag = 0;
     if (!empty($_GET["pag"])) {
