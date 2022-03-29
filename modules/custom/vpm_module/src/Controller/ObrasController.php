@@ -78,7 +78,7 @@ class ObrasController extends ControllerBase
     }
 
     /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
-    if ($buscar != 0) {
+    if($buscar['select'] != 0 || $buscar['texto'] !=0){
       call_user_func_array(array($stmt, 'bind_param'), $a_params);
     }
 
@@ -454,6 +454,11 @@ class ObrasController extends ControllerBase
     } else {
       $idCatalogo = 'null';
     }
+    $busquedaIndex = '';
+    if(isset($_GET["busquedaIndex"])){
+      $busquedaIndex = $_GET["busquedaIndex"];
+    }
+
     return [
       '#theme' => 'vpm-vista-obras',
       '#obras' => $obras,
@@ -463,6 +468,7 @@ class ObrasController extends ControllerBase
       '#artista' => $artista,
       '#idCat' => $idCatalogo,
       '#Sec' => $menuLink,
+      '#busquedaIndex' => $busquedaIndex,
       '#tecnica' => $tecnica
 
     ];

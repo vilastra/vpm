@@ -10,9 +10,14 @@
 				<input type hidden name="idCat" value="{{ idCat }}">
 				<input type hidden name="Sec" value="{{ Sec }}">
 				<div class="row">
-					<div class="col-lg-9">
-						<input class='inputText' type='text' name='busquedaIndex' placeholder='Ingresa palabra o término…'>
+					<div class="col-lg-9">													
+						{% if busquedaIndex == null %}
+							<input class='inputText' type='text' name='busquedaIndex' placeholder='Ingresa palabra o término…'>	
+						{% else %}							
+							<input class='inputText' type='text' name='busquedaIndex' value="{{ busquedaIndex }}">	
+						{% endif %}	
 					</div>
+
 					<div class="col-lg-3">
 						<input type='submit' class='btn button btnBuscar more-link' value="Busca">
 					</div>
@@ -48,7 +53,6 @@
 							<select class="inputSelect" name="artista" id="artista">
 								<option value="0">Selecciona</option>
 								{% for obj in artista %}
-									<option value="{{ obj.autorId }}">{{ obj.autor }}</option>
 									{% if obj.selected == true %}
 										<option selected value="{{ obj.autorId }}">{{ obj.autor }}</option>
 									{% else %}
