@@ -31,10 +31,12 @@ vpm_module.obras:
   defaults:
     _controller: '\Drupal\vpm_module\Controller\ObrasController::obras'
   requirements:
-    _permission: 'access content'    
+    _permission: 'access content'
 
+vpm_module.obra:
+  path: '/obra'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\ObrasController::obra'
+  requirements:
+    _permission: 'access content' 
 
-# En este archivo se define la ruta del controlador que se va a utilizar 
-# en este caso ListadoRegionesController
-# mas el path que vendría siendo como se verá en la URL es decir www.ejemplo.com/puntos-de-conexion
-# Para crear los permisos se debe utilizar (creo) el archivo modulename.permissions.yml

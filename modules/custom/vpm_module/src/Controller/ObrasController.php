@@ -7,11 +7,6 @@ use mysqli;
 
 class ObrasController extends ControllerBase
 {
-
-
-
-
-
   function Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador)
   {
     $limit = 6;
@@ -93,9 +88,6 @@ class ObrasController extends ControllerBase
     return $resultado;
   }
 
-
-
-
   function Listar_Obras($buscar, $condiciones, $where, $whereTipo, $paginador)
   {
     $limit = 6;
@@ -155,7 +147,6 @@ class ObrasController extends ControllerBase
         LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid WHERE  node.type = 'obra'";
 
     $result = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador);
-    $fila = mysqli_fetch_assoc($result);
     $total = $result->num_rows;
 
     $page = false;
@@ -253,6 +244,10 @@ class ObrasController extends ControllerBase
       $infoTematica = [];
       $infoTematica['idTematica'] = $fila["idTematica"];
       $infoTematica['tematica'] = $fila["Tematica"];
+      $infoTematica['selected'] = false;
+      if (isset($_GET["tematica"]) && $_GET["tematica"] != 0 && $_GET["tematica"] == $fila["idTematica"]) {
+        $infoTematica['selected'] = true;
+      }
 
       $tematica[$x] = $infoTematica;
       $x++;
@@ -284,6 +279,10 @@ class ObrasController extends ControllerBase
       $infoArtista = [];
       $infoArtista['autorId'] = $fila["autorId"];
       $infoArtista['autor'] = $fila["autor"];
+      $infoArtista['selected'] = false;
+      if (isset($_GET["artista"]) && $_GET["artista"] != 0 && $_GET["artista"] == $fila["autorId"]) {
+        $infoArtista['selected'] = true;
+      }
 
       $artista[$x] = $infoArtista;
       $x++;
@@ -312,7 +311,10 @@ class ObrasController extends ControllerBase
       $infoAnnio = [];
       $infoAnnio['idfecEjec'] = $fila["idfecEjec"];
       $infoAnnio['fecEjec'] = $fila["fecEjec"];
-
+      $infoAnnio['selected'] = false;
+      if (isset($_GET["ano"]) && $_GET["ano"] != 0 && $_GET["ano"] == $fila["idfecEjec"]) {
+        $infoAnnio['selected'] = true;
+      }
 
       $annio[$x] = $infoAnnio;
       $x++;
@@ -342,6 +344,10 @@ class ObrasController extends ControllerBase
       $infoTecnica = [];
       $infoTecnica['idTecnica'] = $fila["idTecnica"];
       $infoTecnica['tecnica'] = $fila["Tecnica"];
+      $infoTecnica['selected'] = false;
+      if (isset($_GET["tecnica"]) && $_GET["tecnica"] != 0 && $_GET["tecnica"] == $fila["idTecnica"]) {
+        $infoTecnica['selected'] = true;
+      }
 
       $tecnica[$x] = $infoTecnica;
       $x++;
@@ -412,7 +418,18 @@ class ObrasController extends ControllerBase
     $artista = $this->Cb_Artista();
     $annio = $this->Cb_Annio();
     $tecnica = $this->Cb_Tecnica();
-
+    $idCatalogo = 'null';
+    $menuLink = 'null';
+    if (isset($_GET["Sec"])) {
+      $menuLink = $_GET["Sec"];
+    } else {
+      $menuLink = 'null';
+    }
+    if (isset($_GET["idCat"])) {
+      $idCatalogo = $_GET["idCat"];
+    } else {
+      $idCatalogo = 'null';
+    }
     return [
       '#theme' => 'vpm-vista-obras',
       '#obras' => $obras,
@@ -420,8 +437,152 @@ class ObrasController extends ControllerBase
       '#tematica' => $tematica,
       '#annio' => $annio,
       '#artista' => $artista,
+      '#idCat' => $idCatalogo,
+      '#Sec' => $menuLink,
       '#tecnica' => $tecnica
 
+    ];
+  }
+
+
+  function getInfoObra($idObra)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT nid,title as Titulo,
+    fecEjecucion.field_fecha_ejecucion_year as fecha_ejecucion,
+    terminoTaxAutoria.name as Autoria,
+    terminoTaxtipoAutoriaFinal.name as Tipo_Autoria_Final,
+    terminoTaxtipoAutoriaPrinFinal.name as Tipo_Autoria_Prin_Final,
+    terminoTaxtipoInsc.name as Tipo_Inscripcion,
+    ubicacionIns.field_ubicacion_en_la_obra_value as Ubicacion_Inscripcion,
+    file_managed.filename as urlImagen,
+    transcripcionIns.field_transcripcion_value as Transcripcion_Inscripcion,
+    textoRazonado.field_texto_razonado_value as Texto_Razonado
+    FROM node
+    LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+    LEFT JOIN field_data_field_numero numero ON numero.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_titulo_actual titActual ON titActual.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_inscripciones inscrip ON inscrip.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_tipo_de_inscripcion tipoins ON tipoins.entity_id = inscrip.field_inscripciones_value
+    LEFT JOIN taxonomy_term_data terminoTaxtipoInsc ON terminoTaxtipoInsc.tid = tipoins.field_tipo_de_inscripcion_tid
+    LEFT JOIN field_data_field_ubicacion_en_la_obra ubicacionIns ON ubicacionIns.entity_id = inscrip.field_inscripciones_value
+    LEFT JOIN field_data_field_transcripcion transcripcionIns ON transcripcionIns.entity_id = inscrip.field_inscripciones_value
+    LEFT JOIN field_data_field_tipo_de_autoria tipoAutoria ON tipoAutoria.entity_id = iden.field_identificacion_value
+    JOIN taxonomy_term_data terminoTaxtipoAutoria ON terminoTaxtipoAutoria.tid = tipoAutoria.field_tipo_de_autoria_tid
+    LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+    JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+    LEFT JOIN field_data_field_tipo_de_autoria_final tipoAutoriaFinal ON tipoAutoriaFinal.entity_id = iden.field_identificacion_value
+    JOIN taxonomy_term_data terminoTaxtipoAutoriaFinal ON terminoTaxtipoAutoriaFinal.tid = tipoAutoriaFinal.field_tipo_de_autoria_final_tid
+    LEFT JOIN field_data_field_autoria_principal_final tipoAutoriaPrinFinal ON tipoAutoriaPrinFinal.entity_id = iden.field_identificacion_value
+    JOIN taxonomy_term_data terminoTaxtipoAutoriaPrinFinal ON terminoTaxtipoAutoriaPrinFinal.tid = tipoAutoriaPrinFinal.field_autoria_principal_final_tid
+    LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+    LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+    LEFT JOIN field_data_field_texto_razonado textoRazonado ON textoRazonado.entity_id = iden.field_identificacion_value
+    WHERE nid=? ";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $obra = [];
+    while ($row = $result->fetch_assoc()) {
+      $obra['idObra'] = $row["nid"];
+      $obra['titulo'] = $row["Titulo"];
+      $obra['urlImagen'] = $row["urlImagen"];
+      $obra['textoRazonado'] = $row["Texto_Razonado"];
+      $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
+      $obra['autoria'] = $row["Autoria"];
+      $obra['tipoAutoria'] = $row["Tipo_Autoria_Final"];
+      $obra['tipoInscripcion'] = $row["Tipo_Inscripcion"];
+      $obra['ubicacionInscripcion'] = $row["Ubicacion_Inscripcion"];
+      $obra['transInscripcion'] = $row["Transcripcion_Inscripcion"];
+    }
+    return $obra;
+  }
+
+  function getPropiedadObra($idObra)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT nombrePropietario.field_nombre_propietario_value as nombrePropiedad,
+    ingrAdquisicion.field_ano_ingreso_adquisicion_value as fechaAdqPropiedad,
+    ciudadTermDataAdquisicion.name as ciudadAdq FROM node 
+    LEFT JOIN field_data_field_historial_de_propiedad propiedad ON propiedad.entity_id = node.nid
+    LEFT JOIN field_data_field_nombre_propietario nombrePropietario ON nombrePropietario.entity_id = propiedad.field_historial_de_propiedad_value
+    LEFT JOIN field_data_field_ano_ingreso_adquisicion ingrAdquisicion ON ingrAdquisicion.entity_id = propiedad.field_historial_de_propiedad_value
+    LEFT JOIN field_data_field_ciudad ciudadAdquisicion ON ciudadAdquisicion.entity_id = propiedad.field_historial_de_propiedad_value
+    LEFT JOIN taxonomy_term_data ciudadTermDataAdquisicion ON ciudadTermDataAdquisicion.tid = ciudadAdquisicion.field_ciudad_tid
+    WHERE nid=?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $propiedades = [];
+    $x = 0;
+    while ($row = $result->fetch_assoc()) {
+      $propiedad['nombrePropietarioObra'] = $row["nombrePropiedad"];
+      $propiedad['fechaAquisicionObra'] = $row["fechaAdqPropiedad"];
+      $propiedad['ciudadAquisicionObra'] = $row["ciudadAdq"];
+      $propiedades[$x] = $propiedad;
+      $x++;
+    }
+    return $propiedades;
+  }
+
+  function getExhibicionesObra($idObra)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT tituloExhibicion.field_t_tulo_de_la_exhibici_n_value as Titulo_Exhibicion,
+    nombreResponsableExhibicion.field_nombre_curador_responsable_value as Responsable_Exhibicion,
+    nombreInstitucionExhibicion.field_institucion_value as Institucion_Exhibicion,
+    ciudadTermDataExhibicion.name as Ciudad_Exhibicion,
+    fechaExhibicion.field_fecha_inicio_year as Ano_Exhibicion FROM node 
+    LEFT JOIN field_data_field_circulacion_de_la_imagen circulacion ON circulacion.entity_id = node.nid
+    LEFT JOIN field_data_field_exhibiciones exhibiciones ON exhibiciones.entity_id = circulacion.field_circulacion_de_la_imagen_value
+    LEFT JOIN field_data_field_t_tulo_de_la_exhibici_n tituloExhibicion ON tituloExhibicion.entity_id = exhibiciones.field_exhibiciones_value
+    LEFT JOIN field_data_field_nombre_curador_responsable nombreResponsableExhibicion ON nombreResponsableExhibicion.entity_id = exhibiciones.field_exhibiciones_value
+    LEFT JOIN field_data_field_institucion nombreInstitucionExhibicion ON nombreInstitucionExhibicion.entity_id = exhibiciones.field_exhibiciones_value
+    LEFT JOIN field_data_field_ciudad ciudadExhibicion ON ciudadExhibicion.entity_id = exhibiciones.field_exhibiciones_value
+    LEFT JOIN taxonomy_term_data ciudadTermDataExhibicion ON ciudadTermDataExhibicion.tid = ciudadExhibicion.field_ciudad_tid
+    LEFT JOIN field_data_field_fecha_inicio fechaExhibicion ON fechaExhibicion.entity_id = exhibiciones.field_exhibiciones_value
+    WHERE nid=?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $exhibiciones = [];
+    $x = 0;
+    while ($row = $result->fetch_assoc()) {
+      $exhibicion['tituloExhibicion'] = $row["Titulo_Exhibicion"];
+      $exhibicion['responsableExhibicion'] = $row["Responsable_Exhibicion"];
+      $exhibicion['institucionExhibicion'] = $row["Institucion_Exhibicion"];
+      $exhibicion['ciudadExhibicion'] = $row["Ciudad_Exhibicion"];
+      $exhibicion['anoExhibicion'] = $row["Ano_Exhibicion"];
+      $exhibiciones[$x] = $exhibicion;
+      $x++;
+    }
+    return $exhibiciones;
+  }
+
+
+
+
+  function obra()
+  {
+    $obra = [];
+    $obra['idObra'] = null;
+    if (isset($_GET["idObra"])) {
+      $obra['idObra'] = $_GET["idObra"];
+    }
+    $obra["infoObra"] = $this->getInfoObra($obra['idObra']);
+    $obra["propiedadesObra"] = $this->getPropiedadObra($obra['idObra']);
+    $obra["exhibicionesObra"] = $this->getExhibicionesObra($obra['idObra']);
+
+    return [
+      '#theme' => 'vpm-vista-obra',
+      '#obra' => $obra
     ];
   }
 }

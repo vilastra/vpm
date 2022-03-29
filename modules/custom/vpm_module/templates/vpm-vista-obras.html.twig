@@ -7,6 +7,8 @@
 
 
 			<form action="" method="get">
+				<input type hidden name="idCat" value="{{ idCat }}">
+				<input type hidden name="Sec" value="{{ Sec }}">
 				<div class="row">
 					<div class="col-lg-9">
 						<input class='inputText' type='text' name='busquedaIndex' placeholder='Ingresa palabra o término…'>
@@ -31,7 +33,11 @@
 							<select class="inputSelect" name="tematica" id="tematica">
 								<option value="0">Selecciona</option>
 								{% for obj in tematica %}
-									<option value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+									{% if obj.selected == true %}
+										<option selected value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+									{% else %}
+										<option value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+									{% endif %}
 								{% endfor %}
 							</select>
 						</div>
@@ -43,6 +49,11 @@
 								<option value="0">Selecciona</option>
 								{% for obj in artista %}
 									<option value="{{ obj.autorId }}">{{ obj.autor }}</option>
+									{% if obj.selected == true %}
+										<option selected value="{{ obj.autorId }}">{{ obj.autor }}</option>
+									{% else %}
+										<option value="{{ obj.autorId }}">{{ obj.autor }}</option>
+									{% endif %}
 								{% endfor %}
 							</select>
 						</div>
@@ -54,6 +65,11 @@
 								<option value="0">Selecciona</option>
 								{% for obj in annio %}
 									<option value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+									{% if obj.selected == true %}
+										<option selected value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+									{% else %}
+										<option value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+									{% endif %}
 								{% endfor %}
 							</select>
 						</div>
@@ -64,7 +80,12 @@
 							<select class="inputSelect" name="tecnica" id="tecnica">
 								<option value="0">Selecciona</option>
 								{% for obj in tecnica %}
-									<option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+									{% if obj.selected == true %}
+										<option selected value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+									{% else %}
+										<option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+									{% endif %}
+
 								{% endfor %}
 							</select>
 						</div>
@@ -89,9 +110,10 @@
 				<div>
 					<select class="inputSelect" name="tecnica" id="tecnica">
 						<option value="0">Ordenar por:</option>
-						{% for obj in tecnica %}
-							<option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
-						{% endfor %}
+						<option value="1">Autor</option>
+						<option value="2">Fecha</option>
+						<option value="3">Técnica</option>
+						<option value="4">Género</option>
 					</select>
 				</div>
 			</div>
@@ -115,19 +137,14 @@
 								{{ obj.nombreArtista }}</div>
 						</a>
 						<!--<div class='idObra'>{{ obj.idObra }}</div>-->
-
 					</div>
-
 				{% endfor %}
 			</div>
 		</div>
 		<div class="pager mt-5">
 			<div class="pager__items">
 				{% for pag in arrayBoton %}
-
 					{{pag | raw}}
-
-
 				{% endfor %}
 			</div>
 		</div>
