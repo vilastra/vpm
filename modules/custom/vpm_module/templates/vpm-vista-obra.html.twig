@@ -2,56 +2,69 @@
 
 	<div class="col-9 max-container px-0 m-auto ">
 
-		<div class="row mb-5">
-
-			{% for obj in artista %}
-				<h6>{{ obj.nombreArtista }}</h6>
-				<div class='cardItem col-lg-6 col-md-4 col-sm-12 col-xs-12'>
-					<div class='imgItemGrande'><img src='{{ obj.rutaFoto }}'></div>
+		<div class="tituloFicha col-12">Ficha razonada:
+			{{obra.infoObra["titulo"]}}
+		</div>
+		<div class="divSepFicha">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12 imgFicha">
+					<img src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/Portada_recorte.jpg'>
 				</div>
-			{% endfor %}
-			<div class="col-3 ">
-				<p></p>
+				<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+					<div class="divSepFicha pt-0">
+						<a href="#">
+							<div class="buttonDescargaFicha">
+								<i class="fa fa-download" aria-hidden="true"></i>
+								Descarga la ficha razonada</div>
+						</a>
+					</div>
+					<div class="divSepFicha">
+						<div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
+						<div class="descObraFicha">{{obra.infoObra["tecnica"]}}
+							sobre
+							{{obra.infoObra["soporte"]}},
+							{{obra.infoObra["alto"]}}
+							x
+							{{obra.infoObra["ancho"]}}</div>
+						<div class="descObraFicha">{{obra.infoObra["autoria"]}}</div>
+					</div>
+					<div class="divSepFicha">
+						<div class="subTextoObraFicha">Inscripciones</div>
+						<div class="descObraFicha">{{obra.infoObra["tipoInscripcion"]}}
+							{{obra.infoObra["ubicacionInscripcion"]}}
+							{{obra.infoObra["transInscripcion"]}}</div>
+					</div>
+					<div class="divSepFicha">
+						<div class="subTextoObraFicha">Procedencia</div>
+						{% for obj in obra.propiedadesObra %}
+							<div class="descObraFicha">{{ obj.nombrePropietarioObra }},
+								{{ obj.ciudadAquisicionObra }},
+								{{ obj.fechaAquisicionObra }}</div>
+						{% endfor %}
+					</div>
+					<div class="pt-4">
+						<div class="subTextoObraFicha">Exhibiciones</div>
+						<div class="descObraFicha">
+							<ul>
+								{% for obj in obra.exhibicionesObra %}
+								<li>{{ obj.tituloExhibicion }}, {{ obj.institucionExhibicion }}, {{ obj.ciudadExhibicion }}, {{ obj.anoExhibicion }}</li>	
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<div class="row">
-			<h2>Obras destacadas del artista</h2>
-			{% for obj in obrasDestacadas[1] %}
-				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
-					<a href='obra?id={{ obj.idObra }}'>
-						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
-					</a>
-					<a href='tematica?idTematica={{ obj.idTematica }}'>
-						<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
-					</a>
-					<a href='obra?id={{ obj.idObra }}'>
-						<div class='nombreObra'>{{ obj.tituloObra}}</div>
-					</a>
-
-					<div class='descItem'>
-						Autores:
-						<a href='artista?id={{ obj.idArtista }}'>{{ obj.nombreArtista }}</a>
-					</div>
-
-					<a href='obra?id={{ obj.idObra }}'>
-						<div class='descItem'>
-							<b>
-								Ve más
-							</b>
-						</div>
-					</a>
-				</div>
-			{% endfor %}
-			{% if obrasDestacadas[0] > 6 %}
-					{% for obj in artista %}
-						<div class="col-12" style="margin-top:2.5rem">
-							<a href="obras" class="btn button btnBuscar more-link keychainify-checked">Ve todas las obras de este artista</a>
-						</div>
-					</a>
-				{% endfor %}
-			{% endif %}
-
+		<div class="divSepFicha">
+			<div class="colSepDosFicha descObraFicha">
+				{{obra.infoObra["textoRazonado"]}}
+			</div>
+			<div class="firmaObraFicha">
+				<pre>
+				{{ dump(obra) }}
+			</pre>
+			</div>
 		</div>
 	</div>
 </div>

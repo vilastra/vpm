@@ -2142,3 +2142,59 @@ textarea {
 label {
     display: block
 }
+
+
+/* FICHA RAZONADA */
+
+.tituloFicha {
+    font-size: 2.5rem;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    padding-bottom: 0.563rem;
+}
+
+.imgFicha img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.buttonDescargaFicha {
+    width: 100%;
+    background-color: #2D717C;
+    color: white;
+    text-align: center;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-family: "Open Sans", sans-serif;
+}
+
+.tituloObraFicha {
+    font-size: 1.313rem;
+    font-family: "Open Sans", sans-serif;
+    font-style: italic;
+    padding-bottom: 1.25rem;
+}
+
+.subTextoObraFicha {
+    font-size: 1.313rem;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    padding-bottom: 1.25rem;
+}
+
+.descObraFicha {
+    font-size: 1.125rem;
+    font-family: "Open Sans", sans-serif;
+    color: #303030;
+}
+
+.divSepFicha {
+    padding-bottom: 2rem;
+    padding-top: 2rem;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.colSepDosFicha {
+    column-count: 2;
+}

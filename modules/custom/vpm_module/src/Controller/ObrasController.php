@@ -384,29 +384,25 @@ class ObrasController extends ControllerBase
         }
         if (!in_array($valor, $palabrasOmitir)) {
           array_push($condiciones['busqueda2'], 'terminoTaxTematica.tid LIKE ?');
-          array_push($where, "%{$_GET['tematica']}%");
+          array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
         if (!in_array($valor, $palabrasOmitir)) {
           array_push($condiciones['busqueda2'], 'terminoTaxAutoria.tid LIKE ?');
-          array_push($where, "%{$_GET['artista']}%");
+          array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
         if (!in_array($valor, $palabrasOmitir)) {
           array_push($condiciones['busqueda2'], 'fecEjecucion.field_fecha_ejecucion_timestamp LIKE ?');
-          array_push($where, "%{$_GET['ano']}%");
+          array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
 
         if (!in_array($valor, $palabrasOmitir)) {
           array_push($condiciones['busqueda2'], 'terminoTaxTecnica.tid LIKE ?');
-          array_push($where, "%{$_GET['tecnica']}%");
+          array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
-
-
-
-
       }
     }
 
@@ -504,7 +500,11 @@ class ObrasController extends ControllerBase
     ubicacionIns.field_ubicacion_en_la_obra_value as Ubicacion_Inscripcion,
     file_managed.filename as urlImagen,
     transcripcionIns.field_transcripcion_value as Transcripcion_Inscripcion,
-    textoRazonado.field_texto_razonado_value as Texto_Razonado
+    textoRazonado.field_texto_razonado_value as Texto_Razonado,
+    terminoTaxTecnica.name as Tecnica,
+    terminoTaxSoporte.name as Soporte,
+    altoImagen.field_alto_value as Alto,
+    anchoImagen.field_ancho_value as Ancho
     FROM node
     LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
     LEFT JOIN field_data_field_numero numero ON numero.entity_id = iden.field_identificacion_value
@@ -516,6 +516,12 @@ class ObrasController extends ControllerBase
     LEFT JOIN field_data_field_ubicacion_en_la_obra ubicacionIns ON ubicacionIns.entity_id = inscrip.field_inscripciones_value
     LEFT JOIN field_data_field_transcripcion transcripcionIns ON transcripcionIns.entity_id = inscrip.field_inscripciones_value
     LEFT JOIN field_data_field_tipo_de_autoria tipoAutoria ON tipoAutoria.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_alto altoImagen ON altoImagen.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_ancho anchoImagen ON anchoImagen.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
+    JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
+    LEFT JOIN field_data_field_tecnica tecnica ON tecnica.entity_id = iden.field_identificacion_value
+    JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnica.field_tecnica_tid
     JOIN taxonomy_term_data terminoTaxtipoAutoria ON terminoTaxtipoAutoria.tid = tipoAutoria.field_tipo_de_autoria_tid
     LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
     JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
@@ -540,6 +546,12 @@ class ObrasController extends ControllerBase
       $obra['textoRazonado'] = $row["Texto_Razonado"];
       $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
       $obra['autoria'] = $row["Autoria"];
+
+      $obra['tecnica'] = $row["Tecnica"];
+      $obra['soporte'] = $row["Soporte"];
+      $obra['alto'] = $row["Alto"];
+      $obra['ancho'] = $row["Ancho"];
+
       $obra['tipoAutoria'] = $row["Tipo_Autoria_Final"];
       $obra['tipoInscripcion'] = $row["Tipo_Inscripcion"];
       $obra['ubicacionInscripcion'] = $row["Ubicacion_Inscripcion"];
