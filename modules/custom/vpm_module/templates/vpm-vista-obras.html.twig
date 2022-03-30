@@ -89,7 +89,6 @@
 									{% else %}
 										<option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
 									{% endif %}
-
 								{% endfor %}
 							</select>
 						</div>
@@ -140,8 +139,11 @@
 							<div class='descItem'>Autores:
 								{{ obj.nombreArtista }}</div>
 						</a>
-						<!--<div class='idObra'>{{ obj.idObra }}</div>-->
 					</div>
+					{% else %}
+						<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+							<span>No se encontraron resultados</span>
+						</div>
 				{% endfor %}
 			</div>
 		</div>

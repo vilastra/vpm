@@ -370,18 +370,10 @@ class ObrasController extends ControllerBase
     $where = [];
     $whereTipo = [];
 
-    // if (!empty($_GET['busquedaIndex'])) {
-    //   array_push($condiciones, 'node.title LIKE ?');
-    //   array_push($where, "%{$_GET['busquedaIndex']}%");
-    //   array_push($whereTipo, 's');
-    //   $buscar = 1;
-    // }
 
     $palabrasOmitir = ['pieza', 'piezas', 'en', 'primer', 'lugar', 'segundo', 'tercero', 'ante', 'todo', 'fundamentalmente', 'lo', 'más', 'importante', 'después', 'por', 'fin', 'es', 'decir', 'agrega', 'considerar', 'retirar', 'acotar', 'primero', 'para', 'empezar', 'finalmente', 'mientras', 'ultimo', 'sobre', 'podemos', 'incluir', 'agregar', 'sustentar', 'adicionar', 'comprender', 'de', 'modo', 'accesorio', 'y', 'todos', 'modos', 'cualquier', 'forma', 'manera', 'cabe', 'destacar', 'idéntico', 'nuevo', 'al', 'mismo', 'tiempo', 'así', 'se', 'puede', 'señalar', 'inclusive', 'además', 'la', 'misma', 'también', 'algo', 'semejante', 'ocurre', 'con…', 'otra', 'vez', 'pero', 'aunque', 'otro', 'sentido', 'no', 'obstante', 'parte', 'como', 'contrapartida', 'sin', 'embargo', 'a', 'pesar', 'diferencia', 'camino', 'un', 'lado', 'el', 'orden', 'ideas', 'extremo', 'ahora', 'bien', 'contrario', 'que', 'antagónicamente', 'contraposición', 'revés', 'ejemplo', 'tal', 'caso', 'si', 'apelamos', 'usamos', 'una', 'imagen', 'símil', 'similarmente', 'identificante', 'permítanme', 'explicarle', 'decir', 'principio', 'otras', 'palabras', 'hecho', 'conforme', 'circunstancia', 'sea', 'inicio', 'esto', 'manera', 'eso', 'quiere', 'expresar', 'aludir', 'significa', 'razón', 'objeto', 'puesto', 'causa', 'de', 'solicitando', 'debido', 'porque', 'dado', 'ya', 'consecuencia', 'consiguiente', 'esta', 'ello', 'allí', 'ende', 'motivo', 'concordancia', 'resultado', 'cual', 'hay', 'inferir', 'siempre', 'condición', 'cuando', 'con', 'menos', 'acuerdo', 'propósito', 'cono', 'similar', 'igual', 'manera', 'situación', 'comparamos', 'idéntica', 'situación', 'circunstancia', 'paralelamente', 'definitiva', 'resumiendo', 'planteado', 'terminar', 'concretizando', 'resumen', 'englobando', 'conclusión', 'palabra', 'síntesis', 'finalizando', 'habitualmente', 'duda', 'alguna', 'supuesto', 'probablemente', 'notablemente', 'evidentemente', 'efectivamente', 'sencillamente', 'resulta', 'lógico', 'razonable', 'naturalmente', 'debe', 'suponerse', 'generalmente', 'cierto', 'posiblemente', 'efecto', 'mejor', 'desde', 'luego', 'específicamente'];
 
-    /* TEXTO NUMERO PIEZA */
-
-    if (!empty($_GET["busquedaIndex"])) {
+      if (!empty($_GET["busquedaIndex"])) {
       $buscar['texto'] = 1;
       $arrayBusqueda = explode(" ", $_GET["busquedaIndex"]);
       foreach ($arrayBusqueda as &$valor) {
@@ -390,6 +382,31 @@ class ObrasController extends ControllerBase
           array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
+        if (!in_array($valor, $palabrasOmitir)) {
+          array_push($condiciones['busqueda2'], 'terminoTaxTematica.tid LIKE ?');
+          array_push($where, "%{$_GET['tematica']}%");
+          array_push($whereTipo, 's');
+        }
+        if (!in_array($valor, $palabrasOmitir)) {
+          array_push($condiciones['busqueda2'], 'terminoTaxAutoria.tid LIKE ?');
+          array_push($where, "%{$_GET['artista']}%");
+          array_push($whereTipo, 's');
+        }
+        if (!in_array($valor, $palabrasOmitir)) {
+          array_push($condiciones['busqueda2'], 'fecEjecucion.field_fecha_ejecucion_timestamp LIKE ?');
+          array_push($where, "%{$_GET['ano']}%");
+          array_push($whereTipo, 's');
+        }
+
+        if (!in_array($valor, $palabrasOmitir)) {
+          array_push($condiciones['busqueda2'], 'terminoTaxTecnica.tid LIKE ?');
+          array_push($where, "%{$_GET['tecnica']}%");
+          array_push($whereTipo, 's');
+        }
+
+
+
+
       }
     }
 
