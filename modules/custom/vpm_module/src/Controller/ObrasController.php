@@ -7,7 +7,7 @@ use mysqli;
 
 class ObrasController extends ControllerBase
 {
-  function Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador)
+  function Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador, $ordenarPor)
   {
     $limit = 6;
     if (!empty($_GET["pag"])) {
@@ -50,6 +50,16 @@ class ObrasController extends ControllerBase
       $sql .= ' AND ' . implode(' OR ', $condiciones['busqueda2']);
     }
 
+    if($ordenarPor==1){
+      $sql =  $sql. "ORDER BY titulo,terminoTaxAutoria.name  ASC";
+    }elseif($ordenarPor == 2){
+      $sql =  $sql. "ORDER BY  DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')  ASC";
+    }elseif($ordenarPor == 3){
+      $sql =  $sql. "ORDER BY  terminoTaxTematica.name ASC";
+    }elseif($ordenarPor == 4){
+      $sql =  $sql. "ORDER BY  terminoTaxTecnica.name ASC";
+    }
+    
     if (!$paginador) {
       $sql = $sql . " LIMIT $offset, $limit";
     }
@@ -88,7 +98,7 @@ class ObrasController extends ControllerBase
     return $resultado;
   }
 
-  function Listar_Obras($buscar, $condiciones, $where, $whereTipo, $paginador)
+  function Listar_Obras($buscar, $condiciones, $where, $whereTipo, $paginador, $ordenarPor)
   {
     $limit = 6;
 
@@ -100,7 +110,7 @@ class ObrasController extends ControllerBase
     if ($pag < 1) {
       $pag = 1;
     }
-    $resultado = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador);
+    $resultado = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador, $ordenarPor);
     $obras = [];
     $x = 0;
     $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
@@ -133,7 +143,7 @@ class ObrasController extends ControllerBase
     return $obras;
   }
 
-  function Lista_Paginador($buscar, $condiciones, $where, $whereTipo, $paginador)
+  function Lista_Paginador($buscar, $condiciones, $where, $whereTipo, $paginador, $ordenarPor)
   {
     $limit = 6;
     $limitPage = 7;
@@ -156,7 +166,7 @@ class ObrasController extends ControllerBase
         LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
         LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid WHERE  node.type = 'obra'";
 
-    $result = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador);
+    $result = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo, $paginador, $ordenarPor);
     $total = $result->num_rows;
 
     $page = false;
@@ -451,9 +461,13 @@ class ObrasController extends ControllerBase
       $pag = 1;
     }
 
+    $ordenarPor=0;
+    if(isset($_GET["ordena"])){
+      $ordenarPor = $_GET["ordena"];
+    }
 
-    $obras = $this->Listar_Obras($buscar, $condiciones, $where, $whereTipo, false);
-    $arrayBoton = $this->Lista_Paginador($buscar, $condiciones, $where, $whereTipo, true);
+    $obras = $this->Listar_Obras($buscar, $condiciones, $where, $whereTipo, false, $ordenarPor);
+    $arrayBoton = $this->Lista_Paginador($buscar, $condiciones, $where, $whereTipo, true, $ordenarPor);
 
 
     $tematica = $this->Cb_Tematica();
@@ -477,6 +491,8 @@ class ObrasController extends ControllerBase
       $busquedaIndex = $_GET["busquedaIndex"];
     }
 
+   
+
     return [
       '#theme' => 'vpm-vista-obras',
       '#obras' => $obras,
@@ -487,6 +503,7 @@ class ObrasController extends ControllerBase
       '#idCat' => $idCatalogo,
       '#Sec' => $menuLink,
       '#busquedaIndex' => $busquedaIndex,
+      '#ordenarPor' => $ordenarPor,
       '#tecnica' => $tecnica
 
     ];

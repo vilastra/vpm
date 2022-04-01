@@ -97,7 +97,7 @@
 						<input type='submit' class='btn button btnBuscarFiltro more-link' value="Filtra">
 					</div>
 				</div>
-			</form>
+			
 
 			<div class="col-lg-12">
 				<h5 class="linea">
@@ -110,15 +110,16 @@
 
 			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mt-3 mb-3">
 				<div>
-					<select class="inputSelect" name="tecnica" id="tecnica">
+					<select class="inputSelect" name="ordena" id="ordena">
 						<option value="0">Ordenar por:</option>
 						<option value="1">Autor</option>
 						<option value="2">Fecha</option>
-						<option value="3">Técnica</option>
-						<option value="4">Género</option>
+						<option value="3">Temática</option>
+						<option value="4">Técnica</option>
 					</select>
 				</div>
 			</div>
+			</form>
 
 			<div class="row">
 				{% for obj in obras %}
