@@ -107,6 +107,11 @@ class ObrasController extends ControllerBase
     while ($fila = mysqli_fetch_array($resultado)) {
       $infoObra = [];
       $infoObra['idObra'] = $fila["nid"];
+      if (isset($_GET["idCat"])) {
+        $infoObra['urlObra'] = "idObra=" . $fila["nid"];
+      } else {
+        $infoObra['urlObra'] = "idObra=" . $fila["nid"];
+      }
       $infoObra['tituloObra'] = $fila["titulo"];
       $infoObra['nombreArtista'] = $fila["autor"];
       $infoObra['autorId'] = $fila["autorId"];
@@ -539,10 +544,15 @@ class ObrasController extends ControllerBase
     $result = $stmt->get_result();
     mysqli_close($mysqli);
     $obra = [];
+    $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
+
     while ($row = $result->fetch_assoc()) {
       $obra['idObra'] = $row["nid"];
       $obra['titulo'] = $row["Titulo"];
+      //$obra['urlImagen'] = $row["urlImagen"];
       $obra['urlImagen'] = $row["urlImagen"];
+      $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
+
       $obra['textoRazonado'] = $row["Texto_Razonado"];
       $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
       $obra['autoria'] = $row["Autoria"];

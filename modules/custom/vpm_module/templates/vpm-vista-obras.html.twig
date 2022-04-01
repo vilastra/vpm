@@ -68,7 +68,6 @@
 							<select class="inputSelect" name="ano" id="ano">
 								<option value="0">Selecciona</option>
 								{% for obj in annio %}
-									<option value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
 									{% if obj.selected == true %}
 										<option selected value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
 									{% else %}
@@ -132,7 +131,7 @@
 								<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
 							</a>
 						{% endif %}
-						<a href="{{ obj.idObra }}">
+						<a href='obra?{{ obj.urlObra }}'>
 							<div class='nombreObra'>{{ obj.tituloObra }}</div>
 						</a>
 						<a href='artista?{{ obj.urlArtista }}'>
