@@ -150,7 +150,7 @@
 			<div class="row">
 				{% for obj in obras %}
 					<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
-						<a href="">
+						<a href="{{ obj.urlObra }}">
 							<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
 						</a>
 						{% if obj.idTematica!=null %}
@@ -158,10 +158,10 @@
 								<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
 							</a>
 						{% endif %}
-						<a href='obra?{{ obj.urlObra }}'>
+						<a href='{{ obj.urlObra }}'>
 							<div class='nombreObra'>{{ obj.tituloObra }}</div>
 						</a>
-						<a href='artista?{{ obj.urlArtista }}'>
+						<a href='{{ obj.urlArtista }}'>
 							<div class='descItem'>Autores:
 								{{ obj.nombreArtista }}</div>
 						</a>

@@ -118,17 +118,17 @@ class ObrasController extends ControllerBase
       $infoObra = [];
       $infoObra['idObra'] = $fila["nid"];
       if (isset($_GET["idCat"])) {
-        $infoObra['urlObra'] = "idObra=" . $fila["nid"];
+        $infoObra['urlObra'] =  base_path()."obra?idCat=1&Sec=Obras&idObra=" . $fila["nid"];
       } else {
-        $infoObra['urlObra'] = "idObra=" . $fila["nid"];
+        $infoObra['urlObra'] = base_path()."obra?idObra=" . $fila["nid"];
       }
       $infoObra['tituloObra'] = $fila["titulo"];
       $infoObra['nombreArtista'] = $fila["autor"];
       $infoObra['autorId'] = $fila["autorId"];
       if (isset($_GET["idCat"])) {
-        $infoObra['urlArtista'] = "idCat=1&Sec=Art&id=" . $fila["autorId"];
+        $infoObra['urlArtista'] = base_path()."artista?idCat=1&Sec=Art&id=" . $fila["autorId"];
       } else {
-        $infoObra['urlArtista'] = "id=" . $fila["autorId"];
+        $infoObra['urlArtista'] = base_path()."artista?id=" . $fila["autorId"];
       }
       /* IMAGEN */
       $infoObra['rutaFoto'] = $fila["filename"];
