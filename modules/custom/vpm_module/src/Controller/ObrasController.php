@@ -503,7 +503,7 @@ class ObrasController extends ControllerBase
       '#idCat' => $idCatalogo,
       '#Sec' => $menuLink,
       '#busquedaIndex' => $busquedaIndex,
-      '#ordenarPor' => $ordenarPor,
+      '#ordenarPor' => $ordenarPor, 
       '#tecnica' => $tecnica
 
     ];
