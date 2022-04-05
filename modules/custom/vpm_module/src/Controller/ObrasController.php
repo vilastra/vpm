@@ -51,13 +51,13 @@ class ObrasController extends ControllerBase
     }
 
     if($ordenarPor==1){
-      $sql =  $sql. "ORDER BY titulo,terminoTaxAutoria.name  ASC";
+      $sql =  $sql. " ORDER BY titulo,terminoTaxAutoria.name  ASC";
     }elseif($ordenarPor == 2){
-      $sql =  $sql. "ORDER BY  DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')  ASC";
+      $sql =  $sql. " ORDER BY  DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')  ASC";
     }elseif($ordenarPor == 3){
-      $sql =  $sql. "ORDER BY  terminoTaxTematica.name ASC";
+      $sql =  $sql. " ORDER BY  terminoTaxTematica.name ASC";
     }elseif($ordenarPor == 4){
-      $sql =  $sql. "ORDER BY  terminoTaxTecnica.name ASC";
+      $sql =  $sql. " ORDER BY  terminoTaxTecnica.name ASC";
     }
     
     if (!$paginador) {
