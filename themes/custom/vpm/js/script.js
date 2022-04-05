@@ -23,50 +23,6 @@
 
             });
 
-            jQuery('#carouselGaleriaMini2').owlCarousel({
-                margin: 10,
-                dots: false,
-                loop: false,
-                autoWidth: false,
-                nav: true,
-                navText: [
-                    '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
-                ],
-                responsive: {
-                    0: {
-                        items: 2,
-                        nav: true
-                    },
-                    800: {
-                        items: 5,
-                        nav: false
-                    }
-                },
-                navContainer: '#main-contentGaleriaMini2 #custom-navMini2'
-            })
-
-            jQuery('#carouselGaleria').owlCarousel({
-                items: 1,
-                loop: false,
-                autoWidth: false,
-                nav: true,
-                dots: false,
-                navText: [
-                    '<i class="fa fa-angle-left" aria-hidden="true"></i>',
-                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
-                ],
-                navContainer: '#main-contentGaleria #custom-nav'
-            });
-
-            $('.imagenSlider2').click(function() {
-                $('#carouselGaleria').trigger('to.owl.carousel', $(this).attr("id"));
-            });
-
-            var owl = $("#carouselGaleria")
-            owl.on('changed.owl.carousel', function(e) {
-                $('#carouselGaleriaMini2').trigger('to.owl.carousel', e.relatedTarget.current() - 1);
-            });
 
             function shareUrls(name) {
                 var permalink = encodeURI(window.location.href)
@@ -86,12 +42,7 @@
 
             shareUrls($("#tituloContenido").val());
 
-            function resetComuna() {
-                jQuery("#comuna option").each(function() {
-                    $(this).css("display", "block");
-                    // alert('opcion ' + $(this).text() + ' valor ' + $(this).attr('value'))
-                });
-            }
+
             jQuery(window).scroll(function() {
                 if (jQuery(this).scrollTop()) {
                     jQuery('#ir-arriba').fadeIn();
@@ -99,50 +50,50 @@
                     jQuery('#ir-arriba').fadeOut();
                 }
             });
-
+            // jQuery('main', context).once('mei_library_turn').each(function() {
+            //     jQuery(".demo").jspanzoom({ scrollZoom: true, constrainType: 'width', constrainSize: '200px' });
+            // });
             jQuery("#ir-arriba").click(function() {
                 jQuery("html, body").animate({ scrollTop: 0 }, 0);
             });
             $(document).ready(function($) {
-                $('#region').on('change', function(e) {
-                    var valueSelected = this.value;
-                    console.log(this.value);
-                    resetComuna();
-                    $('#comuna').val("0");
-                    if (valueSelected != 0) {
-                        $("#comuna option").each(function() {
-                            if ($(this).val() === "0") {
-                                $(this).css("display", "block");
-                            } else if ($(this).data("region") != valueSelected) {
-                                $(this).css("display", "none");
-                            }
 
-                        });
-                    }
 
+                var imgGrande = $("#urlImg").val();
+                console.log(imgGrande)
+                var iv1 = $("#viewer").iviewer({
+                    src: "http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG",
+                    update_on_resize: false,
+                    zoom_animation: false,
+                    mousewheel: false,
+                    onMouseMove: function(ev, coords) {},
+                    onStartDrag: function(ev, coords) { return true; }, //this image will not be dragged
+                    onDrag: function(ev, coords) {}
                 });
 
-                $("#btnBuscarBiblioteca").click(function() {
-                    // $('.biblioComunas').css("display", "none");
-                    // if ($('#comuna').val() === "0") {
-                    //     if ($('#region').val() === "0") {
-                    //         $('.biblioComunas').css("display", "block");
-                    //     } else {
-                    //         $(".biblioComunas").each(function() {
-                    //             if ($(this).data("regionbiblio") == $('#region').val()) {
-                    //                 $(this).css("display", "block");
-                    //             }
-                    //         });
-                    //     }
-                    // } else {
-                    //     $(".biblioComunas").each(function() {
-                    //         if ($(this).data("comunabiblio") == $('#comuna').val()) {
-                    //             $(this).css("display", "block");
-                    //         }
-                    //     });
-                    // };
-                    $("#btnBuscarBiblioteca").html('Cargando <i class="fas fa-spinner fa-spin"></i>');
+                $("#in").click(function() { iv1.iviewer('zoom_by', 1); });
+                $("#out").click(function() { iv1.iviewer('zoom_by', -1); });
+                $("#fit").click(function() { iv1.iviewer('fit'); });
+                $("#orig").click(function() { iv1.iviewer('set_zoom', 100); });
+                $("#update").click(function() { iv1.iviewer('update_container_info'); });
+
+
+                $("#chimg").click(function() {
+                    iv2.iviewer('loadImage', imgGrande);
+                    return false;
                 });
+
+                var fill = false;
+                $("#fill").click(function() {
+                    fill = !fill;
+                    iv2.iviewer('fill_container', fill);
+                    return false;
+                });
+
+
+
+
+
 
             });
 

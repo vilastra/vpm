@@ -10,7 +10,7 @@
 				<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12 imgFicha">
 					<!--<img src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/Portada_recorte.jpg'>-->
 					<div class='imgItem'><img src='{{obra.infoObra["urlImagen"]}}'></div>
-
+					<input type='hidden' value='{{obra.infoObra["urlImagen"]}}' id='urlImg'>
 					
 
 				</div>
@@ -67,6 +67,12 @@
 			<div class="firmaObraFicha">
 				
 			</div>
+		</div>
+		<div class="divSepFicha">
+			<h2> Explora la obra </h2>
+			<div class="wrapper">
+            <div id="viewer" class="viewer"></div>
+        </div>
 		</div>
 	</div>
 </div>

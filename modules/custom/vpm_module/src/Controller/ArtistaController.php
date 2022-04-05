@@ -24,6 +24,11 @@ class ArtistaController extends ControllerBase
             $infoArtista = [];
 
             $infoArtista['idArtista'] = $fila["tid"];
+            if (isset($_GET["idCat"])) {
+                $infoArtista['urlArtista'] =  base_path() . "obras?idCat=1&Sec=Obras&artista=" . $fila["tid"];
+            } else {
+                $infoArtista['urlArtista'] =  base_path() . "obras?artista=" . $fila["tid"];
+            }
             $infoArtista['nombreArtista'] = $fila["name"];
             // $infoArtista['descripcionArtista'] = $fila["description"];
             $infoArtista['rutaFoto'] = $fila["filename"];
@@ -50,9 +55,9 @@ class ArtistaController extends ControllerBase
             $infoArtista = [];
             $infoArtista['idArtista'] = $fila["tid"];
             if (isset($_GET["idCat"])) {
-                $infoArtista['urlArtista'] = "idCat=1&Sec=Art&id=".$fila["tid"];
+                $infoArtista['urlArtista'] = "idCat=1&Sec=Art&id=" . $fila["tid"];
             } else {
-                $infoArtista['urlArtista']= "id=".$fila["tid"];
+                $infoArtista['urlArtista'] = "id=" . $fila["tid"];
             }
             $host = $GLOBALS["base_url"];
             $infoArtista['nombreArtista'] = $fila["name"];
@@ -97,6 +102,11 @@ class ArtistaController extends ControllerBase
         while ($fila = mysqli_fetch_array($resultado)) {
             $infoObra = [];
             $infoObra['idObra'] = $fila["nid"];
+            if (isset($_GET["idCat"])) {
+                $infoObra['urlObra'] =  base_path() . "obra?idCat=1&Sec=Obras&idObra=" . $fila["nid"];
+            } else {
+                $infoObra['urlObra'] = base_path() . "obra?idObra=" . $fila["nid"];
+            }
             $infoObra['idArtista'] = $fila["idArtista"];
             $infoObra['nombreArtista'] = $fila["nombreArtista"];
             $infoObra['tituloObra'] = $fila["titulo"];
@@ -118,7 +128,7 @@ class ArtistaController extends ControllerBase
     public function artista()
     {
         $artistas = $this->Listar_Artista();
-        $obras = $this->Listar_Obras_Artista($_GET["id"]);
+        $obras = $this->Listar_Obras_Artista($_GET["id"]);        
         return [
             '#theme' => 'vpm-vista-artista',
             '#artista' => $artistas,

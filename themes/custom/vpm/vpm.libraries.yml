@@ -1,20 +1,26 @@
 global-styling:
   css:
     theme:
+      css/jquery.iviewer.css: {}
       css/bs/bootstrap.min.css: {}
       css/style.css: {}
       css/owl.carousel.css: {}
       css/owl.theme.default.css: {}
       
+      
 
 
 global-scripts:
   js:
+    js/jquery.js: {}
+    js/jqueryui.js: {}
+    js/jquery.panzoom.js: {}
+    js/jquery.mousewheel.min.js: {}
+    js/jquery.iviewer.js: {}    
     js/script.js: {}
-    js/owl.carousel.js: {}
     js/bs/bootstrap.bundle.min.js: {}
     js/bs/bootstrap.js: {}
+    
 
   dependencies:
-    - core/jquery
     - core/drupal

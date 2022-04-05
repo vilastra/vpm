@@ -19,13 +19,13 @@
 			<h2>Obras destacadas del artista</h2>
 			{% for obj in obrasDestacadas[1] %}
 				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
-					<a href='obra?id={{ obj.idObra }}'>
+					<a href='{{ obj.urlObra }}'>
 						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
 					</a>
 					<a href='tematica?idTematica={{ obj.idTematica }}'>
 						<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
 					</a>
-					<a href='obra?id={{ obj.idObra }}'>
+					<a href='{{ obj.urlObra }}'>
 						<div class='nombreObra'>{{ obj.tituloObra}}</div>
 					</a>
 
@@ -46,7 +46,7 @@
 			{% if obrasDestacadas[0] > 6 %}
 					{% for obj in artista %}
 						<div class="col-12" style="margin-top:2.5rem">
-							<a href="obras" class="btn button btnBuscar more-link keychainify-checked">Ve todas las obras de este artista</a>
+							<a href="{{ obj.urlArtista }}" class="btn button btnBuscar more-link keychainify-checked">Ve todas las obras de este artista</a>
 						</div>
 					</a>
 				{% endfor %}
