@@ -4,14 +4,16 @@
 
 		<div class="tituloFicha col-12">Ficha razonada:
 			{{obra.infoObra["titulo"]}}
+			<input type='hidden' value='{{obra.infoObra["titulo"]}}' id='tituloObra'>
 		</div>
 		<div class="divSepFicha">
 			<div class="row">
-				<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12 imgFicha">
+				<div
+					class="col-lg-6 col-md-12 col-xs-12 col-sm-12 imgFicha">
 					<!--<img src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/Portada_recorte.jpg'>-->
 					<div class='imgItem'><img src='{{obra.infoObra["urlImagen"]}}'></div>
 					<input type='hidden' value='{{obra.infoObra["urlImagen"]}}' id='urlImg'>
-					
+
 
 				</div>
 				<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
@@ -48,13 +50,12 @@
 					</div>
 					<div class="pt-4">
 						<div class="subTextoObraFicha">Exhibiciones</div>
-						<div class="descObraFicha">
-							<ul>
-								{% for obj in obra.exhibicionesObra %}
-								<li>{{ obj.tituloExhibicion }}, {{ obj.institucionExhibicion }}, {{ obj.ciudadExhibicion }}, {{ obj.anoExhibicion }}</li>	
-								{% endfor %}
-							</ul>
-						</div>
+						{% for obj in obra.exhibicionesObra %}
+							<div class="descObraFicha">{{ obj.tituloExhibicion }},
+								{{ obj.institucionExhibicion }},
+								{{ obj.ciudadExhibicion }},
+								{{ obj.anoExhibicion }}</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>
@@ -64,15 +65,79 @@
 			<div class="colSepDosFicha descObraFicha">
 				{{obra.infoObra["textoRazonado"]}}
 			</div>
-			<div class="firmaObraFicha">
-				
-			</div>
+			<div class="firmaObraFicha"></div>
 		</div>
 		<div class="divSepFicha">
-			<h2> Explora la obra </h2>
-			<div class="wrapper">
-            <div id="viewer" class="viewer"></div>
-        </div>
+			<h2>
+				Explora la obra
+			</h2>
+
+			{# <div class="wrapper">
+						<img class="viewer" src="http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG" alt="Demo" style="max-width: 100%; max-height: 100%;height: inherit !important;">
+						</div> #}
+
+			<div class='frame'>
+				<img id='sample_picture' src='http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG'>
+			</div>
+
+			<div id='controls'>
+
+				<button id='zoom_out' type='button' title='Zoom out'>
+					-
+				</button>
+				<button id='fit' type='button' title='Fit image'>
+					[ ]
+				</button>
+				<button id='zoom_in' type='button' title='Zoom in'>
+					+
+				</button>
+
+			</div>
+
 		</div>
+
+		<h2>
+			Geolocalización de la obra
+		</h2>
+		<div id="map"></div>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8c7i3wQDkRnlmicmy1-gze_NIvB4nkpk&callback=initMap" async defer></script>
 	</div>
-</div>
+	<input type="hidden" value="{{obra.latYLong["latitudAdqObra"]}}" id="latObra">
+	<input type="hidden" value="{{obra.latYLong["longitudAdqObra"]}}" id="longObra">
+	<script>
+		function initMap() {
+var latitud = document.getElementById("latObra").value;
+var longitud = document.getElementById("longObra").value;
+var options = {
+zoom: 15,
+center: {
+lat: parseFloat(latitud),
+lng: parseFloat(longitud)
+} // Coordinates of New York
+}
+var map = new google.maps.Map(document.getElementById('map'), options);
+
+console.log(latitud);
+var marker = new google.maps.Marker({
+position: {
+lat: parseFloat(latitud),
+lng: parseFloat(longitud)
+}, // Brooklyn Coordinates
+map: map, // Map that we need to add
+icon: 'http://localhost/vpm/sites/default/files/2022-04/miniObra.png',
+// adding custom icons (Here I used a Flash logo marker)
+draggarble: false // If set to true you can drag the marker
+});
+
+var information = new google.maps.InfoWindow({
+content: '<div class="miniTitulo">' + document.getElementById("tituloObra").value + '</div><div class="miniImagen"><img src="' + document.getElementById("urlImg").value + '"></div><div class="miniLatLong">Latitud: ' + latitud + ' Longitud: ' + longitud + '</div><div class="miniAutor"></div>'
+});
+
+marker.addListener('click', function () {
+information.open(map, marker);
+});
+
+}
+	</script>
+
+</div></div></div>

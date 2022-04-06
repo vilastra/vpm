@@ -587,15 +587,19 @@ class ObrasController extends ControllerBase
     return $obra;
   }
 
-  function getPropiedadObra($idObra)
+  function getPropiedadObra($idObra,$reqLatLon)
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $sql = "SELECT nombrePropietario.field_nombre_propietario_value as nombrePropiedad,
     ingrAdquisicion.field_ano_ingreso_adquisicion_value as fechaAdqPropiedad,
+    latitudAdquisicion.field_latitud_value as latitudAdqPropiedad,
+    longitudAdquisicion.field_longitud_value as longitudAdqPropiedad,
     ciudadTermDataAdquisicion.name as ciudadAdq FROM node 
     LEFT JOIN field_data_field_historial_de_propiedad propiedad ON propiedad.entity_id = node.nid
     LEFT JOIN field_data_field_nombre_propietario nombrePropietario ON nombrePropietario.entity_id = propiedad.field_historial_de_propiedad_value
     LEFT JOIN field_data_field_ano_ingreso_adquisicion ingrAdquisicion ON ingrAdquisicion.entity_id = propiedad.field_historial_de_propiedad_value
+    LEFT JOIN field_data_field_latitud latitudAdquisicion ON latitudAdquisicion.entity_id = propiedad.field_historial_de_propiedad_value
+    LEFT JOIN field_data_field_longitud longitudAdquisicion ON longitudAdquisicion.entity_id = propiedad.field_historial_de_propiedad_value
     LEFT JOIN field_data_field_ciudad ciudadAdquisicion ON ciudadAdquisicion.entity_id = propiedad.field_historial_de_propiedad_value
     LEFT JOIN taxonomy_term_data ciudadTermDataAdquisicion ON ciudadTermDataAdquisicion.tid = ciudadAdquisicion.field_ciudad_tid
     WHERE nid=?";
@@ -606,13 +610,24 @@ class ObrasController extends ControllerBase
     mysqli_close($mysqli);
     $propiedades = [];
     $x = 0;
-    while ($row = $result->fetch_assoc()) {
-      $propiedad['nombrePropietarioObra'] = $row["nombrePropiedad"];
-      $propiedad['fechaAquisicionObra'] = $row["fechaAdqPropiedad"];
-      $propiedad['ciudadAquisicionObra'] = $row["ciudadAdq"];
-      $propiedades[$x] = $propiedad;
-      $x++;
+    if($reqLatLon){
+      while ($row = $result->fetch_assoc()) {
+        $propiedades['latitudAdqObra'] = str_replace(',','.',$row["latitudAdqPropiedad"]);
+        $propiedades['longitudAdqObra'] = str_replace(',','.',$row["longitudAdqPropiedad"]);
+        break;
+      }
+    }else{
+      while ($row = $result->fetch_assoc()) {
+        $propiedad['nombrePropietarioObra'] = $row["nombrePropiedad"];
+        $propiedad['fechaAquisicionObra'] = $row["fechaAdqPropiedad"];
+        $propiedad['ciudadAquisicionObra'] = $row["ciudadAdq"];
+        $propiedad['latitudAdqObra'] = $row["latitudAdqPropiedad"];
+        $propiedad['longitudAdqObra'] = $row["longitudAdqPropiedad"];
+        $propiedades[$x] = $propiedad;
+        $x++;
+      }
     }
+   
     return $propiedades;
   }
 
@@ -663,7 +678,8 @@ class ObrasController extends ControllerBase
       $obra['idObra'] = $_GET["idObra"];
     }
     $obra["infoObra"] = $this->getInfoObra($obra['idObra']);
-    $obra["propiedadesObra"] = $this->getPropiedadObra($obra['idObra']);
+    $obra["propiedadesObra"] = $this->getPropiedadObra($obra['idObra'],false);
+    $obra["latYLong"] = $this->getPropiedadObra($obra['idObra'],true);
     $obra["exhibicionesObra"] = $this->getExhibicionesObra($obra['idObra']);
 
     return [

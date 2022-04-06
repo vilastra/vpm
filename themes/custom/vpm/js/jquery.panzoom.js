@@ -742,7 +742,7 @@ if (typeof Object.create !== 'function') {
             //self.nzOffset = self.$elem.parent().offset();
 
             if (self.options.tint && self.options.zoomType != "inner") {
-                self.zoomTint.css({ top: 0 });
+                self.zoomTint.css({ bottom: 0 });
                 self.zoomTint.css({ left: 0 });
             }
             //set responsive       
@@ -1756,9 +1756,9 @@ if (typeof Object.create !== 'function') {
         gallery: false,
         galleryActiveClass: "zoomGalleryActive",
         imageCrossfade: false,
-        constrainType: false, //width or height
+        constrainType: true, //width or height
         constrainSize: false, //in pixels the dimensions you want to constrain on
-        loadingIcon: false, //http://www.example.com/spinner.gif
+        loadingIcon: true, //http://www.example.com/spinner.gif
         cursor: "default", // user should set to what they want the cursor as, if they have set a click function
         responsive: true,
         onComplete: $.noop,

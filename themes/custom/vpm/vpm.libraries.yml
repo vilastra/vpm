@@ -6,14 +6,15 @@ global-styling:
       css/style.css: {}
       css/owl.carousel.css: {}
       css/owl.theme.default.css: {}
+      css/jquery.guillotine.css: {}
       
       
 
 
 global-scripts:
   js:
-    js/jquery.js: {}
     js/jqueryui.js: {}
+    js/jquery.guillotine.js: {}
     js/jquery.panzoom.js: {}
     js/jquery.mousewheel.min.js: {}
     js/jquery.iviewer.js: {}    
@@ -24,3 +25,4 @@ global-scripts:
 
   dependencies:
     - core/drupal
+    - core/jquery
