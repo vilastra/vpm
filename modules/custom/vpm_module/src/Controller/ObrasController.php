@@ -50,16 +50,16 @@ class ObrasController extends ControllerBase
       $sql .= ' AND ' . implode(' OR ', $condiciones['busqueda2']);
     }
 
-    if($ordenarPor==1){
-      $sql =  $sql. " ORDER BY titulo,terminoTaxAutoria.name  ASC";
-    }elseif($ordenarPor == 2){
-      $sql =  $sql. " ORDER BY  DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')  ASC";
-    }elseif($ordenarPor == 3){
-      $sql =  $sql. " ORDER BY  terminoTaxTematica.name ASC";
-    }elseif($ordenarPor == 4){
-      $sql =  $sql. " ORDER BY  terminoTaxTecnica.name ASC";
+    if ($ordenarPor == 1) {
+      $sql =  $sql . " ORDER BY titulo,terminoTaxAutoria.name  ASC";
+    } elseif ($ordenarPor == 2) {
+      $sql =  $sql . " ORDER BY  DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')  ASC";
+    } elseif ($ordenarPor == 3) {
+      $sql =  $sql . " ORDER BY  terminoTaxTematica.name ASC";
+    } elseif ($ordenarPor == 4) {
+      $sql =  $sql . " ORDER BY  terminoTaxTecnica.name ASC";
     }
-    
+
     if (!$paginador) {
       $sql = $sql . " LIMIT $offset, $limit";
     }
@@ -88,7 +88,7 @@ class ObrasController extends ControllerBase
     }
 
     /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
-    if($buscar['select'] != 0 || $buscar['texto'] !=0){
+    if ($buscar['select'] != 0 || $buscar['texto'] != 0) {
       call_user_func_array(array($stmt, 'bind_param'), $a_params);
     }
 
@@ -118,17 +118,17 @@ class ObrasController extends ControllerBase
       $infoObra = [];
       $infoObra['idObra'] = $fila["nid"];
       if (isset($_GET["idCat"])) {
-        $infoObra['urlObra'] =  base_path()."obra?idCat=1&Sec=Obras&idObra=" . $fila["nid"];
+        $infoObra['urlObra'] =  base_path() . "obra?idCat=1&Sec=Obras&idObra=" . $fila["nid"];
       } else {
-        $infoObra['urlObra'] = base_path()."obra?idObra=" . $fila["nid"];
+        $infoObra['urlObra'] = base_path() . "obra?idObra=" . $fila["nid"];
       }
       $infoObra['tituloObra'] = $fila["titulo"];
       $infoObra['nombreArtista'] = $fila["autor"];
       $infoObra['autorId'] = $fila["autorId"];
       if (isset($_GET["idCat"])) {
-        $infoObra['urlArtista'] = base_path()."artista?idCat=1&Sec=Art&id=" . $fila["autorId"];
+        $infoObra['urlArtista'] = base_path() . "artista?idCat=1&Sec=Art&id=" . $fila["autorId"];
       } else {
-        $infoObra['urlArtista'] = base_path()."artista?id=" . $fila["autorId"];
+        $infoObra['urlArtista'] = base_path() . "artista?id=" . $fila["autorId"];
       }
       /* IMAGEN */
       $infoObra['rutaFoto'] = $fila["filename"];
@@ -388,7 +388,7 @@ class ObrasController extends ControllerBase
 
     $palabrasOmitir = ['pieza', 'piezas', 'en', 'primer', 'lugar', 'segundo', 'tercero', 'ante', 'todo', 'fundamentalmente', 'lo', 'más', 'importante', 'después', 'por', 'fin', 'es', 'decir', 'agrega', 'considerar', 'retirar', 'acotar', 'primero', 'para', 'empezar', 'finalmente', 'mientras', 'ultimo', 'sobre', 'podemos', 'incluir', 'agregar', 'sustentar', 'adicionar', 'comprender', 'de', 'modo', 'accesorio', 'y', 'todos', 'modos', 'cualquier', 'forma', 'manera', 'cabe', 'destacar', 'idéntico', 'nuevo', 'al', 'mismo', 'tiempo', 'así', 'se', 'puede', 'señalar', 'inclusive', 'además', 'la', 'misma', 'también', 'algo', 'semejante', 'ocurre', 'con…', 'otra', 'vez', 'pero', 'aunque', 'otro', 'sentido', 'no', 'obstante', 'parte', 'como', 'contrapartida', 'sin', 'embargo', 'a', 'pesar', 'diferencia', 'camino', 'un', 'lado', 'el', 'orden', 'ideas', 'extremo', 'ahora', 'bien', 'contrario', 'que', 'antagónicamente', 'contraposición', 'revés', 'ejemplo', 'tal', 'caso', 'si', 'apelamos', 'usamos', 'una', 'imagen', 'símil', 'similarmente', 'identificante', 'permítanme', 'explicarle', 'decir', 'principio', 'otras', 'palabras', 'hecho', 'conforme', 'circunstancia', 'sea', 'inicio', 'esto', 'manera', 'eso', 'quiere', 'expresar', 'aludir', 'significa', 'razón', 'objeto', 'puesto', 'causa', 'de', 'solicitando', 'debido', 'porque', 'dado', 'ya', 'consecuencia', 'consiguiente', 'esta', 'ello', 'allí', 'ende', 'motivo', 'concordancia', 'resultado', 'cual', 'hay', 'inferir', 'siempre', 'condición', 'cuando', 'con', 'menos', 'acuerdo', 'propósito', 'cono', 'similar', 'igual', 'manera', 'situación', 'comparamos', 'idéntica', 'situación', 'circunstancia', 'paralelamente', 'definitiva', 'resumiendo', 'planteado', 'terminar', 'concretizando', 'resumen', 'englobando', 'conclusión', 'palabra', 'síntesis', 'finalizando', 'habitualmente', 'duda', 'alguna', 'supuesto', 'probablemente', 'notablemente', 'evidentemente', 'efectivamente', 'sencillamente', 'resulta', 'lógico', 'razonable', 'naturalmente', 'debe', 'suponerse', 'generalmente', 'cierto', 'posiblemente', 'efecto', 'mejor', 'desde', 'luego', 'específicamente'];
 
-      if (!empty($_GET["busquedaIndex"])) {
+    if (!empty($_GET["busquedaIndex"])) {
       $buscar['texto'] = 1;
       $arrayBusqueda = explode(" ", $_GET["busquedaIndex"]);
       foreach ($arrayBusqueda as &$valor) {
@@ -461,8 +461,8 @@ class ObrasController extends ControllerBase
       $pag = 1;
     }
 
-    $ordenarPor=0;
-    if(isset($_GET["ordena"])){
+    $ordenarPor = 0;
+    if (isset($_GET["ordena"])) {
       $ordenarPor = $_GET["ordena"];
     }
 
@@ -487,11 +487,11 @@ class ObrasController extends ControllerBase
       $idCatalogo = 'null';
     }
     $busquedaIndex = '';
-    if(isset($_GET["busquedaIndex"])){
+    if (isset($_GET["busquedaIndex"])) {
       $busquedaIndex = $_GET["busquedaIndex"];
     }
 
-   
+
 
     return [
       '#theme' => 'vpm-vista-obras',
@@ -503,7 +503,7 @@ class ObrasController extends ControllerBase
       '#idCat' => $idCatalogo,
       '#Sec' => $menuLink,
       '#busquedaIndex' => $busquedaIndex,
-      '#ordenarPor' => $ordenarPor, 
+      '#ordenarPor' => $ordenarPor,
       '#tecnica' => $tecnica
 
     ];
@@ -528,6 +528,7 @@ class ObrasController extends ControllerBase
     terminoTaxSoporte.name as Soporte,
     altoImagen.field_alto_value as Alto,
     anchoImagen.field_ancho_value as Ancho,
+    linkImgOrig.field_enlace_imagen_original_url as linkImgOriginal,
     autorTexto.field_autor_texto_razonado_value as AutorTexto
     FROM node
     LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
@@ -543,21 +544,23 @@ class ObrasController extends ControllerBase
     LEFT JOIN field_data_field_alto altoImagen ON altoImagen.entity_id = iden.field_identificacion_value
     LEFT JOIN field_data_field_ancho anchoImagen ON anchoImagen.entity_id = iden.field_identificacion_value
     LEFT JOIN field_data_field_autor_texto_razonado autorTexto ON autorTexto.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_enlace_imagen_original linkImgOrig ON linkImgOrig.entity_id = iden.field_identificacion_value
+
     LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
-    JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
+    LEFT JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
     LEFT JOIN field_data_field_tecnica tecnica ON tecnica.entity_id = iden.field_identificacion_value
-    JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnica.field_tecnica_tid
-    JOIN taxonomy_term_data terminoTaxtipoAutoria ON terminoTaxtipoAutoria.tid = tipoAutoria.field_tipo_de_autoria_tid
+    LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnica.field_tecnica_tid
+    LEFT JOIN taxonomy_term_data terminoTaxtipoAutoria ON terminoTaxtipoAutoria.tid = tipoAutoria.field_tipo_de_autoria_tid
     LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
-    JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+    LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
     LEFT JOIN field_data_field_tipo_de_autoria_final tipoAutoriaFinal ON tipoAutoriaFinal.entity_id = iden.field_identificacion_value
-    JOIN taxonomy_term_data terminoTaxtipoAutoriaFinal ON terminoTaxtipoAutoriaFinal.tid = tipoAutoriaFinal.field_tipo_de_autoria_final_tid
+    LEFT JOIN taxonomy_term_data terminoTaxtipoAutoriaFinal ON terminoTaxtipoAutoriaFinal.tid = tipoAutoriaFinal.field_tipo_de_autoria_final_tid
     LEFT JOIN field_data_field_autoria_principal_final tipoAutoriaPrinFinal ON tipoAutoriaPrinFinal.entity_id = iden.field_identificacion_value
-    JOIN taxonomy_term_data terminoTaxtipoAutoriaPrinFinal ON terminoTaxtipoAutoriaPrinFinal.tid = tipoAutoriaPrinFinal.field_autoria_principal_final_tid
+    LEFT JOIN taxonomy_term_data terminoTaxtipoAutoriaPrinFinal ON terminoTaxtipoAutoriaPrinFinal.tid = tipoAutoriaPrinFinal.field_autoria_principal_final_tid
     LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
     LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
     LEFT JOIN field_data_field_texto_razonado textoRazonado ON textoRazonado.entity_id = iden.field_identificacion_value
-    WHERE nid=? ";
+    WHERE node.type = 'obra' AND node.status=1 AND nid=? ";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("s", $idObra);
     $stmt->execute();
@@ -570,6 +573,8 @@ class ObrasController extends ControllerBase
       $obra['idObra'] = $row["nid"];
       $obra['titulo'] = $row["Titulo"];
       //$obra['urlImagen'] = $row["urlImagen"];
+      $obra['linkImgOriginal'] = $row["linkImgOriginal"];
+      
       $obra['urlImagen'] = $row["urlImagen"];
       $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
 
@@ -580,11 +585,11 @@ class ObrasController extends ControllerBase
       $obra['autoria'] = $row["Autoria"];
       $obra['autorId'] = $row["autorId"];
       if (isset($_GET["idCat"])) {
-        $obra['autorUrl'] = base_path() ."artista?idCat=1&Sec=Art&id=" . $row["autorId"];
-      }else{
-        $obra['autorUrl'] = base_path() ."artista?id=" . $row["autorId"];
+        $obra['autorUrl'] = base_path() . "artista?idCat=1&Sec=Art&id=" . $row["autorId"];
+      } else {
+        $obra['autorUrl'] = base_path() . "artista?id=" . $row["autorId"];
       }
-      
+
       $obra['autorTexto'] = $row["AutorTexto"];
 
       $obra['tecnica'] = $row["Tecnica"];
@@ -600,7 +605,7 @@ class ObrasController extends ControllerBase
     return $obra;
   }
 
-  function getPropiedadObra($idObra,$reqLatLon)
+  function getPropiedadObra($idObra, $reqLatLon)
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $sql = "SELECT nombrePropietario.field_nombre_propietario_value as nombrePropiedad,
@@ -623,14 +628,15 @@ class ObrasController extends ControllerBase
     mysqli_close($mysqli);
     $propiedades = [];
     $x = 0;
-    if($reqLatLon){
+    if ($reqLatLon) {
       while ($row = $result->fetch_assoc()) {
-        $propiedades['latitudAdqObra'] = str_replace(',','.',$row["latitudAdqPropiedad"]);
-        $propiedades['longitudAdqObra'] = str_replace(',','.',$row["longitudAdqPropiedad"]);
+        $propiedades['latitudAdqObra'] = str_replace(',', '.', $row["latitudAdqPropiedad"]);
+        $propiedades['longitudAdqObra'] = str_replace(',', '.', $row["longitudAdqPropiedad"]);
         break;
       }
-    }else{
+    } else {
       while ($row = $result->fetch_assoc()) {
+        if ($row["nombrePropiedad"] != null) {
         $propiedad['nombrePropietarioObra'] = $row["nombrePropiedad"];
         $propiedad['fechaAquisicionObra'] = $row["fechaAdqPropiedad"];
         $propiedad['ciudadAquisicionObra'] = $row["ciudadAdq"];
@@ -638,9 +644,10 @@ class ObrasController extends ControllerBase
         $propiedad['longitudAdqObra'] = $row["longitudAdqPropiedad"];
         $propiedades[$x] = $propiedad;
         $x++;
+        }
       }
     }
-   
+
     return $propiedades;
   }
 
@@ -669,18 +676,21 @@ class ObrasController extends ControllerBase
     $exhibiciones = [];
     $x = 0;
     while ($row = $result->fetch_assoc()) {
-      $exhibicion['tituloExhibicion'] = $row["Titulo_Exhibicion"];
-      $exhibicion['responsableExhibicion'] = $row["Responsable_Exhibicion"];
-      $exhibicion['institucionExhibicion'] = $row["Institucion_Exhibicion"];
-      $exhibicion['ciudadExhibicion'] = $row["Ciudad_Exhibicion"];
-      $exhibicion['anoExhibicion'] = $row["Ano_Exhibicion"];
-      $exhibiciones[$x] = $exhibicion;
-      $x++;
+      if ($row["Titulo_Exhibicion"] != null) {
+        $exhibicion['tituloExhibicion'] = $row["Titulo_Exhibicion"];
+        $exhibicion['responsableExhibicion'] = $row["Responsable_Exhibicion"];
+        $exhibicion['institucionExhibicion'] = $row["Institucion_Exhibicion"];
+        $exhibicion['ciudadExhibicion'] = $row["Ciudad_Exhibicion"];
+        $exhibicion['anoExhibicion'] = $row["Ano_Exhibicion"];
+        $exhibiciones[$x] = $exhibicion;
+        $x++;
+      }
     }
     return $exhibiciones;
   }
 
-  function getReferenciasBiblioObra($idObra){
+  function getReferenciasBiblioObra($idObra)
+  {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $sql = "SELECT node.title, 
     biblio.biblio_sort_title as Titulo,
@@ -727,8 +737,8 @@ class ObrasController extends ControllerBase
       $obra['idObra'] = $_GET["idObra"];
     }
     $obra["infoObra"] = $this->getInfoObra($obra['idObra']);
-    $obra["propiedadesObra"] = $this->getPropiedadObra($obra['idObra'],false);
-    $obra["latYLong"] = $this->getPropiedadObra($obra['idObra'],true);
+    $obra["propiedadesObra"] = $this->getPropiedadObra($obra['idObra'], false);
+    $obra["latYLong"] = $this->getPropiedadObra($obra['idObra'], true);
     $obra["exhibicionesObra"] = $this->getExhibicionesObra($obra['idObra']);
     $obra["bibliografiaObra"] = $this->getReferenciasBiblioObra($obra['idObra']);
 

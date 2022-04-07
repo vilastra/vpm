@@ -1,136 +1,147 @@
 <div class='whiteArea'>
 
 	<div class="col-9 max-container px-0 m-auto ">
+		{% if obra.infoObra["titulo"] is not empty %}
+			<div class="tituloFicha col-12">Ficha razonada:
+				{{obra.infoObra["titulo"]}}
+				<input type='hidden' value='{{obra.infoObra["titulo"]}}' id='tituloObra'>
+			</div>
+			<div class="divSepFicha">
+				<div class="row">
+					<div
+						class="col-lg-6 col-md-12 col-xs-12 col-sm-12 imgFicha">
+						<!--<img src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/Portada_recorte.jpg'>-->
+						<div class='imgItem'><img src='{{obra.infoObra["urlImagen"]}}'></div>
+						<input type='hidden' value='{{obra.infoObra["urlImagen"]}}' id='urlImg'>
 
-		<div class="tituloFicha col-12">Ficha razonada:
-			{{obra.infoObra["titulo"]}}
-			<input type='hidden' value='{{obra.infoObra["titulo"]}}' id='tituloObra'>
-		</div>
-		<div class="divSepFicha">
-			<div class="row">
-				<div
-					class="col-lg-6 col-md-12 col-xs-12 col-sm-12 imgFicha">
-					<!--<img src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/Portada_recorte.jpg'>-->
-					<div class='imgItem'><img src='{{obra.infoObra["urlImagen"]}}'></div>
-					<input type='hidden' value='{{obra.infoObra["urlImagen"]}}' id='urlImg'>
 
-
+					</div>
+					<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
+						<div class="divSepFicha pt-0">
+							<a href="#">
+								<div class="buttonDescargaFicha">
+									<i class="fa fa-download" aria-hidden="true"></i>
+									Descarga la ficha razonada</div>
+							</a>
+						</div>
+						<div class="divSepFicha">
+							<div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
+							{% if obra.infoObra["tecnica"] is not empty %}
+								<div class="descObraFicha">{{obra.infoObra["tecnica"]}}
+									sobre
+									{{obra.infoObra["soporte"]}},
+									{{obra.infoObra["alto"]}}
+									x
+									{{obra.infoObra["ancho"]}}</div>
+							{% endif %}
+							<div class="descObraFicha">{{obra.infoObra["autoria"]}}</div>
+							<input type='hidden' value='{{obra.infoObra["autoria"]}}' id='autorNombre'>
+							<input type='hidden' value='{{obra.infoObra["autorUrl"]}}' id='autorUrl'>
+						</div>
+						{% if obra.infoObra["tipoInscripcion"] is not empty %}
+							<div class="divSepFicha">
+								<div class="subTextoObraFicha">Inscripciones</div>
+								<div class="descObraFicha">{{obra.infoObra["tipoInscripcion"]}}
+									{{obra.infoObra["ubicacionInscripcion"]}}
+									{{obra.infoObra["transInscripcion"]}}</div>
+							</div>
+						{% endif %}
+						{% if obra.propiedadesObra|length > 0 %}
+							<div class="divSepFicha">
+								<div class="subTextoObraFicha">Procedencia</div>
+								{% for obj in obra.propiedadesObra %}
+									<div class="descObraFicha">{{ obj.nombrePropietarioObra }},
+										{{ obj.ciudadAquisicionObra }},
+										{{ obj.fechaAquisicionObra }}</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+						{% if obra.exhibicionesObra|length > 0 %}
+							<div class="pt-4">
+								<div class="subTextoObraFicha">Exhibiciones</div>
+								{% for obj in obra.exhibicionesObra %}
+									<div class="descObraFicha">{{ obj.tituloExhibicion }},
+										{{ obj.institucionExhibicion }},
+										{{ obj.ciudadExhibicion }},
+										{{ obj.anoExhibicion }}</div>
+								{% endfor %}
+							</div>
+						{% endif %}
+					</div>
 				</div>
-				<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
-					<div class="divSepFicha pt-0">
-						<a href="#">
-							<div class="buttonDescargaFicha">
-								<i class="fa fa-download" aria-hidden="true"></i>
-								Descarga la ficha razonada</div>
-						</a>
+			</div>
+			{% if obra.infoObra["textoRazonado"] is not empty %}
+				<div class="divSepFicha">
+					<div class="colSepDosFicha descObraFicha">
+						{{obra.infoObra["textoRazonado"]}}
 					</div>
-					<div class="divSepFicha">
-						<div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
-						<div class="descObraFicha">{{obra.infoObra["tecnica"]}}
-							sobre
-							{{obra.infoObra["soporte"]}},
-							{{obra.infoObra["alto"]}}
-							x
-							{{obra.infoObra["ancho"]}}</div>
-						<div class="descObraFicha">{{obra.infoObra["autoria"]}}</div>
-						<input type='hidden' value='{{obra.infoObra["autoria"]}}' id='autorNombre'>
-						<input type='hidden' value='{{obra.infoObra["autorUrl"]}}' id='autorUrl'>
-					</div>
-					<div class="divSepFicha">
-						<div class="subTextoObraFicha">Inscripciones</div>
-						<div class="descObraFicha">{{obra.infoObra["tipoInscripcion"]}}
-							{{obra.infoObra["ubicacionInscripcion"]}}
-							{{obra.infoObra["transInscripcion"]}}</div>
-					</div>
-					<div class="divSepFicha">
-						<div class="subTextoObraFicha">Procedencia</div>
-						{% for obj in obra.propiedadesObra %}
-							<div class="descObraFicha">{{ obj.nombrePropietarioObra }},
-								{{ obj.ciudadAquisicionObra }},
-								{{ obj.fechaAquisicionObra }}</div>
-						{% endfor %}
-					</div>
-					<div class="pt-4">
-						<div class="subTextoObraFicha">Exhibiciones</div>
-						{% for obj in obra.exhibicionesObra %}
-							<div class="descObraFicha">{{ obj.tituloExhibicion }},
-								{{ obj.institucionExhibicion }},
-								{{ obj.ciudadExhibicion }},
-								{{ obj.anoExhibicion }}</div>
-						{% endfor %}
-					</div>
+					<div class="firmaObraFicha">{{obra.infoObra["autorTexto"]}}</div>
+				</div>
+			{% endif %}
+			{% if obra.bibliografiaObra|length > 0 %}
+				<div class="divSepFicha">
+					<div class="subTextoObraFicha">Bibliografía</div>
+					{% for obj in obra.bibliografiaObra %}
+						<div class="descObraFicha">{{ obj.nombreAutorBiblio }},
+							{{ obj.anioBiblio }},
+							{{ obj.tituloBiblio }},
+							{{ obj.revistaBiblio }},
+							{{ obj.volumenBiblio }},
+							{{ obj.paginacionBiblio }}</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+			<div class="divSepFicha">
+				<div class="shareBox">
+					Comparte
+					<a href="#" class="share-facebook">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+					<a href="#" class="share-twitter">
+						<i class="fab fa-twitter"></i>
+					</a>
 				</div>
 			</div>
-		</div>
-
-		<div class="divSepFicha">
-			<div class="colSepDosFicha descObraFicha">
-				{{obra.infoObra["textoRazonado"]}}
+			{% if obra.infoObra["linkImgOriginal"] is not empty %}
+				<div class="divSepFicha" style='border-bottom:none'>
+					<h2>
+						Explora la obra
+					</h2>
+					<div class='frame'>
+						<img id='sample_picture' src='{{obra.infoObra["linkImgOriginal"]}}'>
+					</div>
+					<div id='controls'>
+						<button id='zoom_out' type='button' title='Zoom out'>
+							-
+						</button>
+						<button id='fit' type='button' title='Fit image'>
+							[ ]
+						</button>
+						<button id='zoom_in' type='button' title='Zoom in'>
+							+
+						</button>
+					</div>
+				</div>
+			{% endif %}
+			{% if obra.latYLong["latitudAdqObra"] is not empty %}
+				<div class="divSepFicha" style='border-bottom:none'>
+					<h2>
+						Geolocalización de la obra
+					</h2>
+					<div id="map"></div>
+					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8c7i3wQDkRnlmicmy1-gze_NIvB4nkpk&callback=initMap" async defer></script>
+				</div>
+			{% endif %}
+		{% else %}
+			<div class="tituloFicha col-12">No se ha encontrado la obra
 			</div>
-			<div class="firmaObraFicha">{{obra.infoObra["autorTexto"]}}</div>
-		</div>
-		<div class="divSepFicha">
-			<div class="subTextoObraFicha">Bibliografía</div>
-			{% for obj in obra.bibliografiaObra %}
-				<div class="descObraFicha">{{ obj.nombreAutorBiblio }},
-					{{ obj.anioBiblio }},
-					{{ obj.tituloBiblio }},
-					{{ obj.revistaBiblio }},
-					{{ obj.volumenBiblio }},
-					{{ obj.paginacionBiblio }}</div>
-			{% endfor %}
-		</div>
-		<div class="divSepFicha">
-			<div class="shareBox">
-				Comparte
-				<a href="#" class="share-facebook">
-					<i class="fab fa-facebook-f"></i>
-				</a>
-				<a href="#" class="share-twitter">
-					<i class="fab fa-twitter"></i>
-				</a>
-			</div>
-		</div>
-
-		<div class="divSepFicha" style='border-bottom:none'>
-			<h2>
-				Explora la obra
-			</h2>
-
-			{# <div class="wrapper">
-												<img class="viewer" src="http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG" alt="Demo" style="max-width: 100%; max-height: 100%;height: inherit !important;">
-												</div> #}
-
-			<div class='frame'>
-				<img id='sample_picture' src='http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG'>
-			</div>
-
-			<div id='controls'>
-
-				<button id='zoom_out' type='button' title='Zoom out'>
-					-
-				</button>
-				<button id='fit' type='button' title='Fit image'>
-					[ ]
-				</button>
-				<button id='zoom_in' type='button' title='Zoom in'>
-					+
-				</button>
-
-			</div>
-
-		</div>
-
-		<h2>
-			Geolocalización de la obra
-		</h2>
-		<div id="map"></div>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8c7i3wQDkRnlmicmy1-gze_NIvB4nkpk&callback=initMap" async defer></script>
+		{% endif %}
 	</div>
 	<input type="hidden" value="{{obra.latYLong["latitudAdqObra"]}}" id="latObra">
 	<input type="hidden" value="{{obra.latYLong["longitudAdqObra"]}}" id="longObra">
-	<script>
-		function initMap() {
+</div>
+<script>
+	function initMap() {
 var latitud = document.getElementById("latObra").value;
 var longitud = document.getElementById("longObra").value;
 var options = {
@@ -163,6 +174,4 @@ information.open(map, marker);
 });
 
 }
-	</script>
-
-</div></div></div>
+</script>
