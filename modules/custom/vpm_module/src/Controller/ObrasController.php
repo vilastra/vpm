@@ -516,6 +516,7 @@ class ObrasController extends ControllerBase
     $sql = "SELECT nid,title as Titulo,
     fecEjecucion.field_fecha_ejecucion_year as fecha_ejecucion,
     terminoTaxAutoria.name as Autoria,
+    terminoTaxAutoria.tid as autorId,
     terminoTaxtipoAutoriaFinal.name as Tipo_Autoria_Final,
     terminoTaxtipoAutoriaPrinFinal.name as Tipo_Autoria_Prin_Final,
     terminoTaxtipoInsc.name as Tipo_Inscripcion,
@@ -526,7 +527,8 @@ class ObrasController extends ControllerBase
     terminoTaxTecnica.name as Tecnica,
     terminoTaxSoporte.name as Soporte,
     altoImagen.field_alto_value as Alto,
-    anchoImagen.field_ancho_value as Ancho
+    anchoImagen.field_ancho_value as Ancho,
+    autorTexto.field_autor_texto_razonado_value as AutorTexto
     FROM node
     LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
     LEFT JOIN field_data_field_numero numero ON numero.entity_id = iden.field_identificacion_value
@@ -540,6 +542,7 @@ class ObrasController extends ControllerBase
     LEFT JOIN field_data_field_tipo_de_autoria tipoAutoria ON tipoAutoria.entity_id = iden.field_identificacion_value
     LEFT JOIN field_data_field_alto altoImagen ON altoImagen.entity_id = iden.field_identificacion_value
     LEFT JOIN field_data_field_ancho anchoImagen ON anchoImagen.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_autor_texto_razonado autorTexto ON autorTexto.entity_id = iden.field_identificacion_value
     LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
     JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
     LEFT JOIN field_data_field_tecnica tecnica ON tecnica.entity_id = iden.field_identificacion_value
@@ -572,7 +575,17 @@ class ObrasController extends ControllerBase
 
       $obra['textoRazonado'] = $row["Texto_Razonado"];
       $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
+
+
       $obra['autoria'] = $row["Autoria"];
+      $obra['autorId'] = $row["autorId"];
+      if (isset($_GET["idCat"])) {
+        $obra['autorUrl'] = base_path() ."artista?idCat=1&Sec=Art&id=" . $row["autorId"];
+      }else{
+        $obra['autorUrl'] = base_path() ."artista?id=" . $row["autorId"];
+      }
+      
+      $obra['autorTexto'] = $row["AutorTexto"];
 
       $obra['tecnica'] = $row["Tecnica"];
       $obra['soporte'] = $row["Soporte"];
@@ -667,6 +680,42 @@ class ObrasController extends ControllerBase
     return $exhibiciones;
   }
 
+  function getReferenciasBiblioObra($idObra){
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT node.title, 
+    biblio.biblio_sort_title as Titulo,
+    biblio.biblio_secondary_title as Revista,
+    biblio.biblio_year as Anio,
+    biblio.biblio_volume as Volumen,
+    biblio.biblio_pages as Paginacion,
+    biblioConData.name as nombreAutor,
+    node.nid FROM node
+    JOIN field_data_field_referencias_bibliograficas refBiblio ON refBiblio.entity_id= node.nid
+    JOIN field_data_field_referencia ref ON ref.entity_id = refBiblio.field_referencias_bibliograficas_value
+    JOIN biblio ON biblio.nid = ref.field_referencia_target_id
+    JOIN biblio_contributor biblioCon ON biblioCon.nid=biblio.nid
+    JOIN biblio_contributor_data biblioConData ON biblioConData.cid = biblioCon.cid
+    WHERE node.nid=?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $bibliografias = [];
+    $x = 0;
+    while ($row = $result->fetch_assoc()) {
+      $bibliografia['tituloBiblio'] = $row["Titulo"];
+      $bibliografia['revistaBiblio'] = $row["Revista"];
+      $bibliografia['anioBiblio'] = $row["Anio"];
+      $bibliografia['volumenBiblio'] = $row["Volumen"];
+      $bibliografia['paginacionBiblio'] = $row["Paginacion"];
+      $bibliografia['nombreAutorBiblio'] = $row["nombreAutor"];
+      $bibliografias[$x] = $bibliografia;
+      $x++;
+    }
+    return $bibliografias;
+  }
+
 
 
 
@@ -681,6 +730,7 @@ class ObrasController extends ControllerBase
     $obra["propiedadesObra"] = $this->getPropiedadObra($obra['idObra'],false);
     $obra["latYLong"] = $this->getPropiedadObra($obra['idObra'],true);
     $obra["exhibicionesObra"] = $this->getExhibicionesObra($obra['idObra']);
+    $obra["bibliografiaObra"] = $this->getReferenciasBiblioObra($obra['idObra']);
 
     return [
       '#theme' => 'vpm-vista-obra',

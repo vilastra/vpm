@@ -33,6 +33,8 @@
 							x
 							{{obra.infoObra["ancho"]}}</div>
 						<div class="descObraFicha">{{obra.infoObra["autoria"]}}</div>
+						<input type='hidden' value='{{obra.infoObra["autoria"]}}' id='autorNombre'>
+						<input type='hidden' value='{{obra.infoObra["autorUrl"]}}' id='autorUrl'>
 					</div>
 					<div class="divSepFicha">
 						<div class="subTextoObraFicha">Inscripciones</div>
@@ -65,16 +67,39 @@
 			<div class="colSepDosFicha descObraFicha">
 				{{obra.infoObra["textoRazonado"]}}
 			</div>
-			<div class="firmaObraFicha"></div>
+			<div class="firmaObraFicha">{{obra.infoObra["autorTexto"]}}</div>
 		</div>
 		<div class="divSepFicha">
+			<div class="subTextoObraFicha">Bibliografía</div>
+			{% for obj in obra.bibliografiaObra %}
+				<div class="descObraFicha">{{ obj.nombreAutorBiblio }},
+					{{ obj.anioBiblio }},
+					{{ obj.tituloBiblio }},
+					{{ obj.revistaBiblio }},
+					{{ obj.volumenBiblio }},
+					{{ obj.paginacionBiblio }}</div>
+			{% endfor %}
+		</div>
+		<div class="divSepFicha">
+			<div class="shareBox">
+				Comparte
+				<a href="#" class="share-facebook">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="#" class="share-twitter">
+					<i class="fab fa-twitter"></i>
+				</a>
+			</div>
+		</div>
+
+		<div class="divSepFicha" style='border-bottom:none'>
 			<h2>
 				Explora la obra
 			</h2>
 
 			{# <div class="wrapper">
-						<img class="viewer" src="http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG" alt="Demo" style="max-width: 100%; max-height: 100%;height: inherit !important;">
-						</div> #}
+												<img class="viewer" src="http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG" alt="Demo" style="max-width: 100%; max-height: 100%;height: inherit !important;">
+												</div> #}
 
 			<div class='frame'>
 				<img id='sample_picture' src='http://quinsac.patrimoniocultural.gob.cl/sites/default/original_image_files/LFD1655/LFD1655.01.JPG'>
@@ -130,7 +155,7 @@ draggarble: false // If set to true you can drag the marker
 });
 
 var information = new google.maps.InfoWindow({
-content: '<div class="miniTitulo">' + document.getElementById("tituloObra").value + '</div><div class="miniImagen"><img src="' + document.getElementById("urlImg").value + '"></div><div class="miniLatLong">Latitud: ' + latitud + ' Longitud: ' + longitud + '</div><div class="miniAutor"></div>'
+content: '<div class="miniTitulo">' + document.getElementById("tituloObra").value + '</div><div class="miniImagen"><img src="' + document.getElementById("urlImg").value + '"></div><div class="miniLatLong">Latitud: ' + latitud + ' Longitud: ' + longitud + '</div><div class="miniAutor">Autor:   <a href="' + document.getElementById("autorUrl").value + '">' + document.getElementById("autorNombre").value + '</a></div>'
 });
 
 marker.addListener('click', function () {
