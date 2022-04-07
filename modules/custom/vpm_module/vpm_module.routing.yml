@@ -40,3 +40,9 @@ vpm_module.obra:
   requirements:
     _permission: 'access content' 
 
+vpm_module.publicaciones:
+  path: '/publicaciones'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\PublicacionesController::publicaciones'
+  requirements:
+    _permission: 'access content' 
