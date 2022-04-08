@@ -22,7 +22,7 @@ class PublicacionesController extends ControllerBase
 
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
-        $sql = "SELECT managed.filename as name, managed.uri, node.title, managed.timestamp as fecha
+        $sql = "SELECT archivo.entity_id as codArchivo, managed.filename as name, managed.uri as uri, node.title as title, managed.timestamp as fecha
         FROM node
         LEFT JOIN field_data_field_archivo archivo ON archivo.entity_id = node.nid        
         LEFT JOIN field_data_field_autor_ensayo autorensayo ON autorensayo.entity_id = archivo.entity_id
@@ -57,13 +57,20 @@ class PublicacionesController extends ControllerBase
         $resultado = $this->Listar_Query($paginador);
         $publicaciones = [];
         $x = 0;
+        $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
         while ($fila = mysqli_fetch_array($resultado)) {
             $infoPublica = [];
         
+            $infoPublica['codArchivo'] = $fila["codArchivo"];
             $infoPublica['name'] = $fila["name"];
-            $timeStamp = $fila["fecha"];
-            $timeStamp = date( "m/d/Y", strtotime($timeStamp));
-            //$infoPublica['fechaPublica'] = $fila["fecha"];
+            $infoPublica['fecha'] = $fila["fecha"];
+            $infoPublica['fecha'] = date( "d/m/Y", strtotime( $infoPublica['fecha']));
+            $infoPublica['uri'] = $fila["uri"];
+
+            /* RUTA ARCHIVO */
+            $infoPublica['rutaArchivo'] = $fila["title"];
+            $infoPublica['rutaArchivo'] = $rutaQuinsac . $fila["title"];
+
             
             $publicaciones[$x] = $infoPublica;
             $x++;
@@ -165,14 +172,6 @@ class PublicacionesController extends ControllerBase
       }
       return $arrayBoton;
     }
-
-
-
-
-
-
-
-
 
 
 
