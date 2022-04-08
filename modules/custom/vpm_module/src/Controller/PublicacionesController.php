@@ -22,14 +22,14 @@ class PublicacionesController extends ControllerBase
 
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
-        $sql = "SELECT managed.filename as name 
+        $sql = "SELECT managed.filename as name, managed.uri, node.title, managed.timestamp as fecha
         FROM node
         LEFT JOIN field_data_field_archivo archivo ON archivo.entity_id = node.nid        
         LEFT JOIN field_data_field_autor_ensayo autorensayo ON autorensayo.entity_id = archivo.entity_id
         LEFT JOIN field_data_field_tags_ensayos ensayo ON ensayo.entity_id = autorensayo.entity_id
         LEFT JOIN file_managed managed ON managed.fid = archivo.field_archivo_fid
         LEFT JOIN taxonomy_term_data taxensayo ON taxensayo.tid = ensayo.entity_id
-        WHERE managed.filename IS NOT NULL";
+        WHERE managed.filename IS NOT null";
 
         if (!$paginador) {
             $sql = $sql . " LIMIT $offset, $limit";
@@ -61,6 +61,8 @@ class PublicacionesController extends ControllerBase
             $infoPublica = [];
         
             $infoPublica['name'] = $fila["name"];
+            $timeStamp = $fila["fecha"];
+            $timeStamp = date( "m/d/Y", strtotime($timeStamp));
             //$infoPublica['fechaPublica'] = $fila["fecha"];
             
             $publicaciones[$x] = $infoPublica;
