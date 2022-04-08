@@ -33,34 +33,10 @@ class PublicacionesController extends ControllerBase
 
         if (!$paginador) {
             $sql = $sql . " LIMIT $offset, $limit";
-        }
+        }      
 
-        /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
-        $a_params = array();
-
-        $param_type = '';
-        $n = count($whereTipo);
-        for ($i = 0; $i < $n; $i++) {
-        $param_type .= $whereTipo[$i];
-        }
-
-        /* with call_user_func_array, array params must be passed by reference */
-        $a_params[] = &$param_type;
-
-        for ($i = 0; $i < $n; $i++) {
-        /* with call_user_func_array, array params must be passed by reference */
-        $a_params[] = &$where[$i];
-        }
-
-        /* Prepare statement */
-        $stmt = $mysqli->prepare($sql);
-        if ($stmt === false) {
-        trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error, E_USER_ERROR);
-        }
-
-        /* Execute statement */
-        $stmt->execute();
-        $resultado = $stmt->get_result();
+        $resultado = $mysqli->query($sql);
+        mysqli_close($mysqli);
         return $resultado;
 
     }
