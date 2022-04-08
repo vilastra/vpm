@@ -85,7 +85,7 @@ class PublicacionesController extends ControllerBase
             $infoPublica = [];
         
             $infoPublica['name'] = $fila["name"];
-            $infoPublica['fechaPublica'] = $fila["fecha"];
+            //$infoPublica['fechaPublica'] = $fila["fecha"];
             
             $publicaciones[$x] = $infoPublica;
             $x++;
@@ -113,7 +113,7 @@ class PublicacionesController extends ControllerBase
         LEFT JOIN field_data_field_tags_ensayos ensayo ON ensayo.entity_id = autorensayo.entity_id
         LEFT JOIN file_managed managed ON managed.fid = archivo.field_archivo_fid
         LEFT JOIN taxonomy_term_data taxensayo ON taxensayo.tid = ensayo.entity_id
-        WHERE managed.filename IS NOT NULL"
+        WHERE managed.filename IS NOT NULL";
 
       $result = $this->Listar_Query($paginador);
       $total = $result->num_rows;
