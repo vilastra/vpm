@@ -6,6 +6,10 @@
 				{{obra.infoObra["titulo"]}}
 				<input type='hidden' value='{{obra.infoObra["titulo"]}}' id='tituloObra'>
 			</div>
+			{% if obra.obrasRelacionadas|length > 0 %}
+				<div class="tituloFichaRelacionado col-12">Esta obra se encuentra vinculada con otras obras
+				</div>
+			{% endif %}
 			<div class="divSepFicha">
 				<div class="row">
 					<div
@@ -102,46 +106,92 @@
 					</a>
 				</div>
 			</div>
-			{% if obra.infoObra["linkImgOriginal"] is not empty %}
-				<div class="divSepFicha" style='border-bottom:none'>
-					<h2>
-						Explora la obra
-					</h2>
-					<div class='frame'>
-						<img id='sample_picture' src='{{obra.infoObra["linkImgOriginal"]}}'>
+			{% if obra.obrasRelacionadas|length > 0 %}
+				<div class="divSepFicha" style="border-bottom:none">
+					<h2>Obras vinculadas</h2>
+					<div class="descObraFicha">
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
 					</div>
-					<div id='controls'>
-						<button id='zoom_out' type='button' title='Zoom out'>
-							-
-						</button>
-						<button id='fit' type='button' title='Fit image'>
-							[ ]
-						</button>
-						<button id='zoom_in' type='button' title='Zoom in'>
-							+
-						</button>
-					</div>
-				</div>
-			{% endif %}
-			{% if obra.latYLong["latitudAdqObra"] is not empty %}
-				<div class="divSepFicha" style='border-bottom:none'>
-					<h2>
-						Geolocalización de la obra
-					</h2>
-					<div id="map"></div>
-					<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8c7i3wQDkRnlmicmy1-gze_NIvB4nkpk&callback=initMap" async defer></script>
-				</div>
-			{% endif %}
-		{% else %}
-			<div class="tituloFicha col-12">No se ha encontrado la obra
+					{% for obj in obra.obrasRelacionadas %}
+						<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+							<a href='{{ obj.urlObra }}'>
+								<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
+							</a>
+							<a href='tematica?idTematica={{ obj.idTematica }}'>
+								<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
+							</a>
+							<a href='{{ obj.urlObra }}'>
+								<div class='nombreObra'>{{ obj.tituloObra}}</div>
+							</a>
+
+							<div class='descItem'>
+								Autores:
+								<a href='{{ obj.urlArtista }}'>{{ obj.nombreArtista }}</a>
+							</div>
+
+							<a href='obra?id={{ obj.idObra }}'>
+								<div class='descItem'>
+									<b>
+										Ve más
+									</b>
+								</div>
+							</a>
+						</div>
+					{% endfor %}
+					{% if obrasDestacadas[0] > 6 %}
+						{% for obj in artista %}
+							<div class="col-12" style="margin-top:2.5rem">
+								<a href="{{ obj.urlArtista }}" class="btn button btnBuscar more-link keychainify-checked">Ve todas las obras de este artista</a>
+							</div>
+						</a>
+					{% endfor %}
+				{% endif %}
+
 			</div>
 		{% endif %}
-	</div>
-	<input type="hidden" value="{{obra.latYLong["latitudAdqObra"]}}" id="latObra">
-	<input type="hidden" value="{{obra.latYLong["longitudAdqObra"]}}" id="longObra">
+		{% if obra.infoObra["linkImgOriginal"] is not empty %}
+			<div class="divSepFicha" style='border-bottom:none;position:relative'>
+				<h2>
+					Explora la obra
+				</h2>
+				<div class='frame'>
+					<img id='sample_picture' src='{{obra.infoObra["linkImgOriginal"]}}'>
+				</div>
+				<div id='controls'>
+					<div>
+						<button id='zoom_in' type='button' title='Zoom in'>
+							<i class="fa fa-plus" aria-hidden="true"></i>
+						</button>
+					</div>
+					<div>
+						<button id='zoom_out' type='button' title='Zoom out'>
+							<i class="fa fa-minus" aria-hidden="true"></i>
+						</button>
+					</div>
+					<button id='fit' type='button' title='Fit image'>
+						<i class="fa fa-refresh" aria-hidden="true"></i>
+					</button>
+
+				</div>
+			</div>
+		{% endif %}
+		{% if obra.latYLong["latitudAdqObra"] is not empty %}
+			<div class="divSepFicha" style='border-bottom:none'>
+				<h2>
+					Geolocalización de la obra
+				</h2>
+				<div id="map"></div>
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8c7i3wQDkRnlmicmy1-gze_NIvB4nkpk&callback=initMap" async defer></script>
+			</div>
+		{% endif %}
+	{% else %}
+		<div class="tituloFicha col-12">No se ha encontrado la obra
+		</div>
+	{% endif %}
 </div>
-<script>
-	function initMap() {
+<input type="hidden" value="{{obra.latYLong["latitudAdqObra"]}}" id="latObra">
+<input type="hidden" value="{{obra.latYLong["longitudAdqObra"]}}" id="longObra"></div><script>
+function initMap() {
 var latitud = document.getElementById("latObra").value;
 var longitud = document.getElementById("longObra").value;
 var options = {
@@ -173,5 +223,4 @@ marker.addListener('click', function () {
 information.open(map, marker);
 });
 
-}
-</script>
+}</script>

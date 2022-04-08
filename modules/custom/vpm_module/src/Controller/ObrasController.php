@@ -726,6 +726,66 @@ class ObrasController extends ControllerBase
     return $bibliografias;
   }
 
+  function getObrasRelacionadas($idObra){
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "select node.title as ObraPrincipal,
+    obrasRelacionadas.nid as idObraRelacionada,
+    obrasRelacionadas.title as titulo,
+    terminoTaxAutoria.name as autor,
+    terminoTaxAutoria.tid as autorId,
+    terminoTaxTematica.name as Tematica,
+    terminoTaxTematica.tid as idTematica,
+    file_managed.filename
+    FROM node
+    LEFT JOIN field_data_field_iconografia_retrato idenRetrato ON idenRetrato.entity_id = node.nid
+    LEFT JOIN field_data_field_persona idenPersona ON idenPersona.entity_id = idenRetrato.field_iconografia_retrato_value
+    LEFT JOIN field_data_field_num_obra_relacionada targetObra ON targetObra.entity_id = idenPersona.field_persona_value
+    LEFT JOIN node obrasRelacionadas ON obrasRelacionadas.nid = targetObra.field_num_obra_relacionada_target_id
+    LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = obrasRelacionadas.nid
+    LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+    JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+    LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+    LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
+    LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+    LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+    WHERE node.nid = ? AND targetObra.field_num_obra_relacionada_target_id IS NOT NULL AND obrasRelacionadas.type = 'obra' AND obrasRelacionadas.status=1 LIMIT 3";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $obras = [];
+    $x = 0;
+    $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
+    while ($fila = mysqli_fetch_array($result)) {
+      $infoObra = [];
+      $infoObra['idObra'] = $fila["idObraRelacionada"];
+      if (isset($_GET["idCat"])) {
+        $infoObra['urlObra'] =  base_path() . "obra?idCat=1&Sec=Obras&idObra=" . $fila["idObraRelacionada"];
+      } else {
+        $infoObra['urlObra'] = base_path() . "obra?idObra=" . $fila["idObraRelacionada"];
+      }
+      $infoObra['tituloObra'] = $fila["titulo"];
+      $infoObra['nombreArtista'] = $fila["autor"];
+      $infoObra['autorId'] = $fila["autorId"];
+      if (isset($_GET["idCat"])) {
+        $infoObra['urlArtista'] = base_path() . "artista?idCat=1&Sec=Art&id=" . $fila["autorId"];
+      } else {
+        $infoObra['urlArtista'] = base_path() . "artista?id=" . $fila["autorId"];
+      }
+      /* IMAGEN */
+      $infoObra['rutaFoto'] = $fila["filename"];
+      $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+      /* TEMATICA */
+      $infoObra['idTematica'] = $fila["idTematica"];
+      $infoObra['nombreTematica'] = $fila["Tematica"];
+
+      $obras[$x] = $infoObra;
+      $x++;
+    }
+    return $obras;
+  }
+
 
 
 
@@ -741,6 +801,7 @@ class ObrasController extends ControllerBase
     $obra["latYLong"] = $this->getPropiedadObra($obra['idObra'], true);
     $obra["exhibicionesObra"] = $this->getExhibicionesObra($obra['idObra']);
     $obra["bibliografiaObra"] = $this->getReferenciasBiblioObra($obra['idObra']);
+    $obra["obrasRelacionadas"] = $this->getObrasRelacionadas($obra['idObra']);
 
     return [
       '#theme' => 'vpm-vista-obra',
