@@ -61,7 +61,15 @@ class PublicacionesController extends ControllerBase
         while ($fila = mysqli_fetch_array($resultado)) {
             $infoPublica = [];
         
-            $infoPublica['codArchivo'] = $fila["codArchivo"];
+            $infoPublica['idPublica'] = $fila["codArchivo"];
+
+            if (isset($_GET["idCat"])) {
+              $infoObra['urlPublica'] =  base_path() . "publica?idCat=1&Sec=publicaciones&idPublica=" . $fila["codArchivo"];
+            } else {
+              $infoObra['urlPublica'] = base_path() . "publica?idPublica=" . $fila["codArchivo"];
+            }
+
+
             $infoPublica['name'] = $fila["name"];
             $infoPublica['fecha'] = $fila["fecha"];
             $infoPublica['fecha'] = date( "d/m/Y", strtotime( $infoPublica['fecha']));
@@ -174,9 +182,6 @@ class PublicacionesController extends ControllerBase
       return $arrayBoton;
     }
 
-
-
-
     function publicaciones()
     {
         $publicaciones = $this->Listar_Publicaciones(false);
@@ -188,4 +193,47 @@ class PublicacionesController extends ControllerBase
     
         ];
     }
+
+    function getInfPublica($idPublica){
+      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+
+      $sql = "SELECT archivo.entity_id as codArchivo, managed.filename as name, managed.uri as uri, node.title as title, managed.timestamp as fecha
+        FROM node
+        LEFT JOIN field_data_field_archivo archivo ON archivo.entity_id = node.nid        
+        LEFT JOIN field_data_field_autor_ensayo autorensayo ON autorensayo.entity_id = archivo.entity_id
+        LEFT JOIN field_data_field_tags_ensayos ensayo ON ensayo.entity_id = autorensayo.entity_id
+        LEFT JOIN file_managed managed ON managed.fid = archivo.field_archivo_fid
+        LEFT JOIN taxonomy_term_data taxensayo ON taxensayo.tid = ensayo.entity_id
+        WHERE archivo.entity_id=?";
+
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("s", $idPublica);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        mysqli_close($mysqli);
+        $publica = [];
+
+
+        while($row = $result->fetch_assoc()){
+          $publica['name'] = $fila["name"];
+          $publica['fecha'] = $fila["fecha"];
+          $publica['fecha'] = date( "d/m/Y", strtotime( $publica['fecha']));
+          $publica['uri'] = $fila["uri"];
+          $publica['title'] = $fila["title"];
+
+          /* RUTA ARCHIVO */
+          $publica['rutaArchivo'] = $fila["title"];
+          $publica['rutaArchivo'] = $rutaQuinsac . $fila["title"];
+        }
+        return $publica;
+    }
+
+  function publica()
+  { 
+
+    return [
+      '#theme' => 'vpm-vista-publica',
+      '#publica' => $publica
+    ];
+  }
 }
