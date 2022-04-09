@@ -64,9 +64,9 @@ class PublicacionesController extends ControllerBase
             $infoPublica['idPublica'] = $fila["codArchivo"];
 
             if (isset($_GET["idCat"])) {
-              $infoObra['urlPublica'] =  base_path() . "publica?idCat=1&Sec=publicaciones&idPublica=" . $fila["codArchivo"];
+              $infoPublica['urlPublica'] =  base_path() . "publica?idCat=1&Sec=publicaciones&idPublica=" . $fila["codArchivo"];
             } else {
-              $infoObra['urlPublica'] = base_path() . "publica?idPublica=" . $fila["codArchivo"];
+              $infoPublica['urlPublica'] = base_path() . "publica?idPublica=" . $fila["codArchivo"];
             }
 
 
@@ -142,13 +142,13 @@ class PublicacionesController extends ControllerBase
         $arrayBotones = [];
   
         if ($page != 1) {
-          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'obras/' . $variables . 'pag=' . ($page - 1) . '">
+          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'publicaciones/' . $variables . 'pag=' . ($page - 1) . '">
                     <button class="pager__item"><span aria-hidden="true"><i class="fa fa-chevron-left" aria-hidden="true"></i>
                     </span></button></a>';
           $z++;
         }
         if ($page > ($limitPage / 2)) {
-          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'obras/' . $variables . 'pag=' . 1 . '">
+          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'publicaciones/' . $variables . 'pag=' . 1 . '">
                     <button class="pager__item"><span aria-hidden="true">1...</span></button></a>';
           $z++;
         }
@@ -159,7 +159,7 @@ class PublicacionesController extends ControllerBase
                 $arrayBotones[$z] = '<a class="pagelink" href="#"><button class="pager__item is-active">' . $page . '</button></a>';
                 $z++;
               } else {
-                $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'obras/' . $variables . 'pag=' . $x . '">
+                $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'publicaciones/' . $variables . 'pag=' . $x . '">
                       <button class="pager__item">' . $x . '</button></a>';
                 $z++;
               }
@@ -168,12 +168,12 @@ class PublicacionesController extends ControllerBase
           }
         }
         if ($page < $total_pages - ($limitPage / 2)) {
-          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'obras/' . $variables . 'pag=' . $total_pages . '">
+          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'publicaciones/' . $variables . 'pag=' . $total_pages . '">
                   <button class="pager__item"><span aria-hidden="true">...' . $total_pages . '</span></button></a>';
           $z++;
         }
         if ($page != $total_pages) {
-          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'obras/' . $variables . 'pag=' . ($page + 1) . '">
+          $arrayBotones[$z] = '<a class="pagelink"  href="' . base_path() . 'publicaciones/' . $variables . 'pag=' . ($page + 1) . '">
                 <button class="pager__item"><span aria-hidden="true"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></button></a>';
           $z++;
         }
