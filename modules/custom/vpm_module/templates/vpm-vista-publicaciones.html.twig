@@ -12,6 +12,14 @@
 			<pre>
 				{{ dump(publicaciones) }}
 			</pre>
+
+			<div class="pager mt-5">
+				<div class="pager__items">
+					{% for pag in arrayBoton %}
+						{{pag | raw}}
+					{% endfor %}
+				</div>
+			</div>
         </div>
     </div>
 </div> 

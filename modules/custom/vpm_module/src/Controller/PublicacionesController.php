@@ -66,6 +66,7 @@ class PublicacionesController extends ControllerBase
             $infoPublica['fecha'] = $fila["fecha"];
             $infoPublica['fecha'] = date( "d/m/Y", strtotime( $infoPublica['fecha']));
             $infoPublica['uri'] = $fila["uri"];
+            $infoPublica['title'] = $fila["title"];
 
             /* RUTA ARCHIVO */
             $infoPublica['rutaArchivo'] = $fila["title"];
@@ -81,7 +82,7 @@ class PublicacionesController extends ControllerBase
     function Lista_Paginador($paginador)
     {
       $limit = 9;
-      $limitPage = 9;
+      $limitPage = 7 ;
       $pag = (int) (!empty($_GET["pag"]));
       if ($pag < 1) {
         $pag = 1;
@@ -98,7 +99,7 @@ class PublicacionesController extends ControllerBase
         LEFT JOIN field_data_field_tags_ensayos ensayo ON ensayo.entity_id = autorensayo.entity_id
         LEFT JOIN file_managed managed ON managed.fid = archivo.field_archivo_fid
         LEFT JOIN taxonomy_term_data taxensayo ON taxensayo.tid = ensayo.entity_id
-        WHERE managed.filename IS NOT NULL";
+        WHERE managed.filename IS NOT null";
 
       $result = $this->Listar_Query($paginador);
       $total = $result->num_rows;
