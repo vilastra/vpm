@@ -68,9 +68,9 @@ function vpm_module_theme($existing, $type, $theme, $path)
                 'arrayBoton' => []
             ]
         ],
-        'vpm-vista-publica' => [
+        'vpm-vista-publicacion' => [
             'variables' => [
-                'publica' => []
+                'publicacion' => []
             ]
         ],
 

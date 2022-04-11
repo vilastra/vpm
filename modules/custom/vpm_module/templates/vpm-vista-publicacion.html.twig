@@ -1,0 +1,52 @@
+<div class='whiteArea'>
+	<div class="col-9 max-container px-0 m-auto ">
+		<div class="divSepFicha" style=" border-top: 1px solid #C0C0C0;">
+			<div class="shareBox">
+				Comparte
+				<a href="#" class="share-facebook">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="#" class="share-twitter">
+					<i class="fab fa-twitter"></i>
+				</a>
+			</div>
+		</div>
+		<div class="row pt-3">
+			<div class='cardItem col-lg-3 col-md-4 col-sm-12 col-xs-12'>
+				<div class='imgItem'><img src='http://localhost/vpm/sites/default/files/2022-04/fileimage_0.png'></div>
+			</div>
+			<div class='cardItem col-lg-9 col-md-8 col-sm-12 col-xs-12'>
+				<h2>{{ publicacion.title }}</h2>
+				{% if publicacion.autor is not empty %}
+					<div class='publicacionDesc1'>
+						<b>Autor del ensayo:
+						</b>
+						{{ publicacion.autor }}</div>
+				{% endif %}
+				<div class='publicacionDesc1'>
+					<b>Fecha publicación:
+					</b>
+					{{ publicacion.fecha }}</div>
+				<div class='publicacionDesc1'>
+					<b>Catálogo investigado:
+					</b>Monvoisin</div>
+				{% if publicacion.etiquetaPublicacion is not empty %}
+					<div class='publicacionDesc1'>
+						<b>Categoría:
+						</b>
+						{{ publicacion.etiquetaPublicacion }}</div>
+				{% endif %}
+			</div>
+			<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+				<a target='_blank' href='{{ publicacion.rutaArchivo }}' class='btn button btnBuscar more-link'>Ve el ensayo completo</a>
+			</div>
+			<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+				<a download href='{{ publicacion.rutaArchivo }}' class='btn button btnBuscar more-link'>
+					<i class="fa fa-download" aria-hidden="true"></i>
+					{{ publicacion.title }}
+					({{ publicacion.filesize }})</a>
+			</div>
+		</div>
+
+	</div>
+</div>

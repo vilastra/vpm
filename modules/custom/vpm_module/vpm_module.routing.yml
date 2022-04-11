@@ -45,11 +45,11 @@ vpm_module.publicaciones:
   defaults:
     _controller: '\Drupal\vpm_module\Controller\PublicacionesController::publicaciones'
   requirements:
-    _permission: 'access content' 
+    _permission: 'access content'
 
- vpm_module.publica:
-  path: '/publica'
+vpm_module.publicacion:
+  path: '/publicacion'
   defaults:
-    _controller: '\Drupal\vpm_module\Controller\PublicacionesController::publica'
+    _controller: '\Drupal\vpm_module\Controller\PublicacionesController::publicacion'
   requirements:
-    _permission: 'access content'    
+    _permission: 'access content'
