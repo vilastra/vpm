@@ -7,12 +7,14 @@ global-styling:
       css/owl.carousel.css: {}
       css/owl.theme.default.css: {}
       css/jquery.guillotine.css: {}
+      css/timeline.css: {}
       
       
 
 
 global-scripts:
   js:
+    js/timeline.js: {}
     js/jqueryui.js: {}
     js/jquery.guillotine.js: {}
     js/jquery.panzoom.js: {}
@@ -21,6 +23,7 @@ global-scripts:
     js/script.js: {}
     js/bs/bootstrap.bundle.min.js: {}
     js/bs/bootstrap.js: {}
+    
     
 
   dependencies:

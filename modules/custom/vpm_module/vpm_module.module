@@ -55,10 +55,10 @@ function vpm_module_theme($existing, $type, $theme, $path)
                 'tematica' => [],
                 'annio' => [],
                 'artista' => [],
-                'idCat'=>null,
-                'Sec'=>null,
-                'busquedaIndex' =>null,
-                'ordenarPor' =>0,
+                'idCat' => null,
+                'Sec' => null,
+                'busquedaIndex' => null,
+                'ordenarPor' => 0,
                 'tecnica' => []
             ]
         ],

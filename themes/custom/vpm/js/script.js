@@ -57,7 +57,8 @@
                 jQuery("html, body").animate({ scrollTop: 0 }, 0);
             });
             $(document).ready(function($) {
-
+                var timeline;
+                timeline = new TL.Timeline('timeline-embed', 'https://docs.google.com/spreadsheets/d/1cWqQBZCkX9GpzFtxCWHoqFXCHg-ylTVUWlnrdYMzKUI/pubhtml');
                 var picture = $('#sample_picture');
 
                 // Make sure the image is completely loaded before calling the plugin

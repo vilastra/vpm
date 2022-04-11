@@ -3,6 +3,8 @@
 namespace Drupal\vpm_module\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Render\Renderer;
 use mysqli;
 
 use Dompdf\Dompdf;
@@ -10,10 +12,24 @@ use Dompdf\Options;
 
 class PdfController extends ControllerBase
 {
-    function getInfoObra($idObra)
-    {
-      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-      $sql = "SELECT nid,title as Titulo,
+  protected $renderer;
+
+  public function __construct(Renderer $renderer)
+  {
+    $this->renderer = $renderer;
+  }
+
+  public static function create(ContainerInterface $container)
+  {
+    return new static(
+      $container->get('renderer')
+    );
+  }
+
+  function getInfoObra($idObra)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT nid,title as Titulo,
       fecEjecucion.field_fecha_ejecucion_year as fecha_ejecucion,
       terminoTaxAutoria.name as Autoria,
       terminoTaxAutoria.tid as autorId,
@@ -61,54 +77,54 @@ class PdfController extends ControllerBase
       LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
       LEFT JOIN field_data_field_texto_razonado textoRazonado ON textoRazonado.entity_id = iden.field_identificacion_value
       WHERE node.type = 'obra' AND node.status=1 AND nid=? ";
-      $stmt = $mysqli->prepare($sql);
-      $stmt->bind_param("s", $idObra);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      mysqli_close($mysqli);
-      $obra = [];
-      $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
-  
-      while ($row = $result->fetch_assoc()) {
-        $obra['idObra'] = $row["nid"];
-        $obra['titulo'] = $row["Titulo"];
-        //$obra['urlImagen'] = $row["urlImagen"];
-        $obra['linkImgOriginal'] = $row["linkImgOriginal"];
-        
-        $obra['urlImagen'] = $row["urlImagen"];
-        $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
-  
-        $obra['textoRazonado'] = $row["Texto_Razonado"];
-        $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
-  
-  
-        $obra['autoria'] = $row["Autoria"];
-        $obra['autorId'] = $row["autorId"];
-        if (isset($_GET["idCat"])) {
-          $obra['autorUrl'] = base_path() . "artista?idCat=1&Sec=Art&id=" . $row["autorId"];
-        } else {
-          $obra['autorUrl'] = base_path() . "artista?id=" . $row["autorId"];
-        }
-  
-        $obra['autorTexto'] = $row["AutorTexto"];
-  
-        $obra['tecnica'] = $row["Tecnica"];
-        $obra['soporte'] = $row["Soporte"];
-        $obra['alto'] = $row["Alto"];
-        $obra['ancho'] = $row["Ancho"];
-  
-        $obra['tipoAutoria'] = $row["Tipo_Autoria_Final"];
-        $obra['tipoInscripcion'] = $row["Tipo_Inscripcion"];
-        $obra['ubicacionInscripcion'] = $row["Ubicacion_Inscripcion"];
-        $obra['transInscripcion'] = $row["Transcripcion_Inscripcion"];
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $obra = [];
+    $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
+
+    while ($row = $result->fetch_assoc()) {
+      $obra['idObra'] = $row["nid"];
+      $obra['titulo'] = $row["Titulo"];
+      //$obra['urlImagen'] = $row["urlImagen"];
+      $obra['linkImgOriginal'] = $row["linkImgOriginal"];
+
+      $obra['urlImagen'] = $row["urlImagen"];
+      $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
+
+      $obra['textoRazonado'] = $row["Texto_Razonado"];
+      $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
+
+
+      $obra['autoria'] = $row["Autoria"];
+      $obra['autorId'] = $row["autorId"];
+      if (isset($_GET["idCat"])) {
+        $obra['autorUrl'] = base_path() . "artista?idCat=1&Sec=Art&id=" . $row["autorId"];
+      } else {
+        $obra['autorUrl'] = base_path() . "artista?id=" . $row["autorId"];
       }
-      return $obra;
+
+      $obra['autorTexto'] = $row["AutorTexto"];
+
+      $obra['tecnica'] = $row["Tecnica"];
+      $obra['soporte'] = $row["Soporte"];
+      $obra['alto'] = $row["Alto"];
+      $obra['ancho'] = $row["Ancho"];
+
+      $obra['tipoAutoria'] = $row["Tipo_Autoria_Final"];
+      $obra['tipoInscripcion'] = $row["Tipo_Inscripcion"];
+      $obra['ubicacionInscripcion'] = $row["Ubicacion_Inscripcion"];
+      $obra['transInscripcion'] = $row["Transcripcion_Inscripcion"];
     }
-  
-    function getPropiedadObra($idObra, $reqLatLon)
-    {
-      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-      $sql = "SELECT nombrePropietario.field_nombre_propietario_value as nombrePropiedad,
+    return $obra;
+  }
+
+  function getPropiedadObra($idObra, $reqLatLon)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT nombrePropietario.field_nombre_propietario_value as nombrePropiedad,
       ingrAdquisicion.field_ano_ingreso_adquisicion_value as fechaAdqPropiedad,
       latitudAdquisicion.field_latitud_value as latitudAdqPropiedad,
       longitudAdquisicion.field_longitud_value as longitudAdqPropiedad,
@@ -121,22 +137,22 @@ class PdfController extends ControllerBase
       LEFT JOIN field_data_field_ciudad ciudadAdquisicion ON ciudadAdquisicion.entity_id = propiedad.field_historial_de_propiedad_value
       LEFT JOIN taxonomy_term_data ciudadTermDataAdquisicion ON ciudadTermDataAdquisicion.tid = ciudadAdquisicion.field_ciudad_tid
       WHERE nid=?";
-      $stmt = $mysqli->prepare($sql);
-      $stmt->bind_param("s", $idObra);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      mysqli_close($mysqli);
-      $propiedades = [];
-      $x = 0;
-      if ($reqLatLon) {
-        while ($row = $result->fetch_assoc()) {
-          $propiedades['latitudAdqObra'] = str_replace(',', '.', $row["latitudAdqPropiedad"]);
-          $propiedades['longitudAdqObra'] = str_replace(',', '.', $row["longitudAdqPropiedad"]);
-          break;
-        }
-      } else {
-        while ($row = $result->fetch_assoc()) {
-          if ($row["nombrePropiedad"] != null) {
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $propiedades = [];
+    $x = 0;
+    if ($reqLatLon) {
+      while ($row = $result->fetch_assoc()) {
+        $propiedades['latitudAdqObra'] = str_replace(',', '.', $row["latitudAdqPropiedad"]);
+        $propiedades['longitudAdqObra'] = str_replace(',', '.', $row["longitudAdqPropiedad"]);
+        break;
+      }
+    } else {
+      while ($row = $result->fetch_assoc()) {
+        if ($row["nombrePropiedad"] != null) {
           $propiedad['nombrePropietarioObra'] = $row["nombrePropiedad"];
           $propiedad['fechaAquisicionObra'] = $row["fechaAdqPropiedad"];
           $propiedad['ciudadAquisicionObra'] = $row["ciudadAdq"];
@@ -144,17 +160,17 @@ class PdfController extends ControllerBase
           $propiedad['longitudAdqObra'] = $row["longitudAdqPropiedad"];
           $propiedades[$x] = $propiedad;
           $x++;
-          }
         }
       }
-  
-      return $propiedades;
     }
-  
-    function getExhibicionesObra($idObra)
-    {
-      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-      $sql = "SELECT tituloExhibicion.field_t_tulo_de_la_exhibici_n_value as Titulo_Exhibicion,
+
+    return $propiedades;
+  }
+
+  function getExhibicionesObra($idObra)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT tituloExhibicion.field_t_tulo_de_la_exhibici_n_value as Titulo_Exhibicion,
       nombreResponsableExhibicion.field_nombre_curador_responsable_value as Responsable_Exhibicion,
       nombreInstitucionExhibicion.field_institucion_value as Institucion_Exhibicion,
       ciudadTermDataExhibicion.name as Ciudad_Exhibicion,
@@ -168,31 +184,31 @@ class PdfController extends ControllerBase
       LEFT JOIN taxonomy_term_data ciudadTermDataExhibicion ON ciudadTermDataExhibicion.tid = ciudadExhibicion.field_ciudad_tid
       LEFT JOIN field_data_field_fecha_inicio fechaExhibicion ON fechaExhibicion.entity_id = exhibiciones.field_exhibiciones_value
       WHERE nid=?";
-      $stmt = $mysqli->prepare($sql);
-      $stmt->bind_param("s", $idObra);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      mysqli_close($mysqli);
-      $exhibiciones = [];
-      $x = 0;
-      while ($row = $result->fetch_assoc()) {
-        if ($row["Titulo_Exhibicion"] != null) {
-          $exhibicion['tituloExhibicion'] = $row["Titulo_Exhibicion"];
-          $exhibicion['responsableExhibicion'] = $row["Responsable_Exhibicion"];
-          $exhibicion['institucionExhibicion'] = $row["Institucion_Exhibicion"];
-          $exhibicion['ciudadExhibicion'] = $row["Ciudad_Exhibicion"];
-          $exhibicion['anoExhibicion'] = $row["Ano_Exhibicion"];
-          $exhibiciones[$x] = $exhibicion;
-          $x++;
-        }
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $exhibiciones = [];
+    $x = 0;
+    while ($row = $result->fetch_assoc()) {
+      if ($row["Titulo_Exhibicion"] != null) {
+        $exhibicion['tituloExhibicion'] = $row["Titulo_Exhibicion"];
+        $exhibicion['responsableExhibicion'] = $row["Responsable_Exhibicion"];
+        $exhibicion['institucionExhibicion'] = $row["Institucion_Exhibicion"];
+        $exhibicion['ciudadExhibicion'] = $row["Ciudad_Exhibicion"];
+        $exhibicion['anoExhibicion'] = $row["Ano_Exhibicion"];
+        $exhibiciones[$x] = $exhibicion;
+        $x++;
       }
-      return $exhibiciones;
     }
-  
-    function getReferenciasBiblioObra($idObra)
-    {
-      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-      $sql = "SELECT node.title, 
+    return $exhibiciones;
+  }
+
+  function getReferenciasBiblioObra($idObra)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "SELECT node.title, 
       biblio.biblio_sort_title as Titulo,
       biblio.biblio_secondary_title as Revista,
       biblio.biblio_year as Anio,
@@ -206,29 +222,30 @@ class PdfController extends ControllerBase
       JOIN biblio_contributor biblioCon ON biblioCon.nid=biblio.nid
       JOIN biblio_contributor_data biblioConData ON biblioConData.cid = biblioCon.cid
       WHERE node.nid=?";
-      $stmt = $mysqli->prepare($sql);
-      $stmt->bind_param("s", $idObra);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      mysqli_close($mysqli);
-      $bibliografias = [];
-      $x = 0;
-      while ($row = $result->fetch_assoc()) {
-        $bibliografia['tituloBiblio'] = $row["Titulo"];
-        $bibliografia['revistaBiblio'] = $row["Revista"];
-        $bibliografia['anioBiblio'] = $row["Anio"];
-        $bibliografia['volumenBiblio'] = $row["Volumen"];
-        $bibliografia['paginacionBiblio'] = $row["Paginacion"];
-        $bibliografia['nombreAutorBiblio'] = $row["nombreAutor"];
-        $bibliografias[$x] = $bibliografia;
-        $x++;
-      }
-      return $bibliografias;
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $bibliografias = [];
+    $x = 0;
+    while ($row = $result->fetch_assoc()) {
+      $bibliografia['tituloBiblio'] = $row["Titulo"];
+      $bibliografia['revistaBiblio'] = $row["Revista"];
+      $bibliografia['anioBiblio'] = $row["Anio"];
+      $bibliografia['volumenBiblio'] = $row["Volumen"];
+      $bibliografia['paginacionBiblio'] = $row["Paginacion"];
+      $bibliografia['nombreAutorBiblio'] = $row["nombreAutor"];
+      $bibliografias[$x] = $bibliografia;
+      $x++;
     }
-  
-    function getObrasRelacionadas($idObra){
-      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-      $sql = "select node.title as ObraPrincipal,
+    return $bibliografias;
+  }
+
+  function getObrasRelacionadas($idObra)
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $sql = "select node.title as ObraPrincipal,
       obrasRelacionadas.nid as idObraRelacionada,
       obrasRelacionadas.title as titulo,
       terminoTaxAutoria.name as autor,
@@ -249,89 +266,135 @@ class PdfController extends ControllerBase
       LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
       LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
       WHERE node.nid = ? AND targetObra.field_num_obra_relacionada_target_id IS NOT NULL AND obrasRelacionadas.type = 'obra' AND obrasRelacionadas.status=1 LIMIT 3";
-      $stmt = $mysqli->prepare($sql);
-      $stmt->bind_param("s", $idObra);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      mysqli_close($mysqli);
-      $obras = [];
-      $x = 0;
-      $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
-      while ($fila = mysqli_fetch_array($result)) {
-        $infoObra = [];
-        $infoObra['idObra'] = $fila["idObraRelacionada"];
-        if (isset($_GET["idCat"])) {
-          $infoObra['urlObra'] =  base_path() . "obra?idCat=1&Sec=Obras&idObra=" . $fila["idObraRelacionada"];
-        } else {
-          $infoObra['urlObra'] = base_path() . "obra?idObra=" . $fila["idObraRelacionada"];
-        }
-        $infoObra['tituloObra'] = $fila["titulo"];
-        $infoObra['nombreArtista'] = $fila["autor"];
-        $infoObra['autorId'] = $fila["autorId"];
-        if (isset($_GET["idCat"])) {
-          $infoObra['urlArtista'] = base_path() . "artista?idCat=1&Sec=Art&id=" . $fila["autorId"];
-        } else {
-          $infoObra['urlArtista'] = base_path() . "artista?id=" . $fila["autorId"];
-        }
-        /* IMAGEN */
-        $infoObra['rutaFoto'] = $fila["filename"];
-        $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
-        /* TEMATICA */
-        $infoObra['idTematica'] = $fila["idTematica"];
-        $infoObra['nombreTematica'] = $fila["Tematica"];
-  
-        $obras[$x] = $infoObra;
-        $x++;
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $idObra);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    mysqli_close($mysqli);
+    $obras = [];
+    $x = 0;
+    $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
+    while ($fila = mysqli_fetch_array($result)) {
+      $infoObra = [];
+      $infoObra['idObra'] = $fila["idObraRelacionada"];
+      if (isset($_GET["idCat"])) {
+        $infoObra['urlObra'] =  base_path() . "obra?idCat=1&Sec=Obras&idObra=" . $fila["idObraRelacionada"];
+      } else {
+        $infoObra['urlObra'] = base_path() . "obra?idObra=" . $fila["idObraRelacionada"];
       }
-      return $obras;
-    }
-  
-  
-    function pdf()
-    {
-      //$html = ob_get_clean();
-      $idObra = 1;
-      $obra["infoObra"] = $this->getInfoObra($idObra);
-      $obra["propiedadesObra"] = $this->getPropiedadObra($idObra, false);
-      $obra["latYLong"] = $this->getPropiedadObra($idObra, true);
-      $obra["exhibicionesObra"] = $this->getExhibicionesObra($idObra);
-      $obra["bibliografiaObra"] = $this->getReferenciasBiblioObra($idObra);
-      $obra["obrasRelacionadas"] = $this->getObrasRelacionadas($idObra);
+      $infoObra['tituloObra'] = $fila["titulo"];
+      $infoObra['nombreArtista'] = $fila["autor"];
+      $infoObra['autorId'] = $fila["autorId"];
+      if (isset($_GET["idCat"])) {
+        $infoObra['urlArtista'] = base_path() . "artista?idCat=1&Sec=Art&id=" . $fila["autorId"];
+      } else {
+        $infoObra['urlArtista'] = base_path() . "artista?id=" . $fila["autorId"];
+      }
+      /* IMAGEN */
+      $infoObra['rutaFoto'] = $fila["filename"];
+      $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+      /* TEMATICA */
+      $infoObra['idTematica'] = $fila["idTematica"];
+      $infoObra['nombreTematica'] = $fila["Tematica"];
 
-      $dompdf = new Dompdf();
-  
-      $options = $dompdf->getOptions();
-      $options->set(array('isRemoteEnabled' => true));
-      $dompdf->setOptions($options);
-      $html = "<style type='text/css' >";
-      $html .= ".tituloFicha {
-                            font-size: 2.5rem;
-        font-family: 'Open Sans', sans-serif;
-        font-weight: bold;
-        padding-bottom: 0.563rem;
-        }";
-      $html .="</style>";
-      $html .= "<div class='tituloFicha col-12'>Ficha razonada:</div>";
-
-      $dompdf->loadhtml($html);
-      $dompdf->setPaper('letter');
-      //$font = $dompdf->getFontMetrics()->getFont("Arial", "bold");
-      $tituloVar = "Ficha";
-      $tituloVar = str_replace('/', '-', $tituloVar);
-      $dompdf->render();
-      $dompdf->stream($tituloVar, array("Attachment" => true));
-    }  
- 
-  
-  
-    function obra()
-    {   
-      $obra = $this->pdf(); 
-    
-      return [
-        '#theme' => 'vpm-vista-pdf',
-        '#obra' => $obra
-      ];
+      $obras[$x] = $infoObra;
+      $x++;
     }
+    return $obras;
+  }
+
+  public function getViewPdf()
+  {
+    $obra = [];
+    $idObra = 25;
+    $obra["infoObra"] = $this->getInfoObra($idObra);
+    $obra["propiedadesObra"] = $this->getPropiedadObra($idObra, false);
+    $obra["latYLong"] = $this->getPropiedadObra($idObra, true);
+    $obra["exhibicionesObra"] = $this->getExhibicionesObra($idObra);
+    $obra["bibliografiaObra"] = $this->getReferenciasBiblioObra($idObra);
+    $obra["obrasRelacionadas"] = $this->getObrasRelacionadas($idObra);
+    $renderable = [
+      '#theme' => 'vpm-vista-pdf',
+      '#obra' => $obra,
+    ];
+    $rendered = \Drupal::service('renderer')->renderPlain($renderable);
+    // Cast to string since twig_render_template returns a Markup object.
+    $body = (string) $renderable;
+
+    return $rendered;
+  }
+  function pdf()
+  {
+    //$html = ob_get_clean();
+
+
+    $dompdf = new Dompdf();
+    $html = '';
+    $options = $dompdf->getOptions();
+    $options->set(array('isRemoteEnabled' => true));
+    $dompdf->setOptions($options);
+    $html .= "<style type='text/css'>";
+    $html .= '.tituloFicha {
+            font-size: 2.5rem;
+            font-family: "Open Sans", sans-serif;
+            font-weight: bold;
+            padding-bottom: 0.563rem;
+            }
+            .tituloFichaRelacionado {
+              font-size: 1.313rem;
+              font-family: "Open Sans", sans-serif;
+              font-weight: bold;
+              padding-bottom: 0.563rem;
+              color: #8A8A8A;
+            }
+            .divSepFicha {
+              padding-bottom: 2rem;
+              padding-top: 2rem;
+              border-bottom: 1px solid #C0C0C0;
+            }
+            .tituloObraFicha {
+            font-size: 1.313rem;
+            font-family: "Open Sans", sans-serif;
+            font-style: italic;
+            padding-bottom: 1.25rem;
+            }
+            .descObraFicha {
+            font-size: 1.125rem;
+            font-family: "Open Sans", sans-serif;
+            color: #303030;
+            }  
+            .subTextoObraFicha {
+            font-size: 1.313rem;
+            font-family: "Open Sans", sans-serif;
+            font-weight: bold;
+            padding-bottom: 1.25rem;
+            }
+            .imgFicha img {
+            height: 100%;
+            width: 50%;
+            object-fit: cover;
+            } 
+            ';
+    $html .= "</style>";
+    $html .= $this->getViewPdf();
+
+    $dompdf->loadhtml($html);
+    $dompdf->setPaper('letter');
+    $tituloVar = "Ficha";
+    $tituloVar = str_replace('/', '-', $tituloVar);
+    $dompdf->render();
+    $dompdf->stream($tituloVar, array("Attachment" => false));
+  }
+
+
+
+  function obra()
+  {
+    $obra = $this->pdf();
+
+    return [
+      '#theme' => 'vpm-vista-pdf',
+      '#obra' => $obra
+    ];
+  }
 }
-  

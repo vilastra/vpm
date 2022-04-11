@@ -37,14 +37,26 @@
 						{{ publicacion.etiquetaPublicacion }}</div>
 				{% endif %}
 			</div>
-			<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-				<a target='_blank' href='{{ publicacion.rutaArchivo }}' class='btn button btnBuscar more-link'>Ve el ensayo completo</a>
-			</div>
-			<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
-				<a download href='{{ publicacion.rutaArchivo }}' class='btn button btnBuscar more-link'>
-					<i class="fa fa-download" aria-hidden="true"></i>
-					{{ publicacion.title }}
-					({{ publicacion.filesize }})</a>
+
+			<div class='mt-5 row'>
+				{# <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+					<a target='_blank' href='{{ publicacion.rutaArchivo }}' class='btn button btnBuscar more-link'>Ve el ensayo completo</a>
+				</div>
+				<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+					<a download href='{{ publicacion.rutaArchivo }}' class='btn button btnBuscar more-link'>
+						<i class="fa fa-download" aria-hidden="true"></i>
+						{{ publicacion.title }}
+						({{ publicacion.filesize }})</a>
+				</div> #}
+                <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+					<a target='_blank' href='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/1955%20-%20Exposici%C3%B3n%20Monvoisin%20U.%20de%20Chile.pdf' class='btn button btnBuscar more-link'>Ve el ensayo completo</a>
+				</div>
+				<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12'>
+					<a href='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/1955%20-%20Exposici%C3%B3n%20Monvoisin%20U.%20de%20Chile.pdf' download class='btn button btnBuscar more-link'>
+						<i class="fa fa-download" aria-hidden="true"></i>
+						{{ publicacion.title }}
+						({{ publicacion.filesize }})</a>
+				</div>
 			</div>
 		</div>
 
