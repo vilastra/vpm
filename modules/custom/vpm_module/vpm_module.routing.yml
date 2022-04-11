@@ -53,3 +53,10 @@ vpm_module.publicacion:
     _controller: '\Drupal\vpm_module\Controller\PublicacionesController::publicacion'
   requirements:
     _permission: 'access content'
+
+vpm_module.pdf:
+  path: '/pdf'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\PdfController::obra'
+  requirements:
+    _permission: 'access content'

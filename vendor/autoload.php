@@ -4,4 +4,12 @@
 
 require_once __DIR__ . '/composer/autoload_real.php';
 
+require_once __DIR__ . '/dompdf/dompdf/lib/html5lib/Parser.php';
+require_once __DIR__ . '/dompdf/dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
+require_once __DIR__ . '/dompdf/dompdf/lib/php-svg-lib/src/autoload.php';
+require_once __DIR__ . '/dompdf/dompdf/src/Autoloader.php';
+Dompdf\Autoloader::register();
+
+
 return ComposerAutoloaderInit1ca02a844b8d12612a2aa2a04074ccd1::getLoader();
+

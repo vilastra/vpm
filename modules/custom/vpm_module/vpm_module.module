@@ -73,7 +73,11 @@ function vpm_module_theme($existing, $type, $theme, $path)
                 'publicacion' => []
             ]
         ],
-
+        'vpm-vista-pdf' => [
+            'variables' => [
+                'obra' => []
+            ]
+        ],
     ];
 }
 
