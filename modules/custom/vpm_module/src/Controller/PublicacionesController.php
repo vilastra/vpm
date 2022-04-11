@@ -214,10 +214,10 @@ class PublicacionesController extends ControllerBase
         $publica = [];
 
 
-        while($row = $result->fetch_assoc()){
+        while($fila = $result->fetch_assoc()){
           $publica['name'] = $fila["name"];
           $publica['fecha'] = $fila["fecha"];
-          $publica['fecha'] = date( "d/m/Y", strtotime( $publica['fecha']));
+          $publica['fecha'] = date( "d/m/Y", strtotime($publica['fecha']));
           $publica['uri'] = $fila["uri"];
           $publica['title'] = $fila["title"];
 

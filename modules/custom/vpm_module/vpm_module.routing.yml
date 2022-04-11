@@ -47,7 +47,7 @@ vpm_module.publicaciones:
   requirements:
     _permission: 'access content' 
 
- vpm_module.publicaciones:
+ vpm_module.publica:
   path: '/publica'
   defaults:
     _controller: '\Drupal\vpm_module\Controller\PublicacionesController::publica'
