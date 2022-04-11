@@ -311,11 +311,12 @@ class PdfController extends ControllerBase
         padding-bottom: 0.563rem;
         }";
       $html .="</style>";
-      $html .= "	<div class='tituloFicha col-12'>Ficha razonada:</div>";
+      $html .= "<div class='tituloFicha col-12'>Ficha razonada:</div>";
 
       $dompdf->loadhtml($html);
       $dompdf->setPaper('letter');
       //$font = $dompdf->getFontMetrics()->getFont("Arial", "bold");
+      $tituloVar = "Ficha";
       $tituloVar = str_replace('/', '-', $tituloVar);
       $dompdf->render();
       $dompdf->stream($tituloVar, array("Attachment" => true));
@@ -324,12 +325,8 @@ class PdfController extends ControllerBase
   
   
     function obra()
-    {
-     
-    
-
-      $obra = $this->pdf();
-  
+    {   
+      $obra = $this->pdf(); 
     
       return [
         '#theme' => 'vpm-vista-pdf',
