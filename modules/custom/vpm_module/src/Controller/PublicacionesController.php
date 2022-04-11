@@ -99,16 +99,6 @@ class PublicacionesController extends ControllerBase
   
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $offset = ($pag - 1) * $limit;
-  
-      $sqlTotal = "SELECT COUNT(*) total         
-        FROM node
-        LEFT JOIN field_data_field_archivo archivo ON archivo.entity_id = node.nid        
-        LEFT JOIN field_data_field_autor_ensayo autorensayo ON autorensayo.entity_id = archivo.entity_id
-        LEFT JOIN field_data_field_tags_ensayos ensayo ON ensayo.entity_id = autorensayo.entity_id
-        LEFT JOIN file_managed managed ON managed.fid = archivo.field_archivo_fid
-        LEFT JOIN taxonomy_term_data taxensayo ON taxensayo.tid = ensayo.entity_id
-        WHERE managed.filename IS NOT null";
-
       $result = $this->Listar_Query($paginador);
       $total = $result->num_rows;
   
