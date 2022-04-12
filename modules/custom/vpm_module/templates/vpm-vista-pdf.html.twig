@@ -3,7 +3,6 @@
             font-size: 2.5rem;
             font-family: "Open Sans", sans-serif;
             font-weight: bold;
-            padding-bottom: 0.563rem;
             }
             .tituloFichaRelacionado {
               font-size: 1.313rem;
@@ -13,37 +12,27 @@
               color: #8A8A8A;
             }
             .divSepFicha {
-              padding-bottom: 2rem;
-              padding-top: 2rem;
               border-bottom: 1px solid #C0C0C0;
             }
             .tituloObraFicha {
-            font-size: 1.313rem;
+            font-size: 1rem;
             font-family: "Open Sans", sans-serif;
             font-style: italic;
-            padding-bottom: 1.25rem;
             }
             .descObraFicha {
-            font-size: 1.125rem;
+            font-size: 1rem;
             font-family: "Open Sans", sans-serif;
             color: #303030;
             }  
             .subTextoObraFicha {
-            font-size: 1.313rem;
+            font-size: 20px;
             font-family: "Open Sans", sans-serif;
             font-weight: bold;
-            padding-bottom: 1.25rem;
             }
-            .imgItem img {
-            
+            .imgItem img {            
             width: 300px;
-            object-fit: cover;
-            };
+            }
 
-			/*.colSepDosFicha {
-    		column-count: 3;
-			text-align: justify;
-			}*/
     </style>
 
 
@@ -62,17 +51,16 @@
 				<div class="row">
 					<table>
 						<tr>
-							<td align="center" rowspan="3">
+							<td rowspan="4" style="vertical-align: top;">
 								<div class='imgItem'>
-								{% if obra.infoObra["urlImagen"] != null %}
-								
+								{% if obra.infoObra["urlImagen"] != null %}								
 									<img  src='{{obra.infoObra["urlImagen"]}}'>
 								{% else %}
 									<img  src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/default_images/user-img.png'>
 								{% endif %}	
 								</div>
 							</td>
-							<td style="padding: 15px;">
+							<td style="vertical-align: top; padding:15px;">
 								<div class="divSepFicha">
 								<div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
 								{% if obra.infoObra["tecnica"] is not empty %}
@@ -113,16 +101,20 @@
 										{% endfor %}
 									</div>
 								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<td style="padding: 15px;">		
 								{% if obra.exhibicionesObra|length > 0 %}
-									<div class="pt-4">
-										<div class="subTextoObraFicha">Exhibiciones</div>
-										{% for obj in obra.exhibicionesObra %}
-											<div class="descObraFicha">{{ obj.tituloExhibicion }},
-												{{ obj.institucionExhibicion }},
-												{{ obj.ciudadExhibicion }},
-												{{ obj.anoExhibicion }}</div>
-										{% endfor %}
-									</div>
+								<div class="divSepFicha">
+									<div class="subTextoObraFicha">Exhibiciones</div>
+									{% for obj in obra.exhibicionesObra %}
+										<div class="descObraFicha">{{ obj.tituloExhibicion }},
+											{{ obj.institucionExhibicion }},
+											{{ obj.ciudadExhibicion }},
+											{{ obj.anoExhibicion }}</div>
+									{% endfor %}
+								</div>
 								{% endif %}
 							</td>
 						</tr>
