@@ -91,8 +91,17 @@ class PdfController extends ControllerBase
       //$obra['urlImagen'] = $row["urlImagen"];
       $obra['linkImgOriginal'] = $row["linkImgOriginal"];
 
-      $obra['urlImagen'] = $row["urlImagen"];
-      $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
+     
+      /* IMAGEN */
+      if($row["urlImagen"] !=null){
+        $obra['urlImagen'] = $row["urlImagen"];
+        $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
+      }else{
+        $obra['urlImagen'] = null;
+      }
+
+
+
 
       $obra['textoRazonado'] = $row["Texto_Razonado"];
       $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
@@ -291,8 +300,13 @@ class PdfController extends ControllerBase
         $infoObra['urlArtista'] = base_path() . "artista?id=" . $fila["autorId"];
       }
       /* IMAGEN */
-      $infoObra['rutaFoto'] = $fila["filename"];
-      $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+      if($fila["filename"] !=null){
+        $infoObra['rutaFoto'] = $fila["filename"];
+        $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+      }else{
+        $infoObra['rutaFoto'] = 	"http://quinsac.patrimoniocultural.gob.cl/sites/default/files/Portada_recorte.jpg";
+      }
+    
       /* TEMATICA */
       $infoObra['idTematica'] = $fila["idTematica"];
       $infoObra['nombreTematica'] = $fila["Tematica"];
@@ -305,8 +319,12 @@ class PdfController extends ControllerBase
 
   public function getViewPdf()
   {
-    $obra = [];
-    $idObra = 25;
+    $obra['idObra'] = null;
+    if (isset($_GET["idObra"])) {
+      $idObra = $_GET["idObra"];
+    }
+
+   
     $obra["infoObra"] = $this->getInfoObra($idObra);
     $obra["propiedadesObra"] = $this->getPropiedadObra($idObra, false);
     $obra["latYLong"] = $this->getPropiedadObra($idObra, true);
@@ -323,59 +341,15 @@ class PdfController extends ControllerBase
 
     return $rendered;
   }
+
   function pdf()
   {
-    //$html = ob_get_clean();
-
-
     $dompdf = new Dompdf();
     $html = '';
     $options = $dompdf->getOptions();
     $options->set(array('isRemoteEnabled' => true));
     $dompdf->setOptions($options);
-    $html .= "<style type='text/css'>";
-    $html .= '.tituloFicha {
-            font-size: 2.5rem;
-            font-family: "Open Sans", sans-serif;
-            font-weight: bold;
-            padding-bottom: 0.563rem;
-            }
-            .tituloFichaRelacionado {
-              font-size: 1.313rem;
-              font-family: "Open Sans", sans-serif;
-              font-weight: bold;
-              padding-bottom: 0.563rem;
-              color: #8A8A8A;
-            }
-            .divSepFicha {
-              padding-bottom: 2rem;
-              padding-top: 2rem;
-              border-bottom: 1px solid #C0C0C0;
-            }
-            .tituloObraFicha {
-            font-size: 1.313rem;
-            font-family: "Open Sans", sans-serif;
-            font-style: italic;
-            padding-bottom: 1.25rem;
-            }
-            .descObraFicha {
-            font-size: 1.125rem;
-            font-family: "Open Sans", sans-serif;
-            color: #303030;
-            }  
-            .subTextoObraFicha {
-            font-size: 1.313rem;
-            font-family: "Open Sans", sans-serif;
-            font-weight: bold;
-            padding-bottom: 1.25rem;
-            }
-            .imgFicha img {
-            height: 100%;
-            width: 50%;
-            object-fit: cover;
-            } 
-            ';
-    $html .= "</style>";
+   
     $html .= $this->getViewPdf();
 
     $dompdf->loadhtml($html);

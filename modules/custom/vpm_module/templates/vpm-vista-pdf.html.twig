@@ -35,17 +35,19 @@
             padding-bottom: 1.25rem;
             }
             .imgFicha img {
-            height: 100%;
-            width: 50%;
+            height: 25%;
+            width: 25%;
             object-fit: cover;
             };
 
-			
+			/*.colSepDosFicha {
+    		column-count: 3;
+			text-align: justify;
+			}*/
     </style>
 
 
 <div class='whiteArea'>
-
 	<div class="col-9 max-container px-0 m-auto ">
 		{% if obra.infoObra["titulo"] is not empty %}
 			<div class="tituloFicha col-12">Ficha razonada:
@@ -58,66 +60,79 @@
 			{% endif %}
 			<div class="divSepFicha">
 				<div class="row">
-					<div
-						class="col-lg-6 col-md-12 col-xs-12 col-sm-12 imgFicha">
-						<div class='imgItem'><img src='{{obra.infoObra["urlImagen"]}}'></div>
-						<input type='hidden' value='{{obra.infoObra["urlImagen"]}}' id='urlImg'>
-					</div>
-					<div class="col-lg-6 col-md-12 col-xs-12 col-sm-12">
-						<div class="divSepFicha">
-							<div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
-							{% if obra.infoObra["tecnica"] is not empty %}
-								<div class="descObraFicha">{{obra.infoObra["tecnica"]}}
-									sobre
-									{{obra.infoObra["soporte"]}},
-									{{obra.infoObra["alto"]}}
-									x
-									{{obra.infoObra["ancho"]}}</div>
-							{% endif %}
-							<div class="descObraFicha">{{obra.infoObra["autoria"]}}</div>
-							<input type='hidden' value='{{obra.infoObra["autoria"]}}' id='autorNombre'>
-							<input type='hidden' value='{{obra.infoObra["autorUrl"]}}' id='autorUrl'>
-						</div>
-						{% if obra.infoObra["tipoInscripcion"] is not empty %}
-							<div class="divSepFicha">
-								<div class="subTextoObraFicha">Inscripciones</div>
-								<div class="descObraFicha">{{obra.infoObra["tipoInscripcion"]}}
-									{{obra.infoObra["ubicacionInscripcion"]}}
-									{{obra.infoObra["transInscripcion"]}}</div>
-							</div>
-						{% endif %}
-						{% if obra.propiedadesObra|length > 0 %}
-							<div class="divSepFicha">
-								<div class="subTextoObraFicha">Procedencia</div>
-								{% for obj in obra.propiedadesObra %}
-									<div class="descObraFicha">{{ obj.nombrePropietarioObra }},
-										{{ obj.ciudadAquisicionObra }},
-										{{ obj.fechaAquisicionObra }}</div>
-								{% endfor %}
-							</div>
-						{% endif %}
-						{% if obra.exhibicionesObra|length > 0 %}
-							<div class="pt-4">
-								<div class="subTextoObraFicha">Exhibiciones</div>
-								{% for obj in obra.exhibicionesObra %}
-									<div class="descObraFicha">{{ obj.tituloExhibicion }},
-										{{ obj.institucionExhibicion }},
-										{{ obj.ciudadExhibicion }},
-										{{ obj.anoExhibicion }}</div>
-								{% endfor %}
-							</div>
-						{% endif %}
-					</div>
+					<table>
+						<tr>
+							<td align="center" rowspan="3">
+								<div class='imgItem'>
+									<img  src='{{obra.infoObra["urlImagen"]}}'>
+								</div>
+							</td>
+							<td style="padding: 15px;">
+								<div class="divSepFicha">
+								<div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
+								{% if obra.infoObra["tecnica"] is not empty %}
+									<div class="descObraFicha">{{obra.infoObra["tecnica"]}}
+										sobre
+										{{obra.infoObra["soporte"]}},
+										{{obra.infoObra["alto"]}}
+										x
+										{{obra.infoObra["ancho"]}}</div>
+								{% endif %}
+								<div class="descObraFicha">{{obra.infoObra["autoria"]}}</div>
+									<input type='hidden' value='{{obra.infoObra["autoria"]}}' id='autorNombre'>
+									<input type='hidden' value='{{obra.infoObra["autorUrl"]}}' id='autorUrl'>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="padding: 15px;">	
+								{% if obra.infoObra["tipoInscripcion"] is not empty %}
+								<div class="divSepFicha">
+									<div class="subTextoObraFicha">Inscripciones</div>
+									<div class="descObraFicha">{{obra.infoObra["tipoInscripcion"]}}
+										{{obra.infoObra["ubicacionInscripcion"]}}
+										{{obra.infoObra["transInscripcion"]}}</div>
+								</div>
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<td style="padding: 15px;">		
+								{% if obra.propiedadesObra|length > 0 %}
+									<div class="divSepFicha">
+										<div class="subTextoObraFicha">Procedencia</div>
+										{% for obj in obra.propiedadesObra %}
+											<div class="descObraFicha">{{ obj.nombrePropietarioObra }},
+												{{ obj.ciudadAquisicionObra }},
+												{{ obj.fechaAquisicionObra }}</div>
+										{% endfor %}
+									</div>
+								{% endif %}
+								{% if obra.exhibicionesObra|length > 0 %}
+									<div class="pt-4">
+										<div class="subTextoObraFicha">Exhibiciones</div>
+										{% for obj in obra.exhibicionesObra %}
+											<div class="descObraFicha">{{ obj.tituloExhibicion }},
+												{{ obj.institucionExhibicion }},
+												{{ obj.ciudadExhibicion }},
+												{{ obj.anoExhibicion }}</div>
+										{% endfor %}
+									</div>
+								{% endif %}
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			{% if obra.infoObra["textoRazonado"] is not empty %}
-				<div class="divSepFicha">
-					<div class="colSepDosFicha descObraFicha">
-						{{obra.infoObra["textoRazonado"]}}
-					</div>
-					<div class="firmaObraFicha">{{obra.infoObra["autorTexto"]}}</div>
+				
+				<div style="text-align:justify; column-count: 2;">
+					{{obra.infoObra["textoRazonado"]}}
 				</div>
+				<div style="text-align:right;">{{obra.infoObra["autorTexto"]}}</div>
+				
 			{% endif %}
+			
 			{% if obra.bibliografiaObra|length > 0 %}
 				<div class="divSepFicha">
 					<div class="subTextoObraFicha">Bibliografía</div>
@@ -134,5 +149,6 @@
 		{% endif %}
 
 	</div>			
+
 </div>
 
