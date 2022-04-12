@@ -12,12 +12,15 @@
               color: #8A8A8A;
             }
             .divSepFicha {
-              border-bottom: 1px solid #C0C0C0;
+				padding-bottom: 2rem;
+				padding-top: 2rem;
+				border-bottom: 1px solid #C0C0C0;
             }
             .tituloObraFicha {
-            font-size: 1rem;
-            font-family: "Open Sans", sans-serif;
-            font-style: italic;
+				font-size: 1.313rem;
+				font-family: "Open Sans", sans-serif;
+				font-style: italic;
+				padding-bottom: 1.25rem;
             }
             .descObraFicha {
             font-size: 1rem;
@@ -27,7 +30,8 @@
             .subTextoObraFicha {
             font-size: 20px;
             font-family: "Open Sans", sans-serif;
-            font-weight: bold;
+			font-weight: bold;
+			padding-bottom: 1.25rem;
             }
             .imgItem img {            
             width: 300px;
@@ -60,7 +64,7 @@
 								{% endif %}	
 								</div>
 							</td>
-							<td style="vertical-align: top; padding:15px;">
+							<td style="vertical-align:baseline; padding-left:15px; padding-top:0px;">
 								<div class="divSepFicha">
 								<div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
 								{% if obra.infoObra["tecnica"] is not empty %}
@@ -78,7 +82,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td style="padding: 15px;">	
+							<td style="padding-left:15px;">
 								{% if obra.infoObra["tipoInscripcion"] is not empty %}
 								<div class="divSepFicha">
 									<div class="subTextoObraFicha">Inscripciones</div>
@@ -90,7 +94,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td style="padding: 15px;">		
+							<td style="padding-left:15px;">	
 								{% if obra.propiedadesObra|length > 0 %}
 									<div class="divSepFicha">
 										<div class="subTextoObraFicha">Procedencia</div>
@@ -104,7 +108,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td style="padding: 15px;">		
+							<td style="padding-left:15px;">
 								{% if obra.exhibicionesObra|length > 0 %}
 								<div class="divSepFicha">
 									<div class="subTextoObraFicha">Exhibiciones</div>
