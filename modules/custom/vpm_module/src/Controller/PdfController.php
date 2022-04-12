@@ -97,7 +97,7 @@ class PdfController extends ControllerBase
         $obra['urlImagen'] = $row["urlImagen"];
         $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
       }else{
-        $obra['urlImagen'] = null;
+        $obra['urlImagen'] = '';
       }
 
 

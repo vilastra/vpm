@@ -34,9 +34,9 @@
             font-weight: bold;
             padding-bottom: 1.25rem;
             }
-            .imgFicha img {
-            height: 25%;
-            width: 25%;
+            .imgItem img {
+            
+            width: 300px;
             object-fit: cover;
             };
 
@@ -64,7 +64,12 @@
 						<tr>
 							<td align="center" rowspan="3">
 								<div class='imgItem'>
+								{% if obra.infoObra["urlImagen"] != null %}
+								
 									<img  src='{{obra.infoObra["urlImagen"]}}'>
+								{% else %}
+									<img  src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/default_images/user-img.png'>
+								{% endif %}	
 								</div>
 							</td>
 							<td style="padding: 15px;">
