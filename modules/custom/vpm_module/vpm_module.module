@@ -80,7 +80,7 @@ function vpm_module_theme($existing, $type, $theme, $path)
         ],
         'vpm-vista-cronografia' => [
             'variables' => [
-                'cronografia' => []
+                'cronografia' => null
             ]
         ],
     ];

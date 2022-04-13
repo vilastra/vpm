@@ -82,7 +82,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="padding-left:15px;">
+						<td style="padding-left:15px;padding-top:15px">
 							{% if obra.infoObra["tipoInscripcion"] is not empty %}
 							<div class="divSepFicha">
 								<div class="subTextoObraFicha">Inscripciones</div>
@@ -94,7 +94,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="padding-left:15px;">	
+						<td style="padding-left:15px;padding-top:15px">	
 							{% if obra.propiedadesObra|length > 0 %}
 								<div class="divSepFicha">
 									<div class="subTextoObraFicha">Procedencia</div>
@@ -108,7 +108,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td style="padding-left:15px;">
+						<td style="padding-left:15px;padding-top:15px">
 							{% if obra.exhibicionesObra|length > 0 %}
 							<div class="divSepFicha">
 								<div class="subTextoObraFicha">Exhibiciones</div>
@@ -126,8 +126,8 @@
 			</div>
 			
 			{% if obra.infoObra["textoRazonado"] is not empty %}				
-				<div style="text-align:justify; column-count: 2;">
-					{{obra.infoObra["textoRazonado"]}}
+				<div class="descObraFicha" style="padding-top:15px">
+					{{obra.infoObra["textoRazonado"] | nl2br }}
 				</div>
 				<div style="text-align:right;">{{obra.infoObra["autorTexto"]}}</div>				
 			{% endif %}

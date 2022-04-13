@@ -77,7 +77,7 @@
 			{% if obra.infoObra["textoRazonado"] is not empty %}
 				<div class="divSepFicha">
 					<div class="colSepDosFicha descObraFicha">
-						{{obra.infoObra["textoRazonado"]}}
+						{{obra.infoObra["textoRazonado"] | nl2br}}
 					</div>
 					<div class="firmaObraFicha">{{obra.infoObra["autorTexto"]}}</div>
 				</div>

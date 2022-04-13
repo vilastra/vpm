@@ -2350,4 +2350,15 @@ label {
     padding-bottom: 0.938rem;
 }
 
-.tl-timenav-slider-background {}
+.tl-headline {
+    font-family: "Open Sans", sans-serif;
+}
+
+.tl-timenav {
+    background-color: white!important;
+    border-top: none;
+}
+
+.tl-timemarker-line-left {
+    border-left: 1px solid #C0C0C0;
+}

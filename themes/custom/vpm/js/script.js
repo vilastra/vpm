@@ -63,13 +63,13 @@
                 // timeline = new TL.Timeline('timeline-embed', jsonFile);
                 var timeline;
                 var options = {
-                    hash_bookmark: false,
-                    initial_zoom: 3,
+                    initial_zoom: 2,
                     timenav_position: 'top',
                     timenav_height_min: 360,
                     language: 'es',
-                    font: 'opensans-gentiumbook',
-                    height: 700
+                    height: 700,
+                    duration: 500,
+
                 }
                 var timeline = new TL.Timeline('timeline-embed',
                     jsonFile,
