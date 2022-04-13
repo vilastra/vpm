@@ -60,3 +60,10 @@ vpm_module.pdf:
     _controller: '\Drupal\vpm_module\Controller\PdfController::obra'
   requirements:
     _permission: 'access content'
+
+vpm_module.cronografia:
+  path: '/cronografia'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\CronografiaController::cronografia'
+  requirements:
+    _permission: 'access content'

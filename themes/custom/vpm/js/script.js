@@ -57,10 +57,28 @@
                 jQuery("html, body").animate({ scrollTop: 0 }, 0);
             });
             $(document).ready(function($) {
-                var timeline;
-                timeline = new TL.Timeline('timeline-embed', 'https://docs.google.com/spreadsheets/d/1cWqQBZCkX9GpzFtxCWHoqFXCHg-ylTVUWlnrdYMzKUI/pubhtml');
-                var picture = $('#sample_picture');
 
+
+                // var timeline;
+                // timeline = new TL.Timeline('timeline-embed', jsonFile);
+                var timeline;
+                var options = {
+                    hash_bookmark: false,
+                    initial_zoom: 3,
+                    timenav_position: 'top',
+                    timenav_height_min: 360,
+                    language: 'es',
+                    font: 'opensans-gentiumbook',
+                    height: 700
+                }
+                var timeline = new TL.Timeline('timeline-embed',
+                    jsonFile,
+                    options);
+
+
+
+
+                var picture = $('#sample_picture');
                 // Make sure the image is completely loaded before calling the plugin
                 picture.one('load', function() {
                     // Initialize plugin (with custom event)
