@@ -27,7 +27,7 @@
             function shareUrls(name) {
                 var permalink = encodeURI(window.location.href)
 
-                var urlTwitter = 'https://twitter.com/intent/tweet?text=Conoce el contenido "' + name + '" en Portal Biblioredes ' + permalink
+                var urlTwitter = 'https://twitter.com/intent/tweet?text=Conoce "' + name + '" en Portal Monvoisin ' + permalink
                 jQuery('.share-twitter').attr('href', 'javascript:void(0)')
                 jQuery('.share-twitter').click(function() {
                     genericSocialShare(urlTwitter)

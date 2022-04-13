@@ -84,8 +84,8 @@ class CronografiaController extends ControllerBase
                   "thumbnail": ""
                 },
                 "text": {
-                  "headline": "Cronologia catálogo Monvoisin",
-                  "text": "Follow the presidential caucuses and primaries as members of the Republican Party race to become the GO"
+                  "headline": "Cronografía Catálogo Monvoisin",
+                  "text": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
                 }
               },
             "events": [';

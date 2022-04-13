@@ -2350,6 +2350,31 @@ label {
     padding-bottom: 0.938rem;
 }
 
+.tl-timemarker-active .tl-timemarker-content {
+    background-color: #2D717C;
+}
+
+.tl-timemarker-active .tl-timemarker-line-left {
+    border-left: 1px solid #2D717C;
+}
+
+.tl-timemarker-content-container,
+.tl-timemarker-content-container-small {
+    border: none!important;
+    border-radius: 0%!important;
+}
+
+.tl-timemarker-active .tl-timemarker-content-container,
+.tl-timemarker-active .tl-timemarker-content-container-small {
+    border: none!important;
+    border-radius: 0%!important;
+}
+
+.tl-timemarker-active .tl-icon-image,
+.tl-timemarker-active .tl-headline {
+    color: white!important;
+}
+
 .tl-headline {
     font-family: "Open Sans", sans-serif;
 }
