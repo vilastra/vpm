@@ -319,11 +319,12 @@ class PdfController extends ControllerBase
 
   public function getViewPdf()
   {
+    
     $obra['idObra'] = null;
     if (isset($_GET["idObra"])) {
       $idObra = $_GET["idObra"];
     }
-
+    //$idObra = 1;
    
     $obra["infoObra"] = $this->getInfoObra($idObra);
     $obra["propiedadesObra"] = $this->getPropiedadObra($idObra, false);

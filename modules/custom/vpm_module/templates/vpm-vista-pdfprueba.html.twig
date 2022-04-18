@@ -1,0 +1,146 @@
+<style type='text/css'>
+   			.tituloFicha {
+            font-size: 2.5rem;
+            font-family: "Open Sans", sans-serif;
+            font-weight: bold;
+            }
+            .tituloFichaRelacionado {
+              font-size: 1.313rem;
+              font-family: "Open Sans", sans-serif;
+              font-weight: bold;
+              padding-bottom: 0.563rem;
+              color: #8A8A8A;
+            }
+            .divSepFicha {
+				padding-bottom: 2rem;
+				/*padding-top: 2rem;*/
+				border-bottom: 1px solid #C0C0C0;
+            }
+            .tituloObraFicha {
+				font-size: 1.313rem;
+				font-family: "Open Sans", sans-serif;
+				font-style: italic;
+				padding-bottom: 1.25rem;
+            }
+            .descObraFicha {
+            font-size: 1rem;
+            font-family: "Open Sans", sans-serif;
+            color: #303030;
+            }  
+            .subTextoObraFicha {
+            font-size: 20px;
+            font-family: "Open Sans", sans-serif;
+			font-weight: bold;
+			/*padding-bottom: 1.25rem;*/
+            }
+            .imgItem img {            
+            width: 300px;
+            }
+
+    </style>
+
+
+<div class='whiteArea'>
+	<div class="col-9 max-container px-0 m-auto ">
+        <table >
+
+            <tr>
+              <td style="vertical-align:text-top; padding-left:15px; padding-top:0px;">                  
+                <div class="subTextoObraFicha">{{obra.infoObra["autoria"]}}</div>
+                    <input type='hidden' value='{{obra.infoObra["autoria"]}}' id='autorNombre'>
+                    <input type='hidden' value='{{obra.infoObra["autorUrl"]}}' id='autorUrl'>
+                </div>
+              </td>
+              <td rowspan="4" style="vertical-align: top;">							<div class='imgItem'>
+                    {% if obra.infoObra["urlImagen"] != null %}								
+                        <img  src='{{obra.infoObra["urlImagen"]}}'>
+                    {% else %}
+                        <img  src='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/default_images/user-img.png'>
+                    {% endif %}	
+                    </div>
+              </td>
+            </tr>
+            <tr>
+                <td style="vertical-align:text-top; padding-left:15px; padding-top:0px;">
+                    <div class="divSepFicha">
+                    <div class="tituloObraFicha">{{obra.infoObra["titulo"]}}</div>
+                    {% if obra.infoObra["tecnica"] is not empty %}
+                        <div class="descObraFicha">{{obra.infoObra["tecnica"]}}
+                            sobre
+                            {{obra.infoObra["soporte"]}},
+                            {{obra.infoObra["alto"]}}
+                            x
+                            {{obra.infoObra["ancho"]}}</div>
+                    {% endif %}
+                    <div class="descObraFicha">{{obra.infoObra["autoria"]}}</div>
+                        <input type='hidden' value='{{obra.infoObra["autoria"]}}' id='autorNombre'>
+                        <input type='hidden' value='{{obra.infoObra["autorUrl"]}}' id='autorUrl'>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left:15px;padding-top:15px">
+                    {% if obra.infoObra["tipoInscripcion"] is not empty %}
+                    <div class="divSepFicha">
+                        <div class="subTextoObraFicha">Inscripciones</div>
+                        <div class="descObraFicha">{{obra.infoObra["tipoInscripcion"]}}
+                            {{obra.infoObra["ubicacionInscripcion"]}}
+                            {{obra.infoObra["transInscripcion"]}}</div>
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-left:15px;padding-top:15px">	
+                    {% if obra.propiedadesObra|length > 0 %}
+                        <div class="divSepFicha">
+                            <div class="subTextoObraFicha">Procedencia</div>
+                            {% for obj in obra.propiedadesObra %}
+                                <div class="descObraFicha">{{ obj.nombrePropietarioObra }},
+                                    {{ obj.ciudadAquisicionObra }},
+                                    {{ obj.fechaAquisicionObra }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </td>
+            </tr>
+            </table>
+            <table>
+            <tr>
+                <td style="padding-left:15px;padding-top:15px">                   
+                    {% if obra.exhibicionesObra|length > 0 %}
+                    <div class="divSepFicha">
+                        <div class="subTextoObraFicha">Exhibiciones</div>
+                        {% for obj in obra.exhibicionesObra %}
+                            <div class="descObraFicha">{{ obj.tituloExhibicion }},
+                                {{ obj.institucionExhibicion }},
+                                {{ obj.ciudadExhibicion }},
+                                {{ obj.anoExhibicion }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        </div>			
+            {% if obra.infoObra["textoRazonado"] is not empty %}				
+                <div class="descObraFicha" style="padding-top:15px; text-align:justify;">
+                    {{obra.infoObra["textoRazonado"] | nl2br }}
+                </div>
+                <div style="text-align:right;">{{obra.infoObra["autorTexto"]}}</div>				
+            {% endif %}
+            {% if obra.bibliografiaObra|length > 0 %}
+            <div class="divSepFicha">
+                <div class="subTextoObraFicha">Bibliografía</div>
+                {% for obj in obra.bibliografiaObra %}
+                    <div class="descObraFicha">{{ obj.nombreAutorBiblio }},
+                        {{ obj.anioBiblio }},
+                        {{ obj.tituloBiblio }},
+                        {{ obj.revistaBiblio }},
+                        {{ obj.volumenBiblio }},
+                        {{ obj.paginacionBiblio }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

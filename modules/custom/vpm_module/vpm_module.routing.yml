@@ -61,6 +61,13 @@ vpm_module.pdf:
   requirements:
     _permission: 'access content'
 
+vpm_module.pdfprueba:
+  path: '/pdfprueba'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\PdfController::obra'
+  requirements:
+    _permission: 'access content'
+
 vpm_module.cronografia:
   path: '/cronografia'
   defaults:

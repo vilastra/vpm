@@ -78,6 +78,11 @@ function vpm_module_theme($existing, $type, $theme, $path)
                 'obra' => []
             ]
         ],
+        'vpm-vista-pdfprueba' => [
+            'variables' => [
+                'obra' => []
+            ]
+        ],
         'vpm-vista-cronografia' => [
             'variables' => [
                 'cronografia' => null
