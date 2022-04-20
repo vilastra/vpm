@@ -892,6 +892,10 @@ only screen and (max-device-width: 500px) {
     content: "\e64b";
 }
 
+.tl-icon-imageblank:after {
+    content: "\e600";
+}
+
 .tl-icon-evernote:after {
     content: "\e64c";
 }

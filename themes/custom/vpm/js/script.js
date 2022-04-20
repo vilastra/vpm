@@ -59,22 +59,6 @@
             $(document).ready(function($) {
 
 
-                // var timeline;
-                // timeline = new TL.Timeline('timeline-embed', jsonFile);
-                var timeline;
-                var options = {
-                    initial_zoom: 2,
-                    timenav_position: 'top',
-                    timenav_height_min: 360,
-                    language: 'es',
-                    height: 700,
-                    duration: 500,
-
-                }
-                var timeline = new TL.Timeline('timeline-embed',
-                    jsonFile,
-                    options);
-
 
 
 
@@ -143,6 +127,23 @@
 
 
 
+                // var timeline;
+                // timeline = new TL.Timeline('timeline-embed', jsonFile);
+                if (typeof jsonFile !== 'undefined') {
+                    var timeline;
+                    var options = {
+                        initial_zoom: 2,
+                        timenav_position: 'top',
+                        timenav_height_min: 460,
+                        language: 'es',
+                        height: 800,
+                        duration: 500,
+
+                    }
+                    var timeline = new TL.Timeline('timeline-embed',
+                        jsonFile,
+                        options);
+                }
 
 
             });

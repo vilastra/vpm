@@ -717,12 +717,13 @@ h5.linea span {
 
 .btnBuscar {
     background-color: #000000;
-    color: #FFFFFF;
+    color: #FFFFFF!important;
     font-size: 1.125rem;
     width: 100%;
     cursor: pointer !important;
     padding-top: 0.813rem;
     padding-bottom: 0.813rem;
+    font-family: "Open Sans", sans-serif!important;
 }
 
 .btnBuscarFiltro {
@@ -741,8 +742,9 @@ h5.linea span {
 
 .btnBuscar:hover {
     background-color: #2D717C;
-    color: #FFFFFF;
+    color: #FFFFFF!important;
     cursor: pointer !important;
+    text-decoration: none!important;
 }
 
 .pSuperior {
@@ -2350,6 +2352,10 @@ label {
     padding-bottom: 0.938rem;
 }
 
+
+/* 
+TIMELINE */
+
 .tl-timemarker-active .tl-timemarker-content {
     background-color: #2D717C;
 }
@@ -2375,6 +2381,24 @@ label {
     color: white!important;
 }
 
+.tl-timeline p {
+    font-family: "Open Sans", sans-serif!important;
+}
+
+.tl-text .tl-headline {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding-bottom: 0.563rem;
+}
+
+.tl-timemarker-active img {
+    filter: brightness(0) invert(1);
+}
+
+.tl-attribution {
+    display: none!important;
+}
+
 .tl-headline {
     font-family: "Open Sans", sans-serif;
 }
@@ -2386,4 +2410,29 @@ label {
 
 .tl-timemarker-line-left {
     border-left: 1px solid #C0C0C0;
+}
+
+.tl-storyslider {
+    padding-top: 1.75rem;
+}
+
+.tl-media-content img {
+    width: 100%!important;
+    object-fit: cover;
+    height: 516px;
+}
+
+.tl-text,
+.tl-slide-content,
+.tl-slide .tl-slide-content-container {
+    vertical-align: top!important;
+}
+
+.tl-slide-content {
+    padding: 0px!important;
+}
+
+.tl-timemarker-media-container img,
+.tl-timemarker-media-container svg {
+    vertical-align: top;
 }

@@ -10,12 +10,12 @@
 				<input type hidden name="idCat" value="{{ idCat }}">
 				<input type hidden name="Sec" value="{{ Sec }}">
 				<div class="row">
-					<div class="col-lg-9">													
+					<div class="col-lg-9">
 						{% if busquedaIndex == null %}
-							<input class='inputText' type='text' name='busquedaIndex' placeholder='Ingresa palabra o término…'>	
-						{% else %}							
-							<input class='inputText' type='text' name='busquedaIndex' value="{{ busquedaIndex }}">	
-						{% endif %}	
+							<input class='inputText' type='text' name='busquedaIndex' placeholder='Ingresa palabra o término…'>
+						{% else %}
+							<input class='inputText' type='text' name='busquedaIndex' value="{{ busquedaIndex }}">
+						{% endif %}
 					</div>
 
 					<div class="col-lg-3">
@@ -97,54 +97,54 @@
 						<input type='submit' class='btn button btnBuscarFiltro more-link' value="Filtra">
 					</div>
 				</div>
-			
 
-			<div class="col-lg-12">
-				<h5 class="linea">
-					<span>Resultados</span>
-				</h5>
-			</div>
-			<div class="col-lg-12 InfoTitulo1">
-				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-			</div>
 
-			<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mt-3 mb-3">
-				<div>
-					<select class="inputSelect" name="ordena" id="ordena" value="{{ ordenarPor }}">											
-						{% if ordenarPor == 0 %}
-							<option value="0">Ordenar por:</option>
-							<option value="1">Autor</option>
-							<option value="2">Fecha</option>
-							<option value="3">Temática</option>
-							<option value="4">Técnica</option>
-						{% elseif ordenarPor == 1 %}	
-							<option value="0">Ordenar por:</option>
-							<option selected value="1">Autor</option>
-							<option value="2">Fecha</option>
-							<option value="3">Temática</option>
-							<option value="4">Técnica</option>
-						{% elseif ordenarPor == 2 %}	
-							<option value="0">Ordenar por:</option>
-							<option value="1">Autor</option>
-							<option selected value="2">Fecha</option>
-							<option value="3">Temática</option>
-							<option value="4">Técnica</option>
-						{% elseif ordenarPor == 3 %}	
-							<option value="0">Ordenar por:</option>
-							<option value="1">Autor</option>
-							<option value="2">Fecha</option>
-							<option selected value="3">Temática</option>
-							<option value="4">Técnica</option>	
-						{% elseif ordenarPor == 4 %}	
-							<option value="0">Ordenar por:</option>
-							<option value="1">Autor</option>
-							<option value="2">Fecha</option>
-							<option value="3">Temática</option>
-							<option selected value="4">Técnica</option>	 	
-						{% endif %}							
-					</select>					
+				<div class="col-lg-12">
+					<h5 class="linea">
+						<span>Resultados</span>
+					</h5>
 				</div>
-			</div>
+				<div class="col-lg-12 InfoTitulo1">
+					Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+				</div>
+
+				<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 mt-3 mb-3">
+					<div>
+						<select class="inputSelect" name="ordena" id="ordena" value="{{ ordenarPor }}">
+							{% if ordenarPor == 0 %}
+								<option value="0">Ordenar por:</option>
+								<option value="1">Autor</option>
+								<option value="2">Fecha</option>
+								<option value="3">Temática</option>
+								<option value="4">Técnica</option>
+							{% elseif ordenarPor == 1 %}
+								<option value="0">Ordenar por:</option>
+								<option selected value="1">Autor</option>
+								<option value="2">Fecha</option>
+								<option value="3">Temática</option>
+								<option value="4">Técnica</option>
+							{% elseif ordenarPor == 2 %}
+								<option value="0">Ordenar por:</option>
+								<option value="1">Autor</option>
+								<option selected value="2">Fecha</option>
+								<option value="3">Temática</option>
+								<option value="4">Técnica</option>
+							{% elseif ordenarPor == 3 %}
+								<option value="0">Ordenar por:</option>
+								<option value="1">Autor</option>
+								<option value="2">Fecha</option>
+								<option selected value="3">Temática</option>
+								<option value="4">Técnica</option>
+							{% elseif ordenarPor == 4 %}
+								<option value="0">Ordenar por:</option>
+								<option value="1">Autor</option>
+								<option value="2">Fecha</option>
+								<option value="3">Temática</option>
+								<option selected value="4">Técnica</option>
+							{% endif %}
+						</select>
+					</div>
+				</div>
 			</form>
 
 			<div class="row">
@@ -166,10 +166,10 @@
 								{{ obj.nombreArtista }}</div>
 						</a>
 					</div>
-					{% else %}
-						<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
-							<span>No se encontraron resultados</span>
-						</div>
+				{% else %}
+					<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+						<span>No se encontraron resultados</span>
+					</div>
 				{% endfor %}
 			</div>
 		</div>
@@ -182,4 +182,25 @@
 		</div>
 	</div>
 
+</div>
+
+
+<div class='greyArea'>
+	<div class="col-9 max-container px-0 m-auto ">
+		<div class="row">
+			<div class='col-12'>
+				<h1>Contenido relacionado</h2>
+			</div>
+			<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+				<a target="_blank" href='https://www.youtube.com/playlist?list=PLMdUwRpH3syk2fkZW448cfWwiiNioqq_0'>
+					<div class='imgItem'><img src='http://localhost/vpm/sites/default/files/2022-04/hqdefault.jpg'></div>
+					<div class='nombreArtista'>Ciclo Monvoisin en América</div>
+					<div class='linkItem'>Ve más
+						<i class="fa fa-chevron-right" aria-hidden="true"></i>
+					</div>
+				</a>
+			</div>
+
+		</div>
+	</div>
 </div>
