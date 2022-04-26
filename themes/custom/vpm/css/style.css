@@ -2525,7 +2525,7 @@ TIMELINE */
     left: 0;
     right: 0;
     background-color: #000000;
-    font-size: 16px!important;
+    font-size: 20px!important;
 }
 
 .custom-nav button {
@@ -2535,7 +2535,7 @@ TIMELINE */
 }
 
 .custom-nav button:hover {
-    background-color: #0081C3!important;
+    background-color: #2D717C!important;
 }
 
 .owl-prev {
@@ -2553,12 +2553,12 @@ TIMELINE */
 }
 
 .owl-prev i {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: #FFFFFF;
 }
 
 .owl-next i {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: #FFFFFF;
 }
 

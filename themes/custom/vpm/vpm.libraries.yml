@@ -14,7 +14,6 @@ global-styling:
 
 global-scripts:
   js:
-    js/Chart.js: {}
     js/owl.carousel.js: {}
     js/timeline.js: {}    
     js/jqueryui.js: {}
@@ -25,6 +24,7 @@ global-scripts:
     js/script.js: {}
     js/bs/bootstrap.bundle.min.js: {}
     js/bs/bootstrap.js: {}
+    js/Chart.js: {}
     
     
     
