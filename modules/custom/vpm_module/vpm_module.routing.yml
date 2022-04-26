@@ -81,3 +81,10 @@ vpm_module.cronografia:
     _controller: '\Drupal\vpm_module\Controller\CronografiaController::cronografia'
   requirements:
     _permission: 'access content'
+
+vpm_module.grafico:
+  path: '/grafico'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\GraficoController::grafico'
+  requirements:
+    _permission: 'access content'
