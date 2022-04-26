@@ -14,7 +14,8 @@ global-styling:
 
 global-scripts:
   js:
-    js/timeline.js: {}
+    js/owl.carousel.js: {}
+    js/timeline.js: {}    
     js/jqueryui.js: {}
     js/jquery.guillotine.js: {}
     js/jquery.panzoom.js: {}

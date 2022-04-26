@@ -19,6 +19,13 @@ vpm_module.catalogo:
   requirements:
     _permission: 'access content' 
 
+vpm_module.sobreinvestigacion:
+  path: '/sobreinvestigacion'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\CatalogosController::sobreinvestigacion'
+  requirements:
+    _permission: 'access content' 
+
 vpm_module.artistas:
   path: '/artistas'
   defaults:

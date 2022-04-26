@@ -4,7 +4,73 @@
     Drupal.behaviors.vpm = {
         attach: function(context, settings) {
 
+            jQuery('#carouselGaleriaMini2').owlCarousel({
+                margin: 10,
+                dots: false,
+                loop: false,
+                autoWidth: false,
+                nav: true,
+                navText: [
+                    '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    800: {
+                        items: 3,
+                        nav: false
+                    }
+                },
+                navContainer: '#main-contentGaleriaMini2 #custom-navMini2'
+            })
 
+            jQuery('#carouselGaleriaMini').owlCarousel({
+                margin: 10,
+                dots: false,
+                loop: false,
+                autoWidth: false,
+                nav: true,
+                navText: [
+                    '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    800: {
+                        items: 3,
+                        nav: false
+                    }
+                },
+                navContainer: '#main-contentGaleriaMini #custom-navMini'
+            })
+            jQuery('#carouselGaleriaMini1').owlCarousel({
+                margin: 10,
+                dots: false,
+                loop: false,
+                autoWidth: false,
+                nav: true,
+                navText: [
+                    '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    800: {
+                        items: 3,
+                        nav: false
+                    }
+                },
+                navContainer: '#main-contentGaleriaMini1 #custom-navMini1'
+            })
 
             function genericSocialShare(url) {
                 window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
@@ -57,11 +123,6 @@
                 jQuery("html, body").animate({ scrollTop: 0 }, 0);
             });
             $(document).ready(function($) {
-
-
-
-
-
                 var picture = $('#sample_picture');
                 // Make sure the image is completely loaded before calling the plugin
                 picture.one('load', function() {
@@ -90,8 +151,6 @@
 
                 // Make sure the 'load' event is triggered at least once (for cached images)
                 if (picture.prop('complete')) picture.trigger('load')
-
-
 
                 // var imgGrande = $("#urlImg").val();
                 // console.log(imgGrande)
@@ -132,11 +191,11 @@
                 if (typeof jsonFile !== 'undefined') {
                     var timeline;
                     var options = {
-                        initial_zoom: 2,
+                        initial_zoom: 5,
+                        hash_bookmark: true,
                         timenav_position: 'top',
                         timenav_height_min: 460,
                         language: 'es',
-                        height: 800,
                         duration: 500,
 
                     }
@@ -144,6 +203,12 @@
                         jsonFile,
                         options);
                 }
+
+                $('main', context).once('.tl-timenav').each(function() {
+                    $(window).one('load', function() {
+                        $('<div class="cronoLeyend pb-4 pt-4"><span class="spanIcon"><i class="fa fa-picture-o" aria-hidden="true"></i></span><span class="textIcon">Obras del catálogo</span><span class="spanIcon"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span><span class="textIcon">Exposiciones</span>                    <span class="spanIcon"><i class="fa fa-leaf" aria-hidden="true"></i></span><span class="textIcon">Hitos históricos</span>                    <span class="spanIcon"><i class="fa fa-star-o" aria-hidden="true"></i></span><span class="textIcon">Destacados</span></div>').insertAfter(".tl-timenav");
+                    });
+                });
 
 
             });

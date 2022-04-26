@@ -36,7 +36,7 @@ class VpmCatalogoMenu extends BlockBase
     $menuLink['Obras']=$host.'/obras?idCat='.$idCatalogo."&Sec=Obras";
     $menuLink['Publicaciones']=$host.'/publicaciones?idCat='.$idCatalogo."&Sec=Publ";
     $menuLink['Cronografia']=$host.'/cronografia?idCat='.$idCatalogo."&Sec=Cron";
-    $menuLink['SobreInvestigacion']=$host.'/sobre-investigacion?idCat='.$idCatalogo."&Sec=Sobr";
+    $menuLink['SobreInvestigacion']=$host.'/sobreinvestigacion?idCat='.$idCatalogo."&Sec=Sobr";
     return $menuLink;
   }
   /**

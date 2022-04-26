@@ -3,6 +3,8 @@
 		<div class='col-12'>
 			<h1>Cronografía</h2>
 			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit</p>
+			
+		
 		</div>
 		<div id='timeline-embed' style="width: 100%; height:1000px"></div>
 	</div>
@@ -12,15 +14,6 @@
 <script>
 
 	var jsonFile = {{ cronografia|raw }};
-// create new element
-const elem = document.createElement('p');
 
-// add text
-elem.innerText = 'Personal Details';
 
-// grab target element reference
-const target = document.querySelector('.tl-slider-container-mask');
-
-// insert the element before target element
-target.parentNode.insertBefore(elem, target);
 </script>

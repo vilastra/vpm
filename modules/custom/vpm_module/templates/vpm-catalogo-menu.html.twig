@@ -1,70 +1,66 @@
 {% if links.idCatalogo != "null" %}
 	<div class='whiteArea pb-0'>
-		<div class="col-9 max-container px-0 m-auto ">
-			<div class="row">
-			<div cla
-				{% if links.ActualPage == "null" %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
-						<a href="{{ links.Portada }}">Portada</a>
-					</div>
-				{% else %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
-						<a href="{{ links.Portada }}">Portada</a>
-					</div>
-				{% endif %}
+		<div class="col-9 max-container px-0 m-auto row">
+			{% if links.ActualPage == "null" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
+					<a href="{{ links.Portada }}">Portada</a>
+				</div>
+			{% else %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
+					<a href="{{ links.Portada }}">Portada</a>
+				</div>
+			{% endif %}
 
-				{% if links.ActualPage == "Art" %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
-						<a href="{{ links.Artistas }}">Artistas</a>
-					</div>
-				{% else %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
-						<a href="{{ links.Artistas }}">Artistas</a>
-					</div>
-				{% endif %}
+			{% if links.ActualPage == "Art" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
+					<a href="{{ links.Artistas }}">Artistas</a>
+				</div>
+			{% else %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
+					<a href="{{ links.Artistas }}">Artistas</a>
+				</div>
+			{% endif %}
 
-				{% if links.ActualPage == "Obras" %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
-						<a href="{{ links.Obras }}">Obras</a>
-					</div>
-				{% else %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
-						<a href="{{ links.Obras }}">Obras</a>
-					</div>
-				{% endif %}
+			{% if links.ActualPage == "Obras" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
+					<a href="{{ links.Obras }}">Obras</a>
+				</div>
+			{% else %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
+					<a href="{{ links.Obras }}">Obras</a>
+				</div>
+			{% endif %}
 
-				{% if links.ActualPage == "Publ" %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
-						<a href="{{ links.Publicaciones }}">Publicaciones</a>
-					</div>
-				{% else %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
-						<a href="{{ links.Publicaciones }}">Publicaciones</a>
-					</div>
-				{% endif %}
+			{% if links.ActualPage == "Publ" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
+					<a href="{{ links.Publicaciones }}">Publicaciones</a>
+				</div>
+			{% else %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
+					<a href="{{ links.Publicaciones }}">Publicaciones</a>
+				</div>
+			{% endif %}
 
-				{% if links.ActualPage == "Cron" %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
-						<a href="{{ links.Cronografia }}">Cronografía</a>
-					</div>
-				{% else %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
-						<a href="{{ links.Cronografia }}">Cronografía</a>
-					</div>
-				{% endif %}
+			{% if links.ActualPage == "Cron" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
+					<a href="{{ links.Cronografia }}">Cronografía</a>
+				</div>
+			{% else %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
+					<a href="{{ links.Cronografia }}">Cronografía</a>
+				</div>
+			{% endif %}
 
-				{% if links.ActualPage == "Sobr" %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
-						<a href="{{ links.SobreInvestigacion }}">Sobre la investigación</a>
-					</div>
-				{% else %}
-					<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
-						<a href="{{ links.SobreInvestigacion }}">Sobre la investigación</a>
-					</div>
-				{% endif %}
+			{% if links.ActualPage == "Sobr" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 activeButton">
+					<a href="{{ links.SobreInvestigacion }}">Sobre la investigación</a>
+				</div>
+			{% else %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 linkMenuCatalogo">
+					<a href="{{ links.SobreInvestigacion }}">Sobre la investigación</a>
+				</div>
+			{% endif %}
 
 
-			</div>
 		</div>
-	</div>
-{% endif %}
+	{% endif %}

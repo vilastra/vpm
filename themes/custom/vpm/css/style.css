@@ -88,7 +88,7 @@ b {
 
 .h3,
 h3 {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: "Open Sans", sans-serif;
     /** Open Sans bold **/
     font-weight: bold;
@@ -1828,7 +1828,7 @@ a {
     font-weight: bold;
 }
 
-.cardItem .descItem {
+.descItem {
     font-weight: 100;
     padding-top: 0.938rem;
     padding-bottom: 0.625rem;
@@ -2416,10 +2416,19 @@ TIMELINE */
     padding-top: 1.75rem;
 }
 
+.tl-media-content {
+    padding-left: 7rem;
+}
+
 .tl-media-content img {
     width: 100%!important;
     object-fit: cover;
-    height: 516px;
+    height: 416px;
+    max-height: 416px;
+}
+
+.tl-slide {
+    text-align: right!important;
 }
 
 .tl-text,
@@ -2435,4 +2444,132 @@ TIMELINE */
 .tl-timemarker-media-container img,
 .tl-timemarker-media-container svg {
     vertical-align: top;
+}
+
+.cronoLeyend {
+    font-size: 1.125rem;
+    color: #707070;
+    font-family: "Open Sans", sans-serif;
+}
+
+.cronoLeyend .textIcon {
+    padding-right: 3.563rem;
+    padding-left: 0.625rem;
+}
+
+.cronoLeyend .spanIcon {
+    padding: 7px 9px 7px 9px;
+    border: solid 1px #8A8A8A;
+}
+
+
+/* SOBRE INVESTIGACION */
+
+.rolPersona {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125rem;
+    color: #8A8A8A;
+    font-weight: bold;
+}
+
+.nombreInstitucion {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125rem;
+    color: #8A8A8A;
+    padding: 0.625rem 0px 0.625rem 0px;
+}
+
+.correoPersona a {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.125rem;
+    color: #000080;
+}
+
+.correoPersona svg {
+    margin-left: 0.75rem;
+    padding-top: 3px;
+    color: #0F69B4;
+}
+
+#carouselGaleria .item img {
+    object-fit: cover;
+    max-width: 1048px;
+    max-height: 639px;
+    display: initial!important;
+    margin-bottom: 1.313rem;
+}
+
+#carouselGaleriaMini2,
+#carouselGaleriaMini,
+#carouselGaleriaMini1 {
+    margin-top: 3.25rem;
+}
+
+#carouselGaleriaMini2 img,
+#carouselGaleriaMini img,
+#carouselGaleriaMini1 img {
+    height: 121px;
+    max-height: 121px;
+    width: 236px;
+    max-width: 236px;
+    object-fit: contain;
+}
+
+.main-contentSlider {
+    position: relative;
+}
+
+.custom-nav {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    background-color: #000000;
+    font-size: 16px!important;
+}
+
+.custom-nav button {
+    background-color: #000000!important;
+    color: #FFFFFF;
+    border-radius: 0!important;
+}
+
+.custom-nav button:hover {
+    background-color: #0081C3!important;
+}
+
+.owl-prev {
+    position: absolute;
+    color: inherit;
+    border: none;
+    z-index: 100;
+}
+
+.owl-next {
+    position: absolute;
+    color: inherit;
+    border: none;
+    z-index: 100;
+}
+
+.owl-prev i {
+    font-size: 2.5rem;
+    color: #FFFFFF;
+}
+
+.owl-next i {
+    font-size: 2.5rem;
+    color: #FFFFFF;
+}
+
+.owl-prev {
+    left: -40px;
+}
+
+.owl-next {
+    right: -40px;
+}
+
+.owl-carousel .owl-item img {
+    width: inherit!important;
 }
