@@ -29,9 +29,9 @@
 
 <script>
   var Titulo = "Estadísticas generadas";
-  var xValues = [{{ grafico['strinTecnica']|raw }}];
-  var yValues = [{{ grafico['strinIdTecnica']|raw }}];
-  var barColors = [{{ grafico['strinColor']|raw }}];
+  var xValues = [{{ grafico['xValues']|raw }}];
+  var yValues = [{{ grafico['yValues']|raw }}];
+  var barColors = [{{ grafico['stringColor']|raw }}];
 
   var myData = {
                     labels: xValues,
