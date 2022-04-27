@@ -2055,11 +2055,10 @@ a {
 /* PREGUNTAS FRECUENTES */
 
 .accordion {
-    background-color: white;
+    background-color: #F0F0F0;
     color: #444;
     cursor: pointer;
-    padding: 18px;
-    padding-left: 0px;
+    padding: 2.063rem 1.25rem 2.063rem 1.25rem;
     width: 100%;
     border: none;
     text-align: left;
@@ -2087,21 +2086,21 @@ a {
 }
 
 .accordion svg {
-    right: 0;
-    top: 25px !important;
+    right: 15px;
+    top: 40px !important;
     position: absolute;
     color: #444;
     font-size: 1.8rem;
 }
 
-.active,
+
+/* .active,
 .accordion:hover {
     background-color: white;
-}
+} */
 
 .panel {
-    padding: 0 18px;
-    padding-left: 0px;
+    padding: 0 18px 3.438rem 1.25rem;
     display: none;
     background-color: white;
     overflow: hidden;

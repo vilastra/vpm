@@ -83,8 +83,22 @@ vpm_module.cronografia:
     _permission: 'access content'
 
 vpm_module.grafico:
-  path: '/grafico'
+  path: '/quinsac-en-cifras'
   defaults:
     _controller: '\Drupal\vpm_module\Controller\GraficoController::grafico'
+  requirements:
+    _permission: 'access content'
+
+vpm_module.equipoinvestigacion:
+  path: '/equipoinvestigacion'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\CatalogosController::equipoinvestigacion'
+  requirements:
+    _permission: 'access content'
+
+vpm_module.preguntasfrecuentes:
+  path: '/preguntasfrecuentes'
+  defaults:
+    _controller: '\Drupal\vpm_module\Controller\CatalogosController::preguntasfrecuentes'
   requirements:
     _permission: 'access content'

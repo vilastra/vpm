@@ -75,6 +75,22 @@ class CatalogosController extends ControllerBase
             '#sobreinvestigacion' => $sobreinvestigacion,
         ];
     }
+    public function equipoinvestigacion()
+    {
+        $equipoinvestigacion[0]["idCatalogo"] = 1;
+        return [
+            '#theme' => 'vpm-vista-equipoinvestigacion',
+            '#equipoinvestigacion' => $equipoinvestigacion,
+        ];
+    }
+    public function preguntasfrecuentes()
+    {
+        $preguntasfrecuentes[0]["idCatalogo"] = 1;
+        return [
+            '#theme' => 'vpm-vista-preguntasfrecuentes',
+            '#preguntasfrecuentes' => $preguntasfrecuentes,
+        ];
+    }
     public function catalogoIndividual()
     {
         $catalogos = [];

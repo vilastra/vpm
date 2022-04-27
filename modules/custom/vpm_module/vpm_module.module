@@ -43,6 +43,16 @@ function vpm_module_theme($existing, $type, $theme, $path)
                 'sobreinvestigacion' => []
             ]
         ],
+        'vpm-vista-equipoinvestigacion' => [
+            'variables' => [
+                'equipoinvestigacion' => []
+            ]
+        ],
+        'vpm-vista-preguntasfrecuentes' => [
+            'variables' => [
+                'preguntasfrecuentes' => []
+            ]
+        ],
         'vpm-catalogo-menu' => [
             'variables' => [
                 'links' => []

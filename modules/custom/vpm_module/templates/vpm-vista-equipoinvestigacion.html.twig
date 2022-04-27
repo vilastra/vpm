@@ -1,0 +1,106 @@
+<div class="layout-container">
+	<div class='whiteArea'>
+
+
+		<main role="main" class="col-9 max-container px-0 m-auto">
+			<a id="main-content" tabindex="-1"></a>
+			{# link is in html.html.twig #}
+
+			<h1>Equipo de investigación</h1>
+
+
+			<div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
+				<i class="fas fa-chevron-down"></i>
+				<i class="fas fa-chevron-up"></i>
+			</div>
+			<div class="panel">
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
+			</div>
+
+      <div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
+				<i class="fas fa-chevron-down"></i>
+				<i class="fas fa-chevron-up"></i>
+			</div>
+			<div class="panel">
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
+			</div>
+
+      <div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
+				<i class="fas fa-chevron-down"></i>
+				<i class="fas fa-chevron-up"></i>
+			</div>
+			<div class="panel">
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
+			</div>
+
+      <div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
+				<i class="fas fa-chevron-down"></i>
+				<i class="fas fa-chevron-up"></i>
+			</div>
+			<div class="panel">
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
+			</div>
+
+      <div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
+				<i class="fas fa-chevron-down"></i>
+				<i class="fas fa-chevron-up"></i>
+			</div>
+			<div class="panel">
+				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
+			</div>
+
+
+		</div>
+
+
+		<script>
+			var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+acc[i].addEventListener("click", function () {
+this.classList.toggle("active");
+var iconDown = this.querySelector(".fa-chevron-down");
+var iconUp = this.querySelector(".fa-chevron-up");
+var panel = this.nextElementSibling;
+if (panel.style.display === "block") {
+panel.style.display = "none";
+iconUp.style.display = "none";
+iconDown.style.display = "block";
+} else {
+panel.style.display = "block";
+iconDown.style.display = "none";
+iconUp.style.display = "block";
+}
+});
+}
+		</script>
+
+
+		<div class="layout-content">
+			{{ page.content }}
+		</div>
+		{# /.layout-content #}
+
+		{% if page.sidebar_first %}
+			<aside class="layout-sidebar-first" role="complementary">
+				{{ page.sidebar_first }}
+			</aside>
+		{% endif %}
+
+		{% if page.sidebar_second %}
+			<aside class="layout-sidebar-second" role="complementary">
+				{{ page.sidebar_second }}
+			</aside>
+		{% endif %}
+
+	</main>
+
+	{% if page.footer %}
+		<footer role="contentinfo">
+			{{ page.footer }}
+		</footer>
+	{% endif %}
+
+</div>
+{# /.layout-container #}
