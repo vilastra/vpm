@@ -123,65 +123,7 @@
                 jQuery("html, body").animate({ scrollTop: 0 }, 0);
             });
             $(document).ready(function($) {
-
-                new Chart("myChartBar", {
-                    type: "bar",
-                    data: {
-                      labels: xValues,
-                      datasets: [{
-                        backgroundColor: barColors,
-                        data: yValues
-                      }]
-                    },
-                    options: {
-                      legend: {display: false},
-                      title: {
-                        display: true,
-                        text: "World Wine Production 2018"
-                      }
-                    }
-                  });
-                  new Chart("myChartHori", {
-                      type: "horizontalBar",
-                      data: {
-                        labels: xValues,
-                        datasets: [{
-                          backgroundColor: barColors,
-                          data: yValues
-                        }]
-                      },
-                      options: {
-                        legend: {display: false},
-                        title: {
-                          display: true,
-                          text: "World Wine Production 2018"
-                        }
-                      }
-                    });
-                    new Chart("myChartPie", {
-                      type: "pie",
-                      data: {
-                        labels: xValues,
-                        datasets: [{
-                          backgroundColor: barColors,
-                          data: yValues
-                        }]
-                      },
-                      options: {
-                        legend: {display: false},
-                        title: {
-                          display: true,
-                          text: "World Wine Production 2018"
-                        }
-                      }
-                    }); 
-
-
-
-
-
-
-
+                
                 var picture = $('#sample_picture');
                 // Make sure the image is completely loaded before calling the plugin
                 picture.one('load', function() {

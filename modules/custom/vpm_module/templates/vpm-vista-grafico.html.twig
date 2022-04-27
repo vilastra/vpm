@@ -1,37 +1,62 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <div class='whiteArea'>
 	<div class="col-9 max-container px-0 m-auto ">
 		<div class='col-12'>
 			<h1>Graficos</h2>
 			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit</p>
-		</div>
-	
+      
+      
+
+
+      <select name="chartType" id="chartType" onchange="updateChartType()">
+        <option value="bar">Bar</option>
+        <option value="line">Line</option>
+        <option value="pie">Pie</option>
+        <option value="radar">Radar</option>
+        <option value="horizontalBar">Horizontal Bar</option>
+      </select>     
+    </div>
+	 <br/>
+
     <div class ="row">
       <div class="col-lg-4">
-        <canvas id="myChartBar" style="width:100%;max-width:700px"></canvas>
-      </div>
-      <div class="col-lg-4">
-        <canvas id="myChartHori" style="width:100%;max-width:700px"></canvas>
-      </div>
-      <div class="col-lg-4">
-        <canvas id="myChartPie" style="width:100%;max-width:700px"></canvas>
+        <canvas id="my_Chart" style="width:100%;max-width:700px" ></canvas>
       </div>
     </div>
 	</div>
 </div>
 
+
 <script>
+  var Titulo = "Estadísticas generadas";
   var xValues = [{{ grafico['strinTecnica']|raw }}];
   var yValues = [{{ grafico['strinIdTecnica']|raw }}];
   var barColors = [{{ grafico['strinColor']|raw }}];
- 
-  /*function generarNumero(numero){
-	return (Math.random()*numero).toFixed(0);
-  }
 
-    function colorRGB(){
-        var coolor = "("+generarNumero(255)+"," + generarNumero(255) + "," + generarNumero(255) +")";
-        return "rgb" + coolor;
-  }*/
+  var myData = {
+                    labels: xValues,
+                    datasets: [{
+                        label: Titulo,
+                        fill: false,
+                        backgroundColor: barColors,
+                        borderColor: 'black',
+                        data: yValues,
+                    }]
+                };
 
+                var ctx = document.getElementById('my_Chart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',    	
+                    data: myData    	
+                });
 
+                function updateChartType() {
+
+                    myChart.destroy();
+
+                    myChart = new Chart(ctx, {
+                        type: document.getElementById("chartType").value,  
+                        data: myData
+                    });
+                };
 </script>
