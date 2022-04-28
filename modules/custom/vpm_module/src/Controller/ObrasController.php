@@ -385,8 +385,8 @@ class ObrasController extends ControllerBase
     $where = [];
     $whereTipo = [];
 
-
-    $palabrasOmitir = ['pieza', 'piezas', 'en', 'primer', 'lugar', 'segundo', 'tercero', 'ante', 'todo', 'fundamentalmente', 'lo', 'más', 'importante', 'después', 'por', 'fin', 'es', 'decir', 'agrega', 'considerar', 'retirar', 'acotar', 'primero', 'para', 'empezar', 'finalmente', 'mientras', 'ultimo', 'sobre', 'podemos', 'incluir', 'agregar', 'sustentar', 'adicionar', 'comprender', 'de', 'modo', 'accesorio', 'y', 'todos', 'modos', 'cualquier', 'forma', 'manera', 'cabe', 'destacar', 'idéntico', 'nuevo', 'al', 'mismo', 'tiempo', 'así', 'se', 'puede', 'señalar', 'inclusive', 'además', 'la', 'misma', 'también', 'algo', 'semejante', 'ocurre', 'con…', 'otra', 'vez', 'pero', 'aunque', 'otro', 'sentido', 'no', 'obstante', 'parte', 'como', 'contrapartida', 'sin', 'embargo', 'a', 'pesar', 'diferencia', 'camino', 'un', 'lado', 'el', 'orden', 'ideas', 'extremo', 'ahora', 'bien', 'contrario', 'que', 'antagónicamente', 'contraposición', 'revés', 'ejemplo', 'tal', 'caso', 'si', 'apelamos', 'usamos', 'una', 'imagen', 'símil', 'similarmente', 'identificante', 'permítanme', 'explicarle', 'decir', 'principio', 'otras', 'palabras', 'hecho', 'conforme', 'circunstancia', 'sea', 'inicio', 'esto', 'manera', 'eso', 'quiere', 'expresar', 'aludir', 'significa', 'razón', 'objeto', 'puesto', 'causa', 'de', 'solicitando', 'debido', 'porque', 'dado', 'ya', 'consecuencia', 'consiguiente', 'esta', 'ello', 'allí', 'ende', 'motivo', 'concordancia', 'resultado', 'cual', 'hay', 'inferir', 'siempre', 'condición', 'cuando', 'con', 'menos', 'acuerdo', 'propósito', 'cono', 'similar', 'igual', 'manera', 'situación', 'comparamos', 'idéntica', 'situación', 'circunstancia', 'paralelamente', 'definitiva', 'resumiendo', 'planteado', 'terminar', 'concretizando', 'resumen', 'englobando', 'conclusión', 'palabra', 'síntesis', 'finalizando', 'habitualmente', 'duda', 'alguna', 'supuesto', 'probablemente', 'notablemente', 'evidentemente', 'efectivamente', 'sencillamente', 'resulta', 'lógico', 'razonable', 'naturalmente', 'debe', 'suponerse', 'generalmente', 'cierto', 'posiblemente', 'efecto', 'mejor', 'desde', 'luego', 'específicamente'];
+    $palabrasOmitir = ['asdfg'];
+    // $palabrasOmitir = ['pieza', 'piezas', 'en', 'primer', 'lugar', 'segundo', 'tercero', 'ante', 'todo', 'fundamentalmente', 'lo', 'más', 'importante', 'después', 'por', 'fin', 'es', 'decir', 'agrega', 'considerar', 'retirar', 'acotar', 'primero', 'para', 'empezar', 'finalmente', 'mientras', 'ultimo', 'sobre', 'podemos', 'incluir', 'agregar', 'sustentar', 'adicionar', 'comprender', 'de', 'modo', 'accesorio', 'y', 'todos', 'modos', 'cualquier', 'forma', 'manera', 'cabe', 'destacar', 'idéntico', 'nuevo', 'al', 'mismo', 'tiempo', 'así', 'se', 'puede', 'señalar', 'inclusive', 'además', 'la', 'misma', 'también', 'algo', 'semejante', 'ocurre', 'con…', 'otra', 'vez', 'pero', 'aunque', 'otro', 'sentido', 'no', 'obstante', 'parte', 'como', 'contrapartida', 'sin', 'embargo', 'a', 'pesar', 'diferencia', 'camino', 'un', 'lado', 'el', 'orden', 'ideas', 'extremo', 'ahora', 'bien', 'contrario', 'que', 'antagónicamente', 'contraposición', 'revés', 'ejemplo', 'tal', 'caso', 'si', 'apelamos', 'usamos', 'una', 'imagen', 'símil', 'similarmente', 'identificante', 'permítanme', 'explicarle', 'decir', 'principio', 'otras', 'palabras', 'hecho', 'conforme', 'circunstancia', 'sea', 'inicio', 'esto', 'manera', 'eso', 'quiere', 'expresar', 'aludir', 'significa', 'razón', 'objeto', 'puesto', 'causa', 'de', 'solicitando', 'debido', 'porque', 'dado', 'ya', 'consecuencia', 'consiguiente', 'esta', 'ello', 'allí', 'ende', 'motivo', 'concordancia', 'resultado', 'cual', 'hay', 'inferir', 'siempre', 'condición', 'cuando', 'con', 'menos', 'acuerdo', 'propósito', 'cono', 'similar', 'igual', 'manera', 'situación', 'comparamos', 'idéntica', 'situación', 'circunstancia', 'paralelamente', 'definitiva', 'resumiendo', 'planteado', 'terminar', 'concretizando', 'resumen', 'englobando', 'conclusión', 'palabra', 'síntesis', 'finalizando', 'habitualmente', 'duda', 'alguna', 'supuesto', 'probablemente', 'notablemente', 'evidentemente', 'efectivamente', 'sencillamente', 'resulta', 'lógico', 'razonable', 'naturalmente', 'debe', 'suponerse', 'generalmente', 'cierto', 'posiblemente', 'efecto', 'mejor', 'desde', 'luego', 'específicamente'];
 
     if (!empty($_GET["busquedaIndex"])) {
       $buscar['texto'] = 1;
@@ -523,7 +523,7 @@ class ObrasController extends ControllerBase
     ubicacionIns.field_ubicacion_en_la_obra_value as Ubicacion_Inscripcion,
     file_managed.filename as urlImagen,
     transcripcionIns.field_transcripcion_value as Transcripcion_Inscripcion,
-    textoRazonado.field_texto_razonado_value as Texto_Razonado,
+    textoRazonado.field_texto_razonado_cuerpo_value as Texto_Razonado,
     terminoTaxTecnica.name as Tecnica,
     terminoTaxSoporte.name as Soporte,
     altoImagen.field_alto_value as Alto,
@@ -559,7 +559,8 @@ class ObrasController extends ControllerBase
     LEFT JOIN taxonomy_term_data terminoTaxtipoAutoriaPrinFinal ON terminoTaxtipoAutoriaPrinFinal.tid = tipoAutoriaPrinFinal.field_autoria_principal_final_tid
     LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
     LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
-    LEFT JOIN field_data_field_texto_razonado textoRazonado ON textoRazonado.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_cotenido_razonado contenidoRazonado ON contenidoRazonado.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_texto_razonado_cuerpo textoRazonado ON textoRazonado.entity_id = contenidoRazonado.field_cotenido_razonado_value
     WHERE node.type = 'obra' AND node.status=1 AND nid=? ";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("s", $idObra);
@@ -574,12 +575,18 @@ class ObrasController extends ControllerBase
       $obra['titulo'] = $row["Titulo"];
       //$obra['urlImagen'] = $row["urlImagen"];
       $obra['linkImgOriginal'] = $row["linkImgOriginal"];
-      
+
       $obra['urlImagen'] = $row["urlImagen"];
       $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
-
+      
+     
       $obra['textoRazonado'] = $row["Texto_Razonado"];
       $obra['fechaEjecucion'] = $row["fecha_ejecucion"];
+      $obra['referenciaTextoRazonado'] = substr($obra['textoRazonado'], strpos($obra['textoRazonado'], "<div>") + 0);
+      
+      // $obra['referenciaTextoRazonado']='<div>'.$obra['referenciaTextoRazonado'];
+      $obra['textoRazonado'] =substr($obra['textoRazonado'].'<div>', 0, strpos($obra['textoRazonado'], '<div>'));
+      
 
 
       $obra['autoria'] = $row["Autoria"];
@@ -637,13 +644,13 @@ class ObrasController extends ControllerBase
     } else {
       while ($row = $result->fetch_assoc()) {
         if ($row["nombrePropiedad"] != null) {
-        $propiedad['nombrePropietarioObra'] = $row["nombrePropiedad"];
-        $propiedad['fechaAquisicionObra'] = $row["fechaAdqPropiedad"];
-        $propiedad['ciudadAquisicionObra'] = $row["ciudadAdq"];
-        $propiedad['latitudAdqObra'] = $row["latitudAdqPropiedad"];
-        $propiedad['longitudAdqObra'] = $row["longitudAdqPropiedad"];
-        $propiedades[$x] = $propiedad;
-        $x++;
+          $propiedad['nombrePropietarioObra'] = $row["nombrePropiedad"];
+          $propiedad['fechaAquisicionObra'] = $row["fechaAdqPropiedad"];
+          $propiedad['ciudadAquisicionObra'] = $row["ciudadAdq"];
+          $propiedad['latitudAdqObra'] = $row["latitudAdqPropiedad"];
+          $propiedad['longitudAdqObra'] = $row["longitudAdqPropiedad"];
+          $propiedades[$x] = $propiedad;
+          $x++;
         }
       }
     }
@@ -726,7 +733,8 @@ class ObrasController extends ControllerBase
     return $bibliografias;
   }
 
-  function getObrasRelacionadas($idObra){
+  function getObrasRelacionadas($idObra)
+  {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $sql = "select node.title as ObraPrincipal,
     obrasRelacionadas.nid as idObraRelacionada,

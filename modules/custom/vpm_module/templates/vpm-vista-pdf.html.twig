@@ -127,7 +127,7 @@
 			
 			{% if obra.infoObra["textoRazonado"] is not empty %}				
 				<div class="descObraFicha" style="padding-top:15px; text-align:justify;">
-					{{obra.infoObra["textoRazonado"] | nl2br }}
+					{{obra.infoObra["textoRazonado"] | raw }}
 				</div>
 				<div style="text-align:right;">{{obra.infoObra["autorTexto"]}}</div>				
 			{% endif %}

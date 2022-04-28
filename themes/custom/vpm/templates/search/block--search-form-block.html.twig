@@ -27,13 +27,13 @@
 #}
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 searchHeader">
 	<div{{attributes}}>
-		{{ title_prefix }}
-		{% if label %}
-			<h2{{title_attributes}}>{{ label }}</h2>
-		{% endif %}
-		{{ title_suffix }}
-		{% block content %}
-			{{ content }}
-		{% endblock %}
+		<form action="obras" method="get" id="search-block-form" accept-charset="UTF-8">
+				<div class="js-form-item form-item js-form-type-search form-item-keys js-form-item-keys form-no-label">
+			<input title="Escriba lo que quiere buscar." data-drupal-selector="edit-keys" type="search" id="edit-keys--2" name="busquedaIndex" value="" size="15" maxlength="128" class="form-search" placeholder="Buscador...">
+			</div>
+				<button data-twig-suggestion="search_submit" data-drupal-selector="edit-submit" type="submit" id="edit-submit--3" class="button js-form-submit form-submit"> <img src="http://localhost/vpm//sites/default/files/2021-12/lupa.png">
+				</button>
+			</div>
+		</form>
 	</div>
 </div>

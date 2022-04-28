@@ -39,7 +39,7 @@ class PdfController extends ControllerBase
       ubicacionIns.field_ubicacion_en_la_obra_value as Ubicacion_Inscripcion,
       file_managed.filename as urlImagen,
       transcripcionIns.field_transcripcion_value as Transcripcion_Inscripcion,
-      textoRazonado.field_texto_razonado_value as Texto_Razonado,
+      textoRazonado.field_texto_razonado_cuerpo_value as Texto_Razonado,
       terminoTaxTecnica.name as Tecnica,
       terminoTaxSoporte.name as Soporte,
       altoImagen.field_alto_value as Alto,
@@ -75,7 +75,8 @@ class PdfController extends ControllerBase
       LEFT JOIN taxonomy_term_data terminoTaxtipoAutoriaPrinFinal ON terminoTaxtipoAutoriaPrinFinal.tid = tipoAutoriaPrinFinal.field_autoria_principal_final_tid
       LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
       LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
-      LEFT JOIN field_data_field_texto_razonado textoRazonado ON textoRazonado.entity_id = iden.field_identificacion_value
+      LEFT JOIN field_data_field_cotenido_razonado contenidoRazonado ON contenidoRazonado.entity_id = iden.field_identificacion_value
+    LEFT JOIN field_data_field_texto_razonado_cuerpo textoRazonado ON textoRazonado.entity_id = contenidoRazonado.field_cotenido_razonado_value
       WHERE node.type = 'obra' AND node.status=1 AND nid=? ";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("s", $idObra);

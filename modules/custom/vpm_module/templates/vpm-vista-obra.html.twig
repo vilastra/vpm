@@ -75,11 +75,18 @@
 					</div>
 				</div>
 			</div>
+
+
 			{% if obra.infoObra["textoRazonado"] is not empty %}
 				<div class="divSepFicha">
 					<div class="colSepDosFicha descObraFicha">
-						{{obra.infoObra["textoRazonado"] | nl2br}}
+						{{obra.infoObra["textoRazonado"] | raw }}
 					</div>
+					{% if obra.infoObra["referenciaTextoRazonado"] is not empty %}
+						<div class="descObraFicha">
+							{{obra.infoObra["referenciaTextoRazonado"] | raw }}
+						</div>
+					{% endif %}
 					<div class="firmaObraFicha">{{obra.infoObra["autorTexto"]}}</div>
 				</div>
 			{% endif %}
@@ -152,7 +159,7 @@
 		{% endif %}
 		{% if obra.infoObra["linkImgOriginal"] is not empty %}
 			{# <div id="seadragon-viewer" style="width:100%; height:600px;background-color:#000000"></div>
-			<script src="//openseadragon.github.io/openseadragon/openseadragon.min.js"></script> #}
+						<script src="//openseadragon.github.io/openseadragon/openseadragon.min.js"></script> #}
 
 
 			<div class="divSepFicha" style='border-bottom:none;position:relative'>
@@ -195,26 +202,28 @@
 	{% endif %}
 </div>
 <input type="hidden" value="{{obra.latYLong["latitudAdqObra"]}}" id="latObra">
-<input type="hidden" value="{{obra.latYLong["longitudAdqObra"]}}" id="longObra"></div>
-<script>
+<input type="hidden" value="{{obra.latYLong["longitudAdqObra"]}}" id="longObra"></div><script>
 
-{# var request = new XMLHttpRequest();
+{
+var request = new XMLHttpRequest();
 request.open("GET", "http://localhost/images/4/ImageProperties.xml", false);
 request.send();
 var xml = request.responseXML;
 var widthImage = xml.children[0].attributes[0].nodeValue;
 var heightImage = xml.children[0].attributes[1].nodeValue;
-var viewer = OpenSeadragon({
-id:"seadragon-viewer",
-prefixUrl:"http://localhost/images/",
-tileSources:{
-	//required	
-        type:       "zoomifytileservice",
-        width:      parseInt(widthImage),
-        height:     parseInt(heightImage),
-        tilesUrl:   "http://localhost/images/4/",
+var viewer = OpenSeadragon(
+{
+id: "seadragon-viewer",
+prefixUrl: "http://localhost/images/",
+tileSources: { // required
+type: "zoomifytileservice",
+width: parseInt(widthImage),
+height: parseInt(heightImage),
+tilesUrl: "http://localhost/images/4/"
 }
-}) #}
+}
+)
+}
 
 
 function initMap() {
