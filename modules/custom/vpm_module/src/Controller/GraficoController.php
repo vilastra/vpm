@@ -9,7 +9,7 @@ class GraficoController extends ControllerBase
 {
    // ARTISTA //
 
-  function Cb_Artista()
+  /*function Cb_Artista()
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT terminoTaxAutoria.name as autor, 
@@ -43,10 +43,10 @@ class GraficoController extends ControllerBase
     mysqli_close($mysqli);
     return $artista;
 
-  }
+  }*/
 
   /* TEMATICA */
-  function Cb_Tematica(){
+  /*function Cb_Tematica(){
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT
       terminoTaxTematica.name as Tematica,
@@ -80,10 +80,10 @@ class GraficoController extends ControllerBase
     }
     mysqli_close($mysqli);
     return $tematica;
-  }
+  }*/
 
   /* ANNIO */ 
-  function Cb_Annio()
+  /*function Cb_Annio()
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "select node.nid,
@@ -113,10 +113,10 @@ class GraficoController extends ControllerBase
     }
     mysqli_close($mysqli);
     return $annio;
-  }
+  }*/
 
   /* TECNICA */
-  function Cb_Tecnica()
+  /*function Cb_Tecnica()
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT 
@@ -147,6 +147,53 @@ class GraficoController extends ControllerBase
     }
     mysqli_close($mysqli);
     return $tecnica;
+  }*/
+
+
+
+  function Listar_Query()
+  {
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+
+    /* QUERY POR TEMATICA * FECHA */ 
+
+    $valorCorX = $_GET["cX"];
+    if($valorCorX == 1){
+      $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+      $query ="SELECT 
+      terminoTaxTematica.name as Tematica,
+       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
+       FROM node
+       LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+       LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+       LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+       LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+       LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+       LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+       LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+       LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
+       LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
+       LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
+       WHERE node.type = 'obra' AND node.status=1";
+
+        $resultado = $mysqli->query($query);
+                  
+        $xValues = "";
+        $yValues = "";
+        $stringColor ="";
+
+        while ($fila = mysqli_fetch_array($resultado)) { 
+          
+          $yValues.=$fila['fecEjec'].",";  
+          $xValues.="'".substr($fila['Tematica'],0,100)."',"; 
+          $stringColor .=  "'".$this->colorRGB()."',"; 
+        }
+        mysqli_close($mysqli);
+        $grafico['yValues'] = $yValues;
+        $grafico['xValues'] = $xValues;
+        $grafico['stringColor'] = $stringColor;
+        return $grafico;
+    }
   }
 
   function colorRGB(){
@@ -156,27 +203,20 @@ class GraficoController extends ControllerBase
 
   function grafico()
   {
- /* VERIFICAR COMO DEFINIR SEGUN LOS DATOS */
-    $artista = $this->Cb_Artista();
-    $tematica = $this->Cb_Tematica();
-    $annio = $this->Cb_Annio();
-    $tecnica = $this->Cb_Tecnica();
+    $valorCorX = 0;
+    if (isset($_GET["cX"])) {
+      $valorCorX = $_GET["cX"];
+    }
 
+
+    $grafico = $this->Listar_Query();
+    
     return [
         '#theme' => 'vpm-vista-grafico',
-        //'#grafico' => $grafico,
-        '#artista' => $artista, 
-        '#tematica' => $tematica,
-        '#annio' => $annio, 
-        '#tecnica' => $tecnica
+        '#grafico' => $grafico
+ 
 
   
       ];
   }
 }
-
-    //var xValues = [{{ grafico['strinTecnica']|raw }}];
-    //var yValues = [{{ grafico['strinIdTecnica']|raw }}];
-
-    //$infoArtista['autorId'] = $fila["autorId"];
-    //$infoArtista['autor'] = $fila["autor"];
