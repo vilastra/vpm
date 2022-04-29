@@ -161,8 +161,9 @@ class GraficoController extends ControllerBase
     if($valorCorX == 1){
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query ="SELECT 
-      terminoTaxTematica.name as Tematica,
-       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
+      IFNULL(terminoTaxTematica.name, 'Desconocido')  as Tematica,
+       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec,
+       COUNT(*) as Cantidad
        FROM node
        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
        LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
@@ -174,7 +175,8 @@ class GraficoController extends ControllerBase
        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
        LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
        LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
-       WHERE node.type = 'obra' AND node.status=1";
+       WHERE node.type = 'obra' AND node.status=1 AND DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') IS NOT NUll
+       GROUP BY DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')";
 
         $resultado = $mysqli->query($query);
                   
@@ -184,8 +186,8 @@ class GraficoController extends ControllerBase
 
         while ($fila = mysqli_fetch_array($resultado)) { 
           
-          $yValues.=$fila['fecEjec'].",";  
-          $xValues.="'".substr($fila['Tematica'],0,100)."',"; 
+          $yValues.=$fila["Cantidad"].",";  
+          $xValues.="'Temática: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
           $stringColor .=  "'".$this->colorRGB()."',"; 
         }
         mysqli_close($mysqli);
@@ -214,9 +216,6 @@ class GraficoController extends ControllerBase
     return [
         '#theme' => 'vpm-vista-grafico',
         '#grafico' => $grafico
- 
-
-  
       ];
   }
 }
