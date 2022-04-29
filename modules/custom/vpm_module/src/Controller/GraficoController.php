@@ -23,23 +23,25 @@ class GraficoController extends ControllerBase
       LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
       LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid   
       WHERE  node.type = 'obra' and terminoTaxAutoria.name is not null";
-  
+
     $resultado = $mysqli->query($query);
-    $xValues = "";
-    $yValues = "";
-    $stringColor ="";
+    $artista = [];
+    $x = 0;
+    while ($fila = mysqli_fetch_array($resultado)) {
 
-    while ($fila = mysqli_fetch_array($resultado)) { 
+      $infoArtista = [];
+      $infoArtista['autorId'] = $fila["autorId"];
+      $infoArtista['autor'] = $fila["autor"];
+      $infoArtista['selected'] = false;
+      if (isset($_GET["artista"]) && $_GET["artista"] != 0 && $_GET["artista"] == $fila["autorId"]) {
+        $infoArtista['selected'] = true;
+      }
 
-      $yValues.=$fila['autorId'].",";  
-      $xValues.="'".substr($fila['autor'],0,100)."',"; 
-      $stringColor .=  "'".$this->colorRGB()."',"; 
+      $artista[$x] = $infoArtista;
+      $x++;
     }
     mysqli_close($mysqli);
-    $grafico['yValues'] = $yValues;
-    $grafico['xValues'] = $xValues;
-    $grafico['stringColor'] = $stringColor;
-    return $grafico;
+    return $artista;
 
   }
 
@@ -47,35 +49,37 @@ class GraficoController extends ControllerBase
   function Cb_Tematica(){
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT
-    terminoTaxTematica.name as Tematica,
-    terminoTaxTematica.tid as idTematica
-    FROM node
-    LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-    LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
-    LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
-    LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
-    LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
-    LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
-    LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid
-    WHERE  node.type = 'obra' and terminoTaxTematica.name is not null";
+      terminoTaxTematica.name as Tematica,
+      terminoTaxTematica.tid as idTematica
+      FROM node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+      LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+      LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+      LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid
+      WHERE  node.type = 'obra' and terminoTaxTematica.name is not null";
+
 
     $resultado = $mysqli->query($query);
-    $xValues = "";
-    $yValues = "";
-    $stringColor ="";
+    $tematica = [];
+    $x = 0;
+    while ($fila = mysqli_fetch_array($resultado)) {
 
-    while ($fila = mysqli_fetch_array($resultado)) { 
+      $infoTematica = [];
+      $infoTematica['idTematica'] = $fila["idTematica"];
+      $infoTematica['tematica'] = $fila["Tematica"];
+      $infoTematica['selected'] = false;
+      if (isset($_GET["tematica"]) && $_GET["tematica"] != 0 && $_GET["tematica"] == $fila["idTematica"]) {
+        $infoTematica['selected'] = true;
+      }
 
-      $yValues.=$fila['idTematica'].",";  
-      $xValues.="'".substr($fila['Tematica'],0,100)."',"; 
-      $stringColor .=  "'".$this->colorRGB()."',"; 
-
+      $tematica[$x] = $infoTematica;
+      $x++;
     }
     mysqli_close($mysqli);
-    $grafico['yValues'] = $yValues;
-    $grafico['xValues'] = $xValues;
-    $grafico['stringColor'] = $stringColor;
-    return $grafico;
+    return $tematica;
   }
 
   /* ANNIO */ 
@@ -92,22 +96,23 @@ class GraficoController extends ControllerBase
       GROUP BY fecEjecucion.field_fecha_ejecucion_timestamp";
 
     $resultado = $mysqli->query($query);
-    $xValues = "";
-    $yValues = "";
-    $stringColor ="";
-
+    $annio = [];
+    $x = 0;
     while ($fila = mysqli_fetch_array($resultado)) {
 
-     $yValues.= $fila["idfecEjec"];
-     $xValues.="'".substr($fila['fecEjec'],0,100)."',"; 
-     $stringColor .=  "'".$this->colorRGB()."',"; 
-  
+      $infoAnnio = [];
+      $infoAnnio['idfecEjec'] = $fila["idfecEjec"];
+      $infoAnnio['fecEjec'] = $fila["fecEjec"];
+      $infoAnnio['selected'] = false;
+      if (isset($_GET["ano"]) && $_GET["ano"] != 0 && $_GET["ano"] == $fila["idfecEjec"]) {
+        $infoAnnio['selected'] = true;
+      }
+
+      $annio[$x] = $infoAnnio;
+      $x++;
     }
     mysqli_close($mysqli);
-    $grafico['yValues'] = $yValues;
-    $grafico['xValues'] = $xValues;
-    $grafico['stringColor'] = $stringColor;
-    return $grafico;
+    return $annio;
   }
 
   /* TECNICA */
@@ -125,20 +130,23 @@ class GraficoController extends ControllerBase
       GROUP BY Tecnica";
 
     $resultado = $mysqli->query($query);
-    $xValues = "";
-    $yValues = "";
-    $stringColor ="";
-
+    $tecnica = [];
+    $x = 0;
     while ($fila = mysqli_fetch_array($resultado)) {
-      $yValues.= $fila["idTecnica"];
-      $xValues.="'".substr($fila['Tecnica'],0,100)."',"; 
-      $stringColor .=  "'".$this->colorRGB()."',"; 
+
+      $infoTecnica = [];
+      $infoTecnica['idTecnica'] = $fila["idTecnica"];
+      $infoTecnica['tecnica'] = $fila["Tecnica"];
+      $infoTecnica['selected'] = false;
+      if (isset($_GET["tecnica"]) && $_GET["tecnica"] != 0 && $_GET["tecnica"] == $fila["idTecnica"]) {
+        $infoTecnica['selected'] = true;
+      }
+
+      $tecnica[$x] = $infoTecnica;
+      $x++;
     }
     mysqli_close($mysqli);
-    $grafico['yValues'] = $yValues;
-    $grafico['xValues'] = $xValues;
-    $grafico['stringColor'] = $stringColor;
-    return $grafico;
+    return $tecnica;
   }
 
   function colorRGB(){
@@ -148,15 +156,20 @@ class GraficoController extends ControllerBase
 
   function grafico()
   {
+ /* VERIFICAR COMO DEFINIR SEGUN LOS DATOS */
+    $artista = $this->Cb_Artista();
+    $tematica = $this->Cb_Tematica();
+    $annio = $this->Cb_Annio();
+    $tecnica = $this->Cb_Tecnica();
 
-    $grafico = $this->Cb_Artista();
-    $grafico = $this->Cb_Tematica();
-    $grafico = $this->Cb_Annio();
-    $grafico = $this->Cb_Tecnica();
     return [
         '#theme' => 'vpm-vista-grafico',
-        '#grafico' => $grafico,
-        //'#artista' => $artista,
+        //'#grafico' => $grafico,
+        '#artista' => $artista, 
+        '#tematica' => $tematica,
+        '#annio' => $annio, 
+        '#tecnica' => $tecnica
+
   
       ];
   }

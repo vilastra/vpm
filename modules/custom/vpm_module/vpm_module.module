@@ -105,8 +105,11 @@ function vpm_module_theme($existing, $type, $theme, $path)
         ],
         'vpm-vista-grafico' => [
             'variables' => [
-                'grafico' => [],
-                'artista' => []
+               // 'grafico' => [],
+                'artista' => [],
+                'tematica' => [],
+                'annio' => [],
+                'tecnica' => []
             ]
         ],
     ];
