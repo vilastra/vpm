@@ -47,7 +47,7 @@
       <h2 class="pb-3">Estadísticas generadas</h2>
       <div class="InfoTitulo1 pb-1">Tipo de gráfico</div>
       <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-        <select class="inputSelect" name="chartType" id="chartType" onchange="updateChartType()">
+        <select class="inputSelect" name="chartType" id="chartType" >
           <option value="bar">Bar</option>
           <option value="line">Line</option>
           <option value="pie">Pie</option>
@@ -65,40 +65,10 @@
     </div>
 	</div>
 </div>
-<pre>
-  {{ dump(grafico['xValues']) }}
-</pre>
 
 <script>
-  var Titulo = "Cantidad de obras por tematicas cada año";
+  var Titulo = "Cantidad de obras";
   var xValues = [{{ grafico['xValues']|raw }}];
   var yValues = [{{ grafico['yValues']|raw }}];
   var barColors = [{{ grafico['stringColor']|raw }}];
-
-  var myData = {
-                    labels: xValues,
-                    datasets: [{
-                        label: Titulo,
-                        fill: false,
-                        backgroundColor: barColors,
-                        borderColor: 'black',
-                        data: yValues,
-                    }]
-                };
-
-                var ctx = document.getElementById('my_Chart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'bar',    	
-                    data: myData    	
-                });
-
-                function updateChartType() {
-
-                    myChart.destroy();
-
-                    myChart = new Chart(ctx, {
-                        type: document.getElementById("chartType").value,  
-                        data: myData
-                    });
-                };
 </script>

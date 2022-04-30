@@ -123,7 +123,7 @@
                 jQuery("html, body").animate({ scrollTop: 0 }, 0);
             });
             $(document).ready(function($) {
-                
+
                 var picture = $('#sample_picture');
                 // Make sure the image is completely loaded before calling the plugin
                 picture.one('load', function() {
@@ -189,6 +189,38 @@
 
                 // var timeline;
                 // timeline = new TL.Timeline('timeline-embed', jsonFile);
+
+                var myData = {
+                    labels: xValues,
+                    datasets: [{
+                        label: Titulo,
+                        fill: false,
+                        backgroundColor: barColors,
+                        borderColor: 'black',
+                        data: yValues,
+                    }]
+                };
+
+                var ctx = document.getElementById('my_Chart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: myData
+                });
+
+                function updateChartType() {
+
+                    myChart.destroy();
+
+                    myChart = new Chart(ctx, {
+                        type: document.getElementById("chartType").value,
+                        data: myData
+                    });
+                };
+
+                $("#chartType").change(function() {
+                    updateChartType()
+                });
+
                 if (typeof jsonFile !== 'undefined') {
                     var timeline;
                     var options = {
