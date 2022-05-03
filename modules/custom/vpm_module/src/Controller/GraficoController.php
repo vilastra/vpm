@@ -106,7 +106,7 @@ class GraficoController extends ControllerBase
       /* QUERY POR OBRA * FECHA */ 
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
-      $query ="SELECT IFNULL(title, 'Desconocido') as Obra,
+      $query ="SELECT count(IFNULL(title, 'Desconocido'))  as Obra,
       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
       FROM node
       LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
@@ -120,7 +120,8 @@ class GraficoController extends ControllerBase
       LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
       LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
       WHERE node.type = 'obra' AND node.status=1
-      AND DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') IS NOT NUll";
+      AND DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') IS NOT null
+      group by DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')";
       
       $resultado = $mysqli->query($query);
                
@@ -131,16 +132,9 @@ class GraficoController extends ControllerBase
       $prov='';
       
       while ($fila = mysqli_fetch_array($resultado)) { 
-       if($prov!="'Obra: ".substr($fila['Obra'],0,100)." - Año: ".$fila['fecEjec']."',"){
-         $yValues.=$cantObras.",";      
-         $cantObras=1;
-                 
-         $xValues.="'Obra: ".substr($fila['Obra'],0,100)." - Año: ".$fila['fecEjec']."',"; 
-         $prov="'Obra: ".substr($fila['Obra'],0,100)." - Año: ".$fila['fecEjec']."',"; 
-         $stringColor .=  "'".$this->colorRGB()."',"; 
-       }else{
-         $cantObras++;
-       }      
+       $yValues.=$fila['Obra'].",";
+       $xValues.="'Cantidad de Obras: ".substr($fila['Obra'],0,100)." - Año: ".$fila['fecEjec']."',"; 
+       $stringColor .=  "'".$this->colorRGB()."',"; 
      }
      mysqli_close($mysqli);
      $grafico['yValues'] = $yValues;
@@ -151,7 +145,7 @@ class GraficoController extends ControllerBase
     }elseif($valorCorX == 4){ 
       /* QUERY POR ARTISTA*OBRA - FECHA */ 
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-      $query ="SELECT title as Obra,
+      $query ="SELECT 
       IFNULL(terminoTaxAutoria.name, 'Desconocido') as autor,
       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
       FROM node
@@ -177,12 +171,12 @@ class GraficoController extends ControllerBase
       $prov='';
       
       while ($fila = mysqli_fetch_array($resultado)) { 
-       if($prov!="'Artista: ".substr($fila['autor'],0,50)." - Obra: ".substr($fila['Obra'],0,50)." - Año: ".$fila['fecEjec']."',"){
+       if($prov!="'Artista: ".substr($fila['autor'],0,50)." - Año: ".$fila['fecEjec']."',"){
          $yValues.=$cantObras.",";      
          $cantObras=1;
                  
-         $xValues.="'Artista: ".substr($fila['autor'],0,50)." - Obra: ".substr($fila['Obra'],0,50)." - Año: ".$fila['fecEjec']."',"; 
-         $prov="'Artista: ".substr($fila['autor'],0,50)." - Obra: ".substr($fila['Obra'],0,50)." - Año: ".$fila['fecEjec']."',"; 
+         $xValues.="'Artista: ".substr($fila['autor'],0,50)." - Año: ".$fila['fecEjec']."',"; 
+         $prov="'Artista: ".substr($fila['autor'],0,50)." - Año: ".$fila['fecEjec']."',"; 
          $stringColor .=  "'".$this->colorRGB()."',"; 
        }else{
          $cantObras++;
@@ -194,7 +188,7 @@ class GraficoController extends ControllerBase
      $grafico['stringColor'] = $stringColor;
      return $grafico;
     }
-}
+  }
 
   function colorRGB(){
     $color = ['#22555D','#2D717C', '#578D96','#ABC6CB','#D5E3E5'];
