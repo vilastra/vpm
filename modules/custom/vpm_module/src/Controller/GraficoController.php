@@ -7,13 +7,13 @@ use mysqli;
 
 class GraficoController extends ControllerBase
 {
-  function Listar_Query()
+  function Listar_Query($opcion)
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
     /* QUERY POR TEMATICA * FECHA */ 
   
-    $valorCorX = $_GET["cX"];
+    $valorCorX = $opcion;
     if($valorCorX == 1){
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
       $query ="SELECT 
@@ -202,7 +202,7 @@ class GraficoController extends ControllerBase
       $valorCorX = $_GET["cX"];
     }
     
-    $grafico = $this->Listar_Query();
+    $grafico = $this->Listar_Query($valorCorX);
     
     return [
         '#theme' => 'vpm-vista-grafico',

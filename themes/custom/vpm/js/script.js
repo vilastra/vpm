@@ -189,23 +189,24 @@
 
                 // var timeline;
                 // timeline = new TL.Timeline('timeline-embed', jsonFile);
+                if (typeof xValues !== 'undefined') {
+                    var myData = {
+                        labels: xValues,
+                        datasets: [{
+                            label: Titulo,
+                            fill: false,
+                            backgroundColor: barColors,
+                            borderColor: 'black',
+                            data: yValues,
+                        }]
+                    };
 
-                var myData = {
-                    labels: xValues,
-                    datasets: [{
-                        label: Titulo,
-                        fill: false,
-                        backgroundColor: barColors,
-                        borderColor: 'black',
-                        data: yValues,
-                    }]
-                };
-
-                var ctx = document.getElementById('my_Chart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: myData
-                });
+                    var ctx = document.getElementById('my_Chart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: myData
+                    });
+                }
 
                 function updateChartType() {
 
