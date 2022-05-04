@@ -51,7 +51,7 @@ class ObrasController extends ControllerBase
     }
 
     if ($ordenarPor == 1) {
-      $sql =  $sql . " ORDER BY titulo,terminoTaxAutoria.name  ASC";
+      $sql =  $sql . " ORDER BY terminoTaxAutoria.name  ASC";
     } elseif ($ordenarPor == 2) {
       $sql =  $sql . " ORDER BY  DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')  ASC";
     } elseif ($ordenarPor == 3) {
@@ -398,12 +398,12 @@ class ObrasController extends ControllerBase
           array_push($whereTipo, 's');
         }
         if (!in_array($valor, $palabrasOmitir)) {
-          array_push($condiciones['busqueda2'], 'terminoTaxTematica.tid LIKE ?');
+          array_push($condiciones['busqueda2'], 'terminoTaxTematica.name LIKE ?');
           array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
         if (!in_array($valor, $palabrasOmitir)) {
-          array_push($condiciones['busqueda2'], 'terminoTaxAutoria.tid LIKE ?');
+          array_push($condiciones['busqueda2'], 'terminoTaxAutoria.name LIKE ?');
           array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
@@ -414,7 +414,7 @@ class ObrasController extends ControllerBase
         }
 
         if (!in_array($valor, $palabrasOmitir)) {
-          array_push($condiciones['busqueda2'], 'terminoTaxTecnica.tid LIKE ?');
+          array_push($condiciones['busqueda2'], 'terminoTaxTecnica.name LIKE ?');
           array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');
         }
