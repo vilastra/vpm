@@ -49,7 +49,9 @@ class ObrasController extends ControllerBase
     if ($buscar['texto'] == 1) {
       $sql .= ' AND ' . implode(' OR ', $condiciones['busqueda2']);
     }
-
+    
+    
+    
     if ($ordenarPor == 1) {
       $sql =  $sql . " ORDER BY terminoTaxAutoria.name  ASC";
     } elseif ($ordenarPor == 2) {
@@ -91,7 +93,6 @@ class ObrasController extends ControllerBase
     if ($buscar['select'] != 0 || $buscar['texto'] != 0) {
       call_user_func_array(array($stmt, 'bind_param'), $a_params);
     }
-
     /* Execute statement */
     $stmt->execute();
     $resultado = $stmt->get_result();
@@ -387,6 +388,34 @@ class ObrasController extends ControllerBase
 
     $palabrasOmitir = ['asdfg'];
     // $palabrasOmitir = ['pieza', 'piezas', 'en', 'primer', 'lugar', 'segundo', 'tercero', 'ante', 'todo', 'fundamentalmente', 'lo', 'más', 'importante', 'después', 'por', 'fin', 'es', 'decir', 'agrega', 'considerar', 'retirar', 'acotar', 'primero', 'para', 'empezar', 'finalmente', 'mientras', 'ultimo', 'sobre', 'podemos', 'incluir', 'agregar', 'sustentar', 'adicionar', 'comprender', 'de', 'modo', 'accesorio', 'y', 'todos', 'modos', 'cualquier', 'forma', 'manera', 'cabe', 'destacar', 'idéntico', 'nuevo', 'al', 'mismo', 'tiempo', 'así', 'se', 'puede', 'señalar', 'inclusive', 'además', 'la', 'misma', 'también', 'algo', 'semejante', 'ocurre', 'con…', 'otra', 'vez', 'pero', 'aunque', 'otro', 'sentido', 'no', 'obstante', 'parte', 'como', 'contrapartida', 'sin', 'embargo', 'a', 'pesar', 'diferencia', 'camino', 'un', 'lado', 'el', 'orden', 'ideas', 'extremo', 'ahora', 'bien', 'contrario', 'que', 'antagónicamente', 'contraposición', 'revés', 'ejemplo', 'tal', 'caso', 'si', 'apelamos', 'usamos', 'una', 'imagen', 'símil', 'similarmente', 'identificante', 'permítanme', 'explicarle', 'decir', 'principio', 'otras', 'palabras', 'hecho', 'conforme', 'circunstancia', 'sea', 'inicio', 'esto', 'manera', 'eso', 'quiere', 'expresar', 'aludir', 'significa', 'razón', 'objeto', 'puesto', 'causa', 'de', 'solicitando', 'debido', 'porque', 'dado', 'ya', 'consecuencia', 'consiguiente', 'esta', 'ello', 'allí', 'ende', 'motivo', 'concordancia', 'resultado', 'cual', 'hay', 'inferir', 'siempre', 'condición', 'cuando', 'con', 'menos', 'acuerdo', 'propósito', 'cono', 'similar', 'igual', 'manera', 'situación', 'comparamos', 'idéntica', 'situación', 'circunstancia', 'paralelamente', 'definitiva', 'resumiendo', 'planteado', 'terminar', 'concretizando', 'resumen', 'englobando', 'conclusión', 'palabra', 'síntesis', 'finalizando', 'habitualmente', 'duda', 'alguna', 'supuesto', 'probablemente', 'notablemente', 'evidentemente', 'efectivamente', 'sencillamente', 'resulta', 'lógico', 'razonable', 'naturalmente', 'debe', 'suponerse', 'generalmente', 'cierto', 'posiblemente', 'efecto', 'mejor', 'desde', 'luego', 'específicamente'];
+    if (!empty($_GET['tematica'])) {
+      array_push($condiciones['busqueda1'], 'terminoTaxTematica.tid = ?');
+      array_push($where, $_GET['tematica']);
+      array_push($whereTipo, 's');
+      $buscar['select'] = 1;
+    }
+
+    if (!empty($_GET['artista'])) {
+      array_push($condiciones['busqueda1'], 'terminoTaxAutoria.tid = ?');
+      array_push($where, $_GET['artista']);
+      array_push($whereTipo, 's');
+      $buscar['select'] = 1;
+    }
+
+    if (!empty($_GET['ano'])) {
+      array_push($condiciones['busqueda1'], 'fecEjecucion.field_fecha_ejecucion_timestamp = ?');
+      array_push($where, $_GET['ano']);
+      array_push($whereTipo, 's');
+      $buscar['select'] = 1;
+    }
+
+
+    if (!empty($_GET['tecnica'])) {
+      array_push($condiciones['busqueda1'], 'terminoTaxTecnica.tid = ?');
+      array_push($where, $_GET['tecnica']);
+      array_push($whereTipo, 's');
+      $buscar['select'] = 1;
+    }
 
     if (!empty($_GET["busquedaIndex"])) {
       $buscar['texto'] = 1;
@@ -422,34 +451,7 @@ class ObrasController extends ControllerBase
     }
 
 
-    if (!empty($_GET['tematica'])) {
-      array_push($condiciones['busqueda1'], 'terminoTaxTematica.tid = ?');
-      array_push($where, $_GET['tematica']);
-      array_push($whereTipo, 's');
-      $buscar['select'] = 1;
-    }
 
-    if (!empty($_GET['artista'])) {
-      array_push($condiciones['busqueda1'], 'terminoTaxAutoria.tid = ?');
-      array_push($where, $_GET['artista']);
-      array_push($whereTipo, 's');
-      $buscar['select'] = 1;
-    }
-
-    if (!empty($_GET['ano'])) {
-      array_push($condiciones['busqueda1'], 'fecEjecucion.field_fecha_ejecucion_timestamp = ?');
-      array_push($where, $_GET['ano']);
-      array_push($whereTipo, 's');
-      $buscar['select'] = 1;
-    }
-
-
-    if (!empty($_GET['tecnica'])) {
-      array_push($condiciones['busqueda1'], 'terminoTaxTecnica.tid = ?');
-      array_push($where, $_GET['tecnica']);
-      array_push($whereTipo, 's');
-      $buscar['select'] = 1;
-    }
     $pag = 0;
     if (!empty($_GET["pag"])) {
       $pag = $_GET["pag"];
