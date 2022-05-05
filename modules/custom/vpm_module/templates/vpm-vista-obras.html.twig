@@ -152,19 +152,20 @@
 					<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
 						<a href="{{ obj.urlObra }}">
 							<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
-						</a>
-						{% if obj.idTematica!=null %}
-							<a href='tematica?idTematica={{ obj.idTematica }}'>
-								<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
-							</a>
-						{% endif %}
+						</a>	
+						<a href='{{ obj.urlObra }}'>
+							<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
+						</a>					
+												
 						<a href='{{ obj.urlObra }}'>
 							<div class='nombreObra'>{{ obj.tituloObra }}</div>
 						</a>
+						{% if obj.nombreArtista != null %}
 						<a href='{{ obj.urlArtista }}'>
 							<div class='descItem'>Autores:
 								{{ obj.nombreArtista }}</div>
 						</a>
+						{% endif %}
 					</div>
 				{% else %}
 					<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
