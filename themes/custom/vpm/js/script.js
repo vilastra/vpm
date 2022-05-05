@@ -194,35 +194,35 @@
                     console.log("Prueba");
                     var reportPageHeight = $('#report').innerHeight();
                     var reportPageWidth = $('#report').innerWidth();
-                    
-                
+
+
                     var pdfCanvas = $('<canvas />').attr({
-                      id: "canvaspdf",
-                      width: reportPageWidth,
-                      height: reportPageHeight
-                    });                   
-     
+                        id: "canvaspdf",
+                        width: reportPageWidth,
+                        height: reportPageHeight
+                    });
+
                     var pdfctx = $(pdfCanvas)[0].getContext('2d');
                     var pdfctxX = 0;
                     var pdfctxY = 0;
-                    var buffer = 100;                   
+                    var buffer = 100;
 
                     $("canvas").each(function(index) {
-                      var canvasHeight = $(this).innerHeight();
-                      var canvasWidth = $(this).innerWidth();                      
+                        var canvasHeight = $(this).innerHeight();
+                        var canvasWidth = $(this).innerWidth();
 
-                      pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
-                      pdfctxX += canvasWidth + buffer;
-                    
-                      if (index % 2 === 1) {
-                        pdfctxX = 0;
-                        pdfctxY += canvasHeight + buffer;
-                      }
-                    });                    
+                        pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+                        pdfctxX += canvasWidth + buffer;
+
+                        if (index % 2 === 1) {
+                            pdfctxX = 0;
+                            pdfctxY += canvasHeight + buffer;
+                        }
+                    });
                     var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
                     pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
                     pdf.save('Grafico.pdf');
-                  });
+                });
 
 
 
@@ -287,7 +287,7 @@
 
                 $('main', context).once('.tl-timenav').each(function() {
                     $(window).one('load', function() {
-                        $('<div class="cronoLeyend pb-4 pt-4"><span class="spanIcon"><i class="fa fa-picture-o" aria-hidden="true"></i></span><span class="textIcon">Obras del catálogo</span><span class="spanIcon"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span><span class="textIcon">Exposiciones</span>                    <span class="spanIcon"><i class="fa fa-leaf" aria-hidden="true"></i></span><span class="textIcon">Hitos históricos</span>                    <span class="spanIcon"><i class="fa fa-star-o" aria-hidden="true"></i></span><span class="textIcon">Destacados</span></div>').insertAfter(".tl-timenav");
+                        $('<div class="cronoLeyend pb-4 pt-4"><span class="spanIcon obraLeyend"><i class="fa fa-picture-o" aria-hidden="true"></i></span><span class="textIcon">Obras del catálogo</span><span class="spanIcon"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span><span class="textIcon">Exposiciones</span>                    <span class="spanIcon hitoLeyend"><i class="fa fa-leaf" aria-hidden="true"></i></span><span class="textIcon">Hitos históricos</span>                    <span class="spanIcon destLeyend"><i class="fa fa-star-o" aria-hidden="true"></i></span><span class="textIcon">Destacados</span></div>').insertAfter(".tl-timenav");
                     });
                 });
 

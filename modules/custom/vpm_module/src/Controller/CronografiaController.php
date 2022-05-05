@@ -308,7 +308,8 @@ class CronografiaController extends ControllerBase
                     },
                     "start_date": {
                       "year": "' . $infoObra['fecEjec'] . '"
-                    }
+                    },
+                    "unique_id": "obraCrono"
                   },';
 
         $obras[$x] = $infoObra;
@@ -338,7 +339,8 @@ class CronografiaController extends ControllerBase
         "start_date": {
           
           "year": "' . $fila['Ano_Exhibicion'] . '"
-        }
+        },
+        "unique_id": "exhiCrono"
       },';
     }
 

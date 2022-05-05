@@ -2461,6 +2461,44 @@ TIMELINE */
     border: solid 1px #8A8A8A;
 }
 
+.cronoLeyend .obraLeyend {
+    background-color: #8A8A8A!important;
+}
+
+.cronoLeyend .obraLeyend svg,
+.cronoLeyend .destLeyend svg {
+    color: white!important;
+}
+
+.cronoLeyend .hitoLeyend {
+    background-color: #DEDEDE!important;
+}
+
+.cronoLeyend .destLeyend {
+    background-color: #4A4A4A!important;
+}
+
+[id^="obraCrono"] .tl-timemarker-content-container {
+    background-color: #8A8A8A!important;
+}
+
+[id^="obraCrono"] .tl-timemarker-content-container .tl-headline {
+    color: white!important;
+}
+
+[id^="exhiCrono"] .tl-timemarker-content-container {
+    background-color: #FFFFFF!important;
+    border: 1px solid #707070!important;
+}
+
+[id^="exhiCrono"] .tl-timemarker-content-container .tl-headline {
+    color: #4A4A4A!important;
+}
+
+.tl-timemarker-active .tl-timemarker-content-container .tl-headline {
+    color: #FFFFFF!important;
+}
+
 
 /* SOBRE INVESTIGACION */
 
