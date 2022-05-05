@@ -40,12 +40,12 @@ class GraficoController extends ControllerBase
         $cantObras=1;
         $prov='';
         while ($fila = mysqli_fetch_array($resultado)) { 
-          if($prov!="'Temática: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"){
+          if($prov!="'Géneros pictóricos: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"){
             $yValues.=$cantObras.",";      
             $cantObras=1;
                     
-            $xValues.="'Temática: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
-            $prov="'Temática: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
+            $xValues.="'Géneros pictóricos: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
+            $prov="'Géneros pictóricos: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
             $stringColor .=  "'".$this->colorRGB()."',"; 
           }else{
             $cantObras++;
@@ -103,7 +103,7 @@ class GraficoController extends ControllerBase
         return $grafico;
 
     }elseif($valorCorX == 3){ 
-      /* QUERY POR OBRA * FECHA */ 
+      /* QUERY POR OBRA * FECHA OCUPAR ESTA QUERY PARA SEGUIR EL FILTRO AVANZADO*/ 
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
       $query ="SELECT count(IFNULL(title, 'Desconocido'))  as Obra,

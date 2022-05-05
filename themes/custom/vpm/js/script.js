@@ -189,6 +189,53 @@
 
                 // var timeline;
                 // timeline = new TL.Timeline('timeline-embed', jsonFile);
+
+                $('#exportPDF').click(function(event) {
+                    console.log("Prueba");
+                    var reportPageHeight = $('#report').innerHeight();
+                    var reportPageWidth = $('#report').innerWidth();
+                    
+                
+                    var pdfCanvas = $('<canvas />').attr({
+                      id: "canvaspdf",
+                      width: reportPageWidth,
+                      height: reportPageHeight
+                    });                   
+     
+                    var pdfctx = $(pdfCanvas)[0].getContext('2d');
+                    var pdfctxX = 0;
+                    var pdfctxY = 0;
+                    var buffer = 100;                   
+
+                    $("canvas").each(function(index) {
+                      var canvasHeight = $(this).innerHeight();
+                      var canvasWidth = $(this).innerWidth();                      
+
+                      pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+                      pdfctxX += canvasWidth + buffer;
+                    
+                      if (index % 2 === 1) {
+                        pdfctxX = 0;
+                        pdfctxY += canvasHeight + buffer;
+                      }
+                    });                    
+                    var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+                    pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
+                    pdf.save('Grafico.pdf');
+                  });
+
+
+
+
+
+
+
+
+
+
+
+
+
                 if (typeof xValues !== 'undefined') {
                     var myData = {
                         labels: xValues,
