@@ -136,6 +136,14 @@ class ObrasController extends ControllerBase
       $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
       /* TEMATICA */
       $infoObra['idTematica'] = $fila["idTematica"];
+
+      /*$infoObra['idTematica'] = $fila["idTematica"];
+      if (isset($_GET["idCat"])) {
+        $infoObra['urlObra'] =  base_path() . "obras?idTematica=" .  $fila["idTematica"];
+      } else {
+        $infoObra['urlObra'] = base_path() . "obras?idTematica=" .  $fila["idTematica"];
+      }*/
+
       $infoObra['nombreTematica'] = $fila["Tematica"];
 
       $obras[$x] = $infoObra;

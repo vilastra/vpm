@@ -153,10 +153,11 @@
 						<a href="{{ obj.urlObra }}">
 							<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
 						</a>	
-						<a href='{{ obj.urlObra }}'>
-							<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
-						</a>					
-												
+						
+						<a href='obras?idCat=null&Sec=null&busquedaIndex=&catalogo=1&tematica={{obj.idTematica}}&artista=0&ano={{ obj.idfecEjec }}&tecnica={{ obj.idTecnica }}&ordena={{ ordenarPor }}'>
+							<div class='nombreTematica'>{{ obj.nombreTematica }}</div>
+						</a>		
+						
 						<a href='{{ obj.urlObra }}'>
 							<div class='nombreObra'>{{ obj.tituloObra }}</div>
 						</a>

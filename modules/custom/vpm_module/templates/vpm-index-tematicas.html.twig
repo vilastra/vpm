@@ -2,11 +2,11 @@
 	<div class="col-9 max-container px-0 m-auto ">
 		<div class="row">
 			<div class='col-12'>
-				<h1>Encuentra obras por tema</h2>
+				<h1>Encuentra obras por géneros pictóricos</h2>
 			</div>
 			{% for obj in tematicas %}
 				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
-					<a href='catalogo?{{obj.idTematica}}'>
+					<a href='obras?idCat=null&Sec=null&busquedaIndex=&catalogo=1&tematica={{obj.idTematica}}'>
 						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
 						<div class='nombreObra'>{{ obj.nombreTematica }}</div>
 					</a>
