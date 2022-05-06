@@ -191,7 +191,6 @@
                 // timeline = new TL.Timeline('timeline-embed', jsonFile);
 
                 $('#exportPDF').click(function(event) {
-                    console.log("Prueba");
                     var reportPageHeight = $('#report').innerHeight();
                     var reportPageWidth = $('#report').innerWidth();
 
@@ -220,8 +219,10 @@
                         }
                     });
                     var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
-                    pdf.addImage($(pdfCanvas)[0], 'PNG', 0, 0);
-                    pdf.save('Grafico.pdf');
+                    pdf.addImage($(pdfCanvas)[0], 'PNG', 15, 38);
+                    pdf.setFontSize(20);
+                    pdf.text(50,50,"Grafico Quinsac en cifras");
+                    pdf.save('filename.pdf');
                 });
 
 
