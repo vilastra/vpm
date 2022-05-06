@@ -40,12 +40,12 @@ class GraficoController extends ControllerBase
         $cantObras=1;
         $prov='';
         while ($fila = mysqli_fetch_array($resultado)) { 
-          if($prov!="'Géneros pictóricos: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"){
+          if($prov!="'Género pictórico: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"){
             $yValues.=$cantObras.",";      
             $cantObras=1;
                     
-            $xValues.="'Géneros pictóricos: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
-            $prov="'Géneros pictóricos: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
+            $xValues.="'Género pictórico: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
+            $prov="'Género pictórico: ".substr($fila['Tematica'],0,100)." - Año: ".$fila['fecEjec']."',"; 
             $stringColor .=  "'".$this->colorRGB()."',"; 
           }else{
             $cantObras++;
