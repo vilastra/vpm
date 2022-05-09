@@ -22,13 +22,9 @@ class GraficoController extends ControllerBase
       } elseif ($valorCorY == 5) { // SI SELECCIONÓ AUTOR
         $sql = "IFNULL(terminoTaxAutoria.name, 'Desconocido') as EjeY";
       }
-    } else {
-      return null;
-    }
-    //IFNULL($sql, 'Desconocido') as nameY,
 
-    $query = "SELECT
-      DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec,
+      $query = "SELECT
+      IFNULL(DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y'), 'Desconocido') as fecEjec,
       " . $sql . "
       FROM node
       LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
@@ -43,57 +39,121 @@ class GraficoController extends ControllerBase
       LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
       LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
       LEFT JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
-      WHERE node.type = 'obra' AND node.status=1 AND DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') IS NOT NUll";
-    if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
-      $query .= " GROUP BY DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y')";
-    }
-    $resultado = $mysqli->query($query);
+      WHERE node.type = 'obra' AND node.status=1";
+      if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
+        $query .= " GROUP BY IFNULL(DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y'), 'Desconocido')";
+      }
+      $resultado = $mysqli->query($query);
 
-    $xValues = "";
-    $yValues = "";
-    $stringColor = "";
-    $cantObras = 1;
-    $prov = '';
-    $provY = '';
-    $provX = '';
-    $cont = 1;
+      $xValues = "";
+      $yValues = "";
+      $stringColor = "";
+      $cantObras = 1;
+      $prov = '';
+      $provY = '';
+      $provX = '';
+      $cont = 1;
 
 
-    while ($fila = mysqli_fetch_array($resultado)) {
-      if ($valorCorY == 1) {
-        $yValues .= $fila['EjeY'] . ",";
-        $xValues .= "'Cantidad de Obras: " . substr($fila['EjeY'], 0, 100) . " - Año: " . $fila['fecEjec'] . "',";
-        $stringColor .=  "'" . $this->colorRGB() . "',";
-      } else {
-        if ($prov != $fila['EjeY'] . "-" . $fila['fecEjec']) {
-          if ($cont != 1) {
-            $xValues .= "'" . substr($provY, 0, 100) . " - Año: " . $provX . "',";
-            $yValues .= $cantObras . ",";
-            $cantObras = 1;
-          }
-          $cont++;
-          
-          $prov = $fila['EjeY'] . "-" . $fila['fecEjec'];
-          $provY = $fila['EjeY'];
-          $provX = $fila['fecEjec'];
+      while ($fila = mysqli_fetch_array($resultado)) {
+        if ($valorCorY == 1) {
+          $yValues .= $fila['EjeY'] . ",";
+          $xValues .= "'Cantidad de Obras: " . substr($fila['EjeY'], 0, 100) . " - Año: " . $fila['fecEjec'] . "',";
           $stringColor .=  "'" . $this->colorRGB() . "',";
         } else {
-          $cantObras++;
-          $provY = $fila['EjeY'];
-          $provX = $fila['fecEjec'];
+          if ($prov != $fila['EjeY'] . "-" . $fila['fecEjec']) {
+            if ($cont != 1) {
+              $xValues .= "'" . substr($provY, 0, 100) . " - Año: " . $provX . "',";
+              $yValues .= $cantObras . ",";
+              $cantObras = 1;
+            }
+            $cont++;
+
+            $prov = $fila['EjeY'] . "-" . $fila['fecEjec'];
+            $provY = $fila['EjeY'];
+            $provX = $fila['fecEjec'];
+            $stringColor .=  "'" . $this->colorRGB() . "',";
+          } else {
+            $cantObras++;
+            $provY = $fila['EjeY'];
+            $provX = $fila['fecEjec'];
+          }
         }
       }
+      if ($valorCorY != 1) {
+        $xValues .= "'" . substr($provY, 0, 100) . " - Año: " . $provX . "',";
+        $yValues .= $cantObras . ",";
+      }
+
+      mysqli_close($mysqli);
+      $grafico['yValues'] = $yValues;
+      $grafico['xValues'] = $xValues;
+      $grafico['stringColor'] = $stringColor;
+      return $grafico;
+    } else if ($valorCorX == 3) {
+      if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
+        //$sql = "COUNT(IFNULL(title, 'Desconocido'))  as EjeY";
+      } elseif ($valorCorY == 2) { // SI SELECCIONÓ GÉNERO PICTORICO
+        $sql = "IFNULL(terminoTaxTematica.name, 'Desconocido')";
+        $nombre = "Género Pictórico";
+      } elseif ($valorCorY == 3) { // SI SELECCIONÓ TÉCNICA
+        $sql = "IFNULL(terminoTaxTecnica.name, 'Desconocido')";
+        $nombre = "Técnica";
+      } elseif ($valorCorY == 4) { // SI SELECCIONÓ SOPORTE
+        $sql = "IFNULL(terminoTaxSoporte.name, 'Desconocido')";
+        $nombre = "Soporte";
+      } elseif ($valorCorY == 5) { // SI SELECCIONÓ AUTOR
+        $sql = "IFNULL(terminoTaxAutoria.name, 'Desconocido')";
+        $nombre = "Artista";
+      }elseif ($valorCorY == 6) { // SI SELECCIONÓ AÑO
+        $sql = "IFNULL(DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y'), 'Desconocido')";
+        $nombre = "Año";
+      }
+      $query = "SELECT COUNT(nid)  as Obra,
+      ".$sql." as EjeY     
+      FROM node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+      LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+      LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+      LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+      LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
+      LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
+      LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
+      WHERE node.type = 'obra' AND node.status=1 
+      GROUP BY ".$sql."";
+
+      $resultado = $mysqli->query($query);
+
+      $xValues = "";
+      $yValues = "";
+      $stringColor = "";
+      $cantObras = 1;
+      $prov = '';
+
+      while ($fila = mysqli_fetch_array($resultado)) {
+        $yValues .= $fila['Obra'] . ",";
+        $xValues .= "'Cantidad de Obras: " . substr($fila['Obra'], 0, 100) . " - ".$nombre.": " . $fila['EjeY'] . "',";
+        $stringColor .=  "'" . $this->colorRGB() . "',";
+      }
+      mysqli_close($mysqli);
+      $grafico['yValues'] = $yValues;
+      $grafico['xValues'] = $xValues;
+      $grafico['stringColor'] = $stringColor;
+      return $grafico;
+    } else {
+      return null;
     }
-    if ($valorCorY != 1) {
-      $xValues .= "'" . substr($provY, 0, 100) . " - Año: " . $provX . "',";         
-      $yValues .= $cantObras . ",";
-    }
-    mysqli_close($mysqli);
-    $grafico['yValues'] = $yValues;
-    $grafico['xValues'] = $xValues;
-    $grafico['stringColor'] = $stringColor;
-    return $grafico;
+
+
   }
+
+
+
   function colorRGB()
   {
     $color = ['#22555D', '#2D717C', '#578D96', '#ABC6CB', '#D5E3E5'];
