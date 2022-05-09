@@ -16,17 +16,21 @@ class GraficoController extends ControllerBase
 
       if($valorCorX == 1){
         if($valorCorY == 1){
-          $sql = "title";          
+          $sql = "title";
+          $name = "Obras";          
         }elseif ($valorCorY == 2){
           $sql = "terminoTaxTematica.name";
+          $name = "Género pictórico"; 
         }elseif ($valorCorY == 3){
           $sql = "terminoTaxTecnica.name";
+          $name = "Técnica"; 
         }
       }else{
         return null;
       }
-    
-       $query ="SELECT count(IFNULL($sql, 'Desconocido')) as ejeY,      
+      //IFNULL($sql, 'Desconocido') as nameY,      
+       $query ="SELECT count(IFNULL($sql, 'Desconocido')) as ejeY,        
+       IFNULL($sql, 'Desconocido') as nameY, 
        DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
        FROM node
        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
@@ -49,17 +53,32 @@ class GraficoController extends ControllerBase
         $stringColor ="";
         $cantObras=1;
         $prov='';
-        
-        while ($fila = mysqli_fetch_array($resultado)) { 
-         $yValues.=$fila['ejeY'].",";
-         $xValues.="'Cantidad: ".substr($fila['ejeY'],0,100)." - Año: ".$fila['fecEjec']."',"; 
-         $stringColor .=  "'".$this->colorRGB()."',"; 
-       }
-       mysqli_close($mysqli);
-       $grafico['yValues'] = $yValues;
-       $grafico['xValues'] = $xValues;
-       $grafico['stringColor'] = $stringColor;
-       return $grafico;
+
+       while ($fila = mysqli_fetch_array($resultado)) { 
+        if($prov!="'Cantidad de ".$name.":".substr($fila['ejeY'],0,100)." - Año: ".$fila['fecEjec']."',"){
+          $yValues.=$cantObras.",";      
+          $cantObras=1;
+                  
+          $xValues.="'Cantidad de ".$name.":".substr($fila['ejeY'],0,100)." - Año: ".$fila['fecEjec']."',"; 
+          $prov="'Cantidad de ".$name.":".substr($fila['ejeY'],0,100)." - Año: ".$fila['fecEjec']."',"; 
+          $stringColor .=  "'".$this->colorRGB()."',"; 
+        }else{
+          $cantObras++;
+        }      
+      }
+      mysqli_close($mysqli);
+      $grafico['yValues'] = $yValues;
+      $grafico['xValues'] = $xValues;
+      $grafico['stringColor'] = $stringColor;
+      return $grafico;
+
+
+
+
+
+
+
+
 
     
   }
