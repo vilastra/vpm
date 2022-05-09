@@ -29,8 +29,7 @@ class GraficoController extends ControllerBase
         return null;
       }
       //IFNULL($sql, 'Desconocido') as nameY,      
-       $query ="SELECT count(IFNULL($sql, 'Desconocido')) as ejeY,        
-       IFNULL($sql, 'Desconocido') as nameY, 
+       $query ="SELECT count(IFNULL($sql, 'Desconocido')) as ejeY,
        DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
        FROM node
        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
