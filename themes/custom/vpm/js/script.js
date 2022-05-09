@@ -221,7 +221,7 @@
                     var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
                     pdf.addImage($(pdfCanvas)[0], 'PNG', 15, 38);
                     pdf.setFontSize(20);
-                    pdf.text(50,50,"Grafico Quinsac en cifras");
+                    pdf.text(50, 50, "Grafico Quinsac en cifras");
                     pdf.save('filename.pdf');
                 });
 
@@ -252,7 +252,16 @@
                     var ctx = document.getElementById('my_Chart').getContext('2d');
                     var myChart = new Chart(ctx, {
                         type: 'bar',
-                        data: myData
+                        data: myData,
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
                     });
                 }
 
@@ -262,7 +271,16 @@
 
                     myChart = new Chart(ctx, {
                         type: document.getElementById("chartType").value,
-                        data: myData
+                        data: myData,
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
                     });
                 };
 
