@@ -49,7 +49,7 @@ class VpmIndexCatalogos extends BlockBase
         FROM node
         LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
         LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
-        JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+        LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
         WHERE node.type='obra' AND node.status=1";
         $resultado = $mysqli->query($sql);
         $obras = [];
