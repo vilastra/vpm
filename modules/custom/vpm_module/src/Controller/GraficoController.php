@@ -21,6 +21,8 @@ class GraficoController extends ControllerBase
         $sql = "IFNULL(terminoTaxSoporte.name, 'Desconocido') as EjeY";
       } elseif ($valorCorY == 5) { // SI SELECCIONÓ AUTOR
         $sql = "IFNULL(terminoTaxAutoria.name, 'Desconocido') as EjeY";
+      } elseif ($valorCorY == 7) { // SI SELECCIONÓ PAÍS
+        $sql = "IFNULL(terminoTaxPais.name, 'Desconocido') as EjeY";  
       } elseif ($valorCorY == 8) { // SI SELECCIONÓ GÉNERO
         $sql = "IFNULL(fdfg.field_genero_value, 'Desconocido') as EjeY";
       }elseif ($valorCorY == 9) { // SI SELECCIONÓ ACTIVIDAD O PROFESIÓN
@@ -57,6 +59,9 @@ class GraficoController extends ControllerBase
       LEFT JOIN field_data_field_persona etnia on fdfir.field_iconografia_retrato_value = etnia.entity_id
       LEFT JOIN field_data_field_etnico_racial fdfer on etnia.field_persona_value = fdfer.entity_id  
       LEFT JOIN taxonomy_term_data terminoTaxEtnia ON terminoTaxEtnia.tid = fdfer.field_etnico_racial_tid 
+
+      LEFT JOIN field_data_field_pais_ejecucion fdfpe on iden.field_identificacion_value = fdfpe.entity_id
+      LEFT JOIN taxonomy_term_data terminoTaxPais on terminoTaxPais.tid = fdfpe.field_pais_ejecucion_tid    
 
 
       WHERE node.type = 'obra' AND node.status=1";
@@ -132,6 +137,9 @@ class GraficoController extends ControllerBase
       }elseif ($valorCorY == 6) { // SI SELECCIONÓ AÑO
         $sql = "IFNULL(DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y'), 'Desconocido')";
         $nombre = "Año";
+      }elseif ($valorCorY == 7) { // SI SELECCIONÓ PAÍS
+        $sql = "IFNULL(terminoTaxPais.name, 'Desconocido')"; 
+        $nombre = "País";  
       } elseif ($valorCorY == 8) { // SI SELECCIONÓ GÉNERO
         $sql = "IFNULL(fdfg.field_genero_value, 'Desconocido')";
         $nombre = "Género";
@@ -169,6 +177,9 @@ class GraficoController extends ControllerBase
       LEFT JOIN field_data_field_persona etnia on fdfir.field_iconografia_retrato_value = etnia.entity_id
       LEFT JOIN field_data_field_etnico_racial fdfer on etnia.field_persona_value = fdfer.entity_id  
       LEFT JOIN taxonomy_term_data terminoTaxEtnia ON terminoTaxEtnia.tid = fdfer.field_etnico_racial_tid 
+      
+      LEFT JOIN field_data_field_pais_ejecucion fdfpe on iden.field_identificacion_value = fdfpe.entity_id
+      LEFT JOIN taxonomy_term_data terminoTaxPais on terminoTaxPais.tid = fdfpe.field_pais_ejecucion_tid    
       
       WHERE node.type = 'obra' AND node.status=1 
       GROUP BY ".$sql."";
