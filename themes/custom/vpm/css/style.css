@@ -428,9 +428,9 @@ li {
 }
 
 footer {
-    background-color: #EEEEEE;
+    background-color: #F9F9F9;
     color: #6A6A6A;
-    margin-top: 4.375rem;
+    /* margin-top: 4.375rem; */
 }
 
 #footer2 {
@@ -1903,9 +1903,27 @@ a {
 
 /* HEADER LOGO BUSCADOR */
 
+.header-logo {
+    width: 35%;
+    padding: 1.825rem 1.875rem 0.625rem 1.875rem;
+    background-image: url(bg-linea-bicolor.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.header-logo-text {
+    font-size: 1.563rem;
+    color: #5A5A55;
+    font-family: "Open Sans", sans-serif;
+}
+
 #block-vpm-branding img {
-    max-width: 250px;
-    max-height: 110px;
+    max-width: 240px;
+    max-height: 94px;
+    border-right: 2px solid #C0C0C0;
+    padding-right: 1.875rem;
+    margin-right: 1.875rem;
 }
 
 
