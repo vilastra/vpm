@@ -235,7 +235,6 @@ class GraficoController extends ControllerBase
         }else{
           $query .= " GROUP BY node.nid";
         }  
-        echo "".$query;
         $resultado = $mysqli->query($query);
   
         $xValues = "";
@@ -384,6 +383,7 @@ class GraficoController extends ControllerBase
     return $color[rand(0, 4)];
   }
 
+
   function grafico()
   {
     $valorCorX = 0;
@@ -397,6 +397,7 @@ class GraficoController extends ControllerBase
 
 
     $grafico = $this->Listar_Query($valorCorX, $valorCorY);
+ 
 
     return [
       '#theme' => 'vpm-vista-grafico',
