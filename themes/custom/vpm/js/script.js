@@ -192,11 +192,11 @@
 
 
                 $("#cX").on("change", function() {
-                    var value   = $(this).val();
-                    var name    = $("#cY");
-                    var curso   = name.val();
-            
-                    if(value == "0") {
+                    var value = $(this).val();
+                    var name = $("#cY");
+                    var curso = name.val();
+
+                    if (value == "0") {
                         name.prop("disabled", true);
                     } else {
                         name.prop("disabled", false);
@@ -206,46 +206,13 @@
                             var word = option.indexOf(value);
                             (word > 1) ? $(this).show() : $(this).hide()
                         });*/
-                     
+
                     }
                 });
 
 
-                $('#exportPDF').click(function(event) {
-                    var reportPageHeight = $('#report').innerHeight();
-                    var reportPageWidth = $('#report').innerWidth();
 
 
-                    var pdfCanvas = $('<canvas />').attr({
-                        id: "canvaspdf",
-                        width: reportPageWidth,
-                        height: reportPageHeight
-                    });
-
-                    var pdfctx = $(pdfCanvas)[0].getContext('2d');
-                    var pdfctxX = 0;
-                    var pdfctxY = 0;
-                    var buffer = 100;
-
-                    $("canvas").each(function(index) {
-                        var canvasHeight = $(this).innerHeight();
-                        var canvasWidth = $(this).innerWidth();
-
-                        pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
-                        pdfctxX += canvasWidth + buffer;
-
-                        if (index % 2 === 1) {
-                            pdfctxX = 0;
-                            pdfctxY += canvasHeight + buffer;
-                        }
-                    });
-                    var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
-                    pdf.addImage($(pdfCanvas)[0], 'PNG', 15, 38);
-                    pdf.setFontSize(20);
-                    pdf.text(50, 50, "Grafico Quinsac en cifras");
-                    pdf.save('filename.pdf');
-                }); 
-               
 
 
                 if (typeof xValues !== 'undefined') {
@@ -275,26 +242,65 @@
                         }
                     });
                 }
-                $('#exportExcel').click(function(event){                                  
-                    downloadAsExcel();
-                  });
+                $('main', context).once('#exportPDF').each(function() {
+                    $('#exportPDF').click(function(event) {
+                        var reportPageHeight = $('#report').innerHeight();
+                        var reportPageWidth = $('#report').innerWidth();
 
 
-                  function downloadAsExcel() {
-                    var resultado = dataExcel;
-                    var lineArray = [];
-                    resultado.forEach(function(infoArray, index) {
-                        var line = infoArray.join(" \t");
-                        lineArray.push(index == 0 ? line : line);
+                        var pdfCanvas = $('<canvas />').attr({
+                            id: "canvaspdf",
+                            width: reportPageWidth,
+                            height: reportPageHeight
+                        });
+
+                        var pdfctx = $(pdfCanvas)[0].getContext('2d');
+                        var pdfctxX = 0;
+                        var pdfctxY = 0;
+                        var buffer = 100;
+
+                        $("canvas").each(function(index) {
+                            var canvasHeight = $(this).innerHeight();
+                            var canvasWidth = $(this).innerWidth();
+
+                            pdfctx.drawImage($(this)[0], pdfctxX, pdfctxY, canvasWidth, canvasHeight);
+                            pdfctxX += canvasWidth + buffer;
+
+                            if (index % 2 === 1) {
+                                pdfctxX = 0;
+                                pdfctxY += canvasHeight + buffer;
+                            }
+                        });
+                        var pdf = new jsPDF('l', 'pt', [reportPageWidth, reportPageHeight]);
+                        pdf.addImage($(pdfCanvas)[0], 'PNG', 15, 38);
+                        pdf.setFontSize(20);
+                        pdf.text(50, 50, "Grafico Quinsac en cifras");
+                        pdf.save('Quinsac en cifras.pdf');
                     });
-                    var csvContent = lineArray.join("\r\n");
-                    var excel_file = document.createElement('a');
-                    excel_file.setAttribute('href', 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(csvContent));
-                    excel_file.setAttribute('download', 'QuinsacCifras.xls');
-                    document.body.appendChild(excel_file);
-                    excel_file.click();
-                    document.body.removeChild(excel_file);
-                  }
+                });
+                $('main', context).once('#exportExcel').each(function() {
+                    $('#exportExcel').click(function(event) {
+                        downloadAsExcel();
+                    });
+
+
+                    function downloadAsExcel() {
+                        var resultado = dataExcel;
+                        var lineArray = [];
+                        resultado.forEach(function(infoArray, index) {
+                            var line = infoArray.join(" \t");
+                            lineArray.push(index == 0 ? line : line);
+                        });
+                        var csvContent = lineArray.join("\r\n");
+                        var excel_file = document.createElement('a');
+                        excel_file.setAttribute('href', 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(csvContent));
+                        excel_file.setAttribute('download', 'QuinsacCifras.xls');
+                        document.body.appendChild(excel_file);
+                        excel_file.click();
+                        document.body.removeChild(excel_file);
+                    }
+                });
+
 
 
 
@@ -343,7 +349,7 @@
                         $('<div class="cronoLeyend pb-4 pt-4"><span class="spanIcon obraLeyend"><i class="fa fa-picture-o" aria-hidden="true"></i></span><span class="textIcon">Obras del catálogo</span><span class="spanIcon"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span><span class="textIcon">Exposiciones</span>                    <span class="spanIcon hitoLeyend"><i class="fa fa-leaf" aria-hidden="true"></i></span><span class="textIcon">Hitos históricos</span>                    <span class="spanIcon destLeyend"><i class="fa fa-star-o" aria-hidden="true"></i></span><span class="textIcon">Destacados</span></div>').insertAfter(".tl-timenav");
                     });
                 });
-
+                console.log("PRUEBA");
 
             });
 

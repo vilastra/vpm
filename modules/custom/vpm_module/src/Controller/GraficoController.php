@@ -322,6 +322,10 @@ class GraficoController extends ControllerBase
         $sql = "IFNULL(terminoTaxEtnia.name, 'Desconocido')";
         $nombre = "Etnia o Raza";
       }
+
+      $dataExcel ='["Cantidad de obras", "'.$nombre.'"],';
+
+
       $query = "SELECT COUNT(distinct nid)  as Obra,
       ".$sql." as EjeY     
       FROM node
@@ -362,7 +366,7 @@ class GraficoController extends ControllerBase
       $stringColor = "";
       $cantObras = 1;
       $prov = '';
-      $dataExcel = "";
+      
 
       while ($fila = mysqli_fetch_array($resultado)) {
         $yValues .= $fila['Obra'] . ",";
@@ -370,10 +374,10 @@ class GraficoController extends ControllerBase
         $stringColor .=  "'" . $this->colorRGB() . "',"; 
 
         
-        $dataExcel .= "['";
-        $dataExcel .= $fila["Obra"].",";
+        $dataExcel .= '["';
+        $dataExcel .= $fila["Obra"].'","';
         $dataExcel .= $fila["EjeY"];
-        $dataExcel .= "'],";
+        $dataExcel .= '"],';
    
         /*'["ValorY", "ValorX"],
         ["1", "A1"],*/
@@ -420,7 +424,7 @@ class GraficoController extends ControllerBase
     ["1", "A1"],
     ["2", "B1"],
     ["3", "A2"],
-    ["4", "B2"]';*/
+    ["4", "B2"]'; */
 
     return [
       '#theme' => 'vpm-vista-grafico',
