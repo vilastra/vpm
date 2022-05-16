@@ -87,6 +87,8 @@ class GraficoController extends ControllerBase
           $yValues .= $fila['EjeY'] . ",";
           $xValues .= "'Cantidad de Obras: " . substr($fila['EjeY'], 0, 100) . " - Año: " . $fila['fecEjec'] . "',";
           $stringColor .=  "'" . $this->colorRGB() . "',";
+
+
         } else {
           if ($prov != $fila['EjeY'] . "-" . $fila['fecEjec']) {
             if ($cont != 1) {
@@ -117,6 +119,7 @@ class GraficoController extends ControllerBase
       $grafico['xValues'] = $xValues;
       $grafico['stringColor'] = $stringColor;
       return $grafico;
+
     }else if ($valorCorX ==2){
       $sql='';
       $nombre ='';
@@ -359,16 +362,30 @@ class GraficoController extends ControllerBase
       $stringColor = "";
       $cantObras = 1;
       $prov = '';
+      $dataExcel = "";
 
       while ($fila = mysqli_fetch_array($resultado)) {
         $yValues .= $fila['Obra'] . ",";
         $xValues .= "'Cantidad de Obras: " . substr($fila['Obra'], 0, 100) . " - ".$nombre.": " . $fila['EjeY'] . "',";
-        $stringColor .=  "'" . $this->colorRGB() . "',";
+        $stringColor .=  "'" . $this->colorRGB() . "',"; 
+
+        
+        $dataExcel .= "['";
+        $dataExcel .= $fila["Obra"].",";
+        $dataExcel .= $fila["EjeY"];
+        $dataExcel .= "'],";
+   
+        /*'["ValorY", "ValorX"],
+        ["1", "A1"],*/
       }
       mysqli_close($mysqli);
       $grafico['yValues'] = $yValues;
       $grafico['xValues'] = $xValues;
       $grafico['stringColor'] = $stringColor;
+
+      $grafico['dataExcel'] = $dataExcel;
+
+
       return $grafico;
     } else {
       return null;
@@ -397,7 +414,13 @@ class GraficoController extends ControllerBase
 
 
     $grafico = $this->Listar_Query($valorCorX, $valorCorY);
- 
+    
+    $grafico["dataExcel"] =  $grafico['dataExcel'];
+    /*'["ValorY", "ValorX"],
+    ["1", "A1"],
+    ["2", "B1"],
+    ["3", "A2"],
+    ["4", "B2"]';*/
 
     return [
       '#theme' => 'vpm-vista-grafico',

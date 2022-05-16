@@ -86,15 +86,13 @@
 	</div>
 </div>
 
-
-
-
-
-
+{{dump(grafico['dataExcel']|raw)}}
 
 <script>
   var Titulo = "Cantidad de obras";
   var xValues = [{{ grafico['xValues']|raw }}];
   var yValues = [{{ grafico['yValues']|raw }}];
   var barColors = [{{ grafico['stringColor']|raw }}];
+
+  var dataExcel = [{{ grafico['dataExcel']|raw }}];
 </script>

@@ -281,13 +281,7 @@
 
 
                   function downloadAsExcel() {
-                    var resultado = [
-                        ["ValorY", "ValorX"],
-                        ["1", "A1"],
-                        ["2", "B1"],
-                        ["3", "A2"],
-                        ["4", "B2"],
-                    ];
+                    var resultado = dataExcel;
                     var lineArray = [];
                     resultado.forEach(function(infoArray, index) {
                         var line = infoArray.join(" \t");
@@ -296,7 +290,7 @@
                     var csvContent = lineArray.join("\r\n");
                     var excel_file = document.createElement('a');
                     excel_file.setAttribute('href', 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(csvContent));
-                    excel_file.setAttribute('download', 'QuinsacaCifras.xls');
+                    excel_file.setAttribute('download', 'QuinsacCifras.xls');
                     document.body.appendChild(excel_file);
                     excel_file.click();
                     document.body.removeChild(excel_file);
