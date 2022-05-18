@@ -13,13 +13,31 @@
         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
           <div class="InfoTitulo1 pb-1">Coordenada X</div>
           <div>
-            <select class="inputSelect" name="cX" id="cX">
-              <option value="0">Selecciona</option>
-              <option value="1">Año </option>
-              <option value="2">Artista</option>
-              <option value="3">Obras</option>
-              
-              
+            <select class="inputSelect" name="cX" id="cX" value="{{ ordenaX }} ">
+              {% if ordenaX == 0 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Año </option>
+                <option value="2">Artista</option>
+                <option value="3">Obras</option>
+
+              {% elseif ordenaX == 1 %}
+                <option value="0">Selecciona</option>
+                <option selected value="1">Año </option>
+                <option value="2">Artista</option>
+                <option value="3">Obras</option>
+
+              {% elseif ordenaX == 2 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Año </option>
+                <option selected value="2">Artista</option>
+                <option value="3">Obras</option>
+
+              {% elseif ordenaX == 3 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Año </option>
+                <option value="2">Artista</option>
+                <option selected value="3">Obras</option>
+              {% endif %}
             </select>  
           </div>
         </div>
@@ -27,21 +45,162 @@
         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
           <div class="InfoTitulo1 pb-1">Coordenada Y</div>
           <div>
-            <select class="inputSelect" name="cY" id="cY" disabled>
-              <option value="0">Selecciona</option>
-              <option value="1">Obras</option>              
-              <option value="2">Género pictórico</option>
-              <option value="3">Técnica</option>
-              <option value="4">Soporte</option>
-              <option value="5">Artista</option>
-              <option value="6">Año</option>
-              <option value="7">País</option>
-              <option value="8">Género</option>
-              <option value="9">Actividad o profesión</option>
-              <option value="10">Etnia o raza</option>
+            <select class="inputSelect" name="cY" id="cY" value="{{ ordenaY }}">
+
+              {% if ordenaY == 0 %}
+                <option selected value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 1 %}
+                <option value="0">Selecciona</option>
+                <option selected value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 2 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option selected value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 3 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option selected value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 4 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option selected value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 5 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option selected value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 6 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option selected value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 7 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option selected value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+            
+              {% elseif ordenaY == 8 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option selected value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+              
+              {% elseif ordenaY == 9 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option selected value="9">Actividad o profesión</option>
+                <option value="10">Etnia o raza</option>
+
+              {% elseif ordenaY == 10 %}
+                <option value="0">Selecciona</option>
+                <option value="1">Obras</option>              
+                <option value="2">Género pictórico</option>
+                <option value="3">Técnica</option>
+                <option value="4">Soporte</option>
+                <option value="5">Artista</option>
+                <option value="6">Año</option>
+                <option value="7">País</option>
+                <option value="8">Género</option>
+                <option value="9">Actividad o profesión</option>
+                <option selected value="10">Etnia o raza</option>
+              {% endif %}
             </select>  
           </div>
         </div>
+
+
+
+
+
+
+
+
 
         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
           <div class="InfoTitulo1 pb-4-5"></div>
@@ -94,5 +253,5 @@
   var yValues = [{{ grafico['yValues']|raw }}];
   var barColors = [{{ grafico['stringColor']|raw }}];
 
-  var dataExcel = [{{ grafico['dataExcel']|raw }}];
+  var dataExcel = [{{ grafico['dataArrayExcel']|raw }}];
 </script>

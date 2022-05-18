@@ -13,23 +13,34 @@ class GraficoController extends ControllerBase
     if ($valorCorX == 1) {
       if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
         $sql = "COUNT(distinct IFNULL(title, 'Desconocido'))  as EjeY";
+        $nombre = "Obras";
       } elseif ($valorCorY == 2) { // SI SELECCIONÓ GÉNERO PICTORICO
         $sql = "IFNULL(terminoTaxTematica.name, 'Desconocido') as EjeY";
+        $nombre = "Género Pictórico";
       } elseif ($valorCorY == 3) { // SI SELECCIONÓ TÉCNICA
         $sql = "IFNULL(terminoTaxTecnica.name, 'Desconocido') as EjeY";
+        $nombre = "Técnica";
       } elseif ($valorCorY == 4) { // SI SELECCIONÓ SOPORTE
         $sql = "IFNULL(terminoTaxSoporte.name, 'Desconocido') as EjeY";
+        $nombre = "Soporte";
       } elseif ($valorCorY == 5) { // SI SELECCIONÓ AUTOR
         $sql = "IFNULL(terminoTaxAutoria.name, 'Desconocido') as EjeY";
+        $nombre = "Artista";
       } elseif ($valorCorY == 7) { // SI SELECCIONÓ PAÍS
         $sql = "IFNULL(terminoTaxPais.name, 'Desconocido') as EjeY";  
+        $nombre = "País";  
       } elseif ($valorCorY == 8) { // SI SELECCIONÓ GÉNERO
         $sql = "IFNULL(fdfg.field_genero_value, 'Desconocido') as EjeY";
+        $nombre = "Género";
       }elseif ($valorCorY == 9) { // SI SELECCIONÓ ACTIVIDAD O PROFESIÓN
         $sql = "IFNULL(terminoTaxEActiProf.name, 'Desconocido') as EjeY";
+        $nombre = "Actividad o Profesión";
       }elseif ($valorCorY == 10) { // SI SELECCIONÓ ETNIA O RAZA
         $sql = "IFNULL(terminoTaxEtnia.name, 'Desconocido') as EjeY";
+        $nombre = "Etnia o Raza";
       }
+
+      $dataExcel ='["Año", "'.$nombre.'"],';
 
       $query = "SELECT
       IFNULL(DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y'), 'Desconocido') as fecEjec,
@@ -88,13 +99,25 @@ class GraficoController extends ControllerBase
           $xValues .= "'Cantidad de Obras: " . substr($fila['EjeY'], 0, 100) . " - Año: " . $fila['fecEjec'] . "',";
           $stringColor .=  "'" . $this->colorRGB() . "',";
 
+          $dataExcel .= '["';
+          $dataExcel .= $fila["fecEjec"].'","';
+          $dataExcel .= $fila["EjeY"];
+          $dataExcel .= '"],';
 
         } else {
           if ($prov != $fila['EjeY'] . "-" . $fila['fecEjec']) {
             if ($cont != 1) {
               $xValues .= "'" . substr($provY, 0, 100) . " - Año: " . $provX . "',";
               $yValues .= $cantObras . ",";
+             
+
+              $dataExcel .= '["';
+              $dataExcel .= $fila["fecEjec"].'","';
+              $dataExcel .= $fila["EjeY"];
+              $dataExcel .= '"],';
+
               $cantObras = 1;
+
             }
             $cont++;
 
@@ -112,12 +135,20 @@ class GraficoController extends ControllerBase
       if ($valorCorY != 1) {
         $xValues .= "'" . substr($provY, 0, 100) . " - Año: " . $provX . "',";
         $yValues .= $cantObras . ",";
+
+          $dataExcel .= '["';
+          $dataExcel .= $fila["fecEjec"].'","';
+          $dataExcel .= $fila["EjeY"];
+          $dataExcel .= '"],';
       }
 
       mysqli_close($mysqli);
       $grafico['yValues'] = $yValues;
       $grafico['xValues'] = $xValues;
       $grafico['stringColor'] = $stringColor;
+
+      $grafico['dataExcel'] = $dataExcel;
+
       return $grafico;
 
     }else if ($valorCorX ==2){
@@ -125,25 +156,36 @@ class GraficoController extends ControllerBase
       $nombre ='';
       if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
         $sql = "IFNULL(terminoTaxAutoria.name, 'Desconocido')";
+        $nombre = "Obras";
       } elseif ($valorCorY == 2) { // SI SELECCIONÓ GÉNERO PICTORICO
         $sql = "IFNULL(terminoTaxTematica.name, 'Desconocido') as EjeY";
+        $nombre = "Género Pictórico";
       } elseif ($valorCorY == 3) { // SI SELECCIONÓ TÉCNICA
         $sql = "IFNULL(terminoTaxTecnica.name, 'Desconocido') as EjeY";
+        $nombre = "Técnica";
       } elseif ($valorCorY == 4) { // SI SELECCIONÓ SOPORTE
         $sql = "IFNULL(terminoTaxSoporte.name, 'Desconocido') as EjeY";
+        $nombre = "Soporte";
       } elseif ($valorCorY == 5) { // SI SELECCIONÓ AUTOR
        // $sql = "IFNULL(terminoTaxAutoria.name, 'Desconocido') as EjeY";
       } elseif ($valorCorY == 6) { // SI SELECCIONÓ AÑO
         $sql = "IFNULL(DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y'), 'Desconocido') as EjeY"; 
+        $nombre = "Año"; 
       } elseif ($valorCorY == 7) { // SI SELECCIONÓ PAÍS
         $sql = "IFNULL(terminoTaxPais.name, 'Desconocido') as EjeY";  
+        $nombre = "País"; 
       } elseif ($valorCorY == 8) { // SI SELECCIONÓ GÉNERO
         $sql = "IFNULL(fdfg.field_genero_value, 'Desconocido') as EjeY";
+        $nombre = "Género"; 
       }elseif ($valorCorY == 9) { // SI SELECCIONÓ ACTIVIDAD O PROFESIÓN
         $sql = "IFNULL(terminoTaxEActiProf.name, 'Desconocido') as EjeY";
+        $nombre = "Actividad o Profesión";
       }elseif ($valorCorY == 10) { // SI SELECCIONÓ ETNIA O RAZA
         $sql = "IFNULL(terminoTaxEtnia.name, 'Desconocido') as EjeY";
+        $nombre = "Etnia o Raza";
       }
+      
+      $dataExcel ='["Artista", "'.$nombre.'"],';
 
       if($valorCorY == 1){
         $query = "SELECT COUNT(distinct nid)  as Obra,
@@ -192,11 +234,19 @@ class GraficoController extends ControllerBase
         $yValues .= $fila['Obra'] . ",";
         $xValues .= "'Autor: " . substr($fila['EjeY'], 0, 100) . " - Cantidad de Obras : " . $fila['Obra'] . "',";
         $stringColor .=  "'" . $this->colorRGB() . "',";
+
+        $dataExcel .= '["';
+        $dataExcel .= $fila["Obra"].'","';
+        $dataExcel .= $fila["EjeY"];
+        $dataExcel .= '"],';
       }
       mysqli_close($mysqli);
       $grafico['yValues'] = $yValues;
       $grafico['xValues'] = $xValues;
       $grafico['stringColor'] = $stringColor;
+      echo "".$dataExcel;
+      $grafico['dataExcel'] = $dataExcel;
+
       return $grafico;
       }else{
         $query = "SELECT
@@ -255,12 +305,23 @@ class GraficoController extends ControllerBase
             $yValues .= $fila['EjeY'] . ",";
             $xValues .= "'Cantidad de Obras: " . substr($fila['EjeY'], 0, 100) . " - Artista: " . $fila['fecEjec'] . "',";
             $stringColor .=  "'" . $this->colorRGB() . "',";
+
+            $dataExcel .= '["';
+            $dataExcel .= $fila["fecEjec"].'","';
+            $dataExcel .= $fila["EjeY"];
+            $dataExcel .= '"],';
+
           } else {
             if ($prov != $fila['EjeY'] . "-" . $fila['fecEjec']) {
               if ($cont != 1) {
                 $xValues .= "'" . substr($provY, 0, 100) . " - Artista: " . $provX . "',";
                 $yValues .= $cantObras . ",";
                 $cantObras = 1;
+
+                $dataExcel .= '["';
+                $dataExcel .= $fila["fecEjec"].'","';
+                $dataExcel .= $fila["EjeY"];
+                $dataExcel .= '"],';
               }
               $cont++;
   
@@ -278,12 +339,19 @@ class GraficoController extends ControllerBase
         if ($valorCorY != 1) {
           $xValues .= "'" . substr($provY, 0, 100) . " - Artista: " . $provX . "',";
           $yValues .= $cantObras . ",";
+
+          $dataExcel .= '["';
+          $dataExcel .= $fila["fecEjec"].'","';
+          $dataExcel .= $fila["EjeY"];
+          $dataExcel .= '"],';
         }
   
         mysqli_close($mysqli);
         $grafico['yValues'] = $yValues;
         $grafico['xValues'] = $xValues;
         $grafico['stringColor'] = $stringColor;
+    
+        $grafico['dataExcel'] = $dataExcel;
         return $grafico;
       }
 
@@ -416,18 +484,29 @@ class GraficoController extends ControllerBase
       $valorCorY = $_GET["cY"];
     }
 
+    $ordenaX = 0;
+    if (isset($_GET["cX"])) {
+      $ordenaX = $_GET["cX"];
+    }
+
+    $ordenaY = 0;
+    if (isset($_GET["cY"])) {
+      $ordenaY = $_GET["cY"];
+    }
 
     $grafico = $this->Listar_Query($valorCorX, $valorCorY);
     
-    $grafico["dataExcel"] =  $grafico['dataExcel'];
-    /*'["ValorY", "ValorX"],
-    ["1", "A1"],
-    ["2", "B1"],
-    ["3", "A2"],
-    ["4", "B2"]'; */
+    $grafico["dataArrayExcel"] = null;
+    if(isset($grafico['dataExcel'])){
+      $grafico["dataArrayExcel"] =  $grafico['dataExcel'];
+    }
+    
+  
 
     return [
       '#theme' => 'vpm-vista-grafico',
+      '#ordenaX' => $ordenaX,
+      '#ordenaY' => $ordenaY,
       '#grafico' => $grafico
     ];
   }

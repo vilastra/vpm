@@ -191,7 +191,7 @@
                 // timeline = new TL.Timeline('timeline-embed', jsonFile);
 
 
-                $("#cX").on("change", function() {
+                /*$("#cX").on("change", function() {
                     var value = $(this).val();
                     var name = $("#cY");
                     var curso = name.val();
@@ -200,15 +200,15 @@
                         name.prop("disabled", true);
                     } else {
                         name.prop("disabled", false);
-                        /*name.find("option").each(function() {
+                        name.find("option").each(function() {
                             (value == 1) ? 1 : 7
                             var option = $(this).val();
                             var word = option.indexOf(value);
                             (word > 1) ? $(this).show() : $(this).hide()
-                        });*/
+                        });
 
                     }
-                });
+                });*/
 
 
 

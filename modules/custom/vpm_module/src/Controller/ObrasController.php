@@ -32,6 +32,9 @@ class ObrasController extends ControllerBase
       FROM node
       LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
       LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+      
+      left join field_data_field_titulos_anteriores fdfta on fdfta.entity_id = iden.field_identificacion_value
+
       LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
       LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
       LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
@@ -40,6 +43,11 @@ class ObrasController extends ControllerBase
       LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
       LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
       LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
+
+      LEFT JOIN field_data_field_iconografia_retrato fdfir on fdfir.entity_id = node.nid 
+      LEFT JOIN field_data_field_persona fdfp on fdfir.field_iconografia_retrato_value = fdfp.entity_id 
+      LEFT JOIN field_data_field_nombre_retratado fdfnr on fdfp.field_persona_value = fdfnr.entity_id 
+
       WHERE node.type = 'obra' AND node.status=1 ";
 
     //WHERE  node.type = 'obra' AND node.status=1 
