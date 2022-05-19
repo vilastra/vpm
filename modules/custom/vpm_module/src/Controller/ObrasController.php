@@ -443,6 +443,17 @@ class ObrasController extends ControllerBase
           array_push($whereTipo, 's');
         }
         if (!in_array($valor, $palabrasOmitir)) {
+          array_push($condiciones['busqueda2'], 'fdfta.field_titulos_anteriores_value LIKE ?');
+          array_push($where, "%{$_GET['busquedaIndex']}%");
+          array_push($whereTipo, 's');
+        }
+        if (!in_array($valor, $palabrasOmitir)) {
+          array_push($condiciones['busqueda2'], 'fdfnr.field_nombre_retratado_value LIKE ?');
+          array_push($where, "%{$_GET['busquedaIndex']}%");
+          array_push($whereTipo, 's');
+        }
+
+        if (!in_array($valor, $palabrasOmitir)) {
           array_push($condiciones['busqueda2'], 'terminoTaxTematica.name LIKE ?');
           array_push($where, "%{$_GET['busquedaIndex']}%");
           array_push($whereTipo, 's');

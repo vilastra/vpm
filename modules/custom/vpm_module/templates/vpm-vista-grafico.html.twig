@@ -9,197 +9,71 @@
       <h2 class="pb-3">Filtros</h2>
     
     <form action="" method="get">
-      <div class="row">
+      
+       
         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-          <div class="InfoTitulo1 pb-1">Coordenada X</div>
-          <div>
-            <select class="inputSelect" name="cX" id="cX" value="{{ ordenaX }} ">
-              {% if ordenaX == 0 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Año </option>
-                <option value="2">Artista</option>
-                <option value="3">Obras</option>
-
-              {% elseif ordenaX == 1 %}
-                <option value="0">Selecciona</option>
-                <option selected value="1">Año </option>
-                <option value="2">Artista</option>
-                <option value="3">Obras</option>
-
-              {% elseif ordenaX == 2 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Año </option>
-                <option selected value="2">Artista</option>
-                <option value="3">Obras</option>
-
-              {% elseif ordenaX == 3 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Año </option>
-                <option value="2">Artista</option>
-                <option selected value="3">Obras</option>
-              {% endif %}
-            </select>  
-          </div>
+            <div class="InfoTitulo1 pb-1">Géneros pictóricos</div>
+            <div>
+                <select class="inputSelect" name="tematica" id="tematica">
+                    <option value="0">Selecciona</option>
+                    {% for obj in tematica %}
+                        {% if obj.selected == true %}
+                            <option selected value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+                        {% else %}
+                            <option value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
         </div>
 
-        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-          <div class="InfoTitulo1 pb-1">Coordenada Y</div>
-          <div>
-            <select class="inputSelect" name="cY" id="cY" value="{{ ordenaY }}">
-
-              {% if ordenaY == 0 %}
-                <option selected value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 1 %}
-                <option value="0">Selecciona</option>
-                <option selected value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 2 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option selected value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 3 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option selected value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 4 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option selected value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 5 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option selected value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 6 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option selected value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 7 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option selected value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-            
-              {% elseif ordenaY == 8 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option selected value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-              
-              {% elseif ordenaY == 9 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option selected value="9">Actividad o profesión</option>
-                <option value="10">Etnia o raza</option>
-
-              {% elseif ordenaY == 10 %}
-                <option value="0">Selecciona</option>
-                <option value="1">Obras</option>              
-                <option value="2">Género pictórico</option>
-                <option value="3">Técnica</option>
-                <option value="4">Soporte</option>
-                <option value="5">Artista</option>
-                <option value="6">Año</option>
-                <option value="7">País</option>
-                <option value="8">Género</option>
-                <option value="9">Actividad o profesión</option>
-                <option selected value="10">Etnia o raza</option>
-              {% endif %}
-            </select>  
-          </div>
+        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <div class="InfoTitulo1 pb-1">Artista</div>
+            <div>
+                <select class="inputSelect" name="artista" id="artista">
+                    <option value="0">Selecciona</option>
+                    {% for obj in artista %}
+                        {% if obj.selected == true %}
+                            <option selected value="{{ obj.autorId }}">{{ obj.autor }}</option>
+                        {% else %}
+                            <option value="{{ obj.autorId }}">{{ obj.autor }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
         </div>
 
+        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <div class="InfoTitulo1 pb-1">Año</div>
+            <div>
+                <select class="inputSelect" name="ano" id="ano">
+                    <option value="0">Selecciona</option>
+                    {% for obj in annio %}
+                        {% if obj.selected == true %}
+                            <option selected value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+                        {% else %}
+                            <option value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
 
-
-
-
-
-
+        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+            <div class="InfoTitulo1 pb-1">Técnica</div>
+            <div>
+                <select class="inputSelect" name="tecnica" id="tecnica">
+                    <option value="0">Selecciona</option>
+                    {% for obj in tecnica %}
+                        {% if obj.selected == true %}
+                            <option selected value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+                        {% else %}
+                            <option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
 
 
         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
@@ -207,7 +81,7 @@
           <input type='submit' class='btn button btnBuscarFiltro more-link' value="Genera">
         </div>
         
-      </div>
+     
     </form>
 
       <br>
