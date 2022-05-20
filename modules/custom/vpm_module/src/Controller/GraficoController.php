@@ -7,11 +7,12 @@ use mysqli;
 
 class GraficoController extends ControllerBase
 {
-    function Listar_Query($buscar, $condiciones, $where, $whereTipo){
+    function Listar_Query($buscar, $condiciones, $where, $whereTipo)
+    {
       $sql='';
       $nombre ='';
       if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
-        $sql = "COUNT(IFNULL(title, 'Desconocido'))  as EjeY";
+        //$sql = "COUNT(IFNULL(title, 'Desconocido'))";
       } elseif ($valorCorY == 2) { // SI SELECCIONÓ GÉNERO PICTORICO
         $sql = "IFNULL(terminoTaxTematica.name, 'Desconocido')";
         $nombre = "Género Pictórico";
@@ -41,7 +42,7 @@ class GraficoController extends ControllerBase
         $nombre = "Etnia o Raza";
       }
 
-      $dataExcel ='["Cantidad de obras", "'.$nombre.'"],';
+      //$dataExcel ='["Cantidad de obras", "'.$nombre.'"],';
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
       $query = "SELECT COUNT(distinct nid)  as Obra,
@@ -331,15 +332,8 @@ class GraficoController extends ControllerBase
       $annio = $this->Cb_Annio();
       $tecnica = $this->Cb_Tecnica();
 
-      $grafico = $this->Listar_Excel($buscar, $condiciones, $where, $whereTipo);
+     //$grafico = $this->Listar_Excel($buscar, $condiciones, $where, $whereTipo);
   
-   
-
-   
-
-   
-
-      //$grafico = $this->Listar_Query($valorCorX, $valorCorY);
       
       $grafico["dataArrayExcel"] = null;
       if(isset($grafico['dataExcel'])){
