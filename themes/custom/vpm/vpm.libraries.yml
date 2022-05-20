@@ -32,3 +32,4 @@ global-scripts:
   dependencies:
     - core/drupal
     - core/jquery
+    - core/jquery.once
