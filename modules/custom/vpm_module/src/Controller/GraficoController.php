@@ -8,78 +8,143 @@ use mysqli;
 class GraficoController extends ControllerBase
 {
     function Listar_Query($buscar, $condiciones, $where, $whereTipo){
+      $sql='';
+      $nombre ='';
+      if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
+        $sql = "COUNT(IFNULL(title, 'Desconocido'))  as EjeY";
+      } elseif ($valorCorY == 2) { // SI SELECCIONÓ GÉNERO PICTORICO
+        $sql = "IFNULL(terminoTaxTematica.name, 'Desconocido')";
+        $nombre = "Género Pictórico";
+      } elseif ($valorCorY == 3) { // SI SELECCIONÓ TÉCNICA
+        $sql = "IFNULL(terminoTaxTecnica.name, 'Desconocido')";
+        $nombre = "Técnica";
+      } elseif ($valorCorY == 4) { // SI SELECCIONÓ SOPORTE
+        $sql = "IFNULL(terminoTaxSoporte.name, 'Desconocido')";
+        $nombre = "Soporte";
+      } elseif ($valorCorY == 5) { // SI SELECCIONÓ AUTOR
+        $sql = "IFNULL(terminoTaxAutoria.name, 'Desconocido')";
+        $nombre = "Artista";
+      }elseif ($valorCorY == 6) { // SI SELECCIONÓ AÑO
+        $sql = "IFNULL(DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y'), 'Desconocido')";
+        $nombre = "Año";
+      }elseif ($valorCorY == 7) { // SI SELECCIONÓ PAÍS
+        $sql = "IFNULL(terminoTaxPais.name, 'Desconocido')"; 
+        $nombre = "País";  
+      } elseif ($valorCorY == 8) { // SI SELECCIONÓ GÉNERO
+        $sql = "IFNULL(fdfg.field_genero_value, 'Desconocido')";
+        $nombre = "Género";
+      }elseif ($valorCorY == 9) { // SI SELECCIONÓ ACTIVIDAD O PROFESIÓN
+        $sql = "IFNULL(terminoTaxEActiProf.name, 'Desconocido')";
+        $nombre = "Actividad o Profesión";
+      }elseif ($valorCorY == 10) { // SI SELECCIONÓ ETNIA O RAZA
+        $sql = "IFNULL(terminoTaxEtnia.name, 'Desconocido')";
+        $nombre = "Etnia o Raza";
+      }
+
+      $dataExcel ='["Cantidad de obras", "'.$nombre.'"],';
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
       $query = "SELECT COUNT(distinct nid)  as Obra,
-        ".$sql." as EjeY     
-        FROM node
-        JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-        LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
-        LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
-        LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
-        LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
-        LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
-        LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
-        LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
-  
-        LEFT JOIN field_data_field_iconografia_retrato fdfir on fdfir.entity_id = node.nid 
-        LEFT JOIN field_data_field_persona fdfp on fdfir.field_iconografia_retrato_value = fdfp.entity_id 
-        LEFT JOIN field_data_field_genero fdfg on fdfp.field_persona_value = fdfg.entity_id 
-  
-        LEFT JOIN field_data_field_persona actividad on fdfir.field_iconografia_retrato_value = actividad.entity_id 
-        LEFT JOIN field_data_field_actividad_o_profesion fdfaop on actividad.field_persona_value = fdfaop.entity_id 
-        LEFT JOIN taxonomy_term_data terminoTaxEActiProf ON terminoTaxEActiProf.tid = fdfaop.field_actividad_o_profesion_tid 
-  
-        LEFT JOIN field_data_field_persona etnia on fdfir.field_iconografia_retrato_value = etnia.entity_id
-        LEFT JOIN field_data_field_etnico_racial fdfer on etnia.field_persona_value = fdfer.entity_id  
-        LEFT JOIN taxonomy_term_data terminoTaxEtnia ON terminoTaxEtnia.tid = fdfer.field_etnico_racial_tid 
-        
-        LEFT JOIN field_data_field_pais_ejecucion fdfpe on iden.field_identificacion_value = fdfpe.entity_id
-        LEFT JOIN taxonomy_term_data terminoTaxPais on terminoTaxPais.tid = fdfpe.field_pais_ejecucion_tid    
-        
-        WHERE node.type = 'obra' AND node.status=1 
-        GROUP BY ".$sql."";
+      ".$sql."     
+      FROM node
+      JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+      LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+      LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+      LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+      LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
+      LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value        LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
+      LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
 
-        if ($buscar == 1) {
-          $sql .= ' AND ' . implode(' AND ', $condiciones);
-        }
+      LEFT JOIN field_data_field_iconografia_retrato fdfir on fdfir.entity_id = node.nid 
+      LEFT JOIN field_data_field_persona fdfp on fdfir.field_iconografia_retrato_value = fdfp.entity_id 
+      LEFT JOIN field_data_field_genero fdfg on fdfp.field_persona_value = fdfg.entity_id 
 
-        /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
-        $a_params = array();
+      LEFT JOIN field_data_field_persona actividad on fdfir.field_iconografia_retrato_value = actividad.entity_id 
+      LEFT JOIN field_data_field_actividad_o_profesion fdfaop on actividad.field_persona_value = fdfaop.entity_id 
+      LEFT JOIN taxonomy_term_data terminoTaxEActiProf ON terminoTaxEActiProf.tid = fdfaop.field_actividad_o_profesion_tid 
 
-        $param_type = '';
-        $n = count($whereTipo);
-        for ($i = 0; $i < $n; $i++) {
-          $param_type .= $whereTipo[$i];
-        }
-           /* with call_user_func_array, array params must be passed by reference */
-        $a_params[] = &$param_type;
+      LEFT JOIN field_data_field_persona etnia on fdfir.field_iconografia_retrato_value = etnia.entity_id
+      LEFT JOIN field_data_field_etnico_racial fdfer on etnia.field_persona_value = fdfer.entity_id  
+      LEFT JOIN taxonomy_term_data terminoTaxEtnia ON terminoTaxEtnia.tid = fdfer.field_etnico_racial_tid 
+      
+      LEFT JOIN field_data_field_pais_ejecucion fdfpe on iden.field_identificacion_value = fdfpe.entity_id
+      LEFT JOIN taxonomy_term_data terminoTaxPais on terminoTaxPais.tid = fdfpe.field_pais_ejecucion_tid    
+      
+      WHERE node.type = 'obra' AND node.status=1 
+      GROUP BY ".$sql."";
 
-        for ($i = 0; $i < $n; $i++) {
+      if ($buscar == 1) {
+        $sql .= ' AND ' . implode(' AND ', $condiciones);
+      }
+
+      /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
+      $a_params = array();
+
+      $param_type = '';
+      $n = count($whereTipo);
+      for ($i = 0; $i < $n; $i++) {
+        $param_type .= $whereTipo[$i];
+      }
           /* with call_user_func_array, array params must be passed by reference */
-          $a_params[] = &$where[$i];
-        }
+      $a_params[] = &$param_type;
 
-        /* Prepare statement */
-        $stmt = $mysqli->prepare($sql);
-        if ($stmt === false) {
-          trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error, E_USER_ERROR);
-        }
-        /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
-        if ($buscar != 0 ) {
-          call_user_func_array(array($stmt, 'bind_param'), $a_params);
-        }
-        /* Execute statement */
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        return $resultado;
+      for ($i = 0; $i < $n; $i++) {
+        /* with call_user_func_array, array params must be passed by reference */
+        $a_params[] = &$where[$i];
+      }
+
+      /* Prepare statement */
+      $stmt = $mysqli->prepare($sql);
+      if ($stmt === false) {
+        trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $mysqli->errno . ' ' . $mysqli->error, E_USER_ERROR);
+      }
+      /* use call_user_func_array, as $stmt->bind_param('s', $param); does not accept params array */
+      if ($buscar != 0 ) {
+        call_user_func_array(array($stmt, 'bind_param'), $a_params);
+      }
+      /* Execute statement */
+      $stmt->execute();
+      $resultado = $stmt->get_result();
+      return $resultado;
     }
 
-    function Listar_Excel()
+    function Listar_Excel($buscar, $condiciones, $where, $whereTipo)
+    {
+      $resultado = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo);
+      $xValues = "";
+      $yValues = "";
+      $stringColor = "";
+      $cantObras = 1;
+      $prov = '';
+      
+
+      while ($fila = mysqli_fetch_array($resultado)) {
+        $yValues .= $fila['Obra'] . ",";
+        $xValues .= "'Cantidad de Obras: " . substr($fila['Obra'], 0, 100) . " - ".$nombre.": " . $fila['EjeY'] . "',";
+        $stringColor .=  "'" . $this->colorRGB() . "',"; 
+
+        
+        $dataExcel .= '["';
+        $dataExcel .= $fila["Obra"].'","';
+        $dataExcel .= $fila["EjeY"];
+        $dataExcel .= '"],';
+   
+      }
+      mysqli_close($mysqli);
+      $grafico['yValues'] = $yValues;
+      $grafico['xValues'] = $xValues;
+      $grafico['stringColor'] = $stringColor;
+
+      $grafico['dataExcel'] = $dataExcel;
+
+
+      return $grafico;
+    }
+
     function Cb_Tematica()
     {
       $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
@@ -254,17 +319,18 @@ class GraficoController extends ControllerBase
         $valorCorY = $_GET["cY"];
       }
 
-      if($valorCorY == 1){
+      /*if($valorCorY == 1){
         array_push($condiciones, "COUNT(distinct IFNULL(title, 'Desconocido'))");
         array_push($where,$_GET['cY']);
         array_push($whereTipo, 's');
         $buscar = 1;
-      }
+      }*/
 
       $tematica = $this->Cb_Tematica();
       $artista = $this->Cb_Artista();
       $annio = $this->Cb_Annio();
       $tecnica = $this->Cb_Tecnica();
+
       $grafico = $this->Listar_Excel($buscar, $condiciones, $where, $whereTipo);
   
    
