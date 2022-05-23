@@ -87,16 +87,8 @@ class GraficoController extends ControllerBase
     if ($buscar == 1) {
       $sql .= ' AND ' . implode(' AND ', $condiciones);
     }
-
-   // if($valorCorY == 1 ){
-   //   $sql = $sql ." GRUOP BY node.nid "; 
-   // }else{
      $sql =  $sql . " GROUP BY " . $query . "";
-   // }
-
-    //$sql = $sql ." GROUP BY node.nid ";
-   echo " : ".$sql;
-    
+   
     
     /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
     $a_params = array();
