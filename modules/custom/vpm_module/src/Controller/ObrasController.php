@@ -57,8 +57,7 @@ class ObrasController extends ControllerBase
     if ($buscar['texto'] == 1) {
       $sql .= ' AND ' . implode(' OR ', $condiciones['busqueda2']);
     }
-    
-    
+  
     
     if ($ordenarPor == 1) {
       $sql =  $sql . " ORDER BY terminoTaxAutoria.name  ASC";
@@ -73,6 +72,7 @@ class ObrasController extends ControllerBase
     if (!$paginador) {
       $sql = $sql . " LIMIT $offset, $limit";
     }
+
 
     /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
     $a_params = array();

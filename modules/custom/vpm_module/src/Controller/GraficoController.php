@@ -50,7 +50,8 @@ class GraficoController extends ControllerBase
     //$dataExcel ='["Cantidad de obras", "'.$nombre.'"],';
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
-    $sql = "SELECT COUNT(distinct nid)  as Obra, " . $query . "  AS EjeY   
+    $sql = "SELECT COUNT(distinct nid)  as Obra,
+       ".$query."  AS EjeY   
         FROM node
         JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
         LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
@@ -86,7 +87,11 @@ class GraficoController extends ControllerBase
     if ($buscar == 1) {
       $sql .= ' AND ' . implode(' AND ', $condiciones);
     }
+
     $sql =  $sql . " GROUP BY " . $query . "";
+    //$sql = $sql ." GRUOP BY node.nid ";
+
+    //echo " : ".$sql;
     /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
     $a_params = array();
     $param_type = '';
@@ -116,12 +121,14 @@ class GraficoController extends ControllerBase
     /* Execute statement */
     $stmt->execute();
     $resultado = $stmt->get_result();
+
     return $resultado;
   }
 
   function Listar_Excel($buscar, $condiciones, $where, $whereTipo,  $valorCorY)
   {
     $resultado = $this->Listar_Query($buscar, $condiciones, $where, $whereTipo,  $valorCorY);
+    
     $xValues = "";
     $yValues = "";
     $stringColor = "";
