@@ -181,6 +181,27 @@ class GraficoController extends ControllerBase
     return $grafico;
   }
 
+
+  function Cb_CoordenadaEjeY(){
+    $cY='';
+  
+    $cY = [
+      ['idcY' => 2, 'cY' => 'Género pictórico'],
+      ['idcY' => 3, 'cY' => 'Técnica'],
+      ['idcY' => 4, 'cY' => 'Soporte'],
+      ['idcY' => 5, 'cY' => 'Artista'],
+      ['idcY' => 6, 'cY' => 'Año'],      
+      ['idcY' => 7, 'cY' => 'País'],      
+      ['idcY' => 8, 'cY' => 'Género'],      
+      ['idcY' => 9, 'cY' => 'Actividad o profesión'],
+      ['idcY' => 10, 'cY' => 'Etnia o raza'],
+    ];
+
+    return $cY;
+
+
+  }
+
   function Cb_Tematica()
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
@@ -317,6 +338,107 @@ class GraficoController extends ControllerBase
     return $tecnica;
   }
 
+  function Cb_Etnia(){
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $query = "SELECT DISTINCT
+      terminoTaxEtnia.tid as idEtnia,
+      terminoTaxEtnia.name as Etnia
+      FROM node
+      LEFT JOIN field_data_field_iconografia_retrato fdfir on fdfir.entity_id = node.nid 
+      LEFT JOIN field_data_field_persona etnia on fdfir.field_iconografia_retrato_value = etnia.entity_id
+      LEFT JOIN field_data_field_etnico_racial fdfer on etnia.field_persona_value = fdfer.entity_id  
+      LEFT JOIN taxonomy_term_data terminoTaxEtnia ON terminoTaxEtnia.tid = fdfer.field_etnico_racial_tid 
+      WHERE  node.type = 'obra' AND node.status=1 and terminoTaxEtnia.name is not null";
+
+     $resultado = $mysqli->query($query);
+   
+    $etnia = [];
+    $x = 0;
+    while ($fila = mysqli_fetch_array($resultado)) {
+
+      $infoEtnia = [];
+      $infoEtnia['idEtnia'] = $fila["idEtnia"];
+      $infoEtnia['Etnia'] = $fila["Etnia"];
+      $infoEtnia['selected'] = false;
+      if (isset($_GET["etnia"]) && $_GET["etnia"] != 0 && $_GET["etnia"] == $fila["idEtnia"]) {
+        $infoEtnia['selected'] = true;
+      }
+
+      $etnia[$x] = $infoEtnia;
+      $x++;
+    }
+    mysqli_close($mysqli);
+    return $etnia;
+  }
+
+  function Cb_Pais(){
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $query = "SELECT DISTINCT
+    terminoTaxPais.tid as idPais,
+    terminoTaxPais.name as Pais
+    FROM node
+    LEFT  JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+    LEFT JOIN field_data_field_pais_ejecucion fdfpe on iden.field_identificacion_value = fdfpe.entity_id
+    LEFT JOIN taxonomy_term_data terminoTaxPais on terminoTaxPais.tid = fdfpe.field_pais_ejecucion_tid    
+    WHERE  node.type = 'obra' AND node.status=1 and terminoTaxPais.name is not null";
+
+    $resultado = $mysqli->query($query);
+   
+    $pais = [];
+    $x = 0;
+    while ($fila = mysqli_fetch_array($resultado)) {
+
+      $infoPais = [];
+      $infoPais['idPais'] = $fila["idPais"];
+      $infoPais['Pais'] = $fila["Pais"];
+      $infoPais['selected'] = false;
+      if (isset($_GET["pais"]) && $_GET["pais"] != 0 && $_GET["pais"] == $fila["idPais"]) {
+        $infoPais['selected'] = true;
+      }
+
+      $pais[$x] = $infoPais;
+      $x++;
+    }
+    mysqli_close($mysqli);
+    return $pais;
+  }
+
+  function Cb_ActProf(){
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $query = "SELECT DISTINCT
+      terminoTaxEActiProf.tid as idactProf,
+      terminoTaxEActiProf.name as ActProf
+      FROM node
+      LEFT JOIN field_data_field_iconografia_retrato fdfir on fdfir.entity_id = node.nid 
+      LEFT JOIN field_data_field_persona actividad on fdfir.field_iconografia_retrato_value = actividad.entity_id 
+      LEFT JOIN field_data_field_actividad_o_profesion fdfaop on actividad.field_persona_value = fdfaop.entity_id 
+      LEFT JOIN taxonomy_term_data terminoTaxEActiProf ON terminoTaxEActiProf.tid = fdfaop.field_actividad_o_profesion_tid
+    
+      WHERE  node.type = 'obra' AND node.status=1 and terminoTaxEActiProf.name is not null";
+
+    $resultado = $mysqli->query($query);
+   
+    $actProf = [];
+    $x = 0;
+    while ($fila = mysqli_fetch_array($resultado)) {
+
+      $infoActProf = [];
+      $infoActProf['idactProf'] = $fila["idactProf"];
+      $infoActProf['ActProf'] = $fila["ActProf"];
+      $infoActProf['selected'] = false;
+      if (isset($_GET["actProf"]) && $_GET["actProf"] != 0 && $_GET["actProf"] == $fila["idactProf"]) {
+        $infoActProf['selected'] = true;
+      }
+
+      $actProf[$x] = $infoActProf;
+      $x++;
+    }
+    mysqli_close($mysqli);
+    return $actProf;
+  }
+
+
+
   function colorRGB()
   {
     $color = ['#22555D', '#2D717C', '#578D96', '#ABC6CB', '#D5E3E5'];
@@ -358,16 +480,40 @@ class GraficoController extends ControllerBase
       $buscar = 1;
     }
 
+    if (!empty($_GET['etnia'])) {
+      array_push($condiciones, 'terminoTaxEtnia.tid = ?');
+      array_push($where, $_GET['etnia']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
+    }
+
+    if (!empty($_GET['pais'])) {
+      array_push($condiciones, 'terminoTaxPais.tid = ?');
+      array_push($where, $_GET['pais']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
+    }
+
+    if (!empty($_GET['actProf'])) {
+      array_push($condiciones, 'terminoTaxEActiProf.tid = ?');
+      array_push($where, $_GET['actProf']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
+    }
+
     $valorCorY = 0;
     if (isset($_GET["cY"])) {
       $valorCorY = $_GET["cY"];
     }
 
-
+    $cY = $this->Cb_CoordenadaEjeY();
     $tematica = $this->Cb_Tematica();
     $artista = $this->Cb_Artista();
     $annio = $this->Cb_Annio();
     $tecnica = $this->Cb_Tecnica();
+    $etnia = $this->Cb_Etnia();
+    $pais = $this->Cb_Pais();
+    $actProf = $this->Cb_ActProf();
 
     $grafico = $this->Listar_Excel($buscar, $condiciones, $where, $whereTipo, $valorCorY);
 
@@ -383,10 +529,14 @@ class GraficoController extends ControllerBase
       '#theme' => 'vpm-vista-grafico',
       /*'#ordenaX' => $ordenaX,
       '#ordenaY' => $ordenaY,*/
+      '#cY' => $cY,
       '#tematica' => $tematica,
       '#annio' => $annio,
       '#artista' => $artista,
       '#tecnica' => $tecnica,
+      '#etnia' => $etnia,
+      '#pais' => $pais,
+      '#actProf' => $actProf,
       '#grafico' => $grafico
     ];
   }

@@ -6,96 +6,131 @@
 		<div class='col-12'>
 			<h1>Quinsac en cifras</h1>
 			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit</p>
-      <h2 class="pb-3">Filtros</h2>
-    
-    <form action="" method="get">
-        <div class="row">
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                <div class="InfoTitulo1 pb-1">Coordenada Y</div>
-                <select class="inputSelect" name="cY" id="cY">
-                    <option value="0">Selecciona</option>
-                    <!--<option value="1">Obras</option>-->              
-                    <option value="2">Género pictórico</option>
-                    <option value="3">Técnica</option>
-                    <option value="4">Soporte</option>
-                    <option value="5">Artista</option>
-                    <option value="6">Año</option>
-                    <option value="7">País</option>
-                    <option value="8">Género</option>
-                    <option value="9">Actividad o profesión</option>
-                    <option value="10">Etnia o raza</option>
-                </select>
-            </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                <div class="InfoTitulo1 pb-1">Géneros pictóricos</div>
-                <div>
-                    <select class="inputSelect" name="tematica" id="tematica">
-                        <option value="0">Selecciona</option>
-                        {% for obj in tematica %}
-                            {% if obj.selected == true %}
-                                <option selected value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
-                            {% else %}
-                                <option value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-    
-            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                <div class="InfoTitulo1 pb-1">Artista</div>
-                <div>
-                    <select class="inputSelect" name="artista" id="artista">
-                        <option value="0">Selecciona</option>
-                        {% for obj in artista %}
-                            {% if obj.selected == true %}
-                                <option selected value="{{ obj.autorId }}">{{ obj.autor }}</option>
-                            {% else %}
-                                <option value="{{ obj.autorId }}">{{ obj.autor }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-    
-            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                <div class="InfoTitulo1 pb-1">Año</div>
-                <div>
-                    <select class="inputSelect" name="ano" id="ano">
-                        <option value="0">Selecciona</option>
-                        {% for obj in annio %}
-                            {% if obj.selected == true %}
-                                <option selected value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
-                            {% else %}
-                                <option value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-    
-            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                <div class="InfoTitulo1 pb-1">Técnica</div>
-                <div>
-                    <select class="inputSelect" name="tecnica" id="tecnica">
-                        <option value="0">Selecciona</option>
-                        {% for obj in tecnica %}
-                            {% if obj.selected == true %}
-                                <option selected value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
-                            {% else %}
-                                <option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
-                            {% endif %}
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+            <h2 class="pb-3">Filtros</h2>
 
-            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                <div class="InfoTitulo1 pb-4-5"></div>
-                <input type='submit' class='btn button btnBuscarFiltro more-link' value="Genera">
-              </div>
-        </div>
-    </form>
+
+        
+
+            <form action="" method="get">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Coordenada Y</div>
+                        <select class="inputSelect" name="cY" id="cY">
+                            <option value="0">Selecciona</option>
+                            {% for obj in cY %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idcY }}">{{ obj.cY }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idcY }}">{{ obj.cY }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>      
+
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Géneros pictóricos</div>                
+                        <select class="inputSelect" name="tematica" id="tematica">
+                            <option value="0">Selecciona</option>
+                            {% for obj in tematica %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idTematica }}">{{ obj.tematica }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>                
+                    </div>
+            
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Artista</div>
+                        <select class="inputSelect" name="artista" id="artista">
+                            <option value="0">Selecciona</option>
+                            {% for obj in artista %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.autorId }}">{{ obj.autor }}</option>
+                                {% else %}
+                                    <option value="{{ obj.autorId }}">{{ obj.autor }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>                
+                    </div>
+            
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Año</div>
+                        <select class="inputSelect" name="ano" id="ano">
+                            <option value="0">Selecciona</option>
+                            {% for obj in annio %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idfecEjec }}">{{ obj.fecEjec }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+            
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Técnica</div>
+                        <select class="inputSelect" name="tecnica" id="tecnica">
+                            <option value="0">Selecciona</option>
+                            {% for obj in tecnica %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idTecnica }}">{{ obj.tecnica }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Etnia o raza</div>
+                        <select class="inputSelect" name="etnia" id="etnia">
+                            <option value="0">Selecciona</option>
+                            {% for obj in etnia %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idEtnia }}">{{ obj.Etnia }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idEtnia }}">{{ obj.Etnia }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">País</div>
+                        <select class="inputSelect" name="pais" id="pais">
+                            <option value="0">Selecciona</option>
+                            {% for obj in pais %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idPais }}">{{ obj.Pais }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idPais }}">{{ obj.Pais }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Actividad o profesión</div>
+                        <select class="inputSelect" name="actProf" id="actProf">
+                            <option value="0">Selecciona</option>
+                            {% for obj in actProf %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idactProf }}">{{ obj.ActProf }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idactProf }}">{{ obj.ActProf }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-4-5"></div>
+                        <input type='submit' class='btn button btnBuscarFiltro more-link' value="Genera">
+                    </div>
+                </div>
+            </form>
 
       <br>
       <h2 class="pb-3">Estadísticas generadas</h2>
@@ -131,7 +166,6 @@
     </div>  
 	</div>
 </div>
-
 
 
 <script>

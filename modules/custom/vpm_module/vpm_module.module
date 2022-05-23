@@ -113,10 +113,14 @@ function vpm_module_theme($existing, $type, $theme, $path)
                 'grafico' => [],
                 'ordenaX' => 0,
                 'ordenaY' => 0,
+                'cY' => [],
                 'tematica' => [],
                 'annio' => [],
                 'artista' => [],
                 'tecnica' => [],
+                'etnia' => [],
+                'pais' =>[],
+                'actProf' => [],
             ]
         ],
     ];
