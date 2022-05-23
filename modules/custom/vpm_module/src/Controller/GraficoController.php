@@ -14,7 +14,7 @@ class GraficoController extends ControllerBase
 
 
     if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
-      //$sql = "COUNT(IFNULL(title, 'Desconocido'))";
+      $sql = "COUNT(IFNULL(title, 'Desconocido'))";
     } elseif ($valorCorY == 2) { // SI SELECCIONÓ GÉNERO PICTORICO
       $query = "IFNULL(terminoTaxTematica.name, 'Desconocido')";
       $nombre = "Género Pictórico";
@@ -88,10 +88,16 @@ class GraficoController extends ControllerBase
       $sql .= ' AND ' . implode(' AND ', $condiciones);
     }
 
-    $sql =  $sql . " GROUP BY " . $query . "";
-    //$sql = $sql ." GRUOP BY node.nid ";
+   // if($valorCorY == 1 ){
+   //   $sql = $sql ." GRUOP BY node.nid "; 
+   // }else{
+     $sql =  $sql . " GROUP BY " . $query . "";
+   // }
 
-    //echo " : ".$sql;
+    //$sql = $sql ." GROUP BY node.nid ";
+   echo " : ".$sql;
+    
+    
     /* Bind parameters. Types: s = string, i = integer, d = double,  b = blob */
     $a_params = array();
     $param_type = '';
