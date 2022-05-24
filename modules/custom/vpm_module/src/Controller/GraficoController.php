@@ -159,6 +159,7 @@ class GraficoController extends ControllerBase
       $nombre = "Etnia o Raza";
     }
 
+    $dataExcel ='["Obras", "'.$nombre.'"],';
 
     while ($fila = mysqli_fetch_array($resultado)) {
       $yValues .= $fila['Obra'] . ",";
@@ -206,17 +207,17 @@ class GraficoController extends ControllerBase
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT
-        terminoTaxTematica.name as Tematica,
-        terminoTaxTematica.tid as idTematica
-        FROM node
-        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-        LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
-        LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
-        LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
-        LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid
-        WHERE  node.type = 'obra' and terminoTaxTematica.name is not null";
+      terminoTaxTematica.name as Tematica,
+      terminoTaxTematica.tid as idTematica
+      FROM node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+      LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+      LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+      LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid
+      WHERE  node.type = 'obra' and terminoTaxTematica.name is not null";
 
 
     $resultado = $mysqli->query($query);
@@ -243,16 +244,16 @@ class GraficoController extends ControllerBase
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT terminoTaxAutoria.name as autor, 
-        terminoTaxAutoria.tid as autorId
-        FROM node
-        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-        LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
-        LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
-        LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
-        LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid   
-        WHERE  node.type = 'obra' and terminoTaxAutoria.name is not null";
+      terminoTaxAutoria.tid as autorId
+      FROM node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+      LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+      LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+      LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid   
+      WHERE  node.type = 'obra' and terminoTaxAutoria.name is not null";
 
     $resultado = $mysqli->query($query);
     $artista = [];
@@ -277,13 +278,13 @@ class GraficoController extends ControllerBase
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "select node.nid,
-        fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec, 
-        DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
-        from node
-        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-        LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
-        WHERE fecEjecucion.field_fecha_ejecucion_timestamp IS NOT NULL AND DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') IS NOT NULL
-        GROUP BY fecEjecucion.field_fecha_ejecucion_timestamp";
+      fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec, 
+      DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
+      from node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+      WHERE fecEjecucion.field_fecha_ejecucion_timestamp IS NOT NULL AND DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') IS NOT NULL
+      GROUP BY fecEjecucion.field_fecha_ejecucion_timestamp";
 
     $resultado = $mysqli->query($query);
     $annio = [];
@@ -309,14 +310,14 @@ class GraficoController extends ControllerBase
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT 
-        terminoTaxTematica.name as Tecnica,
-        terminoTaxTematica.tid as idTecnica
-        FROM node
-        LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-        LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
-        LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tecnicaObra.field_tecnica_tid
-        WHERE terminoTaxTematica.name IS NOT NULL
-        GROUP BY Tecnica";
+      terminoTaxTematica.name as Tecnica,
+      terminoTaxTematica.tid as idTecnica
+      FROM node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tecnicaObra.field_tecnica_tid
+      WHERE terminoTaxTematica.name IS NOT NULL
+      GROUP BY Tecnica";
 
     $resultado = $mysqli->query($query);
     $tecnica = [];
@@ -348,7 +349,7 @@ class GraficoController extends ControllerBase
       LEFT JOIN field_data_field_persona etnia on fdfir.field_iconografia_retrato_value = etnia.entity_id
       LEFT JOIN field_data_field_etnico_racial fdfer on etnia.field_persona_value = fdfer.entity_id  
       LEFT JOIN taxonomy_term_data terminoTaxEtnia ON terminoTaxEtnia.tid = fdfer.field_etnico_racial_tid 
-      WHERE  node.type = 'obra' AND node.status=1 and terminoTaxEtnia.name is not null";
+      WHERE  node.type = 'obra'  and terminoTaxEtnia.name is not null";
 
      $resultado = $mysqli->query($query);
    
@@ -374,13 +375,13 @@ class GraficoController extends ControllerBase
   function Cb_Pais(){
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT
-    terminoTaxPais.tid as idPais,
-    terminoTaxPais.name as Pais
-    FROM node
-    LEFT  JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
-    LEFT JOIN field_data_field_pais_ejecucion fdfpe on iden.field_identificacion_value = fdfpe.entity_id
-    LEFT JOIN taxonomy_term_data terminoTaxPais on terminoTaxPais.tid = fdfpe.field_pais_ejecucion_tid    
-    WHERE  node.type = 'obra' AND node.status=1 and terminoTaxPais.name is not null";
+      terminoTaxPais.tid as idPais,
+      terminoTaxPais.name as Pais
+      FROM node
+      LEFT  JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_pais_ejecucion fdfpe on iden.field_identificacion_value = fdfpe.entity_id
+      LEFT JOIN taxonomy_term_data terminoTaxPais on terminoTaxPais.tid = fdfpe.field_pais_ejecucion_tid    
+      WHERE  node.type = 'obra' AND terminoTaxPais.name is not null";
 
     $resultado = $mysqli->query($query);
    
@@ -414,7 +415,7 @@ class GraficoController extends ControllerBase
       LEFT JOIN field_data_field_actividad_o_profesion fdfaop on actividad.field_persona_value = fdfaop.entity_id 
       LEFT JOIN taxonomy_term_data terminoTaxEActiProf ON terminoTaxEActiProf.tid = fdfaop.field_actividad_o_profesion_tid
     
-      WHERE  node.type = 'obra' AND node.status=1 and terminoTaxEActiProf.name is not null";
+      WHERE  node.type = 'obra' AND terminoTaxEActiProf.name is not null";
 
     $resultado = $mysqli->query($query);
    
@@ -437,7 +438,50 @@ class GraficoController extends ControllerBase
     return $actProf;
   }
 
+  function Cb_Genero(){
+    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $query = " SELECT distinct
+      fdfg.field_genero_value as idGenero,	
+      fdfg.field_genero_value as Genero 
+      FROM node
+      LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
+      LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
+      LEFT JOIN field_data_field_autoria_principal autoria ON autoria.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxAutoria ON terminoTaxAutoria.tid = autoria.field_autoria_principal_tid
+      LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
+      LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+      LEFT JOIN field_data_field_tematica_de_la_obra tematicaObra ON tematicaObra.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
+      LEFT JOIN field_data_field_tecnica tecnicaObra ON tecnicaObra.entity_id = iden.field_identificacion_value        
+      LEFT JOIN taxonomy_term_data terminoTaxTecnica ON terminoTaxTecnica.tid = tecnicaObra.field_tecnica_tid
+      LEFT JOIN field_data_field_soporte soporte ON soporte.entity_id = iden.field_identificacion_value
+      LEFT JOIN taxonomy_term_data terminoTaxSoporte ON terminoTaxSoporte.tid = soporte.field_soporte_tid
+      LEFT JOIN field_data_field_iconografia_retrato fdfir on fdfir.entity_id = node.nid 
+      LEFT JOIN field_data_field_persona fdfp on fdfir.field_iconografia_retrato_value = fdfp.entity_id 
+      LEFT JOIN field_data_field_genero fdfg on fdfp.field_persona_value = fdfg.entity_id 
 
+      WHERE  node.type = 'obra' and  fdfg.field_genero_value  is not null";
+
+    $resultado = $mysqli->query($query);
+   
+    $genero = [];
+    $x = 0;
+    while ($fila = mysqli_fetch_array($resultado)) {
+
+      $infoGenero = [];
+      $infoGenero['idGenero'] = $fila["idGenero"];
+      $infoGenero['Genero'] = $fila["Genero"];
+      $infoGenero['selected'] = false;
+      if (isset($_GET["genero"]) && $_GET["genero"] != 0 && $_GET["genero"] == $fila["idGenero"]) {
+        $infoGenero['selected'] = true;
+      }
+
+      $genero[$x] = $infoGenero;
+      $x++;
+    }
+    mysqli_close($mysqli);
+    return $genero;
+  }
 
   function colorRGB()
   {
@@ -501,6 +545,13 @@ class GraficoController extends ControllerBase
       $buscar = 1;
     }
 
+    if (!empty($_GET['genero'])) {
+      array_push($condiciones, 'fdfg.field_genero_value = ?');
+      array_push($where, $_GET['genero']);
+      array_push($whereTipo, 's');
+      $buscar = 1;
+    }
+
     $valorCorY = 0;
     if (isset($_GET["cY"])) {
       $valorCorY = $_GET["cY"];
@@ -514,6 +565,7 @@ class GraficoController extends ControllerBase
     $etnia = $this->Cb_Etnia();
     $pais = $this->Cb_Pais();
     $actProf = $this->Cb_ActProf();
+    $genero = $this->Cb_Genero();
 
     $grafico = $this->Listar_Excel($buscar, $condiciones, $where, $whereTipo, $valorCorY);
 
@@ -537,6 +589,7 @@ class GraficoController extends ControllerBase
       '#etnia' => $etnia,
       '#pais' => $pais,
       '#actProf' => $actProf,
+      '#genero' => $genero,
       '#grafico' => $grafico
     ];
   }

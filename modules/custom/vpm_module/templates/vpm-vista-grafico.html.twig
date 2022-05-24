@@ -126,6 +126,20 @@
                     </div>
 
                     <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        <div class="InfoTitulo1 pb-1">Género</div>
+                        <select class="inputSelect" name="genero" id="genero">
+                            <option value="0">Selecciona</option>
+                            {% for obj in genero %}
+                                {% if obj.selected == true %}
+                                    <option selected value="{{ obj.idGenero }}">{{ obj.Genero }}</option>
+                                {% else %}
+                                    <option value="{{ obj.idGenero }}">{{ obj.Genero }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                         <div class="InfoTitulo1 pb-4-5"></div>
                         <input type='submit' class='btn button btnBuscarFiltro more-link' value="Genera">
                     </div>
