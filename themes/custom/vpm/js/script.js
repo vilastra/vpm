@@ -242,6 +242,8 @@
                         }
                     });
                 }
+
+                
                 $('main', context).once('#exportPDF').each(function() {
                     $('#exportPDF').click(function(event) {
                         var reportPageHeight = $('#report').innerHeight();
@@ -285,11 +287,12 @@
 
 
                     function downloadAsExcel() {
+         
                         var resultado = dataExcel;
                         var lineArray = [];
                         resultado.forEach(function(infoArray, index) {
-                            var line = infoArray.join(" \t");
-                            lineArray.push(index == 0 ? line : line);
+                          var line = infoArray.join(" \t");
+                          lineArray.push(index == 0 ? line : line);
                         });
                         var csvContent = lineArray.join("\r\n");
                         var excel_file = document.createElement('a');

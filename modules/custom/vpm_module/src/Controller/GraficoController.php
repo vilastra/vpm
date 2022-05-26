@@ -184,9 +184,8 @@ class GraficoController extends ControllerBase
 
 
   function Cb_CoordenadaEjeY(){
-    $cY='';
-  
-    $cY = [
+     
+    $cY['variable'] = [
       ['idcY' => 2, 'cY' => 'Género pictórico'],
       ['idcY' => 3, 'cY' => 'Técnica'],
       ['idcY' => 4, 'cY' => 'Soporte'],
@@ -196,11 +195,12 @@ class GraficoController extends ControllerBase
       ['idcY' => 8, 'cY' => 'Género'],      
       ['idcY' => 9, 'cY' => 'Actividad o profesión'],
       ['idcY' => 10, 'cY' => 'Etnia o raza'],
-    ];
+    ];    
+    if (isset($_GET["cY"])) {
+      $cY['selected'] = $_GET["cY"];
+    }
 
     return $cY;
-
-
   }
 
   function Cb_Tematica()

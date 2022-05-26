@@ -5,7 +5,7 @@
 	<div class="col-9 max-container px-0 m-auto ">
 		<div class='col-12'>
 			<h1>Quinsac en cifras</h1>
-			<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit</p>
+			<p>Aquí podrás acceder a distintas estadísticas cuantitativas sobre todas y cada una de las obras que componen Quinsac, permitiendo visualizar grandes núcleos de información tales como: número de obras por temática, años de ejecución, técnicas, lugar de ejecución o materialidad. Quinsac en cifras continuará creciendo con cada nuevo catálogo razonado, lo que permitirá trazar visiones panorámicas sobre la producción artística en Chile y la región.</p>
             <h2 class="pb-3">Filtros</h2>
 
 
@@ -17,8 +17,8 @@
                         <div class="InfoTitulo1 pb-1">Coordenada Y</div>
                         <select class="inputSelect" name="cY" id="cY">
                             <option value="0">Selecciona</option>
-                            {% for obj in cY %}
-                                {% if obj.selected == true %}
+                            {% for obj in cY.variable %}
+                                {% if cY.selected == obj.idcY %}
                                     <option selected value="{{ obj.idcY }}">{{ obj.cY }}</option>
                                 {% else %}
                                     <option value="{{ obj.idcY }}">{{ obj.cY }}</option>
@@ -151,11 +151,11 @@
       <div class="InfoTitulo1 pb-1">Tipo de gráfico</div>
       <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
         <select class="inputSelect" name="chartType" id="chartType" >
-          <option value="bar">Bar</option>
-          <option value="line">Line</option>
+          <option value="bar">Barra</option>
+          <option value="line">Linea</option>
           <option value="pie">Pie</option>
           <option value="radar">Radar</option>
-          <option value="horizontalBar">Horizontal Bar</option>
+          <option value="horizontalBar">Horizontal Barra</option>
         </select>  
       </div>   
     </div>
@@ -181,12 +181,13 @@
 	</div>
 </div>
 
+{{dump(grafico['yValues']|raw) }}
 
 <script>
   var Titulo = "Cantidad de obras";
   var xValues = [{{ grafico['xValues']|raw }}];
   var yValues = [{{ grafico['yValues']|raw }}];
   var barColors = [{{ grafico['stringColor']|raw }}];
-
   var dataExcel = [{{ grafico['dataArrayExcel']|raw }}];
+
 </script>

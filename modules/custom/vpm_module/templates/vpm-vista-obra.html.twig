@@ -118,16 +118,26 @@
 				<div class="divSepFicha" style="border-bottom:none">
 					<h2>Obras vinculadas</h2>
 					<div class="descObraFicha">
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+						<p>Las obras presentadas a continuación se encuentran relacionadas entre sí, 
+						ya sea por vinculaciones familiares entre los personajes representados; 
+						procedencias y propietarios similares o bien, por contextos de producción, 
+						formación de obras seriadas, copias, temas o iconografías compartidas, entre 
+						otras cuestiones.</p>
 					</div>
 					{% for obj in obra.obrasRelacionadas %}
 						<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
 							<a href='{{ obj.urlObra }}'>
 								<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
 							</a>
-							<a href='tematica?idTematica={{ obj.idTematica }}'>
+							<!--<a href='tematica?idTematica={{ obj.idTematica }}'>
 								<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
+							</a>-->
+
+							<a href='obras?idCat=null&Sec=null&busquedaIndex=&catalogo=1&tematica={{obj.idTematica}}&artista=0&ano={{ obj.idfecEjec }}&tecnica={{ obj.idTecnica }}&ordena={{ ordenarPor }}'>
+								<div class='nombreTematica'>{{ obj.nombreTematica }}</div>
 							</a>
+
+
 							<a href='{{ obj.urlObra }}'>
 								<div class='nombreObra'>{{ obj.tituloObra}}</div>
 							</a>
