@@ -135,6 +135,11 @@ class GraficoController extends ControllerBase
     $nombre = '';
     $dataExcel='';
 
+    $variableX =[];
+    $variableY = [];
+    $x = 0;
+    $y = 0;
+
     if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
       //$sql = "COUNT(IFNULL(title, 'Desconocido'))";
     } elseif ($valorCorY == 2) { // SI SELECCIONÓ GÉNERO PICTORICO
@@ -160,24 +165,34 @@ class GraficoController extends ControllerBase
     }
 
     $dataExcel ='["Obras", "'.$nombre.'"],';
-
+ 
     while ($fila = mysqli_fetch_array($resultado)) {
       $yValues .= $fila['Obra'] . ",";
       $xValues .= "'Cantidad de Obras: " . substr($fila['Obra'], 0, 100) . " - " . $nombre . ": " . $fila['EjeY'] . "',";
       $stringColor .=  "'" . $this->colorRGB() . "',";
 
+      $variableX[$x]  = $fila["Obra"];
+      $x++;
+      $variableY[$y]  = $fila["EjeY"];
+      $y++;
 
       $dataExcel .= '["';
       $dataExcel .= $fila["Obra"] . '","';
       $dataExcel .= $fila["EjeY"];
       $dataExcel .= '"],';
+
+
+
     }
     $grafico['yValues'] = $yValues;
     $grafico['xValues'] = $xValues;
     $grafico['stringColor'] = $stringColor;
-
     $grafico['dataExcel'] = $dataExcel;
 
+
+    $grafico['variableX'] = $variableX;
+    $grafico['variableY'] = $variableY;
+  
 
     return $grafico;
   }
@@ -203,8 +218,7 @@ class GraficoController extends ControllerBase
     return $cY;
   }
 
-  function Cb_Tematica()
-  {
+  function Cb_Tematica(){
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT
       terminoTaxTematica.name as Tematica,
@@ -240,8 +254,7 @@ class GraficoController extends ControllerBase
     return $tematica;
   }
 
-  function Cb_Artista()
-  {
+  function Cb_Artista(){
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT DISTINCT terminoTaxAutoria.name as autor, 
       terminoTaxAutoria.tid as autorId
@@ -274,8 +287,7 @@ class GraficoController extends ControllerBase
     mysqli_close($mysqli);
     return $artista;
   }
-  function Cb_Annio()
-  {
+  function Cb_Annio(){
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "select node.nid,
       fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec, 
@@ -306,8 +318,7 @@ class GraficoController extends ControllerBase
     return $annio;
   }
 
-  function Cb_Tecnica()
-  {
+  function Cb_Tecnica(){
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
     $query = "SELECT 
       terminoTaxTematica.name as Tecnica,

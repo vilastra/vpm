@@ -166,9 +166,8 @@
       </div>
     </div>
     {% if grafico['xValues'] == "" %}
-        <script>
-            window.alert('Los filtros seleccionados no dieron resultados')
-        </script>
+        <div style="padding-top:25px;"
+        <p>Los filtros seleccionados no dieron resultados</p>
     {% else %}
         <div id="report">
             <div class ="row">
@@ -180,9 +179,33 @@
         </div>
     {% endif %}
 
+     
+{{dump(grafico['variableX'] )}}
 
 
-    
+
+<!--{{dump(grafico['variableY'] )}}-->
+
+
+    <table>
+        {% for row in grafico['variableX']  %}
+            <tr>
+                {% for column in row %}
+                    <td>{{ column }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+
+
+
+
+
+
 </div>
 
 
