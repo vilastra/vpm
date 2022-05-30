@@ -6,28 +6,25 @@
 		<div class='col-12'>
 			<h1>Quinsac en cifras</h1>
 			<p>Aquí podrás acceder a distintas estadísticas cuantitativas sobre todas y cada una de las obras que componen Quinsac, permitiendo visualizar grandes núcleos de información tales como: número de obras por temática, años de ejecución, técnicas, lugar de ejecución o materialidad. Quinsac en cifras continuará creciendo con cada nuevo catálogo razonado, lo que permitirá trazar visiones panorámicas sobre la producción artística en Chile y la región.</p>
-            <h2 class="pb-3">Filtros</h2>
-
-
-        
-
+            
             <form action="" method="get">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                        <div class="InfoTitulo1 pb-1">Coordenada Y</div>
-                        <select class="inputSelect" name="cY" id="cY">
-                            <option value="0">Selecciona</option>
-                            {% for obj in cY.variable %}
-                                {% if cY.selected == obj.idcY %}
-                                    <option selected value="{{ obj.idcY }}">{{ obj.cY }}</option>
-                                {% else %}
-                                    <option value="{{ obj.idcY }}">{{ obj.cY }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>      
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-4">
+                    <div class="InfoTitulo1 pb-1">Coordenada Y</div>
+                    <select class="inputSelect" name="cY" id="cY">
+                        <option value="0">Selecciona</option>
+                        {% for obj in cY.variable %}
+                            {% if cY.selected == obj.idcY %}
+                                <option selected value="{{ obj.idcY }}">{{ obj.cY }}</option>
+                            {% else %}
+                                <option value="{{ obj.idcY }}">{{ obj.cY }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>  
+                </div>
+            <h2 class="pb-3">Filtra las estadisticas</h2>     
 
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div class="row">                 
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb">
                         <div class="InfoTitulo1 pb-1">Géneros pictóricos</div>                
                         <select class="inputSelect" name="tematica" id="tematica">
                             <option value="0">Selecciona</option>
@@ -41,7 +38,7 @@
                         </select>                
                     </div>
             
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         <div class="InfoTitulo1 pb-1">Artista</div>
                         <select class="inputSelect" name="artista" id="artista">
                             <option value="0">Selecciona</option>
@@ -55,7 +52,7 @@
                         </select>                
                     </div>
             
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-3">
                         <div class="InfoTitulo1 pb-1">Año</div>
                         <select class="inputSelect" name="ano" id="ano">
                             <option value="0">Selecciona</option>
@@ -69,7 +66,7 @@
                         </select>
                     </div>
             
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-3">
                         <div class="InfoTitulo1 pb-1">Técnica</div>
                         <select class="inputSelect" name="tecnica" id="tecnica">
                             <option value="0">Selecciona</option>
@@ -83,7 +80,7 @@
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-3">
                         <div class="InfoTitulo1 pb-1">Etnia o raza</div>
                         <select class="inputSelect" name="etnia" id="etnia">
                             <option value="0">Selecciona</option>
@@ -97,7 +94,7 @@
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-3">
                         <div class="InfoTitulo1 pb-1">País</div>
                         <select class="inputSelect" name="pais" id="pais">
                             <option value="0">Selecciona</option>
@@ -111,7 +108,7 @@
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-3">
                         <div class="InfoTitulo1 pb-1">Actividad o profesión</div>
                         <select class="inputSelect" name="actProf" id="actProf">
                             <option value="0">Selecciona</option>
@@ -125,7 +122,7 @@
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-3">
                         <div class="InfoTitulo1 pb-1">Género</div>
                         <select class="inputSelect" name="genero" id="genero">
                             <option value="0">Selecciona</option>
@@ -139,7 +136,7 @@
                         </select>
                     </div>
 
-                    <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 pb-3">
                         <div class="InfoTitulo1 pb-4-5"></div>
                         <input type='submit' class='btn button btnBuscarFiltro more-link' value="Genera">
                     </div>
@@ -168,20 +165,26 @@
           <input type='button' class='btn button btnBuscarFiltro more-link' id="exportExcel" Value="Exportar Excel">
       </div>
     </div>
-   
-
-
-    <div id="report">
-      <div class ="row">
-        <div class="col-lg-12">
-          <canvas id="my_Chart" style="width:100%" ></canvas>
+    {% if grafico['xValues'] == "" %}
+        <script>
+            window.alert('Los filtros seleccionados no dieron resultados')
+        </script>
+    {% else %}
+        <div id="report">
+            <div class ="row">
+            <div class="col-lg-12">
+                <canvas id="my_Chart" style="width:100%" ></canvas>
+            </div>
+            </div>
+        </div>  
         </div>
-      </div>
-    </div>  
-	</div>
+    {% endif %}
+
+
+
+    
 </div>
 
-{{dump(grafico['yValues']|raw) }}
 
 <script>
   var Titulo = "Cantidad de obras";
