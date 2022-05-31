@@ -135,10 +135,13 @@ class GraficoController extends ControllerBase
     $nombre = '';
     $dataExcel='';
 
-    $variableX =[];
-    $variableY = [];
-    $x = 0;
-    $y = 0;
+    /*$variableX =[];
+    $variableY = [];*/
+    $arrayTabla =[];
+
+    /*$x = 0;
+    $y = 0;*/
+    $cont = 0;
 
     if ($valorCorY == 1) { // SI SELECCIONÓ OBRAS
       //$sql = "COUNT(IFNULL(title, 'Desconocido'))";
@@ -171,10 +174,16 @@ class GraficoController extends ControllerBase
       $xValues .= "'Cantidad de Obras: " . substr($fila['Obra'], 0, 100) . " - " . $nombre . ": " . $fila['EjeY'] . "',";
       $stringColor .=  "'" . $this->colorRGB() . "',";
 
-      $variableX[$x]  = $fila["Obra"];
+      /*$variableX[$x]  = $fila["Obra"];
       $x++;
       $variableY[$y]  = $fila["EjeY"];
-      $y++;
+      $y++;*/
+
+      $variables['x'] = $fila['Obra'];
+      $variables['y'] = $fila['EjeY'];
+      
+      $arrayTabla[$cont] = $variables;
+      $cont++;
 
       $dataExcel .= '["';
       $dataExcel .= $fila["Obra"] . '","';
@@ -189,10 +198,10 @@ class GraficoController extends ControllerBase
     $grafico['stringColor'] = $stringColor;
     $grafico['dataExcel'] = $dataExcel;
 
-
-    $grafico['variableX'] = $variableX;
-    $grafico['variableY'] = $variableY;
+    /*$grafico['variableX'] = $variableX;
+    $grafico['variableY'] = $variableY;*/
   
+    $grafico['variableXY'] = $arrayTabla;
 
     return $grafico;
   }

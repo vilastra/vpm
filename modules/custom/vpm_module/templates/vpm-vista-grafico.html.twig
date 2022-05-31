@@ -1,5 +1,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 
 <div class='whiteArea'>
 	<div class="col-9 max-container px-0 m-auto ">
@@ -21,6 +22,9 @@
                         {% endfor %}
                     </select>  
                 </div>
+
+
+
             <h2 class="pb-3">Filtra las estadisticas</h2>     
 
                 <div class="row">                 
@@ -162,7 +166,7 @@
         <input type='button' class='btn button btnBuscarFiltro more-link' id="exportPDF" Value="Exportar PDF">
         </div>
       <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-          <input type='button' class='btn button btnBuscarFiltro more-link' id="exportExcel" Value="Exportar Excel">
+          <input type='button' class='btn button btnBuscarFiltro more-link' id="exportExcel" Value="Exportar Excel" onclick="exportFile()">
       </div>
     </div>
     {% if grafico['xValues'] == "" %}
@@ -179,35 +183,27 @@
         </div>
     {% endif %}
 
-     
-{{dump(grafico['variableX'] )}}
-
-
-
-<!--{{dump(grafico['variableY'] )}}-->
-
-
-    <table>
-        {% for row in grafico['variableX']  %}
+</div>
+<div style="display: none">
+    <table id="exportaExcel">
+        {% for rowY in grafico['variableXY']|batch(1) %}
             <tr>
-                {% for column in row %}
-                    <td>{{ column }}</td>
+                {% for columnY in rowY  %}
+                    <td>{{ columnY['x'] }}</td>
+                    <td>{{ columnY['y'] }}</td>
                 {% endfor %}
             </tr>
         {% endfor %}
     </table>
+</div>    
 
+<script>
+  function exportFile(){
+  var wb = XLSX.utils.table_to_book(document.getElementById('exportaExcel'));
+  XLSX.writeFile(wb, 'QuinsacCifras.xlsx');
 
-
-
-
-
-
-
-
-
-</div>
-
+}
+</script>
 
 <script>
   var Titulo = "Cantidad de obras";
