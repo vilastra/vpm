@@ -168,17 +168,17 @@ class GraficoController extends ControllerBase
     }
 
     $dataExcel ='["Obras", "'.$nombre.'"],';
- 
+
+    $variables['x'] = 'Cantidad de Obras';
+    $variables['y'] = $nombre;
+    $arrayTabla[$cont] = $variables;
+    $cont++;
+    
     while ($fila = mysqli_fetch_array($resultado)) {
       $yValues .= $fila['Obra'] . ",";
       $xValues .= "'Cantidad de Obras: " . substr($fila['Obra'], 0, 100) . " - " . $nombre . ": " . $fila['EjeY'] . "',";
       $stringColor .=  "'" . $this->colorRGB() . "',";
-
-      /*$variableX[$x]  = $fila["Obra"];
-      $x++;
-      $variableY[$y]  = $fila["EjeY"];
-      $y++;*/
-
+      
       $variables['x'] = $fila['Obra'];
       $variables['y'] = $fila['EjeY'];
       
@@ -189,17 +189,13 @@ class GraficoController extends ControllerBase
       $dataExcel .= $fila["Obra"] . '","';
       $dataExcel .= $fila["EjeY"];
       $dataExcel .= '"],';
-
-
-
     }
+
     $grafico['yValues'] = $yValues;
     $grafico['xValues'] = $xValues;
     $grafico['stringColor'] = $stringColor;
     $grafico['dataExcel'] = $dataExcel;
 
-    /*$grafico['variableX'] = $variableX;
-    $grafico['variableY'] = $variableY;*/
   
     $grafico['variableXY'] = $arrayTabla;
 
