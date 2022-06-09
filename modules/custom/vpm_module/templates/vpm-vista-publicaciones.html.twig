@@ -9,7 +9,7 @@
 			{% for obj in publicaciones %}
 				<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
 					<a href='{{ obj.urlPublica }}'>
-						<div class='imgItem'><img src='http://localhost/vpm/sites/default/files/2022-04/fileimage_0.png'></div>
+						<div class='imgItem'><img src='{{ url('<front>') }}/sites/default/files/2022-06/publicacion.png'></div>
 						<div class='nombreArtista' style="border-bottom:none">{{ obj.title }}</div>
 						<div class='fechPublicacion'>Publicado el {{ obj.fecha }}</div>
 						<div class='linkPublicacion'>Ve más <i class="fa fa-chevron-right" aria-hidden="true"></i></div>
