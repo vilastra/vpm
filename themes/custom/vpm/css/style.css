@@ -2628,3 +2628,33 @@ TIMELINE */
 .owl-carousel .owl-item img {
     width: inherit!important;
 }
+
+/*FICHA  ARTISTA*/
+.alinearTexto {
+
+	padding-right: 5px;
+	padding-bottom: 5px;
+	margin: 10px 0;
+	
+}
+
+.alinearTexto  img{
+    /*float: left;
+    width: 688px;
+    height: 516px;
+    max-width: 688px;
+    max-height: 516px;
+    object-fit: cover;*/
+    width: 688px;
+    height: 516px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.alinearTexto p{
+    font-size: 18px;
+    font-weight: 300;
+    /*margin-top: 20px;*/
+}
+

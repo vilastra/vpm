@@ -215,7 +215,7 @@
 
 
 
-                if (typeof xValues !== '') {
+                if (typeof xValues !== 'undefined') {
                     var myData = {
                         labels: xValues,
                         datasets: [{

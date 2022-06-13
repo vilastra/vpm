@@ -1,34 +1,49 @@
+
+
+
 <div class='whiteArea'>
 
 	<div class="col-9 max-container px-0 m-auto ">
 
-		<div class="row mb-5">
-
+		<div class="row mb-5 ">
 			{% for obj in artista %}
 				<h6>{{ obj.nombreArtista }}</h6>
-				<div class='cardItem col-lg-6 col-md-4 col-sm-12 col-xs-12'>
-					<div class='imgItemGrande'><img src='{{ obj.rutaFoto }}'></div>
-				</div>
-			{% endfor %}
-			<div class="cardItem col-lg-6 col-md-4 col-sm-12 col-xs-12">
-				{% for obj in artista %}
-
+				<div class='alinearTexto col-lg-12 col-md-4 col-sm-12 col-xs-12'>
+					<div ><img src='{{ obj.rutaFoto }}'></div>			
 					{% if obj.idArtista == 323 %}
-						<p>Clara Filleul-De Pétigny nació en Nogent-Le Rotrou, al norte de Francia, el 18 de marzo de 1822. Su padre, François-Adrien Filleul-De Pétigny, fue un liberal que participó en L’emeute de Nogent-le-Rotrou lors de la procession de 1838, un enfrentamiento entre católicos y anticlericales influenciados por la Ilustración y la Revolución Francesa. A los 18 años Clara emigra a París, donde participa en actividades literarias y se convierte en alumna de pintura y dibujo del pintor bordelés Raymon Quinsac Monvoisin. Arribó a Chile hacia 1844 / 1845 —en el período que transcurre entre su participación en la Exposition de l’Industrie de mayo de 1844 en París y su viaje a Perú con Monvoisin a mediados de 1845— y regresó a Francia alrededor de 1863. En Chile se estableció junto a Monvoisin y su taller, participando activamente en la producción de retratos por todo el país. </p>
-						<p>En 1847 realizan un breve viaje a Francia. A su regreso al continente americano, se establecen un tiempo en Río de Janeiro, Brasil, y participa en la Exposición General de Bellas Artes exhibiendo una copia del retrato del Emperador don Pedro II realizado por Monvoisin para la misma ocasión. Tras su regreso a Chile en 1848, pasaría largas temporadas en la Hacienda de los Molles en la Región de Valparaíso, donde compatibilizaría el trabajo artístico con el doméstico, en el cuidado y crianza de los hijos del sobrino de Monvoisin. Durante la década de 1850 Clara participa en distintas versiones de la Exposición Nacional de Artes y Manufactura, destacando en cada una de ellas e, incluso, trabajando en la iluminación de fotografías junto al fotógrafo francés Deroche hacia 1854. Tras su regreso a Europa, en 1863 Clara participa en el Salon des Refusés y en el Salón de París de 1864. </p>	
-						<p>La labor de Filleul se extiende también a la escritura. Entre los cuarenta títulos publicados en París se encuentran L’Algérie (1846), L’Égypte, son histoire et ses merveilles (1850) y La Palestine, ou Une visite aux Lieux Saints (1866), lugares que además visita y probablemente ilustra. Fue también escritora de cuentos infantiles como Contes et légendes (1838), dedicado a su madre; L’heureuse famille, ou les veillées amusantes (hacia 1840–1845) y Fables offertes à l’enfance (1850), entre otros. También aparece como editora científica de Fable de Florian de Jean Pierre Claris de Florian (1755–1794) y como traductora de Oeuvres complètes du Chanoine Schmid (1838). Clara Filleul murió el 7 de agosto de 1878 en París, Francia.</p>
-					{% elseif obj.idArtista == 342 %}
-					
+						<p>Clara Filleul-De Pétigny nació en Nogent-Le Rotrou, al norte de Francia, el 18 de marzo de 1822. 
+							Su padre, François-Adrien Filleul-De Pétigny, fue un liberal que participó en L’emeute de Nogent-le-Rotrou 
+							lors de la procession de 1838, un enfrentamiento entre católicos y anticlericales influenciados por la Ilustración
+							y la Revolución Francesa. A los 18 años Clara emigra a París, donde participa en actividades literarias y se 
+							convierte en alumna de pintura y dibujo del pintor bordelés Raymon Quinsac Monvoisin. Arribó a Chile hacia
+							1844 / 1845 —en el período que transcurre entre su participación en la Exposition de l’Industrie de mayo de 
+							1844 en París y su viaje a Perú con Monvoisin a mediados de 1845— y regresó a Francia alrededor de 1863. En Chile 
+							se estableció junto a Monvoisin y su taller, participando activamente en la producción de retratos por todo el país.</p> 
+						<p>En 1847 realizan un breve viaje a Francia. A su regreso al continente americano, 
+							se establecen un tiempo en Río de Janeiro, Brasil, y participa en la Exposición General 
+							de Bellas Artes exhibiendo una copia del retrato del Emperador don Pedro II realizado por
+							Monvoisin para la misma ocasión. Tras su regreso a Chile en 1848, pasaría largas temporadas 
+							en la Hacienda de los Molles en la Región de Valparaíso, donde compatibilizaría el trabajo artístico con el doméstico, 
+							en el cuidado y crianza de los hijos del sobrino de Monvoisin. Durante la década de 1850 Clara participa en distintas 
+							versiones de la Exposición Nacional de Artes y Manufactura, destacando en cada una de ellas e, incluso, trabajando en 
+							la iluminación de fotografías junto al fotógrafo francés Deroche hacia 1854. Tras su regreso a Europa, en 1863 Clara 
+							participa en el Salon des Refusés y en el Salón de París de 1864.</p>
+						<p>La labor de Filleul se extiende también a la escritura. Entre los cuarenta títulos publicados en París se encuentran 
+							L’Algérie (1846), L’Égypte, son histoire et ses merveilles (1850) y La Palestine, ou Une visite aux Lieux Saints (1866),
+							lugares que además visita y probablemente ilustra. Fue también escritora de cuentos infantiles como Contes et légendes 
+							(1838), dedicado a su madre; L’heureuse famille, ou les veillées amusantes (hacia 1840–1845) y Fables offertes à l’enfance 
+							(1850), entre otros. También aparece como editora científica de Fable de Florian de Jean Pierre Claris de Florian (1755–1794)
+							y como traductora de Oeuvres complètes du Chanoine Schmid (1838). Clara Filleul murió el 7 de agosto de 1878 en París, 
+							Francia.</p>	
+					{% elseif obj.idArtista == 342 %}					
 					{% elseif obj.idArtista == 324 %}
-
 					{% elseif obj.idArtista == 307 %}
 						<p>Monvoisin en América es un proyecto de investigación internacional que se centra en la catalogación y estudio de las obras del artista Raymond Quinsac Monvoisin (1790-1870) que se produjeron o que actualmente se encuentran en el continente americano. Este proyecto propone una perspectiva regional sobre su producción artística y se centra en diversos aspectos de la presencia de Monvoisin en todo el continente, tales como los problemas de la circulación de sus imágenes, las migraciones, representación de sujetos subalternos, la materialidad de sus obras, el mercado de arte y el coleccionismo del período. Todo ello se analiza a través de una óptica transnacional e interregional en el cono sur americano. </p>
 						<p>Por lo anterior, el objetivo central de esta investigación es realizar un catálogo razonado de la obra de Raymond Quinsac Monvoisin por medio del catastro, registro, documentación y estudio químico/material de su obra en el continente. Asimismo, busca articular complejamente la figura del pintor con sus discípulos o taller artístico en América, estudiando la vida y obra de su círculo más cercano: Clara Filleul, Franklin Rawson, Gregorio Torres, Procesa Sarmiento y Francisco Javier Mandiola.</p>
 					{% endif %}
-
-				{% endfor %}
-				
+						
 			</div>
+			{% endfor %}
 		</div>
 
 		<div class="row">
