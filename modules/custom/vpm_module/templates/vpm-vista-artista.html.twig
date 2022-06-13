@@ -53,7 +53,7 @@
 					<a href='{{ obj.urlObra }}'>
 						<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
 					</a>
-					<a href='tematica?idTematica={{ obj.idTematica }}'>
+					<a href='obras?idCat=null&Sec=null&busquedaIndex=&catalogo=1&tematica={{obj.idTematica}}'>
 						<div class='nombreTematica'>{{ obj.nombreTematica}}</div>
 					</a>
 					<a href='{{ obj.urlObra }}'>
@@ -61,7 +61,7 @@
 					</a>
 
 					<div class='descItem'>
-						Autores:
+						Autoría:
 						<a href='artista?id={{ obj.idArtista }}'>{{ obj.nombreArtista }}</a>
 					</div>
 
