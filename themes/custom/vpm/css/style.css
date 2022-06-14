@@ -2650,6 +2650,9 @@ TIMELINE */
     float: left;
     margin-right: 20px;
     margin-bottom: 20px;
+    object-fit: cover;
+    max-width: 688px;
+    max-height: 516px;
 }
 
 .alinearTexto p{
