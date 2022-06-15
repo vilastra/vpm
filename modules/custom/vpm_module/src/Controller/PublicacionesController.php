@@ -23,7 +23,7 @@ class PublicacionesController extends ControllerBase
 
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
-    $sql = "SELECT archivo.entity_id as codArchivo, managed.filename as name, managed.uri as uri, node.title as title, managed.timestamp as fecha
+    $sql = "SELECT Distinct archivo.entity_id as codArchivo, managed.filename as name, managed.uri as uri, node.title as title, managed.timestamp as fecha
         FROM node
         LEFT JOIN field_data_field_archivo archivo ON archivo.entity_id = node.nid        
         LEFT JOIN field_data_field_autor_ensayo autorensayo ON autorensayo.entity_id = archivo.entity_id

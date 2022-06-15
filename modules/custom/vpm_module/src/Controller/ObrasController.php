@@ -28,7 +28,9 @@ class ObrasController extends ControllerBase
       fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec,
       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec,
       terminoTaxTecnica.name as Tecnica,
-      terminoTaxTecnica.tid as idTecnica
+      terminoTaxTecnica.tid as idTecnica,     
+	    terminoTaxRela.name as TipoRelacion
+      
       FROM node
       LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
       LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
@@ -47,6 +49,13 @@ class ObrasController extends ControllerBase
       LEFT JOIN field_data_field_iconografia_retrato fdfir on fdfir.entity_id = node.nid 
       LEFT JOIN field_data_field_persona fdfp on fdfir.field_iconografia_retrato_value = fdfp.entity_id 
       LEFT JOIN field_data_field_nombre_retratado fdfnr on fdfp.field_persona_value = fdfnr.entity_id 
+
+      LEFT JOIN field_data_field_iconografia_retrato fdfirR on fdfirR.entity_id = node.nid 
+      LEFT JOIN field_data_field_persona fdfpR on fdfirR.field_iconografia_retrato_value = fdfpR.entity_id 
+      LEFT join field_data_field_otros_retratados fdfor on fdfpR.field_persona_value = fdfor.entity_id 
+      LEFT JOIN field_data_field_tipo_de_relacion fdfer on fdfor.field_otros_retratados_value  = fdfer.entity_id
+      LEFT JOIN taxonomy_term_data terminoTaxRela on terminoTaxRela.tid = fdfer.field_tipo_de_relacion_tid 
+
 
       WHERE node.type = 'obra' AND node.status=1 ";
 
@@ -153,6 +162,9 @@ class ObrasController extends ControllerBase
       }*/
 
       $infoObra['nombreTematica'] = $fila["Tematica"];
+      
+      /* TIPO DE RELACION */ 
+      $infoObra['TipoRelacion'] = $fila["TipoRelacion"];
 
       $obras[$x] = $infoObra;
       $x++;
@@ -772,7 +784,9 @@ class ObrasController extends ControllerBase
     terminoTaxAutoria.tid as autorId,
     terminoTaxTematica.name as Tematica,
     terminoTaxTematica.tid as idTematica,
-    file_managed.filename
+    file_managed.filename,
+    terminoTaxRela.name as TipoRelacion
+
     FROM node
     LEFT JOIN field_data_field_iconografia_retrato idenRetrato ON idenRetrato.entity_id = node.nid
     LEFT JOIN field_data_field_persona idenPersona ON idenPersona.entity_id = idenRetrato.field_iconografia_retrato_value
@@ -785,6 +799,18 @@ class ObrasController extends ControllerBase
     LEFT JOIN taxonomy_term_data terminoTaxTematica ON terminoTaxTematica.tid = tematicaObra.field_tematica_de_la_obra_tid 
     LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = iden.field_identificacion_value
     LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+
+    
+    LEFT JOIN field_data_field_iconografia_retrato fdfirR on fdfirR.entity_id = node.nid 
+    LEFT JOIN field_data_field_persona fdfpR on fdfirR.field_iconografia_retrato_value = fdfpR.entity_id 
+    LEFT join field_data_field_otros_retratados fdfor on fdfpR.field_persona_value = fdfor.entity_id 
+    LEFT JOIN field_data_field_tipo_de_relacion fdfer on fdfor.field_otros_retratados_value  = fdfer.entity_id
+    LEFT JOIN taxonomy_term_data terminoTaxRela on terminoTaxRela.tid = fdfer.field_tipo_de_relacion_tid 
+
+
+
+
+
     WHERE node.nid = ? AND targetObra.field_num_obra_relacionada_target_id IS NOT NULL AND obrasRelacionadas.type = 'obra' AND obrasRelacionadas.status=1 LIMIT 3";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("s", $idObra);
@@ -816,6 +842,9 @@ class ObrasController extends ControllerBase
       /* TEMATICA */
       $infoObra['idTematica'] = $fila["idTematica"];
       $infoObra['nombreTematica'] = $fila["Tematica"];
+
+      /* TIPO DE RELACION */ 
+      $infoObra['TipoRelacion'] = $fila["TipoRelacion"];
 
       $obras[$x] = $infoObra;
       $x++;

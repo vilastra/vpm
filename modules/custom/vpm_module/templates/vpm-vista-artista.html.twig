@@ -64,7 +64,9 @@
 						Autoría:
 						<a href='artista?id={{ obj.idArtista }}'>{{ obj.nombreArtista }}</a>
 					</div>
-
+					{% if obj.TipoRelacion != null %}
+						<div class='descItem'>Tipo de relación:{{obj.TipoRelacion}}</div>
+					{% endif %}
 					<a href='obra?id={{ obj.idObra }}'>
 						<div class='descItem'>
 							<b>

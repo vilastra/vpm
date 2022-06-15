@@ -24,7 +24,7 @@
 					<div class="col-lg-12 mb-3 mt-5 ">
 						<h7>Refina tu búsqueda utilizando los siguientes filtros:</h7>
 					</div>
-					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
 						<div class="InfoTitulo1 pb-1">Catálogo</div>
 						<div>
 							<select class="inputSelect" name="catalogo" id="catalogo">
@@ -32,8 +32,9 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-						<div class="InfoTitulo1 pb-1">Géneros pictóricos</div>
+
+					<div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+						<div class="InfoTituloGeneroPictorico pb-1">Géneros pictóricos</div>
 						<div>
 							<select class="inputSelect" name="tematica" id="tematica">
 								<option value="0">Selecciona</option>
@@ -47,7 +48,8 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+
+					<div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
 						<div class="InfoTitulo1 pb-1">Artista</div>
 						<div>
 							<select class="inputSelect" name="artista" id="artista">
@@ -62,7 +64,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
 						<div class="InfoTitulo1 pb-1">Año</div>
 						<div>
 							<select class="inputSelect" name="ano" id="ano">
@@ -77,7 +79,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
 						<div class="InfoTitulo1 pb-1">Técnica</div>
 						<div>
 							<select class="inputSelect" name="tecnica" id="tecnica">
@@ -92,7 +94,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-xl-2 col-lg-3 col-md-12 col-sm-12 col-xs-12">
 						<div class="InfoTitulo1 pb-4-5"></div>
 						<input type='submit' class='btn button btnBuscarFiltro more-link' value="Filtra">
 					</div>
@@ -161,9 +163,11 @@
 						</a>
 						{% if obj.nombreArtista != null %}
 						<a href='{{ obj.urlArtista }}'>
-							<div class='descItem'>Autoría:
-								{{ obj.nombreArtista }}</div>
+							<div class='descItem'>Autoría:{{ obj.nombreArtista }}</div>
 						</a>
+						{% endif %}
+						{% if obj.TipoRelacion != null %}
+							<div class='descItem'>Tipo de relación:{{obj.TipoRelacion}}</div>
 						{% endif %}
 					</div>
 				{% else %}
