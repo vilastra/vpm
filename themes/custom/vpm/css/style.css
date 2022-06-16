@@ -61,23 +61,17 @@ h6 {
     }
 }
 
-@media screen and (max-width:1168px) {
-    .header-logo-text-Titulo {
-        font-size: 1.400rem;
-        color: #5A5A55;
-        font-family: "Open Sans", sans-serif;
-    }
-}
+
 
 @media screen and (max-width:1280px) {
     .InfoTituloGeneroPictorico {
         font-size: 1rem;
         color: #303030;
         font-family: "Open Sans", sans-serif;
-
-
     }
 }
+
+
 
 
 
@@ -1933,10 +1927,20 @@ a {
     background-position: top;
 }
 
+
+
 .header-logo-text {
     font-size: 1.563rem;
     color: #5A5A55;
     font-family: "Open Sans", sans-serif;
+}
+
+@media screen and (max-width:1396px) {
+    .header-logo-text{
+        font-size: 1.188rem;
+        color: #5A5A55;
+        font-family: "Open Sans", sans-serif;
+    }
 }
 
 #block-vpm-branding img {

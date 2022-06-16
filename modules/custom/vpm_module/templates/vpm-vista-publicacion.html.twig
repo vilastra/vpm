@@ -25,9 +25,13 @@
 						{{ publicacion.autor }}</div>
 				{% endif %}
 				<div class='publicacionDesc1'>
+
+				{% if publicacion.fecha != '31/12/1969' %}
 					<b>Fecha publicación:
 					</b>
-					{{ publicacion.fecha }}</div>
+					 {{ publicacion.fecha }}</div>
+				{% endif %}	
+
 				<div class='publicacionDesc1'>
 					<b>Catálogo investigado:
 					</b>Monvoisin</div>

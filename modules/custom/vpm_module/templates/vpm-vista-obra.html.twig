@@ -147,6 +147,10 @@
 								<a href='{{ obj.urlArtista }}'>{{ obj.nombreArtista }}</a>
 							</div>
 
+							{% if obj.TipoRelacion != null %}
+								<div class='descItem'>Tipo de relación: {{obj.TipoRelacion}}</div>
+							{% endif %}
+
 							<a href='obra?id={{ obj.idObra }}'>
 								<div class='descItem'>
 									<b>
