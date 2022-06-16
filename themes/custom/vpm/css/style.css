@@ -63,11 +63,19 @@ h6 {
 
 
 
+.InfoTituloGeneroPictorico {
+    font-size: 1.125rem;
+    color: #303030;
+    font-family: "Open Sans", sans-serif;
+    padding-bottom: 0.313rem;
+}
+
 @media screen and (max-width:1280px) {
     .InfoTituloGeneroPictorico {
         font-size: 1rem;
         color: #303030;
         font-family: "Open Sans", sans-serif;
+        padding-bottom: 0.438rem;
     }
 }
 
