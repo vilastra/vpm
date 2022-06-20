@@ -570,7 +570,9 @@ class ObrasController extends ControllerBase
     altoImagen.field_alto_value as Alto,
     anchoImagen.field_ancho_value as Ancho,
     linkImgOrig.field_enlace_imagen_original_url as linkImgOriginal,
-    autorTexto.field_autor_texto_razonado_value as AutorTexto
+    autorTexto.field_autor_texto_razonado_value as AutorTexto,
+    fdfnf.field_numero_ficha_value as NomFotografo
+    
     FROM node
     LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
     LEFT JOIN field_data_field_numero numero ON numero.entity_id = iden.field_identificacion_value
@@ -602,7 +604,9 @@ class ObrasController extends ControllerBase
     LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
     LEFT JOIN field_data_field_cotenido_razonado contenidoRazonado ON contenidoRazonado.entity_id = iden.field_identificacion_value
     LEFT JOIN field_data_field_texto_razonado_cuerpo textoRazonado ON textoRazonado.entity_id = contenidoRazonado.field_cotenido_razonado_value
+    LEFT JOIN field_data_field_numero_ficha fdfnf on fdfnf.entity_id = iden.field_identificacion_value 
     WHERE node.type = 'obra' AND node.status=1 AND nid=? ";
+
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("s", $idObra);
     $stmt->execute();

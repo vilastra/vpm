@@ -124,6 +124,12 @@ function vpm_module_theme($existing, $type, $theme, $path)
                 'genero' => [],
             ]
         ],
+        'vpm-catalogo-menu-breadcrumb' => [
+            'variables' => [
+                'links' => []
+            ]
+        ],
+
     ];
 }
 
