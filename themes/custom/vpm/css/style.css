@@ -25,7 +25,7 @@ h7 {
 }
 
 .pb-4-5 {
-    padding-bottom: 1.9rem!important;
+    padding-bottom: 1.9rem !important;
 }
 
 h6 {
@@ -35,6 +35,12 @@ h6 {
     font-weight: bold;
     line-height: 120%;
     margin-bottom: 2.5rem;
+}
+@media screen and (max-width:575px) {
+
+    h6 {
+        font-size: 1.5rem;
+    }
 }
 
 
@@ -48,6 +54,7 @@ h6 {
 } */
 
 @media screen and (min-width:576px) and (max-width:991px) {
+
     h1,
     .notDestTitle {
         font-size: 2rem;
@@ -55,6 +62,7 @@ h6 {
 }
 
 @media screen and (max-width:575px) {
+
     h1,
     .notDestTitle {
         font-size: 1.5rem;
@@ -92,11 +100,10 @@ h2 {
     margin-bottom: 1.25rem;
 }
 
-.h2 {
-    font-size: 2rem;
-    font-family: "Open Sans", sans-serif;
-    /** Open Sans bold **/
-    font-weight: bold;
+@media screen and (max-width:575px) {
+    h2 {
+        font-size: 1.563rem !important;
+    }
 }
 
 b {
@@ -175,10 +182,11 @@ li {
     .subMenu {
         position: absolute;
         background-color: #000000;
-        flex-direction: column!important;
+        flex-direction: column !important;
         display: none;
         width: 16.7%;
     }
+
     .nav-item:hover>ul {
         display: block;
     }
@@ -277,6 +285,7 @@ li {
     .container-menu {
         padding: 0.47rem 2rem 0.47rem 2rem;
     }
+
     .links-footer {
         padding: 0rem 2rem 0rem 2rem;
     }
@@ -402,6 +411,7 @@ li {
         right: 1.2rem;
         bottom: 20px;
     }
+
     .ir-arriba {
         padding: .5rem;
         font-size: 1rem;
@@ -613,36 +623,46 @@ footer li {
         padding-bottom: 1.5rem;
         padding-top: 3.1875rem;
     }
+
     .footer-copy-rights a {
         font-size: 70%;
     }
+
     .texto-footer {
         padding-left: 0rem;
         padding-right: 0rem;
         line-height: 1rem;
     }
+
     .contenedor-logo-footer {
         padding-right: 0px;
     }
+
     .contenedor-logo-footer img {
         width: 100%;
     }
+
     #texto-footer-1 {
         padding-bottom: .5rem;
     }
+
     #footer1 {
         padding-bottom: 1.5rem;
     }
+
     #footer2 {
         padding-top: 0.875rem;
     }
+
     .links-paginas-footer a,
     .links-recorridos-footer a {
         font-size: 90%;
     }
+
     .links-paginas-footer ul {
         padding-bottom: 0rem;
     }
+
     .links-footer {
         padding-bottom: 1.8rem;
         padding-top: 1.8rem;
@@ -740,13 +760,13 @@ h5.linea span {
 
 .btnBuscar {
     background-color: #000000;
-    color: #FFFFFF!important;
+    color: #FFFFFF !important;
     font-size: 1.125rem;
     width: 100%;
     cursor: pointer !important;
     padding-top: 0.813rem;
     padding-bottom: 0.813rem;
-    font-family: "Open Sans", sans-serif!important;
+    font-family: "Open Sans", sans-serif !important;
 }
 
 .btnBuscarFiltro {
@@ -765,9 +785,9 @@ h5.linea span {
 
 .btnBuscar:hover {
     background-color: #2D717C;
-    color: #FFFFFF!important;
+    color: #FFFFFF !important;
     cursor: pointer !important;
-    text-decoration: none!important;
+    text-decoration: none !important;
 }
 
 .pSuperior {
@@ -958,6 +978,12 @@ p {
     font-family: "Open Sans", sans-serif;
     padding-left: 0px;
     padding-right: 0px;
+}
+
+@media screen and (max-width:575px) {
+    p {
+        font-size: 0.813rem !important;
+    }
 }
 
 .InfoTitulo1 {
@@ -1182,6 +1208,7 @@ p {
     .buttonsForm {
         text-align: center;
     }
+
     .buttonsForm button {
         width: 100%;
         margin-bottom: 10px;
@@ -1413,26 +1440,32 @@ a {
     .contendor {
         margin: 0rem 0.938rem 0rem 0.938rem;
     }
+
     .contendorFooter {
         margin: 0rem 0.938rem 0rem 0.938rem !important;
     }
+
     .links-footer {
         padding: 0px;
     }
+
     .navbar-toggler {
-        padding-right: 4.375rem!important;
+        padding-right: 4.375rem !important;
     }
+
     .container-menu {
         margin: 0rem 0.938rem 0rem 0.938rem;
         padding: 0;
         justify-content: flex-end;
-        margin-right: 0px!important;
-        margin-left: 0px!important;
-        width: 100%!important;
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+        width: 100% !important;
     }
+
     .noPaddingMobile {
         padding-left: 0 !important;
     }
+
     .contendorFooter2 {
         margin: 0rem 1.876rem 0rem 1.876rem !important;
     }
@@ -1442,6 +1475,7 @@ a {
     .btnEnvia {
         padding: 0.813rem 5rem 0.813rem 5rem;
     }
+
     .btnBorra {
         padding: 0.813rem 5rem 0.813rem 5rem;
         margin-right: 1.25rem;
@@ -1453,11 +1487,13 @@ a {
         padding: 10px 45px 10px 45px;
         width: 50%;
     }
+
     .btnBorra {
         padding: 10px 45px 10px 45px;
         margin-right: 1.25rem;
         width: 50%;
     }
+
     .btnEnviaError {
         width: 100%
     }
@@ -1467,24 +1503,30 @@ a {
     h1 {
         margin-bottom: 1.875rem;
     }
+
     .noPaddingMobile {
         padding-left: 0 !important;
     }
+
     .noPaddingMobile img {
         max-width: 137px;
         max-height: 55px;
     }
+
     .container-menu {
         margin: 0rem 0rem 0rem 0rem;
         padding: 0;
     }
+
     .navbar li {
         width: 100%;
         text-align: left !important;
     }
+
     #navDesktop a {
         padding: 1.125rem 0rem 1.125rem 4.375rem !important;
     }
+
     .colMobileHeader {
         width: 50%;
         padding-right: 0px;
@@ -1492,31 +1534,39 @@ a {
         padding-bottom: 1rem;
         text-align: justify;
     }
+
     .colMobileHeader a {
         padding-left: 0.4rem;
     }
+
     .container-fluid-nav {
         margin-top: 0.5rem;
     }
+
     .nombrePagina,
     .nombrePagina2 {
         font-size: 0.688rem;
     }
+
     .contendor h1,
     .contendorMarginInferior4 .h1 {
         font-size: 1.563rem;
     }
+
     .contendorMarginInferior5,
     .contendorMarginInferior6 {
         margin-bottom: 1.875rem !important;
     }
+
     .contendorMarginInferior6 {
         margin-bottom: 1.438rem !important;
     }
+
     .contendor h2,
     h5.linea {
         font-size: 1.313rem;
     }
+
     .InfoTitulo1,
     .txtAsterisco,
     .customSelect,
@@ -1539,6 +1589,7 @@ a {
     #mensajeCurso {
         font-size: 0.938rem;
     }
+
     .contendor p,
     .txtIcono2,
     .txtDefinicion,
@@ -1547,58 +1598,72 @@ a {
     .collapPreg {
         font-size: 0.813rem;
     }
+
     .InfoTitulo2,
     .tituloCurso {
         font-size: 1.125rem !important;
     }
+
     .subtituloCurso,
     .subtituloCurso2,
     .txtIcono {
         font-size: 0.875rem !important;
     }
+
     .tdMisCapacitaciones {
         font-size: 0.938rem !important;
     }
+
     .tdMisCapacitaciones2 {
         font-size: 0.813rem !important;
     }
+
     .InfoTitulo4 {
         font-size: 1.188rem !important;
     }
+
     .contenedorAlertaTexto {
         font-size: 0.688rem;
         text-align: left;
     }
+
     .ContenedorCamposObligatorios {
         margin-bottom: 0.938rem;
         font-size: 0.938rem !important;
     }
+
     .btnNegro,
     .btnGris {
         margin-bottom: 1.25rem;
     }
+
     .btnVerde {
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
     }
+
     #contenidoTabla .btnDetalle,
     #contenidoTabla .btnConfirmar,
     #contenidoTabla .btnCancelar {
         padding: 0.625rem 1.063rem 0.625rem 1.063rem;
         font-size: 0.938rem !important;
     }
+
     .bloque {
         padding-top: 1.875rem;
         padding-bottom: 1.875rem;
         margin-bottom: 1.875rem;
     }
+
     .bloque .InfoTitulo3 {
         margin-bottom: 0.938rem;
     }
+
     .colButtonsMobile {
         text-align: center;
         display: inline-flex;
     }
+
     .colButtonsMobile .btnBorra,
     .colButtonsMobile .btnEnvia {
         text-align: center;
@@ -1606,10 +1671,12 @@ a {
         font-size: 0.938rem;
         padding: 0.75rem 2.5rem 0.75rem 2.5rem;
     }
+
     .colButtonsMobile2 {
         text-align: center;
         display: inline-flex;
     }
+
     .colButtonsMobile2 .btnBorra,
     .colButtonsMobile2 .btnEnvia {
         text-align: center;
@@ -1618,90 +1685,112 @@ a {
         padding: 0.75rem 2.5rem 0.75rem 2.5rem;
         margin-right: 0.3rem;
     }
+
     .btnTbInscribete {
         width: 100%;
     }
+
     .contendorMarginInferior2 {
         margin-bottom: 0.938rem !important;
     }
+
     .contendorMarginInferior4 {
         margin-bottom: 1.875rem !important;
     }
+
     .bloqueBuscarCapacitaciones .col-sm-12,
     .bloqueBuscarCapacitaciones .col-xs-12,
     .bloqueBuscarCapacitaciones .col-md-4 {
         margin-top: 0.469rem;
         margin-bottom: 0.469rem;
     }
+
     .bloqueBuscarCapacitaciones .customSelect {
         margin-bottom: 0rem;
     }
+
     .bloqueBuscarCapacitaciones h2 {
         margin-bottom: 0.625rem;
     }
+
     .btnBuscar {
         background-color: #000000;
         color: #FFFFFF;
         height: auto;
-        width: auto;
+        width: 100%;
         cursor: pointer !important;
         padding: 0.75rem 2.188rem 0.75rem 2.188rem;
     }
+
     .btnNewPass {
         font-size: 0.738rem !important;
         padding-left: inherit !important;
         padding-right: inherit !important;
     }
+
     #main .ContenedorBotones {
         margin-top: auto;
     }
+
     .footer-related-link {
         margin-left: 0;
         font-size: 0.563rem;
     }
+
     .contendorfooterRed {
         margin-left: 5px !important;
     }
+
     .footer-related-link a {
         font-size: 0.663rem;
     }
+
     .contenedor-logo-footer {
         max-width: 137px;
         max-height: 124px;
         margin-bottom: 1.875rem;
     }
+
     .icon-social-network-footer {
         padding-left: 5px;
         padding-right: 5px;
         text-align: left;
     }
+
     .icon-social-network-footer a {
         font-size: 0.813rem !important;
     }
+
     .container {
         padding-right: 0.688rem !important;
     }
+
     .bloquePregFrec,
     .bloquePregFrec .collapPreg {
         margin-top: 0.938rem;
     }
+
     .collapPreg {
         font-size: 0.813rem !important;
     }
+
     .borderPregFrec {
         margin-top: 1.563rem;
         margin-bottom: 1.563rem;
         border-bottom: 2px solid #707070;
     }
+
     .borderPregFrec2 {
         margin-top: 0rem !important;
     }
+
     .contendorAlertaAzul .contenedorAlertaTexto img {
         top: 2rem;
         right: 5px;
         position: relative;
         display: table-cell;
     }
+
     .ir-arriba {
         height: 1.875rem !important;
         width: 1.875rem !important;
@@ -1715,6 +1804,7 @@ a {
         padding-right: 5px;
         text-align: left;
     }
+
     .icon-social-network-footer a {
         font-size: 0.613rem !important;
     }
@@ -1752,6 +1842,12 @@ a {
     color: #707070;
     border: 1px solid #707070;
 }
+@media screen and (max-width:575px) {
+    .inputText {
+        height: 44px;
+        font-size: 1rem;
+    }
+}
 
 .inputSelect {
     width: 100%;
@@ -1786,7 +1882,6 @@ a {
     font-weight: bold;
     margin-bottom: 0.813rem;
 }
-
 .indexEncontrar .divEncontrar span {
     padding-left: 1.563rem;
     font-size: 1.125rem;
@@ -1803,6 +1898,16 @@ a {
 .indexEncontrar .divEncontrar {
     display: flex;
 }
+@media screen and (max-width:575px) {
+    .indexEncontrar .titleIndexEncontrar  {
+        font-size: 1.125rem;
+    }
+    .indexEncontrar .divEncontrar span {
+        font-size: 0.813rem;
+    }
+}
+
+
 
 .imgIndex img {
     object-fit: cover;
@@ -1820,6 +1925,12 @@ a {
     object-fit: cover;
     height: 336px;
     max-height: 336px;
+}
+@media screen and (max-width:575px) {
+    .cardItem .imgItem img  {
+        height: 170px;
+        max-height: 170px;
+    }
 }
 
 .cardItem .imgItemGrande img {
@@ -1843,6 +1954,12 @@ a {
     font-weight: bold;
     font-family: "Open Sans", sans-serif;
 }
+@media screen and (max-width:575px) {
+    .cardItem .nombreArtista  {
+        font-size: 1.125rem;
+    }
+}
+
 
 .cardItem .nombreObra {
     padding-top: 1.25rem;
@@ -1850,7 +1967,6 @@ a {
     text-decoration: none;
     font-weight: bold;
 }
-
 .descItem {
     font-weight: 100;
     padding-top: 0.938rem;
@@ -1858,6 +1974,16 @@ a {
     font-size: 1.125rem;
     text-decoration: none;
 }
+@media screen and (max-width:575px) {
+    .cardItem .nombreObra  {
+        font-size: 1.125rem;
+    }
+    .descItem {
+        font-size: 0.813rem;
+    }
+}
+
+
 
 .cardItem .nombreTematica {
     background-color: #DEDEDE;
@@ -1868,11 +1994,26 @@ a {
     padding: 0.438rem 3.125rem 0.438rem 3.125rem;
 }
 
-.cardItem .linkItem {
+.linkItem {
     padding-top: 0.5rem;
     font-size: 1.125rem;
     text-decoration: none;
     font-weight: bold;
+}
+
+.linkItem a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000000;
+}
+
+@media screen and (max-width:575px) {
+    .linkItem {
+        font-size: 0.813rem;
+    }
+    .linkItem a {
+        font-size: 0.813rem;
+    }
 }
 
 .linkMenuCatalogo {
@@ -1921,6 +2062,10 @@ a {
     .imgIndex {
         padding: 0;
     }
+    .imgIndex img{
+        height: 400px;
+        max-height: 400px;
+    }
 }
 
 
@@ -1944,10 +2089,16 @@ a {
 }
 
 @media screen and (max-width:1396px) {
-    .header-logo-text{
+    .header-logo-text {
         font-size: 1.188rem;
         color: #5A5A55;
         font-family: "Open Sans", sans-serif;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .header-logo-text {
+        font-size: 0.75rem;
     }
 }
 
@@ -1959,6 +2110,15 @@ a {
     margin-right: 1.875rem;
 }
 
+@media screen and (max-width:575px) {
+    #block-vpm-branding {
+        padding: 0px;
+    }
+
+    #block-vpm-branding img {
+        max-width: 137px;
+    }
+}
 
 /* SEARCH BOX */
 
@@ -1999,6 +2159,7 @@ a {
     background-color: white;
 }
 
+
 #search-block-form button[type=submit] img {
     width: initial;
     height: 45%;
@@ -2011,11 +2172,21 @@ a {
 }
 
 @media screen and (max-width:575px) {
-    #search-block-form input[type=search] {
+    #search-block-form {
         width: 100%;
     }
+
+    #search-block-form input[type=search] {
+        width: 100%;
+        height: 38px;
+        max-height: 38px;
+        font-size: 1rem;
+    }
+
     .searchHeader {
         text-align: left;
+        padding-left: 0px;
+        padding-right: 0px;
     }
 }
 
@@ -2099,7 +2270,7 @@ a {
 
 .pager__item--previous,
 .pager__item--next {
-    background-color: white!important;
+    background-color: white !important;
 }
 
 
@@ -2271,12 +2442,12 @@ label {
 }
 
 .zoomWindow {
-    background-color: black!important;
-    text-align: center!important;
+    background-color: black !important;
+    text-align: center !important;
 }
 
 .zoomContainer {
-    float: right!important;
+    float: right !important;
 }
 
 .viewer {
@@ -2416,23 +2587,23 @@ TIMELINE */
 
 .tl-timemarker-content-container,
 .tl-timemarker-content-container-small {
-    border: none!important;
-    border-radius: 0%!important;
+    border: none !important;
+    border-radius: 0% !important;
 }
 
 .tl-timemarker-active .tl-timemarker-content-container,
 .tl-timemarker-active .tl-timemarker-content-container-small {
-    border: none!important;
-    border-radius: 0%!important;
+    border: none !important;
+    border-radius: 0% !important;
 }
 
 .tl-timemarker-active .tl-icon-image,
 .tl-timemarker-active .tl-headline {
-    color: white!important;
+    color: white !important;
 }
 
 .tl-timeline p {
-    font-family: "Open Sans", sans-serif!important;
+    font-family: "Open Sans", sans-serif !important;
 }
 
 .tl-text .tl-headline {
@@ -2446,7 +2617,7 @@ TIMELINE */
 }
 
 .tl-attribution {
-    display: none!important;
+    display: none !important;
 }
 
 .tl-headline {
@@ -2454,7 +2625,7 @@ TIMELINE */
 }
 
 .tl-timenav {
-    background-color: white!important;
+    background-color: white !important;
     border-top: none;
 }
 
@@ -2471,24 +2642,24 @@ TIMELINE */
 }
 
 .tl-media-content img {
-    width: 100%!important;
+    width: 100% !important;
     object-fit: cover;
     height: 416px;
     max-height: 416px;
 }
 
 .tl-slide {
-    text-align: right!important;
+    text-align: right !important;
 }
 
 .tl-text,
 .tl-slide-content,
 .tl-slide .tl-slide-content-container {
-    vertical-align: top!important;
+    vertical-align: top !important;
 }
 
 .tl-slide-content {
-    padding: 0px!important;
+    padding: 0px !important;
 }
 
 .tl-timemarker-media-container img,
@@ -2513,41 +2684,41 @@ TIMELINE */
 }
 
 .cronoLeyend .obraLeyend {
-    background-color: #8A8A8A!important;
+    background-color: #8A8A8A !important;
 }
 
 .cronoLeyend .obraLeyend svg,
 .cronoLeyend .destLeyend svg {
-    color: white!important;
+    color: white !important;
 }
 
 .cronoLeyend .hitoLeyend {
-    background-color: #DEDEDE!important;
+    background-color: #DEDEDE !important;
 }
 
 .cronoLeyend .destLeyend {
-    background-color: #4A4A4A!important;
+    background-color: #4A4A4A !important;
 }
 
 [id^="obraCrono"] .tl-timemarker-content-container {
-    background-color: #8A8A8A!important;
+    background-color: #8A8A8A !important;
 }
 
 [id^="obraCrono"] .tl-timemarker-content-container .tl-headline {
-    color: white!important;
+    color: white !important;
 }
 
 [id^="exhiCrono"] .tl-timemarker-content-container {
-    background-color: #FFFFFF!important;
-    border: 1px solid #707070!important;
+    background-color: #FFFFFF !important;
+    border: 1px solid #707070 !important;
 }
 
 [id^="exhiCrono"] .tl-timemarker-content-container .tl-headline {
-    color: #4A4A4A!important;
+    color: #4A4A4A !important;
 }
 
 .tl-timemarker-active .tl-timemarker-content-container .tl-headline {
-    color: #FFFFFF!important;
+    color: #FFFFFF !important;
 }
 
 
@@ -2583,7 +2754,7 @@ TIMELINE */
     object-fit: cover;
     max-width: 1048px;
     max-height: 639px;
-    display: initial!important;
+    display: initial !important;
     margin-bottom: 1.313rem;
 }
 
@@ -2613,17 +2784,17 @@ TIMELINE */
     left: 0;
     right: 0;
     background-color: #000000;
-    font-size: 20px!important;
+    font-size: 20px !important;
 }
 
 .custom-nav button {
-    background-color: #000000!important;
+    background-color: #000000 !important;
     color: #FFFFFF;
-    border-radius: 0!important;
+    border-radius: 0 !important;
 }
 
 .custom-nav button:hover {
-    background-color: #2D717C!important;
+    background-color: #2D717C !important;
 }
 
 .owl-prev {
@@ -2659,19 +2830,19 @@ TIMELINE */
 }
 
 .owl-carousel .owl-item img {
-    width: inherit!important;
+    width: inherit !important;
 }
 
 /*FICHA  ARTISTA*/
 .alinearTexto {
 
-	padding-right: 5px;
-	padding-bottom: 5px;
-	margin: 10px 0;
-	
+    padding-right: 5px;
+    padding-bottom: 5px;
+    margin: 10px 0;
+
 }
 
-.alinearTexto  img{
+.alinearTexto img {
     /*float: left;
     width: 688px;
     height: 516px;
@@ -2688,9 +2859,8 @@ TIMELINE */
     max-height: 516px;
 }
 
-.alinearTexto p{
+.alinearTexto p {
     font-size: 18px;
     font-weight: 300;
     /*margin-top: 20px;*/
 }
-

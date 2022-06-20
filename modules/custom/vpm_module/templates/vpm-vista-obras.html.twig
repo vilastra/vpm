@@ -147,9 +147,9 @@
 				</div>
 			</form>
 
-			<div class="row">
+			
 				{% for obj in obras %}
-					<div class='cardItem col-lg-4 col-md-4 col-sm-6 col-xs-6'>
+					<div class='cardItem col-lg-4 col-md-6 col-sm-6 col-xs-6'>
 						<a href="{{ obj.urlObra }}">
 							<div class='imgItem'><img src='{{ obj.rutaFoto }}'></div>
 						</a>	
@@ -173,7 +173,7 @@
 						<span>No se encontraron resultados</span>
 					</div>
 				{% endfor %}
-			</div>
+			
 		</div>
 		<div class="pager mt-5">
 			<div class="pager__items">

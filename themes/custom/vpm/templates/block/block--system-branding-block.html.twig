@@ -15,7 +15,7 @@
 
 {%
   set classes = [
-    'col-lg-9 col-md-12 col-sm-12 col-xs-12',
+    'col-lg-9 col-md-12 col-sm-12 col-xs-12 row',
   ]
 %}
 
@@ -24,20 +24,21 @@
 	{{ title_suffix }}
 
 	{% block content %}
+		<div class="row">
+			{% if site_logo %}
+				<div class="col-xl-4 col-lg-5 col-md-6 col-sm-6 col-xs-4 p-xl-0">
+					<a href="{{ path('<front>') }}" rel="home" class="text-decoration-none">
+						<img src="{{ site_logo }}" alt="{{ 'Home'|t }}"/>
+					</a>
 
-		{% if site_logo %}
-			<a href="{{ path('<front>') }}" rel="home" class="text-decoration-none">
-				<img src="{{ site_logo }}" alt="{{ 'Home'|t }}"/>
-			</a>
-
-
-		{% endif %}
-		{% if site_name %}
-
-			<span class='header-logo-text'>Quinsac. Estudios razonados de arte y coleccionismo</span>
-
-		{% endif %}
-		{{ site_slogan }}
-
+				</div>
+			{% endif %}
+			{% if site_name %}
+				<div class="col-xl-8 col-lg-8 p-lg-4 p-md-3 col-md-6 col-sm-6 col-xs-4">
+					<span class='header-logo-text'>Quinsac. Estudios razonados de arte y coleccionismo</span>
+				</div>
+			{% endif %}
+			{{ site_slogan }}
+		</div>
 	{% endblock %}
 </div>
