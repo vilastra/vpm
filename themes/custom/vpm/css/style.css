@@ -2866,3 +2866,10 @@ TIMELINE */
 }
 
 /* MENU BREADCRUM */
+.menuBreadcrum{
+    padding-left: 16.5rem;
+}
+.menuBreadcrum a {
+    text-decoration: none;
+    color: #000000;
+}
