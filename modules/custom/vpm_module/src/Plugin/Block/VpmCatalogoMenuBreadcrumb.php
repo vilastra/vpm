@@ -38,6 +38,16 @@ class VpmCatalogoMenuBreadcrumb extends BlockBase
         $menuLink['Publicaciones']=$host.'/publicaciones?idCat='.$idCatalogo."&Sec=Publ";
         $menuLink['Cronografia']=$host.'/cronografia?idCat='.$idCatalogo."&Sec=Cron";
         $menuLink['SobreInvestigacion']=$host.'/sobreinvestigacion?idCat='.$idCatalogo."&Sec=Sobr";
+
+
+
+        $menuLink['CatalogosRazonados']=$host.'/catalogos-razonados';
+        $menuLink['EquipoInvestigacion']=$host.'/equipoinvestigacion';
+        $menuLink['QuinsacEnCifras']=$host.'/quinsac-en-cifras';
+        $menuLink['PreguntasFrecuentes']=$host.'/preguntasfrecuentes';
+        //$menuLink['QuinsacEnCifras']=$host.'/
+
+
         return $menuLink;
       }
 
