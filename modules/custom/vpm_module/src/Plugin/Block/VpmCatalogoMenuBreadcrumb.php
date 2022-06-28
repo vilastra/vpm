@@ -40,15 +40,43 @@ class VpmCatalogoMenuBreadcrumb extends BlockBase
         $menuLink['SobreInvestigacion']=$host.'/sobreinvestigacion?idCat='.$idCatalogo."&Sec=Sobr";
         return $menuLink;
       }
+
+     /*function Listar_Artista($idCatalogo){
+        $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+        $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,file_managed.filename ,taxonomy_term_data.description 
+        FROM taxonomy_term_data
+        JOIN taxonomy_vocabulary ON taxonomy_vocabulary.vid=taxonomy_term_data.vid
+        JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = taxonomy_term_data.tid
+        JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+        WHERE taxonomy_vocabulary.name='Artistas' AND taxonomy_term_data.tid=?";
+        
+        $resultado = $mysqli->query($sql);
+        $artistas = [];
+        $x = 0;
+        while ($fila = mysqli_fetch_array($resultado)) {
+            $infoArtista = [];          
+            $infoArtista['nombreArtista'] = $fila["name"];
+            $artistas[$x] = $infoArtista;
+            $x++;
+        }
+        mysqli_close($mysqli);
+        return $artistas;
+      }*/
+
       /**
        * {@inheritdoc}
        */
       public function build()
       {
+       /* if(isset($_GET["idCat"])){
+          $idCatalogo=$_GET["idCat"];*/
+
         $links = $this->Crea_Menu();
+        //$artistas = $this->Listar_Artista($idCatalogo);
         return [
           '#theme' => 'vpm-catalogo-menu-breadcrumb',
           '#links' => $links,
+          //'#artista' => $artistas
         ];
       }
 }

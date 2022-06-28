@@ -1,49 +1,54 @@
 {% if links.idCatalogo != "null" %}
 	<div class='whiteArea pb-0'>
-		<div class="menuBreadcrum">
-			{% if links.ActualPage == "null" %}	
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="{{ links.Portada }}">Portada</a>
-			{% endif %}
+		<div class="col-9 max-container px-0 m-auto row menuBreadcrum">
+	
+				{% if links.ActualPage == "null" %}	
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 ">
+					<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
+					<a href="{{ links.Portada }}">Portada</a>
+				</div>	
+				{% endif %}
 
-			{% if links.ActualPage == "Art" %}
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
-				<a href="{{ links.Artistas }}">Artistas</a>
-			{% endif %}
+				{% if links.ActualPage == "Art" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 ">
+					<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
+					<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
+					<a href="{{ links.Artistas }}">Artistas</a>
+				</div>	
+				{% endif %}
 
-			{% if links.ActualPage == "Obras" %}
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
-				<a href="{{ links.Artistas }}" style="color:#C0C0C0">Artistas /</a>
-				<a href="{{ links.Obras }}">Obras</a>
-			{% endif %}
+				{% if links.ActualPage == "Obras" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 ">
+					<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
+					<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
+					<a href="{{ links.Obras }}">Obras</a>
+				</div>	
+				{% endif %}
 
-			{% if links.ActualPage == "Publ" %}
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
-				<a href="{{ links.Artistas }}" style="color:#C0C0C0">Artistas /</a>
-				<a href="{{ links.Obras }}" style="color:#C0C0C0">Obras /</a>
-				<a href="{{ links.Publicaciones }}">Publicaciones</a>
-			{% endif %}
+				{% if links.ActualPage == "Publ" %}
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 ">
+					<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
+					<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
+					<a href="{{ links.Publicaciones }}">Publicaciones</a>
+				</div>	
+				{% endif %}
 
-			{% if links.ActualPage == "Cron" %}				
-				<a href="/vpm/" style="color:#C0C0C0" >Inicio /</a>
-				<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
-				<a href="{{ links.Artistas }}" style="color:#C0C0C0">Artistas /</a>
-				<a href="{{ links.Obras }}" style="color:#C0C0C0">Obras /</a>
-				<a href="{{ links.Publicaciones }}" style="color:#C0C0C0">Publicaciones /</a>
-				<a href="{{ links.Cronografia }}">Cronografía</a>		
-			{% endif %}
+				{% if links.ActualPage == "Cron" %}			
+				<div class="col-lg-2 col-md-6 col-sm-12 col-xs-12 ">	
+					<a href="/vpm/" style="color:#C0C0C0" >Inicio /</a>
+					<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
+					<a href="{{ links.Cronografia }}">Cronografía</a>	
+				</div>	
+				{% endif %}
 
-			{% if links.ActualPage == "Sobr" %}				
-				<a href="/vpm/" style="color:#C0C0C0" >Inicio /</a>
-				<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
-				<a href="{{ links.Artistas }}" style="color:#C0C0C0">Artistas /</a>
-				<a href="{{ links.Obras }}" style="color:#C0C0C0">Obras /</a>
-				<a href="{{ links.Publicaciones }}" style="color:#C0C0C0">Publicaciones /</a>
-				<a href="{{ links.Cronografia }}" style="color:#C0C0C0">Cronografía /</a>	
-				<a href="{{ links.SobreInvestigacion }}">Sobre la investigación</a>			
-			{% endif %}
+				{% if links.ActualPage == "Sobr" %}			
+				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 ">	
+					<a href="/vpm/" style="color:#C0C0C0" >Inicio /</a>
+					<a href="{{ links.Portada }}" style="color:#C0C0C0">Portada /</a> 
+					<a href="{{ links.SobreInvestigacion }}">Sobre la investigación</a>		
+				</div>		
+				{% endif %}
+			
 		</div>
 	{% endif %}
+	<!--<a href="{{ links.Portada }}" style="color:#C0C0C0">{{ obj.nombreArtista }}</a> -->
