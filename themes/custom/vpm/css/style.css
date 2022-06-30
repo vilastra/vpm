@@ -1911,7 +1911,7 @@ a {
 
 .imgIndex img {
     object-fit: cover;
-    max-height: 657px;
+    max-height: 480px;
     width: 100%;
 }
 
@@ -2760,13 +2760,15 @@ TIMELINE */
 
 #carouselGaleriaMini2,
 #carouselGaleriaMini,
-#carouselGaleriaMini1 {
+#carouselGaleriaMini1,
+#carouselGaleriaMini3 {
     margin-top: 3.25rem;
 }
 
 #carouselGaleriaMini2 img,
 #carouselGaleriaMini img,
-#carouselGaleriaMini1 img {
+#carouselGaleriaMini1 img,
+#carouselGaleriaMini3 img {
     height: 121px;
     max-height: 121px;
     width: 236px;
@@ -2828,6 +2830,10 @@ TIMELINE */
 
 .owl-next {
     right: -40px;
+}
+.owl-carousel .owl-item  {
+    display: flex;
+    justify-content: center;
 }
 
 .owl-carousel .owl-item img {

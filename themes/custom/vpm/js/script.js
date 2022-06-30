@@ -70,7 +70,29 @@
                     }
                 },
                 navContainer: '#main-contentGaleriaMini1 #custom-navMini1'
-            })
+            });
+            jQuery('#carouselGaleriaMini3').owlCarousel({
+                margin: 10,
+                dots: false,
+                loop: false,
+                autoWidth: false,
+                nav: true,
+                navText: [
+                    '<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                ],
+                responsive: {
+                    0: {
+                        items: 1,
+                        nav: true
+                    },
+                    800: {
+                        items: 3,
+                        nav: false
+                    }
+                },
+                navContainer: '#main-contentGaleriaMini3 #custom-navMini3'
+            });
 
             function genericSocialShare(url) {
                 window.open(url, 'sharer', 'toolbar=0,status=0,width=648,height=395');
