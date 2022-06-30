@@ -2772,6 +2772,7 @@ TIMELINE */
     width: 236px;
     max-width: 236px;
     object-fit: contain;
+    filter: grayscale(100%);
 }
 
 .main-contentSlider {
