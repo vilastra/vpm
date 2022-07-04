@@ -127,6 +127,8 @@ function vpm_module_theme($existing, $type, $theme, $path)
         'vpm-catalogo-menu-breadcrumb' => [
             'variables' => [
                 'links' => [],
+                'catalogo' => [],
+                'artistas' => [],
             ]
         ],
 

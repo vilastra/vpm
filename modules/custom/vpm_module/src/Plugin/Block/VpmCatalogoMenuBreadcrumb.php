@@ -31,6 +31,16 @@ class VpmCatalogoMenuBreadcrumb extends BlockBase
         }else{
           $menuLink['ActualPage']='null';
         }
+
+        /* MENU PRINCIPAL */
+        if(isset($_GET["busquedaIndex"])){
+          $busquedaIndex = $_GET["busquedaIndex"];
+        }else{
+          $busquedaIndex='null';
+        }
+        /* ------------- */
+
+
         $menuLink['idCatalogo']=$idCatalogo;
         $menuLink['Portada']=$host.'/catalogo?idCat='.$idCatalogo;
         $menuLink['Artistas']=$host.'/artistas?idCat='.$idCatalogo."&Sec=Art";
@@ -40,17 +50,20 @@ class VpmCatalogoMenuBreadcrumb extends BlockBase
         $menuLink['SobreInvestigacion']=$host.'/sobreinvestigacion?idCat='.$idCatalogo."&Sec=Sobr";
 
 
-
+        /* MENU PRINCIPAL */
+        $menuLink['busquedaIndex']=$busquedaIndex;
+        $menuLink['Obras']=$host.'/obras?busquedaIndex='.$busquedaIndex;
+  
+       /* $menu2 = 2;
+        $menuLink['menu2'] = $menu2;
         $menuLink['CatalogosRazonados']=$host.'/catalogos-razonados';
         $menuLink['EquipoInvestigacion']=$host.'/equipoinvestigacion';
         $menuLink['QuinsacEnCifras']=$host.'/quinsac-en-cifras';
-        $menuLink['PreguntasFrecuentes']=$host.'/preguntasfrecuentes';
-        //$menuLink['QuinsacEnCifras']=$host.'/
-
+        $menuLink['PreguntasFrecuentes']=$host.'/preguntasfrecuentes';*/
 
         return $menuLink;
       }
-
+   
      /*function Listar_Artista($idCatalogo){
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
         $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,file_managed.filename ,taxonomy_term_data.description 
@@ -60,6 +73,7 @@ class VpmCatalogoMenuBreadcrumb extends BlockBase
         JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
         WHERE taxonomy_vocabulary.name='Artistas' AND taxonomy_term_data.tid=?";
         
+        echo "".$sql;
         $resultado = $mysqli->query($sql);
         $artistas = [];
         $x = 0;
@@ -79,14 +93,23 @@ class VpmCatalogoMenuBreadcrumb extends BlockBase
       public function build()
       {
        /* if(isset($_GET["idCat"])){
-          $idCatalogo=$_GET["idCat"];*/
+          $idCatalogo=$_GET["idCat"];
+        }else{
+          $idCatalogo='null';
+        }*/
 
+        $catalogos = [];
+        $catalogos[0]["nombreCatalogo"] = "Raymond Quinsac Monvoisin";
+        $catalogos[0]["idCatalogo"] = 1;
+    
         $links = $this->Crea_Menu();
-        //$artistas = $this->Listar_Artista($idCatalogo);
+       /* $artistas = $this->Listar_Artista($idCatalogo);*/
+
         return [
           '#theme' => 'vpm-catalogo-menu-breadcrumb',
           '#links' => $links,
-          //'#artista' => $artistas
+          '#catalogo' => $catalogos,
+          /*'#artistas' => $artistas*/
         ];
       }
 }
