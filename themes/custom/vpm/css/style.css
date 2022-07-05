@@ -1720,6 +1720,7 @@ a {
         width: 100%;
         cursor: pointer !important;
         padding: 0.75rem 2.188rem 0.75rem 2.188rem;
+        font-size: 0.938rem;
     }
 
     .btnNewPass {
@@ -2026,6 +2027,14 @@ a {
     padding-top: 1.188rem;
     padding-bottom: 1.188rem;
     border: solid 1px #C0C0C0;
+}
+@media screen and (max-width:575px) {
+    .activeButton{
+        font-size: 0.813rem !important;
+    }
+    .linkMenuCatalogo {
+        font-size: 0.813rem !important;
+    }
 }
 
 .activeButton {
@@ -2409,12 +2418,21 @@ label {
     font-weight: bold;
     padding-bottom: 1.25rem;
 }
-
 .descObraFicha {
     font-size: 1.125rem;
     font-family: "Open Sans", sans-serif;
     color: #303030;
 }
+@media screen and (max-width:575px) {
+    .subTextoObraFicha{
+        font-size: 1rem !important;
+    }
+    .descObraFicha{
+        font-size: 0.813rem !important;
+    }
+}
+
+
 
 .firmaObraFicha {
     font-size: 1.125rem;
@@ -2623,6 +2641,11 @@ TIMELINE */
 .tl-headline {
     font-family: "Open Sans", sans-serif;
 }
+@media (max-width: 768px) {
+    .tl-headline {
+        font-size: 0.813rem !important;
+    }
+}
 
 .tl-timenav {
     background-color: white !important;
@@ -2674,7 +2697,6 @@ TIMELINE */
 }
 
 .cronoLeyend .textIcon {
-    padding-right: 3.563rem;
     padding-left: 0.625rem;
 }
 
