@@ -151,7 +151,7 @@ class CronografiaController extends ControllerBase
     terminoTaxtipoAutoriaPrinFinal.name as Tipo_Autoria_Prin_Final,
     terminoTaxtipoInsc.name as Tipo_Inscripcion,
     ubicacionIns.field_ubicacion_en_la_obra_value as Ubicacion_Inscripcion,
-    file_managed.filename as urlImagen,
+    file_managed.uri as urlImagen,
     transcripcionIns.field_transcripcion_value as Transcripcion_Inscripcion,
     textoRazonado.field_texto_razonado_value as Texto_Razonado,
     terminoTaxTecnica.name as Tecnica,
@@ -270,8 +270,9 @@ class CronografiaController extends ControllerBase
           $infoObra['urlArtista'] = base_path() . "artista?id=" . $fila["autorId"];
         }
         /* IMAGEN */
-        $infoObra['rutaFoto'] = $fila["urlImagen"];
-        $infoObra['rutaFoto'] = $rutaQuinsac . $fila["urlImagen"];
+
+        $infoObra['rutaFoto'] = str_replace("public://","",$fila["urlImagen"]);
+        $infoObra['rutaFoto'] = $rutaQuinsac . $infoObra['rutaFoto'];
 
         $infoObra['fecEjec'] = $fila["fecha_ejecucion"];
         $infoObra['tipoInscripcion'] = $fila["Tipo_Inscripcion"];

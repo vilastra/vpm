@@ -20,7 +20,7 @@ class VpmIndexTematicas extends BlockBase
   function Listar_Tematicas()
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-    $sql = "SELECT file_managed.filename,
+    $sql = "SELECT file_managed.uri,
     terminoTaxTematica.name as Tematica,
     terminoTaxTematica.tid as idTematica
     FROM node
@@ -32,16 +32,17 @@ class VpmIndexTematicas extends BlockBase
     WHERE terminoTaxTematica.name IS NOT NULL
     GROUP BY Tematica";
     $resultado = $mysqli->query($sql);
-    $Tematicas=[];
-    $x=0;
-    $rutaQuinsac='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
+    $Tematicas = [];
+    $x = 0;
+    $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/';
     while ($fila = mysqli_fetch_array($resultado)) {
-      $infoTematica=[];
-      $infoTematica['idTematica']=$fila["idTematica"];
-      $infoTematica['nombreTematica']=$fila["Tematica"];
-      $infoTematica['rutaFoto']=$fila["filename"];
-      $infoTematica['rutaFoto']=$rutaQuinsac.$fila["filename"];
-      $Tematicas[$x]=$infoTematica;
+      $infoTematica = [];
+      $infoTematica['idTematica'] = $fila["idTematica"];
+      $infoTematica['nombreTematica'] = $fila["Tematica"];
+
+      $infoTematica['rutaFoto'] = str_replace("public://", "", $fila["uri"]);
+      $infoTematica['rutaFoto'] = $rutaQuinsac . $infoTematica['rutaFoto'];
+      $Tematicas[$x] = $infoTematica;
       $x++;
     }
     mysqli_close($mysqli);

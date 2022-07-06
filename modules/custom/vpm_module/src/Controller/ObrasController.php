@@ -22,8 +22,10 @@ class ObrasController extends ControllerBase
     $offset = ($pag - 1) * $limit;
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
 
-    $sql = "SELECT nid,title as titulo,terminoTaxAutoria.name as autor, terminoTaxAutoria.tid as autorId, 
-      file_managed.filename, terminoTaxTematica.name as Tematica,
+    $sql = "SELECT nid,
+    title as titulo,
+    terminoTaxAutoria.name as autor, terminoTaxAutoria.tid as autorId, 
+      file_managed.uri, terminoTaxTematica.name as Tematica,
       terminoTaxTematica.tid as idTematica,
       fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec,
       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec,
@@ -149,8 +151,9 @@ class ObrasController extends ControllerBase
         $infoObra['urlArtista'] = base_path() . "artista?id=" . $fila["autorId"];
       }
       /* IMAGEN */
-      $infoObra['rutaFoto'] = $fila["filename"];
-      $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+      $infoObra['rutaFoto'] = $fila["uri"];
+      $infoObra['rutaFoto'] = str_replace("public://","",$fila["uri"]);
+      $infoObra['rutaFoto'] = $rutaQuinsac . $infoObra['rutaFoto'];
       /* TEMATICA */
       $infoObra['idTematica'] = $fila["idTematica"];
 
@@ -562,7 +565,7 @@ class ObrasController extends ControllerBase
     terminoTaxtipoAutoriaPrinFinal.name as Tipo_Autoria_Prin_Final,
     terminoTaxtipoInsc.name as Tipo_Inscripcion,
     ubicacionIns.field_ubicacion_en_la_obra_value as Ubicacion_Inscripcion,
-    file_managed.filename as urlImagen,
+    file_managed.uri as urlImagen,
     transcripcionIns.field_transcripcion_value as Transcripcion_Inscripcion,
     textoRazonado.field_texto_razonado_cuerpo_value as Texto_Razonado,
     terminoTaxTecnica.name as Tecnica,
@@ -622,7 +625,8 @@ class ObrasController extends ControllerBase
       $obra['linkImgOriginal'] = $row["linkImgOriginal"];
 
       $obra['urlImagen'] = $row["urlImagen"];
-      $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
+      $obra['urlImagen'] = str_replace("public://","",$row["urlImagen"]);
+      $obra['urlImagen'] = $rutaQuinsac . $obra['urlImagen'];
       
      
       $obra['textoRazonado'] = $row["Texto_Razonado"];

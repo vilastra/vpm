@@ -2764,6 +2764,7 @@ TIMELINE */
     font-family: "Open Sans", sans-serif;
     font-size: 1.125rem;
     color: #000080;
+    word-break:break-word
 }
 
 .correoPersona svg {

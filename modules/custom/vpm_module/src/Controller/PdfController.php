@@ -37,7 +37,7 @@ class PdfController extends ControllerBase
       terminoTaxtipoAutoriaPrinFinal.name as Tipo_Autoria_Prin_Final,
       terminoTaxtipoInsc.name as Tipo_Inscripcion,
       ubicacionIns.field_ubicacion_en_la_obra_value as Ubicacion_Inscripcion,
-      file_managed.filename as urlImagen,
+      file_managed.uri as urlImagen,
       transcripcionIns.field_transcripcion_value as Transcripcion_Inscripcion,
       textoRazonado.field_texto_razonado_cuerpo_value as Texto_Razonado,
       terminoTaxTecnica.name as Tecnica,
@@ -95,8 +95,9 @@ class PdfController extends ControllerBase
      
       /* IMAGEN */
       if($row["urlImagen"] !=null){
-        $obra['urlImagen'] = $row["urlImagen"];
-        $obra['urlImagen'] = $rutaQuinsac . $row["urlImagen"];
+
+        $obra['urlImagen'] = str_replace("public://","",$row["urlImagen"]);
+        $obra['urlImagen'] = $rutaQuinsac . $obra['urlImagen'];
       }else{
         $obra['urlImagen'] = '';
       }

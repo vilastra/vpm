@@ -20,22 +20,26 @@ class VpmIndexArtistas extends BlockBase
   function Listar_Artistas()
   {
     $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-    $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,file_managed.filename FROM taxonomy_term_data
+    $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,file_managed.uri FROM taxonomy_term_data
     LEFT JOIN taxonomy_vocabulary ON taxonomy_vocabulary.vid=taxonomy_term_data.vid
     LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = taxonomy_term_data.tid
     LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
     WHERE taxonomy_vocabulary.name='Artistas' LIMIT 3;";
     $resultado = $mysqli->query($sql);
-    $artistas=[];
-    $x=0;
-    $rutaQuinsac='http://quinsac.patrimoniocultural.gob.cl/sites/default/files/styles/200x200/public/';
+    $artistas = [];
+    $x = 0;
+    $rutaQuinsac = 'http://quinsac.patrimoniocultural.gob.cl/sites/default/files/styles/200x200/public/';
     while ($fila = mysqli_fetch_array($resultado)) {
-      $infoArtista=[];
-      $infoArtista['idArtista']=$fila["tid"];
-      $infoArtista['nombreArtista']=$fila["name"];
-      $infoArtista['rutaFoto']=$fila["filename"];
-      $infoArtista['rutaFoto']=$rutaQuinsac.$fila["filename"];
-      $artistas[$x]=$infoArtista;
+      $infoArtista = [];
+      $infoArtista['idArtista'] = $fila["tid"];
+      $infoArtista['nombreArtista'] = $fila["name"];
+      if ($fila["uri"] != null) {
+        $infoArtista['rutaFoto'] = str_replace("public://", "", $fila["uri"]);
+        $infoArtista['rutaFoto'] = $rutaQuinsac . $infoArtista['rutaFoto'];
+      } else {
+        $infoArtista['rutaFoto'] = "http://quinsac.patrimoniocultural.gob.cl/sites/default/files/default_images/user-img.png";
+      }
+      $artistas[$x] = $infoArtista;
       $x++;
     }
     mysqli_close($mysqli);

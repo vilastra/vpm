@@ -10,7 +10,8 @@ class ArtistaController extends ControllerBase
     function Listar_Artista()
     {
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-        $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,file_managed.filename ,taxonomy_term_data.description 
+        $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,
+        file_managed.uri ,taxonomy_term_data.description 
         FROM taxonomy_term_data
         JOIN taxonomy_vocabulary ON taxonomy_vocabulary.vid=taxonomy_term_data.vid
         JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = taxonomy_term_data.tid
@@ -31,8 +32,9 @@ class ArtistaController extends ControllerBase
             }
             $infoArtista['nombreArtista'] = $fila["name"];
             // $infoArtista['descripcionArtista'] = $fila["description"];
-            $infoArtista['rutaFoto'] = $fila["filename"];
-            $infoArtista['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+
+            $infoArtista['rutaFoto'] = str_replace("public://","",$fila["uri"]);
+            $infoArtista['rutaFoto'] = $rutaQuinsac . $infoArtista['rutaFoto'];
             $artistas[$x] = $infoArtista;
             $x++;
         }
@@ -42,7 +44,7 @@ class ArtistaController extends ControllerBase
     function Listar_Artistas()
     {
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
-        $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,file_managed.filename FROM taxonomy_term_data
+        $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,file_managed.uri FROM taxonomy_term_data
     LEFT JOIN taxonomy_vocabulary ON taxonomy_vocabulary.vid=taxonomy_term_data.vid
     LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = taxonomy_term_data.tid
     LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
@@ -61,9 +63,9 @@ class ArtistaController extends ControllerBase
             }
             $host = $GLOBALS["base_url"];
             $infoArtista['nombreArtista'] = $fila["name"];
-            if ($fila["filename"] != null) {
-                $infoArtista['rutaFoto'] = $fila["filename"];
-                $infoArtista['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+            if ($fila["uri"] != null) {
+                $infoArtista['rutaFoto'] = str_replace("public://","",$fila["uri"]);
+            $infoArtista['rutaFoto'] = $rutaQuinsac . $infoArtista['rutaFoto'];
             } else {
                 $infoArtista['rutaFoto'] = "http://quinsac.patrimoniocultural.gob.cl/sites/default/files/default_images/user-img.png";
             }
@@ -79,7 +81,7 @@ class ArtistaController extends ControllerBase
         $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
         $sql = "SELECT nid,title as titulo,
         autoria.field_autoria_principal_tid as idAutoria,
-        file_managed.filename ,
+        file_managed.uri ,
         terminoTaxTematica.name as Tematica,
         terminoTaxTematica.tid as idTematica,
         terminoTaxAutoria.tid as idArtista,
@@ -110,8 +112,8 @@ class ArtistaController extends ControllerBase
             $infoObra['idArtista'] = $fila["idArtista"];
             $infoObra['nombreArtista'] = $fila["nombreArtista"];
             $infoObra['tituloObra'] = $fila["titulo"];
-            $infoObra['rutaFoto'] = $fila["filename"];
-            $infoObra['rutaFoto'] = $rutaQuinsac . $fila["filename"];
+            $infoObra['rutaFoto'] = str_replace("public://","",$fila["uri"]);
+            $infoObra['rutaFoto'] = $rutaQuinsac . $infoObra['rutaFoto'];
             $infoObra['idTematica'] = $fila["idTematica"];
             $infoObra['nombreTematica'] = $fila["Tematica"];
             $obras[$x] = $infoObra;

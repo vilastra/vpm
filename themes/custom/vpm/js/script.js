@@ -1,14 +1,17 @@
-(function($, Drupal) {
+(function ($, Drupal) {
     'use strict';
 
     Drupal.behaviors.vpm = {
-        attach: function(context, settings) {
+        attach: function (context, settings) {
 
             jQuery('#carouselGaleriaMini2').owlCarousel({
                 margin: 10,
                 dots: false,
-                loop: false,
+                loop: true,
                 autoWidth: false,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
                 nav: true,
                 navText: [
                     '<i class="fa fa-angle-left" aria-hidden="true"></i>',
@@ -30,8 +33,11 @@
             jQuery('#carouselGaleriaMini').owlCarousel({
                 margin: 10,
                 dots: false,
-                loop: false,
+                loop: true,
                 autoWidth: false,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
                 nav: true,
                 navText: [
                     '<i class="fa fa-angle-left" aria-hidden="true"></i>',
@@ -54,6 +60,9 @@
                 dots: false,
                 loop: false,
                 autoWidth: false,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
                 nav: true,
                 navText: [
                     '<i class="fa fa-angle-left" aria-hidden="true"></i>',
@@ -76,6 +85,9 @@
                 dots: false,
                 loop: false,
                 autoWidth: false,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
                 nav: true,
                 navText: [
                     '<i class="fa fa-angle-left" aria-hidden="true"></i>',
@@ -100,7 +112,7 @@
             }
 
 
-            jQuery(".navbar-toggler").unbind().click(function() {
+            jQuery(".navbar-toggler").unbind().click(function () {
                 var display = jQuery('.navbar-collapse').css('display');
                 console.log("botont");
                 if (display === "block") {
@@ -117,13 +129,13 @@
 
                 var urlTwitter = 'https://twitter.com/intent/tweet?text=Conoce "' + name + '" en Portal Monvoisin ' + permalink
                 jQuery('.share-twitter').attr('href', 'javascript:void(0)')
-                jQuery('.share-twitter').click(function() {
+                jQuery('.share-twitter').click(function () {
                     genericSocialShare(urlTwitter)
                 })
 
                 var urlFacebook = "https://www.facebook.com/sharer/sharer.php?u=" + permalink
                 jQuery('.share-facebook').attr('href', 'javascript:void(0)')
-                jQuery('.share-facebook').click(function() {
+                jQuery('.share-facebook').click(function () {
                     genericSocialShare(urlFacebook)
                 })
             }
@@ -131,7 +143,7 @@
             shareUrls($("#tituloContenido").val());
 
 
-            jQuery(window).scroll(function() {
+            jQuery(window).scroll(function () {
                 if (jQuery(this).scrollTop()) {
                     jQuery('#ir-arriba').fadeIn();
                 } else {
@@ -141,14 +153,14 @@
             // jQuery('main', context).once('mei_library_turn').each(function() {
             //     jQuery(".viewer").jspanzoom({ scrollZoom: true, constrainType: true, constrainSize: 720 });
             // });
-            jQuery("#ir-arriba").click(function() {
+            jQuery("#ir-arriba").click(function () {
                 jQuery("html, body").animate({ scrollTop: 0 }, 0);
             });
-            $(document).ready(function($) {
+            $(document).ready(function ($) {
 
                 var picture = $('#sample_picture');
                 // Make sure the image is completely loaded before calling the plugin
-                picture.one('load', function() {
+                picture.one('load', function () {
                     // Initialize plugin (with custom event)
                     picture.guillotine({ eventOnChange: 'guillotinechange', height: 200 });
 
@@ -157,14 +169,14 @@
                     for (var key in data) { $('#' + key).html(data[key]); }
 
                     // Bind button actions
-                    $('#rotate_left').click(function() { picture.guillotine('rotateLeft'); });
-                    $('#rotate_right').click(function() { picture.guillotine('rotateRight'); });
-                    $('#fit').click(function() { picture.guillotine('fit'); });
-                    $('#zoom_in').click(function() { picture.guillotine('zoomIn'); });
-                    $('#zoom_out').click(function() { picture.guillotine('zoomOut'); });
+                    $('#rotate_left').click(function () { picture.guillotine('rotateLeft'); });
+                    $('#rotate_right').click(function () { picture.guillotine('rotateRight'); });
+                    $('#fit').click(function () { picture.guillotine('fit'); });
+                    $('#zoom_in').click(function () { picture.guillotine('zoomIn'); });
+                    $('#zoom_out').click(function () { picture.guillotine('zoomOut'); });
 
                     // Update data on change
-                    picture.on('guillotinechange', function(ev, data, action) {
+                    picture.on('guillotinechange', function (ev, data, action) {
                         data.scale = parseFloat(data.scale.toFixed(4));
                         for (var k in data) { $('#' + k).html(data[k]); }
                     });
@@ -265,9 +277,9 @@
                     });
                 }
 
-                
-                $('main', context).once('#exportPDF').each(function() {
-                    $('#exportPDF').click(function(event) {
+
+                $('main', context).once('#exportPDF').each(function () {
+                    $('#exportPDF').click(function (event) {
                         var reportPageHeight = $('#report').innerHeight();
                         var reportPageWidth = $('#report').innerWidth();
 
@@ -283,7 +295,7 @@
                         var pdfctxY = 0;
                         var buffer = 100;
 
-                        $("canvas").each(function(index) {
+                        $("canvas").each(function (index) {
                             var canvasHeight = $(this).innerHeight();
                             var canvasWidth = $(this).innerWidth();
 
@@ -302,7 +314,7 @@
                         pdf.save('Quinsac en cifras.pdf');
                     });
                 });
-                
+
                 /*$('main', context).once('#exportExcel').each(function() {
                     $('#exportExcel').click(function(event) {
                         downloadAsExcel();
@@ -355,7 +367,7 @@
                     });
                 };
 
-                $("#chartType").change(function() {
+                $("#chartType").change(function () {
                     updateChartType()
                 });
 
@@ -375,8 +387,8 @@
                         options);
                 }
 
-                $('main', context).once('.tl-timenav').each(function() {
-                    $(window).one('load', function() {
+                $('main', context).once('.tl-timenav').each(function () {
+                    $(window).one('load', function () {
                         $('<div class="row cronoLeyend pb-4 pt-4"><div class="col-xl-3 col-lg-4 pt-3 pb-3 col-md-4 col-sm-12 col-xs-12"><span class="spanIcon obraLeyend"><i class="fa fa-picture-o" aria-hidden="true"></i></span><span class="textIcon">Obras del catálogo</span></div><div class="col-xl-3 col-lg-4 pt-3 pb-3 col-md-4 col-sm-12 col-xs-12"><span class="spanIcon"><i class="fa fa-bookmark-o" aria-hidden="true"></i></span><span class="textIcon">Exposiciones</span></div><div class="col-xl-3 col-lg-4 pt-3 pb-3 col-md-4 col-sm-12 col-xs-12"><span class="spanIcon hitoLeyend"><i class="fa fa-leaf" aria-hidden="true"></i></span><span class="textIcon">Hitos históricos</span></div><div class="col-xl-3 col-lg-4 pt-3 pb-3 col-md-4 col-sm-12 col-xs-12"><span class="spanIcon destLeyend"><i class="fa fa-star-o" aria-hidden="true"></i></span><span class="textIcon">Destacados</span></div></div>').insertAfter(".tl-timenav");
                     });
                 });
