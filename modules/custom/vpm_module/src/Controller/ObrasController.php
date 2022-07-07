@@ -30,9 +30,7 @@ class ObrasController extends ControllerBase
       fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec,
       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec,
       terminoTaxTecnica.name as Tecnica,
-      terminoTaxTecnica.tid as idTecnica,     
-	    terminoTaxRela.name as TipoRelacion
-      
+      terminoTaxTecnica.tid as idTecnica      
       FROM node
       LEFT JOIN field_data_field_identificacion iden ON iden.entity_id = node.nid
       LEFT JOIN field_data_field_fecha_ejecucion fecEjecucion ON fecEjecucion.entity_id = iden.field_identificacion_value
@@ -59,7 +57,8 @@ class ObrasController extends ControllerBase
       LEFT JOIN taxonomy_term_data terminoTaxRela on terminoTaxRela.tid = fdfer.field_tipo_de_relacion_tid 
 
 
-      WHERE node.type = 'obra' AND node.status=1 ";
+      WHERE node.type = 'obra' AND node.status=1 
+      group by node.nid";
 
     //WHERE  node.type = 'obra' AND node.status=1 
     if ($buscar['select'] == 1) {
@@ -167,7 +166,7 @@ class ObrasController extends ControllerBase
       $infoObra['nombreTematica'] = $fila["Tematica"];
       
       /* TIPO DE RELACION */ 
-      $infoObra['TipoRelacion'] = $fila["TipoRelacion"];
+      /*$infoObra['TipoRelacion'] = $fila["TipoRelacion"];*/
 
       $obras[$x] = $infoObra;
       $x++;
