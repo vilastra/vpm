@@ -3,48 +3,48 @@
 		<div class="col-9 max-container px-0 m-auto row menuBreadcrum">	
 			{% if links.ActualPage == "null" %}	
 			<div class="col-9 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="/vpm/catalogos-razonados" style="color:#C0C0C0" >Catálogo Razonados / {{catalogo[0].nombreCatalogo}} /</a>
+				<a href="/" style="color:#C0C0C0">Inicio /</a>
+				<a href="/catalogos-razonados" style="color:#C0C0C0" >Catálogos Razonados / {{catalogo[0].nombreCatalogo}} /</a>
 				<a href="{{ links.Portada }}" >Portada </a> 
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Art" %}
 			<div class="col-9 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="/vpm/catalogos-razonados" style="color:#C0C0C0" >Catálogo Razonados / {{catalogo[0].nombreCatalogo}} /</a>
+				<a href="/" style="color:#C0C0C0">Inicio /</a>
+				<a href="/catalogos-razonados" style="color:#C0C0C0" >Catálogos Razonados / <a href="{{ links.Portada }}" style="color:#C0C0C0" >{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.Artistas }}">Artistas</a>
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Obras" %}
 			<div class="col-9 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="/vpm/catalogos-razonados" style="color:#C0C0C0" >Catálogo Razonados / {{catalogo[0].nombreCatalogo}} /</a> 
+				<a href="/" style="color:#C0C0C0">Inicio /</a>
+				<a href="/catalogos-razonados" style="color:#C0C0C0" >Catálogos Razonados / <a href="{{ links.Portada }}" style="color:#C0C0C0" >{{catalogo[0].nombreCatalogo}} /</a></a> 
 				<a href="{{ links.Obras }}">Obras</a>
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Publ" %}
 			<div class="col-9 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/vpm/" style="color:#C0C0C0">Inicio /</a>
-				<a href="/vpm/catalogos-razonados" style="color:#C0C0C0" >Catálogo Razonados / {{catalogo[0].nombreCatalogo}} /</a>
+				<a href="/" style="color:#C0C0C0">Inicio /</a>
+				<a href="/catalogos-razonados" style="color:#C0C0C0" >Catálogos Razonados / <a href="{{ links.Portada }}" style="color:#C0C0C0" >{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.Publicaciones }}">Publicaciones</a>
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Cron" %}			
 			<div class="col-9 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/vpm/" style="color:#C0C0C0" >Inicio /</a>
-				<a href="/vpm/catalogos-razonados" style="color:#C0C0C0" >Catálogo Razonados / {{catalogo[0].nombreCatalogo}} /</a>
+				<a href="/" style="color:#C0C0C0" >Inicio /</a>
+				<a href="/catalogos-razonados" style="color:#C0C0C0" >Catálogos Razonados / <a href="{{ links.Portada }}" style="color:#C0C0C0" >{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.Cronografia }}">Cronografía</a>	
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Sobr" %}			
 			<div class="col-9 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/vpm/" style="color:#C0C0C0" >Inicio /</a>
-				<a href="/vpm/catalogos-razonados" style="color:#C0C0C0" >Catálogo Razonados / {{catalogo[0].nombreCatalogo}} /</a>
+				<a href="/" style="color:#C0C0C0" >Inicio /</a>
+				<a href="/catalogos-razonados" style="color:#C0C0C0" >Catálogos Razonados / <a href="{{ links.Portada }}" style="color:#C0C0C0" >{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.SobreInvestigacion }}">Sobre la investigación</a>		
 			</div>		
 			{% endif %}
@@ -55,8 +55,8 @@
 		<div class="col-9 max-container px-0 m-auto row menuBreadcrum">	
 			{% if links.ActualPage == "null" %}
 				<div class="col-9 col-md-6 col-sm-12 col-xs-12 ">
-					<a href="/vpm/" style="color:#C0C0C0" >Inicio /</a>
-					<a href="/vpm/obras" >Resultados de búsqueda </a>
+					<a href="/" style="color:#C0C0C0" >Inicio /</a>
+					<a href="/obras" >Resultados de búsqueda </a>
 				</div>
 			{% endif %}
 		</div>		
