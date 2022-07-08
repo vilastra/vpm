@@ -38,7 +38,7 @@ class GraficoController extends ControllerBase
       $nombre = "País";
     } elseif ($valorCorY == 8) { // SI SELECCIONÓ GÉNERO
       $query = "IFNULL(fdfg.field_genero_value, 'Desconocido')";
-      $nombre = "Género";
+      $nombre = "Sexo";
     } elseif ($valorCorY == 9) { // SI SELECCIONÓ ACTIVIDAD O PROFESIÓN
       $query = "IFNULL(terminoTaxEActiProf.name, 'Desconocido')";
       $nombre = "Actividad o Profesión";
@@ -48,7 +48,7 @@ class GraficoController extends ControllerBase
     }
 
     //$dataExcel ='["Cantidad de obras", "'.$nombre.'"],';
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
 
     $sql = "SELECT COUNT(distinct nid)  as Obra,
        ".$query."  AS EjeY   
@@ -160,7 +160,7 @@ class GraficoController extends ControllerBase
     } elseif ($valorCorY == 7) { // SI SELECCIONÓ PAÍS
       $nombre = "País";
     } elseif ($valorCorY == 8) { // SI SELECCIONÓ GÉNERO
-      $nombre = "Género";
+      $nombre = "Sexo";
     } elseif ($valorCorY == 9) { // SI SELECCIONÓ ACTIVIDAD O PROFESIÓN
       $nombre = "Actividad o Profesión";
     } elseif ($valorCorY == 10) { // SI SELECCIONÓ ETNIA O RAZA
@@ -212,7 +212,7 @@ class GraficoController extends ControllerBase
       ['idcY' => 5, 'cY' => 'Artista'],
       ['idcY' => 6, 'cY' => 'Año'],      
       ['idcY' => 7, 'cY' => 'País'],      
-      ['idcY' => 8, 'cY' => 'Género'],      
+      ['idcY' => 8, 'cY' => 'Sexo'],      
       ['idcY' => 9, 'cY' => 'Actividad o profesión'],
       ['idcY' => 10, 'cY' => 'Etnia o raza'],
     ];    
@@ -224,7 +224,7 @@ class GraficoController extends ControllerBase
   }
 
   function Cb_Tematica(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = "SELECT DISTINCT
       terminoTaxTematica.name as Tematica,
       terminoTaxTematica.tid as idTematica
@@ -260,7 +260,7 @@ class GraficoController extends ControllerBase
   }
 
   function Cb_Artista(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = "SELECT DISTINCT terminoTaxAutoria.name as autor, 
       terminoTaxAutoria.tid as autorId
       FROM node
@@ -293,7 +293,7 @@ class GraficoController extends ControllerBase
     return $artista;
   }
   function Cb_Annio(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = "select node.nid,
       fecEjecucion.field_fecha_ejecucion_timestamp as idfecEjec, 
       DATE_FORMAT(fecEjecucion.field_fecha_ejecucion_timestamp, '%Y') as fecEjec
@@ -324,7 +324,7 @@ class GraficoController extends ControllerBase
   }
 
   function Cb_Tecnica(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = "SELECT 
       terminoTaxTematica.name as Tecnica,
       terminoTaxTematica.tid as idTecnica
@@ -356,7 +356,7 @@ class GraficoController extends ControllerBase
   }
 
   function Cb_Etnia(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = "SELECT DISTINCT
       terminoTaxEtnia.tid as idEtnia,
       terminoTaxEtnia.name as Etnia
@@ -389,7 +389,7 @@ class GraficoController extends ControllerBase
   }
 
   function Cb_Pais(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = "SELECT DISTINCT
       terminoTaxPais.tid as idPais,
       terminoTaxPais.name as Pais
@@ -421,7 +421,7 @@ class GraficoController extends ControllerBase
   }
 
   function Cb_ActProf(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = "SELECT DISTINCT
       terminoTaxEActiProf.tid as idactProf,
       terminoTaxEActiProf.name as ActProf
@@ -455,7 +455,7 @@ class GraficoController extends ControllerBase
   }
 
   function Cb_Genero(){
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $query = " SELECT distinct
       fdfg.field_genero_value as idGenero,	
       fdfg.field_genero_value as Genero 
