@@ -16,6 +16,7 @@ h1 {
     line-height: 120%;
     margin-bottom: 3.125rem;
     padding-bottom: 1rem;
+    color:#000000;
 }
 
 h7 {
@@ -35,6 +36,8 @@ h6 {
     font-weight: bold;
     line-height: 120%;
     margin-bottom: 2.5rem;
+    color:#000000;
+
 }
 @media screen and (max-width:575px) {
 
@@ -434,7 +437,7 @@ li {
     padding-top: 2.875rem !important;
     padding-bottom: 0.875rem !important;
     font-size: 1.5rem !important;
-    color: #4A4A4A !important;
+    color:#030303;/* #4A4A4A !important;*/
     font-weight: bold !important;
 }
 
@@ -475,7 +478,7 @@ footer {
 
 footer a,
 footer a:hover {
-    color: #707070;
+    color: #333333; /*#707070;*/
     font-size: 0.938rem;
     padding-bottom: 0.688rem;
 }
@@ -575,7 +578,8 @@ footer li {
 }
 
 .texto-footer {
-    padding-left: 2.3125rem;
+    /*padding-left: 2.3125rem;*/
+    padding-left: 3rem;
     line-height: 1.875rem;
     color: #8a8a8a;
     /** #DEDEDE; **/
@@ -2054,6 +2058,7 @@ a {
 .linkMenuCatalogo a {
     text-decoration: none;
     color: #8A8A8A;
+    
 }
 
 .activeButton a {
@@ -2143,8 +2148,8 @@ a {
 
 #search-block-form input[type=search] {
     position: relative;
-    width: 18.375rem;
-    height: 3.125rem;
+    width: 11.25rem;/*18.375rem;*/
+    height: 2.438rem; /*3.125rem;*/
     border: 1px solid #707070;
     border-radius: 0px;
     font-size: 1rem;
@@ -2155,8 +2160,8 @@ a {
 #search-block-form button[type=submit] {
     position: absolute;
     width: 2.5rem;
-    height: 90%;
-    top: 0.188rem;
+    height: 94%;
+    top: 0.01rem;
     right: 0.313rem;
     color: black;
     display: block;
