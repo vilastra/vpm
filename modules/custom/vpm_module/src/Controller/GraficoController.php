@@ -48,8 +48,7 @@ class GraficoController extends ControllerBase
     }
 
     //$dataExcel ='["Cantidad de obras", "'.$nombre.'"],';
-    /*$mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');*/
-    $mysqli = new mysqli('127.0.0.1', 'root', '', 'quinsac');
+    $mysqli =  new mysqli('localhost', 'vpm', 'vpm2022', 'quinsac');
     $sql = "SELECT COUNT(distinct nid)  as Obra,
        ".$query."  AS EjeY   
         FROM node
