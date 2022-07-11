@@ -788,10 +788,12 @@ h5.linea span {
 }
 
 .btnBuscar:hover {
-    background-color: #2D717C;
+    background-color: #333333;
     color: #FFFFFF !important;
     cursor: pointer !important;
-    text-decoration: none !important;
+    /*text-decoration: none !important;*/
+    text-decoration: underline !important;
+    
 }
 
 .pSuperior {
@@ -918,7 +920,7 @@ h5.linea span {
 }
 
 .btnTbInscribete:hover {
-    background: #2D717C;
+    background: #333333;
     color: white;
     width: 90%;
     cursor: pointer;
@@ -2011,6 +2013,9 @@ a {
     font-weight: bold;
     color: #000000;
 }
+.linkItem:hover{
+    text-decoration: underline;
+}
 
 @media screen and (max-width:575px) {
     .linkItem {
@@ -2909,4 +2914,36 @@ TIMELINE */
 .menuBreadcrum a {
     text-decoration: none;
     color: #000000;
+}
+
+.btn:hover{
+    background-color: #333333;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    /*text-decoration: none !important*/
+} 
+
+.btn2:hover{
+    background-color: #333333;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    text-decoration: none !important
+} 
+
+/*  QUINSAC EN CIFRAS */
+
+.btnBuscarGenera {
+    background-color: #0B8843;
+    color: #FFFFFF;
+    font-size: 1.125rem;
+    width: 100%;
+    cursor: pointer !important;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+.btnGenera:hover{
+    background-color: #0B8843;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    text-decoration: none !important
 }
