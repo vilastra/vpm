@@ -599,7 +599,8 @@ footer li {
 .footer-copy-rights {
     font-size: 0.938rem;
     padding-bottom: 1.5rem;
-    padding-top: 3.125rem;
+    /*padding-top: 3.125rem;*/
+    padding-top:  4.063rem;
     background-color: #000000;
 }
 
@@ -784,6 +785,9 @@ h5.linea span {
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
 }
+
+
+
 
 .btnBuscar svg {
     margin-left: 5px;
@@ -2342,6 +2346,23 @@ a {
     position: relative;
 }
 
+
+@media screen and (min-width:576px) and (max-width:991px) {
+    .accordion {
+        /*font-size: 0.75rem;*/
+        font-size: 0.875rem;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .accordion {
+        /*font-size: 0.75rem;*/
+        font-size: 0.875rem;
+    }
+}
+
+
+
 .accordion i {
     right: 0;
     position: absolute;
@@ -3001,6 +3022,31 @@ TIMELINE */
     text-decoration: none !important
 }
 
+.btnBuscarFiltroExportar {
+    background-color: #000000;
+    color: #FFFFFF;
+    font-size: 1.125rem;
+    width: 100%;
+    cursor: pointer !important;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+}
+
+
+@media screen and (min-width:576px) and (max-width:991px) {
+    .btn4 {
+        margin-top: 0.5rem;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .btn4 {
+        margin-top: 0.5rem;
+    }
+}
+
+
+
 /* PUBLICACIONES */
 
 .btnBuscarEnsayo {
@@ -3035,3 +3081,12 @@ TIMELINE */
     cursor: pointer !important;
     text-decoration: none !important
 }
+
+/* GEOLOCALICACION */
+.MargUbica svg{
+   
+    margin-right: 1.25rem;
+ 
+}
+
+

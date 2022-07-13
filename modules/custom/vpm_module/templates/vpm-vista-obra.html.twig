@@ -209,15 +209,11 @@
 				<div id="map"></div>
 				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8c7i3wQDkRnlmicmy1-gze_NIvB4nkpk&callback=initMap" async defer></script>
 			</div>
-		
 
-			<div  class="col-lg-1 col-md-12 col-xs-12 col-sm-12">
-				<i class="fa fa-picture-o" aria-hidden="true" style="width: 2rem; height: 2rem;"></i>
+			<div class='MargUbica'>
+				<i class="fa fa-picture-o" style=" width: 2rem; height: 2rem;"></i>
+					Ubicación de la obras({{obra.latYLong["latitudAdqObra"]}} / {{obra.latYLong["longitudAdqObra"]}})
 			</div>
-			<div  class="col-lg-4 col-md-12 col-xs-12 col-sm-12" style="padding-left: 2rem; position:absolute; margin-bottom:1.5rem;">	
-				<div>Ubicación de la obras({{obra.latYLong["latitudAdqObra"]}} / {{obra.latYLong["longitudAdqObra"]}})</div>
-			</div>		
-
 					
 		{% endif %}
 	{% else %}
