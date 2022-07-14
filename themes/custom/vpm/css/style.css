@@ -2201,11 +2201,13 @@ a {
 }
 
 #search-block-form button[type=submit] {
-    position: absolute;
-    width: 2.5rem;
-    height: 90%; 
-    top: 0.01rem;
-    right: 0.313rem;
+    /*position: absolute;*/
+    /*width: 2.5rem;
+    height: 90%;*/
+    width: 16px;
+    height: 16px;  
+    /*top: 0.01rem;
+    right: 0.313rem;*/
     color: black;
     display: block;
     cursor: pointer;
@@ -2218,10 +2220,12 @@ a {
 
 
 #search-block-form button[type=submit] img {
-    width: initial;
-    /*height: 45%;*/
+
     width: 16px;
     height: 16px;
+    position: absolute;
+    top: 0.688rem;
+    right: 0.625rem;
 }
 
 #search-form {
