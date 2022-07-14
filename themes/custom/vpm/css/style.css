@@ -2108,16 +2108,19 @@ a {
 
 
 .header-logo-text {
-    /*font-size: 1.563rem;*/
-    font-size: 1.25rem;
+    font-size: 1.563rem;    
     color: #5A5A55;
     font-family: "Open Sans", sans-serif;
 }
-
+@media screen and (min-width: 1600px) {
+    .header-logo-text{
+        font-size:20px;
+    }
+    
+}
 @media screen and (max-width:1396px) {
     .header-logo-text {
-        /*font-size: 1.188rem;*/
-        font-size: 1.25rem;
+        font-size: 1.188rem;        
         color: #5A5A55;
         font-family: "Open Sans", sans-serif;
     }
@@ -2125,8 +2128,7 @@ a {
 
 @media screen and (max-width:575px) {
     .header-logo-text {
-        /*font-size: 0.75rem;*/
-        font-size: 1.25rem;
+        font-size: 0.75rem;
     }
 }
 
