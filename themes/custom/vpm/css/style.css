@@ -2973,12 +2973,17 @@ TIMELINE */
 }
 
 /* MENU BREADCRUM */
-.menuBreadcrum{
-    padding-left: 17.4rem;
+.menuBreadcrum {
+    padding-left: 0px !important;
 }
+
 .menuBreadcrum a {
     text-decoration: none;
     color: #000000;
+}
+
+.menuBreadcrum div {
+    padding-left: 0px !important ;
 }
 
 .btn:hover{
