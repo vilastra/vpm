@@ -581,8 +581,8 @@ footer li {
 
 .texto-footer {
     /*padding-left: 2.3125rem;*/
-    /*padding-left: 3rem;
-    line-height: 1.875rem;*/
+    padding-left: 3rem;
+    line-height: 1.875rem;
     color: #8a8a8a;
     /** #DEDEDE; **/
 }
