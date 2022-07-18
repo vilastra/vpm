@@ -103,6 +103,7 @@ h2 {
     /** Open Sans bold **/
     font-weight: bold;
     margin-bottom: 1.25rem;
+    color: #000000;
 }
 
 @media screen and (max-width:575px) {
@@ -128,6 +129,7 @@ h3 {
     /** Open Sans bold **/
     font-weight: bold;
     margin-bottom: 1rem;
+    color: #000000;
 }
 
 ul {
@@ -612,6 +614,27 @@ footer li {
     padding-inline-start: 0px;
 }
 
+@media screen and (min-width:576px) and (max-width:991px) {
+    .links-paginas-footer ul {
+        margin-left: 0.938rem;
+        font-size: 0.938rem;
+    }
+    .links-paginas-footer li {
+        /*list-style: none;*/
+        text-align: left;
+        font-size: 0.938rem;
+    }
+}
+
+@media screen and (max-width:575px) {
+    .links-paginas-footer ul {
+        margin-left: 0.938rem;
+        font-size: 0.938rem;
+    }
+    
+}
+
+
 .links-paginas-footer li {
     /*list-style: none;*/
     text-align: left;
@@ -635,9 +658,12 @@ footer li {
     }
 
     .footer-copy-rights a {
-        font-size: 70%;
+        /*font-size: 70%;*/
+        font-size: 0.813rem;
+        
     }
 
+    
     .texto-footer {
         padding-left: 0rem;
         padding-right: 0rem;
@@ -654,6 +680,7 @@ footer li {
 
     #texto-footer-1 {
         padding-bottom: .5rem;
+        font-size: 0.813rem;
     }
 
     #footer1 {
@@ -1483,7 +1510,10 @@ a {
     }
 
     .contendorFooter2 {
-        margin: 0rem 1.876rem 0rem 1.876rem !important;
+       /* margin: 0rem 1.876rem 1.888rem 1.876rem !important; */
+        /*margin-left: 0.938rem !important;*/
+        margin-right: 0.938rem !important;
+        margin-bottom: 1.888rem !important;
     }
 }
 
@@ -2672,13 +2702,13 @@ label {
     margin-bottom: 0.5rem;
 }
 
-.cardItem .linkPublicacion {
+/*.cardItem .linkPublicacion {
     padding-top: 0.5rem;
     font-size: 1.125rem;
     border-top: 1px solid #707070;
     text-decoration: none;
     font-weight: bold;
-}
+}*/
 
 .publicacionDesc1 {
     font-family: "Open Sans", sans-serif;
@@ -3025,9 +3055,11 @@ TIMELINE */
 
 .menuBreadcrum a {
     text-decoration: none;
-    color: #000000;
+    color: #b3b3b3;
 }
-
+.menuBreadcrum_link:hover{
+    color: #6a6a6a;
+}
 .menuBreadcrum div {
     padding-left: 0px !important;
 }
@@ -3116,9 +3148,10 @@ TIMELINE */
     cursor: pointer !important;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
-    padding-left: 15.625rem;
+    text-align: center;
     display: block;
     border: #000 1px solid;
+    text-decoration: none;
 }
 
 .btnBuscarTituloEnsayo {
@@ -3132,11 +3165,12 @@ TIMELINE */
     padding-left: 7.5rem;
     display: block;
     border: #000 1px solid;
+    text-decoration: none;
 }
 
 .btn3:hover {
-    background-color: #FFFFFF;
-    color: #000 !important;
+    background-color: #2d717c;
+    color: #FFF !important;
     cursor: pointer !important;
     text-decoration: none !important
 }
@@ -3146,4 +3180,18 @@ TIMELINE */
 
     margin-right: 1.25rem;
 
+}
+
+/*PUBLICACIONES */
+
+.cardItem .linkPublicacion {
+    padding-top: 0.5rem;
+    font-size: 1.125rem;
+    border-top: 1px solid #707070;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cardItem .linkPublicacion:hover {
+    text-decoration: underline;
 }
