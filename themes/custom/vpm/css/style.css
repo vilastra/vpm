@@ -16,7 +16,7 @@ h1 {
     line-height: 120%;
     margin-bottom: 3.125rem;
     padding-bottom: 1rem;
-    color:#000000;
+    color: #000000;
 }
 
 h7 {
@@ -36,9 +36,10 @@ h6 {
     font-weight: bold;
     line-height: 120%;
     margin-bottom: 2.5rem;
-    color:#000000;
+    color: #000000;
 
 }
+
 @media screen and (max-width:575px) {
 
     h6 {
@@ -439,7 +440,8 @@ li {
     padding-top: 2.875rem !important;
     padding-bottom: 0.875rem !important;
     font-size: 1.5rem !important;
-    color:#030303;/* #4A4A4A !important;*/
+    color: #030303;
+    /* #4A4A4A !important;*/
     font-weight: bold !important;
 }
 
@@ -480,7 +482,8 @@ footer {
 
 footer a,
 footer a:hover {
-    color: #333333; /*#707070;*/
+    color: #333333;
+    /*#707070;*/
     font-size: 0.938rem;
     padding-bottom: 0.688rem;
 }
@@ -600,7 +603,7 @@ footer li {
     font-size: 0.938rem;
     padding-bottom: 1.5rem;
     /*padding-top: 3.125rem;*/
-    padding-top:  4.063rem;
+    padding-top: 4.063rem;
     background-color: #000000;
 }
 
@@ -799,7 +802,7 @@ h5.linea span {
     cursor: pointer !important;
     /*text-decoration: none !important;*/
     text-decoration: underline !important;
-    
+
 }
 
 .pSuperior {
@@ -960,8 +963,9 @@ h5.linea span {
 }
 
 #navDesktop a:hover {
-    background-color: /*#2D717C;*/
-    cursor: pointer !important;
+    background-color:
+        /*#2D717C;*/
+        cursor: pointer !important;
     /*text-decoration: none !important;*/
 }
 
@@ -1855,6 +1859,7 @@ a {
     color: #707070;
     border: 1px solid #707070;
 }
+
 @media screen and (max-width:575px) {
     .inputText {
         height: 44px;
@@ -1895,6 +1900,7 @@ a {
     font-weight: bold;
     margin-bottom: 0.813rem;
 }
+
 .indexEncontrar .divEncontrar span {
     padding-left: 1.563rem;
     font-size: 1.125rem;
@@ -1911,10 +1917,12 @@ a {
 .indexEncontrar .divEncontrar {
     display: flex;
 }
+
 @media screen and (max-width:575px) {
-    .indexEncontrar .titleIndexEncontrar  {
+    .indexEncontrar .titleIndexEncontrar {
         font-size: 1.125rem;
     }
+
     .indexEncontrar .divEncontrar span {
         font-size: 0.813rem;
     }
@@ -1939,8 +1947,9 @@ a {
     height: 336px;
     max-height: 336px;
 }
+
 @media screen and (max-width:575px) {
-    .cardItem .imgItem img  {
+    .cardItem .imgItem img {
         height: 170px;
         max-height: 170px;
     }
@@ -1967,8 +1976,9 @@ a {
     font-weight: bold;
     font-family: "Open Sans", sans-serif;
 }
+
 @media screen and (max-width:575px) {
-    .cardItem .nombreArtista  {
+    .cardItem .nombreArtista {
         font-size: 1.125rem;
     }
 }
@@ -1980,6 +1990,7 @@ a {
     text-decoration: none;
     font-weight: bold;
 }
+
 .descItem {
     font-weight: 100;
     padding-top: 0.938rem;
@@ -1987,10 +1998,12 @@ a {
     font-size: 1.125rem;
     text-decoration: none;
 }
+
 @media screen and (max-width:575px) {
-    .cardItem .nombreObra  {
+    .cardItem .nombreObra {
         font-size: 1.125rem;
     }
+
     .descItem {
         font-size: 0.813rem;
     }
@@ -2019,7 +2032,8 @@ a {
     font-weight: bold;
     color: #000000;
 }
-.linkItem:hover{
+
+.linkItem:hover {
     text-decoration: underline;
 }
 
@@ -2027,6 +2041,7 @@ a {
     .linkItem {
         font-size: 0.813rem;
     }
+
     .linkItem a {
         font-size: 0.813rem;
     }
@@ -2043,10 +2058,12 @@ a {
     padding-bottom: 1.188rem;
     border: solid 1px #C0C0C0;
 }
+
 @media screen and (max-width:575px) {
-    .activeButton{
+    .activeButton {
         font-size: 0.813rem !important;
     }
+
     .linkMenuCatalogo {
         font-size: 0.813rem !important;
     }
@@ -2069,7 +2086,7 @@ a {
 .linkMenuCatalogo a {
     text-decoration: none;
     color: #8A8A8A;
-    
+
 }
 
 .activeButton a {
@@ -2087,7 +2104,8 @@ a {
     .imgIndex {
         padding: 0;
     }
-    .imgIndex img{
+
+    .imgIndex img {
         height: 400px;
         max-height: 400px;
     }
@@ -2108,19 +2126,21 @@ a {
 
 
 .header-logo-text {
-    font-size: 1.563rem;    
+    font-size: 1.563rem;
     color: #5A5A55;
     font-family: "Open Sans", sans-serif;
 }
+
 @media screen and (min-width: 1600px) {
-    .header-logo-text{
-        font-size:20px;
+    .header-logo-text {
+        font-size: 20px;
     }
-    
+
 }
+
 @media screen and (max-width:1396px) {
     .header-logo-text {
-        font-size: 1.188rem;        
+        font-size: 1.188rem;
         color: #5A5A55;
         font-family: "Open Sans", sans-serif;
     }
@@ -2164,8 +2184,10 @@ a {
 
 #search-block-form input[type=search] {
     position: relative;
-    width: 11.25rem;/*18.375rem;*/
-    height: 2.438rem; /*3.125rem;*/
+    width: 11.25rem;
+    /*18.375rem;*/
+    height: 2.438rem;
+    /*3.125rem;*/
     border: 1px solid #707070;
     border-radius: 0px;
     font-size: 1rem;
@@ -2185,7 +2207,7 @@ a {
 @media screen and (max-width:575px) {
     #search-block-form {
         width: 100%;
-        
+
     }
 
     #search-block-form input[type=search] {
@@ -2207,7 +2229,7 @@ a {
     /*width: 2.5rem;
     height: 90%;*/
     width: 16px;
-    height: 16px;  
+    height: 16px;
     /*top: 0.01rem;
     right: 0.313rem;*/
     color: black;
@@ -2484,17 +2506,26 @@ label {
     font-weight: bold;
     padding-bottom: 1.25rem;
 }
+
 .descObraFicha {
     font-size: 1.125rem;
     font-family: "Open Sans", sans-serif;
     color: #303030;
 }
+
 @media screen and (max-width:575px) {
-    .subTextoObraFicha{
+    .subTextoObraFicha {
         font-size: 1rem !important;
     }
-    .descObraFicha{
+
+    .descObraFicha {
         font-size: 0.813rem !important;
+    }
+    .tituloFicha {
+        font-size: 1.5rem;
+    }
+    .imgFicha  {
+        padding-bottom: 1.5rem;
     }
 }
 
@@ -2707,6 +2738,7 @@ TIMELINE */
 .tl-headline {
     font-family: "Open Sans", sans-serif;
 }
+
 @media (max-width: 768px) {
     .tl-headline {
         font-size: 0.813rem !important;
@@ -2788,6 +2820,16 @@ TIMELINE */
     background-color: #4A4A4A !important;
 }
 
+@media (max-width: 768px) {
+    .cronoLeyend {
+        font-size: 0.75rem;
+    }
+
+    #timeline-embed {
+        height: 100%;
+    }
+}
+
 [id^="obraCrono"] .tl-timemarker-content-container {
     background-color: #8A8A8A !important;
 }
@@ -2830,7 +2872,7 @@ TIMELINE */
     font-family: "Open Sans", sans-serif;
     font-size: 1.125rem;
     color: #000080;
-    word-break:break-word
+    word-break: break-word
 }
 
 .correoPersona svg {
@@ -2920,7 +2962,8 @@ TIMELINE */
 .owl-next {
     right: -40px;
 }
-.owl-carousel .owl-item  {
+
+.owl-carousel .owl-item {
     display: flex;
     justify-content: center;
 }
@@ -2954,6 +2997,7 @@ TIMELINE */
     max-width: 688px;
     max-height: 516px;
 }
+
 @media screen and (min-width:576px) and (max-width:991px) {
     .alinearTexto img {
         max-width: 100%;
@@ -2985,22 +3029,22 @@ TIMELINE */
 }
 
 .menuBreadcrum div {
-    padding-left: 0px !important ;
+    padding-left: 0px !important;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: #333333;
     color: #FFFFFF !important;
     cursor: pointer !important;
     /*text-decoration: none !important*/
-} 
+}
 
-.btn2:hover{
+.btn2:hover {
     background-color: #333333;
     color: #FFFFFF !important;
     cursor: pointer !important;
     /*text-decoration: none !important*/
-} 
+}
 
 @media screen and (min-width:576px) and (max-width:991px) {
     .btn2 {
@@ -3011,6 +3055,9 @@ TIMELINE */
 @media screen and (max-width:575px) {
     .btn2 {
         margin-top: 1.25rem;
+    }
+    .menuBreadcrum a {
+        font-size: 0.788rem;
     }
 }
 
@@ -3026,7 +3073,8 @@ TIMELINE */
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
 }
-.btnGenera:hover{
+
+.btnGenera:hover {
     background-color: #0B8843;
     color: #FFFFFF !important;
     cursor: pointer !important;
@@ -3086,7 +3134,7 @@ TIMELINE */
     border: #000 1px solid;
 }
 
-.btn3:hover{
+.btn3:hover {
     background-color: #FFFFFF;
     color: #000 !important;
     cursor: pointer !important;
@@ -3094,10 +3142,8 @@ TIMELINE */
 }
 
 /* GEOLOCALICACION */
-.MargUbica svg{
-   
+.MargUbica svg {
+
     margin-right: 1.25rem;
- 
+
 }
-
-
