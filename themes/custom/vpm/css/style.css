@@ -490,6 +490,23 @@ footer a:hover {
     padding-bottom: 0.688rem;
 }
 
+
+
+@media screen and (min-width:576px) and (max-width:991px) {
+    footer a:hover {
+        font-size: 0.938rem;
+    }
+}
+
+@media screen and (max-width:575px) {
+    footer a:hover {
+        font-size: 0.938rem;
+    }
+}
+
+
+
+
 footer li {
     padding-bottom: 0.3rem;
 }
