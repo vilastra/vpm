@@ -631,6 +631,22 @@ footer li {
     padding-inline-start: 0px;
 }
 
+.links-paginas-footer li {
+    /*list-style: none;*/
+    text-align: left;
+}
+
+.links-paginas-footer a,
+.footer-social-networks a {
+    text-decoration: none;
+}
+
+.links-paginas-footer a:hover,
+.footer-social-networks a:hover {
+    text-decoration: underline;
+}
+
+
 @media screen and (min-width:576px) and (max-width:991px) {
     .links-paginas-footer ul {
         margin-left: 0.938rem;
@@ -649,22 +665,6 @@ footer li {
         font-size: 0.938rem;
     }
     
-}
-
-
-.links-paginas-footer li {
-    /*list-style: none;*/
-    text-align: left;
-}
-
-.links-paginas-footer a,
-.footer-social-networks a {
-    text-decoration: none;
-}
-
-.links-paginas-footer a:hover,
-.footer-social-networks a:hover {
-    text-decoration: underline;
 }
 
 @media screen and (max-width:575px) {
@@ -3141,6 +3141,19 @@ TIMELINE */
 }
 
 
+.btnBuscarFiltroExportar:hover {
+    background-color: #333333;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    /*text-decoration: none !important;*/
+    text-decoration: underline !important;
+
+}
+
+
+
+
+
 @media screen and (min-width:576px) and (max-width:991px) {
     .btn4 {
         margin-top: 0.5rem;
@@ -3210,5 +3223,16 @@ TIMELINE */
 }
 
 .cardItem .linkPublicacion:hover {
+    text-decoration: underline;
+}
+
+/* ARTISTA */
+.linkArtista {
+    padding-top: 0.5rem;
+    font-size: 1.125rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+.linkArtista:hover{
     text-decoration: underline;
 }

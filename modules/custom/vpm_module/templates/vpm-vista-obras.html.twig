@@ -162,9 +162,10 @@
 							<div class='nombreObra'>{{ obj.tituloObra }}</div>
 						</a>
 						{% if obj.nombreArtista != null %}
-						<a href='{{ obj.urlArtista }}'>
-							<div class='descItem'>Autoría:{{ obj.nombreArtista }}</div>
-						</a>
+							<div class='descItem'>
+								Autoría:
+								<a href='{{ obj.urlArtista }}' style="color:#000080;  text-decoration: underline;">{{ obj.nombreArtista }}</a>
+							</div>
 						{% endif %}
 				
 					</div>

@@ -7,7 +7,7 @@
 
 		<div class="row mb-5 ">
 			{% for obj in artista %}
-				<h6>{{ obj.nombreArtista }}</h6>
+				<h1>{{ obj.nombreArtista }}</h1>
 				<div class='alinearTexto col-lg-12 col-md-4 col-sm-12 col-xs-12'>
 					<div ><img src='{{ obj.rutaFoto }}'></div>			
 					{% if obj.idArtista == 323 %}
@@ -62,13 +62,14 @@
 
 					<div class='descItem'>
 						Autoría:
-						<a href='artista?id={{ obj.idArtista }}'>{{ obj.nombreArtista }}</a>
+						<a href='artista?id={{ obj.idArtista }}' style="color:#000080;  text-decoration: underline;">{{ obj.nombreArtista }}</a>
 					</div>
 					<a href='obra?id={{ obj.idObra }}'>
 						<div class='descItem'>
-							<b>
-								Ve más >
-							</b>
+							<div class='linkArtista'>
+								Ve más
+								<i class="fa fa-chevron-right" aria-hidden="true"></i>
+							</div>	
 						</div>
 					</a>
 				</div>
