@@ -266,6 +266,8 @@
                         type: 'bar',
                         data: myData,
                         options: {
+                            responsive:true,
+                            maintainAspectRatio:false,
                             scales: {
                                 yAxes: [{
                                     ticks: {
@@ -356,6 +358,8 @@
                         type: document.getElementById("chartType").value,
                         data: myData,
                         options: {
+                            responsive:true,
+                            maintainAspectRatio:false,
                             scales: {
                                 yAxes: [{
                                     ticks: {
