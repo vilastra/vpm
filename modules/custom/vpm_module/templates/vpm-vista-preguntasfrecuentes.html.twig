@@ -3,7 +3,7 @@
 	<div class='whiteArea pb-0'>
 		<div class="col-9 max-container px-0 m-auto row menuBreadcrum ">
 			<div class="col-12 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/" class="menuBreadcrum_link">Inicio /</a>
+				<a href="/" class="menuBreadcrum_link" style="color: #8a8a8a;">Inicio /</a>
 				<a href="/preguntasfrecuentes" style="color: #bbb;">Preguntas frecuentes</a>
 			</div>
 		</div>
@@ -20,40 +20,40 @@
 
 
 			<div class="accordion">1. ¿Qué es el catálogo de Monvoisin del Museo Nacional de Bellas Artes?
-				<i class="fas fa-chevron-down"></i>
 				<i class="fas fa-chevron-up"></i>
+				<i class="fas fa-chevron-down"></i>		
 			</div>
 			<div class="panel">
 				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
 			</div>
 
 			<div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
-				<i class="fas fa-chevron-down"></i>
 				<i class="fas fa-chevron-up"></i>
+				<i class="fas fa-chevron-down"></i>		
 			</div>
 			<div class="panel">
 				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
 			</div>
 
 			<div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
-				<i class="fas fa-chevron-down"></i>
 				<i class="fas fa-chevron-up"></i>
+				<i class="fas fa-chevron-down"></i>		
 			</div>
 			<div class="panel">
 				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
 			</div>
 
 			<div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
-				<i class="fas fa-chevron-down"></i>
 				<i class="fas fa-chevron-up"></i>
+				<i class="fas fa-chevron-down"></i>		
 			</div>
 			<div class="panel">
 				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
 			</div>
 
 			<div class="accordion">Lorem ipsum dolor sit amet, consetetur sadipscing
-				<i class="fas fa-chevron-down"></i>
 				<i class="fas fa-chevron-up"></i>
+				<i class="fas fa-chevron-down"></i>		
 			</div>
 			<div class="panel">
 				<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor</p>
@@ -65,25 +65,32 @@
 
 		<script>
 			var acc = document.getElementsByClassName("accordion");
-var i;
+			var i;
 
-for (i = 0; i < acc.length; i++) {
-acc[i].addEventListener("click", function () {
-this.classList.toggle("active");
-var iconDown = this.querySelector(".fa-chevron-down");
-var iconUp = this.querySelector(".fa-chevron-up");
-var panel = this.nextElementSibling;
-if (panel.style.display === "block") {
-panel.style.display = "none";
-iconUp.style.display = "none";
-iconDown.style.display = "block";
-} else {
-panel.style.display = "block";
-iconDown.style.display = "none";
-iconUp.style.display = "block";
-}
-});
-}
+			for (i = 0; i < acc.length; i++) {
+				acc[i].addEventListener("click", function () {
+					this.classList.toggle("active");
+					var iconDown = this.querySelector(".fa-chevron-down");
+					var iconUp = this.querySelector(".fa-chevron-up");
+					var panel = this.nextElementSibling;
+					if (panel.style.display === "block") {
+						/*panel.style.display = "none";
+						iconUp.style.display = "none";
+						iconDown.style.display = "block";*/
+						panel.style.display = "none";
+						iconDown.style.display = "none";
+						iconUp.style.display="block";
+						
+					} else {
+						/*panel.style.display = "block";
+						iconDown.style.display = "none";
+						iconUp.style.display = "block";*/
+						panel.style.display = "block";
+						iconDown.style.display = "block";
+						iconUp.style.display="none";
+					}
+				});
+			}
 		</script>
 
 

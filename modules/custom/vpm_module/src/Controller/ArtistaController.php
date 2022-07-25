@@ -13,9 +13,9 @@ class ArtistaController extends ControllerBase
         $sql = "SELECT taxonomy_term_data.tid,taxonomy_term_data.name,
         file_managed.uri ,taxonomy_term_data.description 
         FROM taxonomy_term_data
-        JOIN taxonomy_vocabulary ON taxonomy_vocabulary.vid=taxonomy_term_data.vid
-        JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = taxonomy_term_data.tid
-        JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
+        LEFT JOIN taxonomy_vocabulary ON taxonomy_vocabulary.vid=taxonomy_term_data.vid
+        LEFT JOIN field_data_field_imagen ON field_data_field_imagen.entity_id = taxonomy_term_data.tid
+        LEFT JOIN file_managed ON file_managed.fid = field_data_field_imagen.field_imagen_fid
         WHERE taxonomy_vocabulary.name='Artistas' AND taxonomy_term_data.tid=" . $_GET["id"] . " LIMIT 3;";
         $resultado = $mysqli->query($sql);
         $artistas = [];
@@ -33,8 +33,19 @@ class ArtistaController extends ControllerBase
             $infoArtista['nombreArtista'] = $fila["name"];
             // $infoArtista['descripcionArtista'] = $fila["description"];
 
-            $infoArtista['rutaFoto'] = str_replace("public://","",$fila["uri"]);
+            //$infoArtista['rutaFoto'] = str_replace("public://","",$fila["uri"]);
+            //$infoArtista['rutaFoto'] = $rutaQuinsac . $infoArtista['rutaFoto'];
+
+
+            if ($fila["uri"] != null) {
+                $infoArtista['rutaFoto'] = str_replace("public://","",$fila["uri"]);
             $infoArtista['rutaFoto'] = $rutaQuinsac . $infoArtista['rutaFoto'];
+            } else {
+                $infoArtista['rutaFoto'] = "http://quinsac.patrimoniocultural.gob.cl/sites/default/files/default_images/user-img.png";
+            }
+
+
+
             $artistas[$x] = $infoArtista;
             $x++;
         }

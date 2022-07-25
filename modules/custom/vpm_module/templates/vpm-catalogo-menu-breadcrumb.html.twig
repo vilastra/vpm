@@ -3,51 +3,51 @@
 	<div class="col-9 max-container px-0 m-auto row menuBreadcrum ">
 			{% if links.ActualPage == "null" %}	
 			<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/" class="menuBreadcrum_link">Inicio /</a>
-				<a href="/catalogos-razonados" class="menuBreadcrum_link" >Catálogos Razonados / {{catalogo[0].nombreCatalogo}} /</a>
+				<a href="/" class="menuBreadcrum_link" style="color: #8a8a8a;">Inicio /</a>
+				<a href="/catalogos-razonados" class="menuBreadcrum_link" style="color: #8a8a8a;">Catálogos Razonados / {{catalogo[0].nombreCatalogo}} /</a>
 				<a href="{{ links.Portada }}" style="color: #bbb;">Portada </a> 
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Art" %}
 			<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/"class="menuBreadcrum_link">Inicio /</a>
-				<a href="/catalogos-razonados" class="menuBreadcrum_link" >Catálogos Razonados / 
-					<a href="{{ links.Portada }}" class="menuBreadcrum_link" >{{catalogo[0].nombreCatalogo}} /</a></a>
+				<a href="/"class="menuBreadcrum_link" style="color: #8a8a8a;">Inicio /</a>
+				<a href="/catalogos-razonados" class="menuBreadcrum_link" style="color: #8a8a8a;">Catálogos Razonados / 
+					<a href="{{ links.Portada }}" class="menuBreadcrum_link" style="color: #8a8a8a;">{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.Artistas }}" style="color: #bbb;">Artistas</a>
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Obras" %}
 			<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/" class="menuBreadcrum_link">Inicio /</a>
-				<a href="/catalogos-razonados" class="menuBreadcrum_link" >Catálogos Razonados / 
-					<a href="{{ links.Portada }}" class="menuBreadcrum_link" >{{catalogo[0].nombreCatalogo}} /</a></a> 
+				<a href="/" class="menuBreadcrum_link" style="color: #8a8a8a;">Inicio /</a>
+				<a href="/catalogos-razonados" class="menuBreadcrum_link" style="color: #8a8a8a;">Catálogos Razonados / 
+					<a href="{{ links.Portada }}" class="menuBreadcrum_link" style="color: #8a8a8a;">{{catalogo[0].nombreCatalogo}} /</a></a> 
 				<a href="{{ links.Obras }}" style="color: #bbb;">Obras</a>
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Publ" %}
 			<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/" class="menuBreadcrum_link">Inicio /</a>
-				<a href="/catalogos-razonados" class="menuBreadcrum_link" >Catálogos Razonados / 
-					<a href="{{ links.Portada }}" class="menuBreadcrum_link" >{{catalogo[0].nombreCatalogo}} /</a></a>
+				<a href="/" class="menuBreadcrum_link" style="color: #8a8a8a;">Inicio /</a>
+				<a href="/catalogos-razonados" class="menuBreadcrum_link" style="color: #8a8a8a;">Catálogos Razonados / 
+					<a href="{{ links.Portada }}" class="menuBreadcrum_link" style="color: #8a8a8a;">{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.Publicaciones }}" style="color: #bbb;">Publicaciones</a>
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Cron" %}			
 			<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/" sclass="menuBreadcrum_link" >Inicio /</a>
-				<a href="/catalogos-razonados" class="menuBreadcrum_link" >Catálogos Razonados / 
-					<a href="{{ links.Portada }}" class="menuBreadcrum_link" >{{catalogo[0].nombreCatalogo}} /</a></a>
+				<a href="/" sclass="menuBreadcrum_link" style="color: #8a8a8a;">Inicio /</a>
+				<a href="/catalogos-razonados" class="menuBreadcrum_link" style="color: #8a8a8a;">Catálogos Razonados / 
+					<a href="{{ links.Portada }}" class="menuBreadcrum_link" style="color: #8a8a8a;">{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.Cronografia }}" style="color: #bbb;">Cronografía</a>	
 			</div>	
 			{% endif %}
 
 			{% if links.ActualPage == "Sobr" %}			
 			<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 ">
-				<a href="/" class="menuBreadcrum_link" >Inicio /</a>
+				<a href="/" class="menuBreadcrum_link" style="color: #8a8a8a;">Inicio /</a>
 				<a href="/catalogos-razonados" class="menuBreadcrum_link" >Catálogos Razonados / 
 					<a href="{{ links.Portada }}" class="menuBreadcrum_link" >{{catalogo[0].nombreCatalogo}} /</a></a>
 				<a href="{{ links.SobreInvestigacion }}" style="color: #bbb;">Sobre la investigación</a>		
@@ -60,7 +60,7 @@
 		<div class="col-9 max-container px-0 m-auto row menuBreadcrum">	
 			{% if links.ActualPage == "null" %}
 				<div class="col-lg-12 col-md-6 col-sm-12 col-xs-12 ">
-					<a href="/" class="menuBreadcrum_link"  >Inicio /</a>
+					<a href="/" class="menuBreadcrum_link"  style="color: #8a8a8a;">Inicio /</a>
 					<a href="/obras" style="color: #bbb;">Resultados de búsqueda </a>
 				</div>
 			{% endif %}

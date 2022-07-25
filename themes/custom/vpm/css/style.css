@@ -1532,6 +1532,9 @@ a {
         margin-right: 0.938rem !important;
         margin-bottom: 1.888rem !important;
     }
+    .contendorFooter2 .d-md-inline{
+        display: none;
+    }
 }
 
 @media (min-width: 768px) {
@@ -1875,6 +1878,7 @@ a {
 }
 
 
+
 /* Nuevo estilo */
 
 
@@ -2202,7 +2206,7 @@ a {
 #block-vpm-branding img {
     max-width: 240px;
     max-height: 94px;
-    border-right: 2px solid #C0C0C0;
+    /*border-right: 2px solid #C0C0C0;*/
     padding-right: 1.875rem;
     margin-right: 1.875rem;
 }
@@ -2451,11 +2455,16 @@ a {
     top: 10px !important;
 }
 
-.accordion .fa-chevron-up {
+.accordion .fa-chevron-down {
     display: none;
     top: 25px !important;
+    
 }
 
+.accordion .fa-chevron-up{
+
+    top:25px !important;
+}
 .accordion svg {
     right: 15px;
     top: 40px !important;
@@ -3073,6 +3082,8 @@ TIMELINE */
 /* MENU BREADCRUM */
 .menuBreadcrum {
     padding-left: 0px !important;
+   
+    
 }
 
 .menuBreadcrum a {
@@ -3176,8 +3187,8 @@ TIMELINE */
 /* PUBLICACIONES */
 
 .btnBuscarEnsayo {
-    background-color: #FFFFFF;
-    color: #000;
+    background-color: #000000;
+    color: #FFFFFF !important;
     font-size: 1.125rem;
     width: 100% !important;
     cursor: pointer !important;
@@ -3185,9 +3196,17 @@ TIMELINE */
     padding-bottom: 0.6rem;
     text-align: center;
     display: block;
-    border: #000 1px solid;
     text-decoration: none;
 }
+
+.btnBuscaEnsayo:hover{
+    background-color: #333333;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    /*text-decoration: none !important;*/
+    text-decoration: underline !important;
+}
+
 
 .btnBuscarTituloEnsayo {
     background-color: #FFFFFF;
@@ -3197,18 +3216,23 @@ TIMELINE */
     cursor: pointer !important;
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
-    padding-left: 7.5rem;
+
+    text-align: center;
     display: block;
     border: #000 1px solid;
     text-decoration: none;
 }
+
+
 
 .btn3:hover {
     background-color: #2d717c;
     color: #FFF !important;
     cursor: pointer !important;
     text-decoration: none !important
+    
 }
+
 
 /* GEOLOCALICACION */
 .MargUbica svg {
@@ -3241,4 +3265,41 @@ TIMELINE */
 }
 .linkArtista:hover{
     text-decoration: underline;
+    
+}
+
+
+
+
+
+/* VISTA INDIVIDUAL OBRA */
+
+.btnBuscarFichaRazonada {
+    
+    background-color: #FFFFFF;
+    color: #000;
+    font-size: 1.125rem;
+    font-family: "Open Sans", sans-serif !important;
+    width: 100% !important;
+    text-align: center;
+    cursor: pointer !important;
+    padding-top: 0.813rem;
+    padding-bottom: 0.813rem;
+    display: block;
+    border: #000 1px solid;
+    text-decoration: none !important;
+    
+}
+
+.btnBuscarFichaRazonada svg {
+    margin-left: 5px;
+    text-decoration: none;
+}
+
+.btnBuscarFicha:hover {
+    background-color: #2d717c;
+    color: #FFF !important;
+    cursor: pointer !important;
+    text-decoration: none !important
+
 }
