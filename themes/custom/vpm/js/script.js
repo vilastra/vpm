@@ -279,7 +279,7 @@
                     });
                 }
 
-
+                
                 $('main', context).once('#exportPDF').each(function () {
                     $('#exportPDF').click(function (event) {
                         var reportPageHeight = $('#report').innerHeight();
@@ -371,9 +371,34 @@
                     });
                 };
 
+
+                //var para = document.querySelector('p');
+                var mql = window.matchMedia('(max-width: 600px)');
+                
+                function screenTest(e) {
+                if (e.matches) {
+                        $('select[name="chartType"] option[value="pie"]').hide();
+                        $('select[name="chartType"] option[value="radar"]').hide();
+                    }else{
+                       $('select[name="chartType"] option[value="pie"]').show();
+                        $('select[name="chartType"] option[value="radar"]').show();
+                    } 
+                }
+
+                    screenTest(mql);
+                    mql.addEventListener('change', screenTest, false);
+
+                    mql.onchange = function() {
+                    console.log(mql);
+                }
+
+
+
                 $("#chartType").change(function () {
                     updateChartType()
                 });
+
+
 
                 if (typeof jsonFile !== 'undefined') {
                     var timeline;

@@ -163,7 +163,7 @@
         <select class="inputSelect" name="chartType" id="chartType" >
           <option value="bar">Barra</option>
           <option value="line">Linea</option>
-          <option value="pie">Torta</option>
+          <option  value="pie">Torta</option>
           <option value="radar">Radar</option>
           <option value="horizontalBar">Horizontal Barra</option>
         </select>  
@@ -208,7 +208,6 @@
   function exportFile(){
   var wb = XLSX.utils.table_to_book(document.getElementById('exportaExcel'));
   XLSX.writeFile(wb, 'QuinsacCifras.xlsx');
-
 }
 </script>
 

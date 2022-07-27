@@ -2423,28 +2423,24 @@ a {
     font-weight: bold;
     margin-bottom: 1.25rem;
     position: relative;
-    overflow-wrap: break-word;
 }
 
 
 @media screen and (min-width:576px) and (max-width:991px) {
-    .accordion {
-        /*font-size: 0.75rem;*/
+    .accordion {      
         font-size: 1rem;
         text-align: left;
-        overflow-wrap: break-word;
+        padding-right: 3rem;        
     }
 }
 
 @media screen and (max-width:575px) {
     .accordion {
-        /*font-size: 0.75rem;*/
         font-size: 1rem;
         text-align: left;
-        overflow-wrap: break-word;
+        padding-right: 3rem;       
     }
 }
-
 
 
 .accordion i {
