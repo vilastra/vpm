@@ -1535,6 +1535,7 @@ a {
     .contendorFooter2 .d-md-inline{
         display: none;
     }
+    
 }
 
 @media (min-width: 768px) {
@@ -1825,7 +1826,7 @@ a {
     }
 
     .icon-social-network-footer a {
-        font-size: 0.813rem !important;
+        font-size: 0.944rem !important;
     }
 
     .container {
@@ -1873,10 +1874,23 @@ a {
     }
 
     .icon-social-network-footer a {
-        font-size: 0.613rem !important;
+        font-size: 1.125rem !important;
+    }
+
+}
+@media screen and (min-width:576px) and (max-width:991px) {
+
+    .icon-social-network-footer a {
+        font-size: 1.125rem !important;
     }
 }
 
+@media screen and (max-width:575px) {
+
+    .icon-social-network-footer a {
+        font-size: 1.125rem !important;
+    }
+}
 
 
 /* Nuevo estilo */
