@@ -2186,14 +2186,26 @@ a {
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: top;
+    
 }
 
 
 
 .header-logo-text {
-    font-size: 1.563rem;
+    /*font-size: 1.563rem;
     color: #5A5A55;
     font-family: "Open Sans", sans-serif;
+    max-height: 3.8125rem;
+    border-left: 1px solid #707070;*/
+
+    text-align: left;
+    letter-spacing: -0.36px;
+    color: #4D464A;
+    max-height: 3.8125rem;
+    padding: 1.2rem 0rem 1.03rem 2rem;
+    border-left: 1px solid #707070;
+    margin-top: 0.5rem;
+    
 }
 
 @media screen and (min-width: 1600px) {
@@ -2212,8 +2224,14 @@ a {
 }
 
 @media screen and (max-width:575px) {
-    .header-logo-text {
-        font-size: 0.75rem;
+    .header-logo-text {        
+        /*padding-left: 135px;*/
+        border-left: 1px solid #707070;
+        text-align: left;
+        position: absolute;
+        font-size: 95%;
+        top: -4%;
+        left: 38%;
     }
 }
 
